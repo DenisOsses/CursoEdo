@@ -178,10 +178,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Capítulo 1</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Capítulo 1</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
 </ul>
 
     </div>
@@ -354,7 +354,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -370,6 +372,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion1">Seccion1</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -379,385 +389,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hide_toggle_code</span><span class="p">(</span><span class="n">off</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function generates HTML code to toggle the display of an input</span>
-<span class="sd">    cell.</span>
-<span class="sd">    </span>
-<span class="sd">    The output of the cell will still be displayed.  This can be used</span>
-<span class="sd">    to hide (from immediate view) some code to generate data or the</span>
-<span class="sd">    like.  It can also be used to hide other notebook explicit</span>
-<span class="sd">    implementations - e.g., C++ processing, or the like.</span>
-<span class="sd">    </span>
-<span class="sd">    Note, calling this function alone will not enable toggling.</span>
-<span class="sd">    Instead, we must wrap the generated code in an</span>
-<span class="sd">    `IPython.display.HTML` object and return that as the cell value.</span>
-<span class="sd">    This will let IPython evaluate the HTML code and pass it on to the</span>
-<span class="sd">    browser.</span>
-<span class="sd">    </span>
-<span class="sd">    If all one wants is to toggle a cell one can use the function</span>
-<span class="sd">    `hide_toggle` below.  However, we can also combine the code</span>
-<span class="sd">    generated here with other HTML code - for example _style_</span>
-<span class="sd">    declarations and pass that along embedded in an HTML object.</span>
-<span class="sd">    </span>
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    off : int </span>
-<span class="sd">        Offset of cell to hide relative to the cell calling this function </span>
-<span class="sd">    </span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    code : str </span>
-<span class="sd">        HTML code to enable toggling of the cell</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span> 
-    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span> 
-    
-    <span class="n">jp_cell</span>     <span class="o">=</span> <span class="s1">&#39;document.getElementsByClassName(&quot;jp-Cell jp-mod-selected&quot;)[0]&#39;</span>
-    <span class="n">jq_cell</span>     <span class="o">=</span> <span class="s1">&#39;$(&quot;div.cell.code_cell.rendered.selected&quot;)&#39;</span>
-    <span class="n">toggle_text</span> <span class="o">=</span> <span class="s1">&#39;Please close&#39;</span>
-    <span class="n">cell_id</span>     <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">))</span>
-    <span class="n">func_name</span>   <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;code_toggle_</span><span class="si">{</span><span class="n">cell_id</span><span class="si">}</span><span class="s1">&#39;</span>
-    
-    <span class="n">scr1</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">    &lt;script id=&quot;s</span><span class="si">{</span><span class="n">cell_id</span><span class="si">}</span><span class="s1">&quot;&gt;</span>
-<span class="s1">      function </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s1">() </span><span class="se">{{</span>
-<span class="s1">          if (typeof $ == &quot;undefined&quot;) </span><span class="se">{{</span>
-<span class="s1">              // console.log(&quot;For JupyterLab (no jQuery)&quot;)</span>
-<span class="s1">              var c  = </span><span class="si">{</span><span class="n">jp_cell</span><span class="si">}</span><span class="s1">;</span>
-<span class="s1">              // console.log(c);</span>
-<span class="s1">              var iw = c.getElementsByClassName(&quot;jp-Cell-inputArea&quot;)[0];</span>
-<span class="s1">              var op = c.getElementsByClassName(&quot;jp-OutputPrompt&quot;)[0];</span>
-<span class="s1">              // console.log(iw,op)</span>
-<span class="s1">              if (iw.style.display !== undefined &amp;&amp; iw.style.display === &quot;none&quot;) </span><span class="se">{{</span>
-<span class="s1">                  iw.style.display = null;</span>
-<span class="s1">                  op.style.display = null;</span>
-<span class="s1">              </span><span class="se">}}</span><span class="s1"> else </span><span class="se">{{</span>
-<span class="s1">                  iw.style.display = &quot;none&quot;;</span>
-<span class="s1">                  op.style.display = &quot;none&quot;;</span>
-<span class="s1">              </span><span class="se">}}</span>
-<span class="s1">           </span><span class="se">}}</span>
-<span class="s1">           else </span><span class="se">{{</span>
-<span class="s1">                console.log(&#39;Will toggle input display </span><span class="si">{</span><span class="n">jp_cell</span><span class="si">}</span><span class="s1">&#39;)</span>
-<span class="s1">                console.log(</span><span class="si">{</span><span class="n">jp_cell</span><span class="si">}</span><span class="s1">)</span>
-<span class="s1">                </span><span class="si">{</span><span class="n">jq_cell</span><span class="si">}</span><span class="s1">.find(&quot;div.input&quot;).toggle();</span>
-<span class="s1">                </span><span class="si">{</span><span class="n">jq_cell</span><span class="si">}</span><span class="s1">.find(&quot;div.out_prompt_overlay.prompt&quot;).toggle();</span>
-<span class="s1">                </span><span class="si">{</span><span class="n">jq_cell</span><span class="si">}</span><span class="s1">.find(&quot;div.out_prompt_overlay.prompt&quot;).toggle();</span>
-<span class="s1">                </span><span class="si">{</span><span class="n">jq_cell</span><span class="si">}</span><span class="s1">.find(&quot;div.prompt.output_prompt&quot;).toggle();</span>
-<span class="s1">                console.log(&#39;End toggle input display </span><span class="si">{</span><span class="n">jp_cell</span><span class="si">}</span><span class="s1">&#39;)</span>
-<span class="s1">           </span><span class="se">}}</span>
-<span class="s1">      </span><span class="se">}}</span><span class="s1">  </span>
-<span class="s1">    &lt;/script&gt;</span>
-<span class="s1">    &#39;&#39;&#39;</span>
-    <span class="n">but</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">     &lt;details style=&#39;z-index:99;position:relative;color:lightgray;&#39; </span>
-<span class="s1">             onclick=&#39;javascript:</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s1">()&#39;&gt;</span>
-<span class="s1">        &lt;summary&gt;&amp;gt;&lt;/summary&gt;</span>
-<span class="s1">    &lt;/details&gt;</span>
-<span class="s1">    &#39;&#39;&#39;</span>
-    <span class="n">scr2</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">    &lt;script&gt;</span>
-<span class="s1">      var c = null;</span>
-<span class="s1">      if (typeof $ == &quot;undefined&quot;) </span><span class="se">{{</span>
-<span class="s1">         var c  = document.getElementById(&quot;s</span><span class="si">{</span><span class="n">cell_id</span><span class="si">}</span><span class="s1">&quot;);</span>
-<span class="s1">         var p  = c.parentNode.parentNode.parentNode.parentNode.parentNode;</span>
-<span class="s1">         var iw = p.getElementsByClassName(&quot;jp-Cell-inputArea&quot;)[0];</span>
-<span class="s1">         var op = p.getElementsByClassName(&quot;jp-OutputPrompt&quot;)[0];</span>
-<span class="s1">         var ou = c.parentNode;</span>
-<span class="s1">         iw.style.display = &quot;none&quot;;</span>
-<span class="s1">         op.style.display = &quot;none&quot;;</span>
-<span class="s1">         ou.style.background = &quot;transparent&quot;;</span>
-<span class="s1">      </span><span class="se">}}</span>
-<span class="s1">      else </span><span class="se">{{</span>
-<span class="s1">          var p = $(&#39;#s</span><span class="si">{</span><span class="n">cell_id</span><span class="si">}</span><span class="s1">&#39;).parents();</span>
-<span class="s1">          p.siblings(&#39;div.input&#39;).hide();</span>
-<span class="s1">          p.find(&#39;div.prompt.output_prompt&#39;).hide()</span>
-<span class="s1">          p.find(&#39;div.out_prompt_overlay.prompt&#39;).hide()      </span>
-<span class="s1">      </span><span class="se">}}</span>
-<span class="s1">      // </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span>
-<span class="s1">    &lt;/script&gt;</span>
-<span class="s1">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">scr1</span><span class="o">+</span><span class="n">but</span><span class="o">+</span><span class="n">scr2</span>        
-
-<span class="k">def</span> <span class="nf">hide_toggle</span><span class="p">(</span><span class="n">off</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cnt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This will wrap the HTML code returned from the above function</span>
-<span class="sd">    in an `IPython.display.HTML` object so that the notebook will </span>
-<span class="sd">    evaluate the HTML code. </span>
-<span class="sd">    </span>
-<span class="sd">    This function is what we will use most of the time.  However, </span>
-<span class="sd">    the function `hide_toggle_code` can be combined with other code </span>
-<span class="sd">    and then be put  into an HTML object to let the notebook evaluate</span>
-<span class="sd">    all the code. </span>
-
-<span class="sd">    Parameters </span>
-<span class="sd">    ----------</span>
-<span class="sd">    off : int </span>
-<span class="sd">        Cell offset relative to calling cell which we should toggle </span>
-<span class="sd">    cnt : int or None </span>
-<span class="sd">        If not None, set the execution count to this number </span>
-<span class="sd">        (currently broken)</span>
-<span class="sd">        </span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    object : IPython.display.HTML </span>
-<span class="sd">        HTML object wrapping code to toggle cell </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
-    <span class="k">if</span> <span class="n">cnt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">execution_count</span> <span class="o">=</span> <span class="n">cnt</span>
-    <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">hide_toggle_code</span><span class="p">(</span><span class="n">off</span><span class="p">))</span>
-<span class="c1">### END hide_toggle</span>
-<span class="c1"># hide_toggle(cnt=0)</span>
-
-
-<span class="c1">### BEGIN setup_matplotlib</span>
-<span class="c1">### Update 30/10-&#39;20</span>
-<span class="k">def</span> <span class="nf">_setup_matplotlib</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set-up Matplotlib parameters. </span>
-<span class="sd">    </span>
-<span class="sd">    We specify that we want both PDF and PNG images, and </span>
-<span class="sd">    that the default image size should be 8 by 8 inches </span>
-<span class="sd">    </span>
-<span class="sd">    We also disable warnings about too many open figures </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="o">%</span><span class="k">matplotlib</span> inline 
-    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span> 
-    
-    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.max_open_warning&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Palatino&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.serif&#39;</span><span class="p">]</span>
-    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;serif&#39;</span><span class="p">]</span>
-    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;mathtext.fontset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;dejavuserif&#39;</span>
-    <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.formatter.use_mathtext&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="n">f</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># IPython &gt;= 7.23 depcrates set_matplotlib_formats</span>
-        <span class="kn">from</span> <span class="nn">matplotlib_inline.backend_inline</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">set_matplotlib_formats</span>
-        
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="n">set_matplotlib_formats</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">pass</span> 
-
-    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
-        
-<span class="n">_setup_matplotlib</span><span class="p">()</span>
-<span class="c1">### END setup_matplotlib</span>
-<span class="n">_setup_matplotlib</span><span class="p">()</span>
-
-<span class="c1">### BEGIN css_styling</span>
-<span class="c1">### Update 30/10-&#39;20</span>
-<span class="k">def</span> <span class="nf">css_styling_code</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function returns HTML code to customize the CSS </span>
-<span class="sd">    of the notebook </span>
-<span class="sd">    </span>
-<span class="sd">    - The text font to be Palatino (serif)</span>
-<span class="sd">    - Headers are oblique (italic)</span>
-<span class="sd">    - Extra spacing below H1 headers </span>
-<span class="sd">    - Extra spacing spacing above H1 headers </span>
-<span class="sd">    - Headers have larger fonts, and is set in normal weight</span>
-<span class="sd">    - Remove padding around code cells </span>
-<span class="sd">    - Code uses the fint &quot;Source Code Pro&quot; (or monospace)</span>
-<span class="sd">    - Code background is changed to light yellow </span>
-<span class="sd">    - Output background is set to lavender</span>
-<span class="sd">    </span>
-<span class="sd">    The function combines these CSS declarations with the HTML </span>
-<span class="sd">    code from `hide_toggle_code` above so what we automatically </span>
-<span class="sd">    hide this code from the user. </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">styles</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">    &lt;style&gt;</span>
-<span class="s1">    .rendered_html, .jp-RenderedHTMLCommon {</span>
-<span class="s1">        font-family: Palatino, serif</span>
-<span class="s1">    }</span>
-<span class="s1">    h1, h2, h3, h4, .jp-RenderedHTMLCommon h1, .jp-RenderedHTMLCommon h2, .jp-RenderedHTMLCommon h3, .jp-RenderedHTMLCommon h4{</span>
-<span class="s1">        font-style: oblique;  </span>
-<span class="s1">    }</span>
-<span class="s1">    jp-RenderedHTMLCommon h1:first-child {</span>
-<span class="s1">        margin-top: 4ex;</span>
-<span class="s1">    }</span>
-<span class="s1">    .jp-RenderedHTMLCommon h1, .rendered_html h1 {</span>
-<span class="s1">        margin-bottom: 2ex;</span>
-<span class="s1">        font-weight: normal;</span>
-<span class="s1">        font-size: 220%;</span>
-<span class="s1">    }</span>
-<span class="s1">    .jp-RenderedHTMLCommon h2, .rendered_html h2 {</span>
-<span class="s1">        font-weight: normal;</span>
-<span class="s1">        font-size: 180%;</span>
-<span class="s1">    }</span>
-<span class="s1">    .jp-RenderedHTMLCommon h3, .rendered_html h3 {</span>
-<span class="s1">        font-weight: normal</span>
-<span class="s1">    }</span>
-<span class="s1">    .jp-RenderedHTMLCommon h4, .rendered_html h4 {</span>
-<span class="s1">        font-weight: normal</span>
-<span class="s1">    }</span>
-<span class="s1">    p code {</span>
-<span class="s1">        padding: 0;</span>
-<span class="s1">    }</span>
-<span class="s1">    .CodeMirror, .jp-Notebook .CodeMirror.cm-s-jupyter, code, div.input_area {</span>
-<span class="s1">        font-family: &quot;Source Code Pro&quot;, source-code-pro,Consolas, monospace;</span>
-<span class="s1">        background: lightyellow;</span>
-<span class="s1">    }</span>
-<span class="s1">    .output_text, .output_stream, .output_stdout, .jp-OutputArea-executeResult .jp-OutputArea-output {</span>
-<span class="s1">        background: lavender;</span>
-<span class="s1">    }</span>
-<span class="s1">    .output_error {</span>
-<span class="s1">        background-color: #fff2f2;</span>
-<span class="s1">    }</span>
-<span class="s1">    .celltag_alert-info li {</span>
-<span class="s1">        list-style-image:  url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9gEGxE4IQYzJ14AAAI3SURBVDjLZZNPSFVBFIe/e9+zd3silBCl0SZoU4s2rVq0EB5tQip4UNvATVGu3QRBiyAi2iltWkgbF5EgRhFFRpiWtrWIzDIV1Pzz7p15M2fmtvDevOqBw8DM9zvnN8ycgF3R/eDtM2mac96ZdrFNxBikqbRV+vHH/ut9gAZczoe7C3gnF0f6au1OLM5avFi8d1Ea+JvAMSAq8nsKOGs5f2cYJ3Y7rc2PO4BqkS8DdD98f9tbe1ysCoxOBo1qlEXHJWcM4b5KPU19zleA0o4Clx99eO3EdqVewHsCoFRugUoVghJO7A6H6Vx9wdtYi27cr5x6dy/03nVtWTU7bWeZh6jNUcAiCaFTURl9A+gs56AviHzh3mnqtdPxm6knfQPLU7UaokASQq/agY7yDrG16Mba6Pz48NP56VdrgAApYObGaicPtkovToFLQBKA/WUxTe3FRk4san15aGKgd3Dj560rrdGJS6FT0X9YYvLuiMKL1kAQOpHZ3PqfyZfP41+9PW1VfzX0RXFSECfgNEmSTgImdDruF2O0E8vvqZG1auQubAsKooIYYHpGvwA2g+xndQBHgWa6cG0ih5cW/w6VvEq3nChwCoBvs+bL2Z7VceBHGTDAIrABpMVuhw+4OiLgLIglOLPYBTQAlfErIeCzjRVg1dtEb1kt5Omv+DTV2YssAN+zNdkzC42N9brV8WdvYp07seOdM2Of1F3AAknW0AJpwN6IgEPAEaANaMlcbmZdl7KRBuAfAb+v//yMAJoAAAAASUVORK5CYII=);</span>
-<span class="s1">    }</span>
-<span class="s1">    &lt;/style&gt;</span>
-<span class="s1">    &lt;script&gt;</span>
-<span class="s1">    if (typeof $ !== &quot;undefined&quot;) {</span>
-<span class="s1">  $(function(){</span>
-<span class="s1"> $(&quot;.celltag_alert         .text_cell_render&quot;).addClass(&quot;alert&quot;);</span>
-<span class="s1"> $(&quot;.celltag_alert-info    .text_cell_render&quot;).addClass(&quot;alert alert-info&quot;);</span>
-<span class="s1"> $(&quot;.celltag_alert-warning .text_cell_render&quot;).addClass(&quot;alert alert-warning&quot;);</span>
-<span class="s1"> $(&quot;.celltag_alert-danger  .text_cell_render&quot;).addClass(&quot;alert alert-danger&quot;);</span>
-<span class="s1"> $(&quot;.celltag_alert-success .text_cell_render&quot;).addClass(&quot;alert alert-successs&quot;);</span>
-<span class="s1">      });</span>
-<span class="s1">    }</span>
-<span class="s1">    &lt;/script&gt;</span>
-<span class="s1">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">styles</span>
-
-<span class="k">def</span> <span class="nf">css_styling</span><span class="p">():</span>
-    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span> 
-    
-    <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">hide_toggle_code</span><span class="p">()</span><span class="o">+</span><span class="n">css_styling_code</span><span class="p">())</span>
-<span class="c1">### END css_styling</span>
-<span class="n">css_styling</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-    <script id="s4305859767435753978">
-      function code_toggle_4305859767435753978() {
-          if (typeof $ == "undefined") {
-              // console.log("For JupyterLab (no jQuery)")
-              var c  = document.getElementsByClassName("jp-Cell jp-mod-selected")[0];
-              // console.log(c);
-              var iw = c.getElementsByClassName("jp-Cell-inputArea")[0];
-              var op = c.getElementsByClassName("jp-OutputPrompt")[0];
-              // console.log(iw,op)
-              if (iw.style.display !== undefined && iw.style.display === "none") {
-                  iw.style.display = null;
-                  op.style.display = null;
-              } else {
-                  iw.style.display = "none";
-                  op.style.display = "none";
-              }
-           }
-           else {
-                console.log('Will toggle input display document.getElementsByClassName("jp-Cell jp-mod-selected")[0]')
-                console.log(document.getElementsByClassName("jp-Cell jp-mod-selected")[0])
-                $("div.cell.code_cell.rendered.selected").find("div.input").toggle();
-                $("div.cell.code_cell.rendered.selected").find("div.out_prompt_overlay.prompt").toggle();
-                $("div.cell.code_cell.rendered.selected").find("div.out_prompt_overlay.prompt").toggle();
-                $("div.cell.code_cell.rendered.selected").find("div.prompt.output_prompt").toggle();
-                console.log('End toggle input display document.getElementsByClassName("jp-Cell jp-mod-selected")[0]')
-           }
-      }  
-    </script>
-    
-     <details style='z-index:99;position:relative;color:lightgray;' 
-             onclick='javascript:code_toggle_4305859767435753978()'>
-        <summary>&gt;</summary>
-    </details>
-    
-    <script>
-      var c = null;
-      if (typeof $ == "undefined") {
-         var c  = document.getElementById("s4305859767435753978");
-         var p  = c.parentNode.parentNode.parentNode.parentNode.parentNode;
-         var iw = p.getElementsByClassName("jp-Cell-inputArea")[0];
-         var op = p.getElementsByClassName("jp-OutputPrompt")[0];
-         var ou = c.parentNode;
-         iw.style.display = "none";
-         op.style.display = "none";
-         ou.style.background = "transparent";
-      }
-      else {
-          var p = $('#s4305859767435753978').parents();
-          p.siblings('div.input').hide();
-          p.find('div.prompt.output_prompt').hide()
-          p.find('div.out_prompt_overlay.prompt').hide()      
-      }
-      // code_toggle_4305859767435753978
-    </script>
-    
-    <style>
-    .rendered_html, .jp-RenderedHTMLCommon {
-        font-family: Palatino, serif
-    }
-    h1, h2, h3, h4, .jp-RenderedHTMLCommon h1, .jp-RenderedHTMLCommon h2, .jp-RenderedHTMLCommon h3, .jp-RenderedHTMLCommon h4{
-        font-style: oblique;  
-    }
-    jp-RenderedHTMLCommon h1:first-child {
-        margin-top: 4ex;
-    }
-    .jp-RenderedHTMLCommon h1, .rendered_html h1 {
-        margin-bottom: 2ex;
-        font-weight: normal;
-        font-size: 220%;
-    }
-    .jp-RenderedHTMLCommon h2, .rendered_html h2 {
-        font-weight: normal;
-        font-size: 180%;
-    }
-    .jp-RenderedHTMLCommon h3, .rendered_html h3 {
-        font-weight: normal
-    }
-    .jp-RenderedHTMLCommon h4, .rendered_html h4 {
-        font-weight: normal
-    }
-    p code {
-        padding: 0;
-    }
-    .CodeMirror, .jp-Notebook .CodeMirror.cm-s-jupyter, code, div.input_area {
-        font-family: "Source Code Pro", source-code-pro,Consolas, monospace;
-        background: lightyellow;
-    }
-    .output_text, .output_stream, .output_stdout, .jp-OutputArea-executeResult .jp-OutputArea-output {
-        background: lavender;
-    }
-    .output_error {
-        background-color: #fff2f2;
-    }
-    .celltag_alert-info li {
-        list-style-image:  url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9gEGxE4IQYzJ14AAAI3SURBVDjLZZNPSFVBFIe/e9+zd3silBCl0SZoU4s2rVq0EB5tQip4UNvATVGu3QRBiyAi2iltWkgbF5EgRhFFRpiWtrWIzDIV1Pzz7p15M2fmtvDevOqBw8DM9zvnN8ycgF3R/eDtM2mac96ZdrFNxBikqbRV+vHH/ut9gAZczoe7C3gnF0f6au1OLM5avFi8d1Ea+JvAMSAq8nsKOGs5f2cYJ3Y7rc2PO4BqkS8DdD98f9tbe1ysCoxOBo1qlEXHJWcM4b5KPU19zleA0o4Clx99eO3EdqVewHsCoFRugUoVghJO7A6H6Vx9wdtYi27cr5x6dy/03nVtWTU7bWeZh6jNUcAiCaFTURl9A+gs56AviHzh3mnqtdPxm6knfQPLU7UaokASQq/agY7yDrG16Mba6Pz48NP56VdrgAApYObGaicPtkovToFLQBKA/WUxTe3FRk4san15aGKgd3Dj560rrdGJS6FT0X9YYvLuiMKL1kAQOpHZ3PqfyZfP41+9PW1VfzX0RXFSECfgNEmSTgImdDruF2O0E8vvqZG1auQubAsKooIYYHpGvwA2g+xndQBHgWa6cG0ih5cW/w6VvEq3nChwCoBvs+bL2Z7VceBHGTDAIrABpMVuhw+4OiLgLIglOLPYBTQAlfErIeCzjRVg1dtEb1kt5Omv+DTV2YssAN+zNdkzC42N9brV8WdvYp07seOdM2Of1F3AAknW0AJpwN6IgEPAEaANaMlcbmZdl7KRBuAfAb+v//yMAJoAAAAASUVORK5CYII=);
-    }
-    </style>
-    <script>
-    if (typeof $ !== "undefined") {
-  $(function(){
- $(".celltag_alert         .text_cell_render").addClass("alert");
- $(".celltag_alert-info    .text_cell_render").addClass("alert alert-info");
- $(".celltag_alert-warning .text_cell_render").addClass("alert alert-warning");
- $(".celltag_alert-danger  .text_cell_render").addClass("alert alert-danger");
- $(".celltag_alert-success .text_cell_render").addClass("alert alert-successs");
-      });
-    }
-    </script>
-    </div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="s1">&#39;mathjax3&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section class="tex2jax_ignore mathjax_ignore" id="capitulo-1">
+  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-1">
 <h1>Capítulo 1<a class="headerlink" href="#capitulo-1" title="Link to this heading">#</a></h1>
 <p>Supongamos que un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> cae bajo la única influencia de la gravitación. La única fuerza que actúa sobre él es <span class="math notranslate nohighlight">\(mg\)</span>, donde <span class="math notranslate nohighlight">\(g\)</span> es la aceleración de gravedad. Si <span class="math notranslate nohighlight">\(y\)</span> es la altura medida hacia abajo desde una posición fija, entonces <span class="math notranslate nohighlight">\(v=\frac{dy}{dt}\)</span> es el ritmo de cambio de su posición y su aceleración <span class="math notranslate nohighlight">\(a=\frac{dv}{dt}=\frac{d^2y}{dt^2}\)</span> es el ritmo de cambio de la velocidad. Reemplazando en (1.1) obtenemos</p>
 <div class="math notranslate nohighlight">
@@ -784,7 +416,13 @@ document.write(`
 <p>Para resolver el PVI usamos el <strong>método de separación de variables</strong>, obteniendo</p>
 <div class="math notranslate nohighlight">
 \[v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}\]</div>
-<p>Esta es una <strong>solución explícita</strong> del PVI y su <strong>intervalo de definición</strong> es <span class="math notranslate nohighlight">\(t\in\mathbb{R}_0^+\)</span>. HOLA</p>
+<p>Esta es una <strong>solución explícita</strong> del PVI y su <strong>intervalo de definición</strong> es <span class="math notranslate nohighlight">\(t\in\mathbb{R}_0^+\)</span>. Podemos visualizar esta solución mediante el siguiente código de Python:</p>
+<section id="seccion1">
+<h2>Seccion1<a class="headerlink" href="#seccion1" title="Link to this heading">#</a></h2>
+<p>HOLSSSSS</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -833,7 +471,20 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seccion1">Seccion1</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
@@ -844,7 +495,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community/ Área de Matemáticas FIC UAI
+By The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
 </p>
 
   </div>
