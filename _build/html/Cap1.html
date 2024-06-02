@@ -391,6 +391,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-1">
 <h1>Capítulo 1<a class="headerlink" href="#capitulo-1" title="Link to this heading">#</a></h1>
+<p><strong>Segunda ley de Newton</strong>: Mutationem motus proportionalem esse vi motrici impressae, &amp; fieri secundum lineam rectam qua vis illa imprimitur.</p>
+<p>“El cambio de movimiento es directamente proporcional a la fuerza motriz impresa y ocurre según la línea recta a lo largo de la cual aquella fuerza se imprime.”</p>
+<p>Actualmente decimos: La aceleración <span class="math notranslate nohighlight">\(a\)</span> de un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> es proporcional a la fuerza total <span class="math notranslate nohighlight">\(F\)</span> ejercida sobre él:</p>
+<div class="math notranslate nohighlight">
+\[
+F=ma
+\]</div>
 <p>Supongamos que un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> cae bajo la única influencia de la gravitación. La única fuerza que actúa sobre él es <span class="math notranslate nohighlight">\(mg\)</span>, donde <span class="math notranslate nohighlight">\(g\)</span> es la aceleración de gravedad. Si <span class="math notranslate nohighlight">\(y\)</span> es la altura medida hacia abajo desde una posición fija, entonces <span class="math notranslate nohighlight">\(v=\frac{dy}{dt}\)</span> es el ritmo de cambio de su posición y su aceleración <span class="math notranslate nohighlight">\(a=\frac{dv}{dt}=\frac{d^2y}{dt^2}\)</span> es el ritmo de cambio de la velocidad. Reemplazando en (1.1) obtenemos</p>
 <div class="math notranslate nohighlight">
 \[
@@ -416,7 +423,40 @@ document.write(`
 <p>Para resolver el PVI usamos el <strong>método de separación de variables</strong>, obteniendo</p>
 <div class="math notranslate nohighlight">
 \[v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}\]</div>
-<p>Esta es una <strong>solución explícita</strong> del PVI y su <strong>intervalo de definición</strong> es <span class="math notranslate nohighlight">\(t\in\mathbb{R}_0^+\)</span>. Podemos visualizar esta solución mediante el siguiente código de Python:</p>
+<p>Esta es una <strong>solución explícita</strong> del PVI y su <strong>intervalo de definición</strong> es <span class="math notranslate nohighlight">\(t\in\mathbb{R}_0^+\)</span>. Algunas preguntas son:</p>
+<p>Establezca un PVI que exprese la posición <span class="math notranslate nohighlight">\(y(t)\)</span> del cuerpo en cualquier instante <span class="math notranslate nohighlight">\(t\)</span> si su posiciión inicial es <span class="math notranslate nohighlight">\(y(0)=y_0\)</span>.</p>
+<p>Resuelva el PVI anterior. ¿Qué ocurre cuando <span class="math notranslate nohighlight">\(t\to\infty\)</span>?</p>
+<p>Podemos visualizar esta solución mediante el siguiente código de Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">returns_dvdt</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">dvdt</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">dvdt</span>
+
+<span class="c1"># y value at time 0</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># values of time - from 0 to 8.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># solving ODE</span>
+<span class="n">y_result</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">returns_dvdt</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># plot results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y_result</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/85c3cb6110c5e8efaf204eeee274531c3dbe2af41fb5f2f3376b93ec9be09c9a.png" src="_images/85c3cb6110c5e8efaf204eeee274531c3dbe2af41fb5f2f3376b93ec9be09c9a.png" />
+</div>
+</div>
 <section id="seccion1">
 <h2>Seccion1<a class="headerlink" href="#seccion1" title="Link to this heading">#</a></h2>
 <p>HOLSSSSS</p>
