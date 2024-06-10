@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MAT208 Ecuaciones Diferenciales &#8212; Ecuaciones Diferenciales 2024-1</title>
+    <title>Unidad 1 &#8212; Ecuaciones Diferenciales 2024-1</title>
   
   
   
@@ -59,10 +59,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap11';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Unidad 1" href="Cap1.html" />
+    <link rel="prev" title="Unidad 1" href="Cap1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -142,7 +140,7 @@
 
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -173,16 +171,18 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     MAT208 Ecuaciones Diferenciales
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="Cap1.html">Unidad 1</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unidad 1</a></li>
 </ul>
 
     </div>
@@ -254,7 +254,7 @@
       
       
       
-      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2FCap11.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +284,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/Cap11.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -355,7 +355,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -366,11 +368,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MAT208 Ecuaciones Diferenciales</h1>
+    <h1>Unidad 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -380,17 +390,51 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mat208-ecuaciones-diferenciales">
-<h1>MAT208 Ecuaciones Diferenciales<a class="headerlink" href="#mat208-ecuaciones-diferenciales" title="Link to this heading">#</a></h1>
-<p>El curso Ecuaciones Diferenciales Ordinarias (EDO) tiene como objetivos:</p>
-<p>Durante este semestre, EDO se realizará mediante la herramienta Jupyter Book (ver <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a> para más información) que nos permitirá una gran versatilidad matemática e interactividad con Python.</p>
-<p>Puedes acceder libremente a este libro vía <a class="reference external" href="https://github.com/DenisOsses/CursoEdo"><img alt="Jupyter Book Badge" src="https://jupyterbook.org/badge.svg" /></a> y <a class="reference external" href="https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
-<p>Las partes de este libro están compuestas por:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Cap1.html">Unidad 1</a></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="unidad-1">
+<h1>Unidad 1<a class="headerlink" href="#unidad-1" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<span id="intro"></span><h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<p><strong>Segunda ley de Newton</strong>: Mutationem motus proportionalem esse vi motrici impressae, &amp; fieri secundum lineam rectam qua vis illa imprimitur.</p>
+<p>“El cambio de movimiento es directamente proporcional a la fuerza motriz impresa y ocurre según la línea recta a lo largo de la cual aquella fuerza se imprime.”</p>
+<p>Actualmente decimos: La aceleración <span class="math notranslate nohighlight">\(a\)</span> de un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> es proporcional a la fuerza total <span class="math notranslate nohighlight">\(F\)</span> ejercida sobre él:</p>
+<div class="math notranslate nohighlight">
+\[
+F=ma
+\]</div>
+<p>Supongamos que un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> cae bajo la única influencia de la gravitación. La única fuerza que actúa sobre él es <span class="math notranslate nohighlight">\(mg\)</span>, donde <span class="math notranslate nohighlight">\(g\)</span> es la aceleración de gravedad. Si <span class="math notranslate nohighlight">\(y\)</span> es la altura medida hacia abajo desde una posición fija, entonces <span class="math notranslate nohighlight">\(v=\frac{dy}{dt}\)</span> es el ritmo de cambio de su posición y su aceleración <span class="math notranslate nohighlight">\(a=\frac{dv}{dt}=\frac{d^2y}{dt^2}\)</span> es el ritmo de cambio de la velocidad. Reemplazando en (1.1) obtenemos</p>
+<div class="math notranslate nohighlight">
+\[
+\tag{1.2}
+    m\frac{d^2y}{dt^2}=mg
+\]</div>
+<p>Esta es una <strong>Ecuación Diferencial Ordinaria (EDO)</strong> de <strong>Segundo Orden</strong>.</p>
+<p>La ecuación (1.2) puede ser reescrita como una EDO de <strong>Primer Orden</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\tag{1.3}
+    m\frac{dv}{dt}=mg
+\]</div>
+<p>Si admitimos que el aire ejerce una fuerza de resistencia proporcional a la velocidad, la fuerza total que actúa sobre el cuerpo es <span class="math notranslate nohighlight">\(mg-kv\)</span> y la ecuación (1.3) queda</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{equation*}
+    m\frac{dv}{dt}=mg-kv 
+\end{equation*}\]</div>
+<p>¿Es posible determinar la velocidad <span class="math notranslate nohighlight">\(v(t)\)</span> del cuerpo en cualquier instante <span class="math notranslate nohighlight">\(t\)</span> si su velocidad inicial es <span class="math notranslate nohighlight">\(v(0)=v_0\)</span>?</p>
+<p>Si consideramos esta condición, tenemos el <strong>Problema de Valor Inicial (PVI)</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{PVI}~~~~\left\{\begin{array}{ccc}m\dfrac{dv}{dt}&amp;=&amp;mg-kv\\&amp;&amp;\\ v(0)&amp;=&amp;v_0\end{array}\right.\end{split}\]</div>
+<p>Para resolver el PVI usamos el <strong>método de separación de variables</strong>, obteniendo</p>
+<div class="math notranslate nohighlight">
+\[
+v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}
+\]</div>
+<p>Esta es una <strong>solución explícita</strong> del PVI y su <strong>intervalo de definición</strong> es <span class="math notranslate nohighlight">\(t\in\mathbb{R}_0^+\)</span>. Algunas preguntas son:</p>
+<div class="admonition-ejercicio admonition">
+<p class="admonition-title">Ejercicio</p>
+<p>Establezca un PVI que exprese la posición <span class="math notranslate nohighlight">\(y(t)\)</span> del cuerpo en cualquier instante <span class="math notranslate nohighlight">\(t\)</span> si su posiciión inicial es <span class="math notranslate nohighlight">\(y(0)=y_0\)</span>. Resuelva el PVI anterior. ¿Qué ocurre cuando <span class="math notranslate nohighlight">\(t\to\infty\)</span>?</p>
 </div>
+<p>Podemos visualizar esta solución mediante el siguiente código de Python:</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -423,14 +467,14 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="Cap1.html"
-       title="next page">
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Unidad 1</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -439,7 +483,20 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
