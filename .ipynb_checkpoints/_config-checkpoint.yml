@@ -41,10 +41,16 @@ parse:
     # including those that are enabled by default!
     - amsmath
     - dollarmath
-  myst_dmath_double_inline: truey
+    - colon_fence
+    - html_admonition
+  myst_dmath_double_inline: true
   
 launch_buttons:
   binderhub_url: "https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD"
   thebe: true
   #colab_url: "https://colab.research.google.com"
   #jupyterhub_url: "your-hub-url"
+  
+extensions:
+    myst_parser: true
+    sphinx_design: true
