@@ -12,11 +12,23 @@ kernelspec:
   name: python3
 ---
 
++++
+
 (U1)=
 # Unidad 1
 
-(Intro)=
-## Clase 1: Introducción
++++
+
+## Introducción. Método de Variables Separables
+
+<!-- (Clase1.1)=
+## Clase 1.1 
+
++++
+
+### Introducción. Método de Variables Separables -->
+
++++
 
 **Segunda ley de Newton**: Mutationem motus proportionalem esse vi motrici impressae, \& fieri secundum lineam rectam qua vis illa imprimitur.
 
@@ -47,7 +59,7 @@ La ecuación [](eq1.2) puede ser reescrita como una EDO de **Primer Orden**:
 m\frac{dv}{dt}=mg
 ```
 
-Si admitimos que el aire ejerce una fuerza de resistencia proporcional a la velocidad, la fuerza total que actúa sobre el cuerpo es $mg-kv$ y la ecuación [](eq1.3) queda  
+Si admitimos que el aire ejerce una fuerza de resistencia proporcional a la velocidad (con una constante de proporcionalidad $k>0$), la fuerza total que actúa sobre el cuerpo es $mg-kv$ y la ecuación [](eq1.3) queda  
 
 \begin{equation*}
     m\frac{dv}{dt}=mg-kv 
@@ -131,8 +143,101 @@ dsolve(eq, v, ics={v.subs(t, 0): v0})
 ```
 
 ```{admonition} Ejercicio
-Establezca un PVI que exprese la posición $y(t)$ del cuerpo en cualquier instante $t$ si su posición inicial es $y(0)=y_0$. Resuelva el PVI anterior. ¿Qué ocurre cuando $t\to\infty$? 
+Establezca un PVI que exprese la posición $y(t)$ del cuerpo en cualquier instante $t$ si su posición inicial es $y(0)=y_0$. Sin resolver el PVI, visualice sus soluciones para distintos valores de los parámetros involucrados. ¿Qué ocurre cuando $t\to\infty$? Finalmente, determine la solución explícita del PVI de modo analítico y también usando Python. 
 ```
 +++
 
-## Clase 2
+## Ecuaciones Lineales de Primer Orden
+
+<!-- (Clase1.2)=
+## Clase 1.2 
+
++++
+
+### Método de Variables Separables. Ecuaciones Lineales de Primer Orden.  -->
+
++++
+
+### Ley de Enfriamiento de Newton 
+
++++
+
+Esta ley establece que la rapidez con que cambia la temperatura $T(t)$ de un cuerpo en el instante $t$ es proporcional a la diferencia entre la temperatura de dicho cuerpo y la del medio $T_m$ que lo rodea.
+
+Así, obtenemos la EDO
+
+$$
+\frac{dT}{dt}=k(T-T_m)
+$$ (eq2.1)
+
+Si $T_m$ es constante, la ecuación [](eq2.1) es de variables separables; en cambio, si $T_m=f(t)$ (varía en el tiempo), es una EDO **Lineal de Primer Orden** 
+
++++
+
+### Mezclas
+
++++
+
+Consideremos un tanque que contiene una solución (mezcla de sal y solvente). Existen tanto flujos de entrada como de salida y se quiere calcular la cantidad $x(t)$ de solución en el tanque en el instante $t$, donde la cantidad de solución (sal) inicial en el tanque es $x(0)=x_0$.
+
+Suponga que la sustancia, con una concentración constante de $c_i~[gr/lt]$ de solución, fluye dentro del tanque a una velocidad constante de $r_i~[lt/seg]$ y que la solución en el tanque (que permanece completamente mezclada por agitación) fluye hacia afuera a una velocidad constante de $r_0~[lt/seg]$ con una concentración de $c_0~[gr/lt]$.
+
+```{figure} Mezclas.png
+---
+height: 150px
+name: Mezclas
+---
+Modelo de Mezclas
+```
+
+Con el fin de determinar una ED0 para $x(t)$, estimamos el cambio $\Delta x$ durante un breve intervalo de tiempo $[t,t+\Delta t]$. La cantidad de sal que fluye dentro del tanque durante $\Delta t$ segundos es 
+
+$$
+r_i\cdot c_i\cdot\Delta t~[gr].
+$$
+
+Notamos que la cantidad de sal $x$ en un intervalo de tiempo infinitesimal es 
+
+$$
+\Delta x=\{gr~entrada\}-\{gr~salida\}
+$$ 
+
+$$
+\approx r_i\cdot c_i\cdot\Delta t-r_0\cdot c_0\cdot\Delta t~~\Rightarrow~~\frac{\Delta x}{\Delta t}\approx r_i\cdot c_i-r_0\cdot c_0.
+$$ 
+
+Haciendo $\Delta t\to0$, obtenemos la ED 
+
+$$
+\frac{dx}{dt}=r_i\cdot c_i-r_0\cdot c_0.
+$$ 
+
+En general, la cantidad de sal que fluye hacia afuera del tanque, depende de la concentración $c_0(t)$ de sal presente en la solución en el instante $t$. Pero 
+
+$$
+c_0(t)=\frac{x(t)}{V(t)}
+$$
+
+donde $V(t)$ es el volumen de la solución en el instante $t$ ($V(t)$ es no constante a menos que $r_i=r_0$). Reemplazando, obtenemos la ED 
+
+$$
+\frac{dx}{dt}=r_i\cdot c_i-\frac{r_0}{V}\cdot x.
+$$ 
+
+Notamos que la razón de cambio del volumen en el tiempo, depende de la velocidad inicial $r_i$ y final $r_0$; es decir, 
+
+$$
+\frac{dV}{dt}=r_i-r_0~~\Rightarrow~~V(t)=(r_i-r_0)t+K.
+$$
+
+Poniendo la condición inicial $V(0)=V_0$, obtenemos $V(t)=(r_i-r_0)t+V_0$. 
+
+Por lo tanto, la ED que modela el problema de mezclas es 
+
+$$
+\color{red}\boxed{\color{black}\frac{dx}{dt}=r_i\cdot c_i-\frac{r_0}{(r_i-r_0)t+V_0}\cdot x}
+$$ 
+
+¿Qué tipo de ecuación es esta?
+
+
