@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Unidad 1 &#8212; Ecuaciones Diferenciales 2024-1</title>
+    <title>1. Unidad 1 &#8212; Ecuaciones Diferenciales 2024-1</title>
   
   
   
@@ -177,10 +177,9 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Unidad 1</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
-</ul>
-</li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Unidades del curso</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Unidad 1</a></li>
 </ul>
 
     </div>
@@ -247,6 +246,24 @@
     <img src="_static/images/logo_binder.svg">
   </span>
 <span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/master/docs/Cap1.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
 </a>
 </li>
       
@@ -442,8 +459,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clase-1-introduccion">Clase 1: Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clase-2">Clase 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-metodo-de-variables-separables">1.1. Introducción. Método de Variables Separables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-lineales-de-primer-orden">1.2. Ecuaciones Lineales de Primer Orden</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-enfriamiento-de-newton">1.2.1. Ley de Enfriamiento de Newton</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mezclas">1.2.2. Mezclas</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -456,22 +477,27 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="unidad-1">
-<span id="u1"></span><h1>Unidad 1<a class="headerlink" href="#unidad-1" title="Link to this heading">#</a></h1>
-<section id="clase-1-introduccion">
-<span id="intro"></span><h2>Clase 1: Introducción<a class="headerlink" href="#clase-1-introduccion" title="Link to this heading">#</a></h2>
-<p><strong>Segunda ley de Newton</strong>: Mutationem motus proportionalem esse vi motrici impressae, &amp; fieri secundum lineam rectam qua vis illa imprimitur.</p>
+<span id="u1"></span><h1><span class="section-number">1. </span>Unidad 1<a class="headerlink" href="#unidad-1" title="Link to this heading">#</a></h1>
+<section id="introduccion-metodo-de-variables-separables">
+<h2><span class="section-number">1.1. </span>Introducción. Método de Variables Separables<a class="headerlink" href="#introduccion-metodo-de-variables-separables" title="Link to this heading">#</a></h2>
+<!-- (Clase1.1)=
+## Clase 1.1 
+
++++
+
+### Introducción. Método de Variables Separables --><p><strong>Segunda ley de Newton</strong>: Mutationem motus proportionalem esse vi motrici impressae, &amp; fieri secundum lineam rectam qua vis illa imprimitur.</p>
 <p>“El cambio de movimiento es directamente proporcional a la fuerza motriz impresa y ocurre según la línea recta a lo largo de la cual aquella fuerza se imprime.”</p>
 <p>Actualmente decimos: La aceleración <span class="math notranslate nohighlight">\(a\)</span> de un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> es proporcional a la fuerza total <span class="math notranslate nohighlight">\(F\)</span> ejercida sobre él:</p>
 <div class="math notranslate nohighlight" id="equation-eq1-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-eq1-1" title="Link to this equation">#</a></span>\[F=ma\]</div>
-<p>Supongamos que un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> cae bajo la única influencia de la gravitación. La única fuerza que actúa sobre él es <span class="math notranslate nohighlight">\(mg\)</span>, donde <span class="math notranslate nohighlight">\(g\)</span> es la aceleración de gravedad. Si <span class="math notranslate nohighlight">\(y\)</span> es la altura medida hacia abajo desde una posición fija, entonces <span class="math notranslate nohighlight">\(v=\frac{dy}{dt}\)</span> es el ritmo de cambio de su posición y su aceleración <span class="math notranslate nohighlight">\(a=\frac{dv}{dt}=\frac{d^2y}{dt^2}\)</span> es el ritmo de cambio de la velocidad. Reemplazando en <a class="reference internal" href="#equation-eq1-1">(1)</a> obtenemos</p>
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-eq1-1" title="Link to this equation">#</a></span>\[F=ma\]</div>
+<p>Supongamos que un cuerpo de masa <span class="math notranslate nohighlight">\(m\)</span> cae bajo la única influencia de la gravitación. La única fuerza que actúa sobre él es <span class="math notranslate nohighlight">\(mg\)</span>, donde <span class="math notranslate nohighlight">\(g\)</span> es la aceleración de gravedad. Si <span class="math notranslate nohighlight">\(y\)</span> es la altura medida hacia abajo desde una posición fija, entonces <span class="math notranslate nohighlight">\(v=\frac{dy}{dt}\)</span> es el ritmo de cambio de su posición y su aceleración <span class="math notranslate nohighlight">\(a=\frac{dv}{dt}=\frac{d^2y}{dt^2}\)</span> es el ritmo de cambio de la velocidad. Reemplazando en <a class="reference internal" href="#equation-eq1-1">(1.1)</a> obtenemos</p>
 <div class="math notranslate nohighlight" id="equation-eq1-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-eq1-2" title="Link to this equation">#</a></span>\[m\frac{d^2y}{dt^2}=mg\]</div>
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-eq1-2" title="Link to this equation">#</a></span>\[m\frac{d^2y}{dt^2}=mg\]</div>
 <p>Esta es una <strong>Ecuación Diferencial Ordinaria (EDO)</strong> de <strong>Segundo Orden</strong>.</p>
-<p>La ecuación <a class="reference internal" href="#equation-eq1-2">(2)</a> puede ser reescrita como una EDO de <strong>Primer Orden</strong>:</p>
+<p>La ecuación <a class="reference internal" href="#equation-eq1-2">(1.2)</a> puede ser reescrita como una EDO de <strong>Primer Orden</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq1-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-eq1-3" title="Link to this equation">#</a></span>\[m\frac{dv}{dt}=mg\]</div>
-<p>Si admitimos que el aire ejerce una fuerza de resistencia proporcional a la velocidad, la fuerza total que actúa sobre el cuerpo es <span class="math notranslate nohighlight">\(mg-kv\)</span> y la ecuación <a class="reference internal" href="#equation-eq1-3">(3)</a> queda</p>
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-eq1-3" title="Link to this equation">#</a></span>\[m\frac{dv}{dt}=mg\]</div>
+<p>Si admitimos que el aire ejerce una fuerza de resistencia proporcional a la velocidad (con una constante de proporcionalidad <span class="math notranslate nohighlight">\(k&gt;0\)</span>), la fuerza total que actúa sobre el cuerpo es <span class="math notranslate nohighlight">\(mg-kv\)</span> y la ecuación <a class="reference internal" href="#equation-eq1-3">(1.3)</a> queda</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{equation*}
     m\frac{dv}{dt}=mg-kv 
@@ -560,14 +586,79 @@ v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}
 </div>
 <div class="admonition-ejercicio admonition">
 <p class="admonition-title">Ejercicio</p>
-<p>Establezca un PVI que exprese la posición <span class="math notranslate nohighlight">\(y(t)\)</span> del cuerpo en cualquier instante <span class="math notranslate nohighlight">\(t\)</span> si su posición inicial es <span class="math notranslate nohighlight">\(y(0)=y_0\)</span>. Resuelva el PVI anterior. ¿Qué ocurre cuando <span class="math notranslate nohighlight">\(t\to\infty\)</span>?</p>
+<p>Establezca un PVI que exprese la posición <span class="math notranslate nohighlight">\(y(t)\)</span> del cuerpo en cualquier instante <span class="math notranslate nohighlight">\(t\)</span> si su posición inicial es <span class="math notranslate nohighlight">\(y(0)=y_0\)</span>. Sin resolver el PVI, visualice sus soluciones para distintos valores de los parámetros involucrados. ¿Qué ocurre cuando <span class="math notranslate nohighlight">\(t\to\infty\)</span>? Finalmente, determine la solución explícita del PVI de modo analítico y también usando Python.</p>
 </div>
 </section>
-<section id="clase-2">
-<h2>Clase 2<a class="headerlink" href="#clase-2" title="Link to this heading">#</a></h2>
+<section id="ecuaciones-lineales-de-primer-orden">
+<h2><span class="section-number">1.2. </span>Ecuaciones Lineales de Primer Orden<a class="headerlink" href="#ecuaciones-lineales-de-primer-orden" title="Link to this heading">#</a></h2>
+<!-- (Clase1.2)=
+## Clase 1.2 
+
++++
+
+### Método de Variables Separables. Ecuaciones Lineales de Primer Orden.  --><section id="ley-de-enfriamiento-de-newton">
+<h3><span class="section-number">1.2.1. </span>Ley de Enfriamiento de Newton<a class="headerlink" href="#ley-de-enfriamiento-de-newton" title="Link to this heading">#</a></h3>
+<p>Esta ley establece que la rapidez con que cambia la temperatura <span class="math notranslate nohighlight">\(T(t)\)</span> de un cuerpo en el instante <span class="math notranslate nohighlight">\(t\)</span> es proporcional a la diferencia entre la temperatura de dicho cuerpo y la del medio <span class="math notranslate nohighlight">\(T_m\)</span> que lo rodea.</p>
+<p>Así, obtenemos la EDO</p>
+<div class="math notranslate nohighlight" id="equation-eq2-1">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-eq2-1" title="Link to this equation">#</a></span>\[
+\frac{dT}{dt}=k(T-T_m)
+\]</div>
+<p>Si <span class="math notranslate nohighlight">\(T_m\)</span> es constante, la ecuación <a class="reference internal" href="#equation-eq2-1">(1.4)</a> es de variables separables; en cambio, si <span class="math notranslate nohighlight">\(T_m=f(t)\)</span> (varía en el tiempo), es una EDO <strong>Lineal de Primer Orden</strong></p>
 </section>
-<div class="toctree-wrapper compound">
-</div>
+<section id="mezclas">
+<h3><span class="section-number">1.2.2. </span>Mezclas<a class="headerlink" href="#mezclas" title="Link to this heading">#</a></h3>
+<p>Consideremos un tanque que contiene una solución (mezcla de sal y solvente). Existen tanto flujos de entrada como de salida y se quiere calcular la cantidad <span class="math notranslate nohighlight">\(x(t)\)</span> de solución en el tanque en el instante <span class="math notranslate nohighlight">\(t\)</span>, donde la cantidad de solución (sal) inicial en el tanque es <span class="math notranslate nohighlight">\(x(0)=x_0\)</span>.</p>
+<p>Suponga que la sustancia, con una concentración constante de <span class="math notranslate nohighlight">\(c_i~[gr/lt]\)</span> de solución, fluye dentro del tanque a una velocidad constante de <span class="math notranslate nohighlight">\(r_i~[lt/seg]\)</span> y que la solución en el tanque (que permanece completamente mezclada por agitación) fluye hacia afuera a una velocidad constante de <span class="math notranslate nohighlight">\(r_0~[lt/seg]\)</span> con una concentración de <span class="math notranslate nohighlight">\(c_0~[gr/lt]\)</span>.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/Mezclas.png"><img alt="_images/Mezclas.png" src="_images/Mezclas.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Modelo de Mezclas</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Con el fin de determinar una ED0 para <span class="math notranslate nohighlight">\(x(t)\)</span>, estimamos el cambio <span class="math notranslate nohighlight">\(\Delta x\)</span> durante un breve intervalo de tiempo <span class="math notranslate nohighlight">\([t,t+\Delta t]\)</span>. La cantidad de sal que fluye dentro del tanque durante <span class="math notranslate nohighlight">\(\Delta t\)</span> segundos es</p>
+<div class="math notranslate nohighlight">
+\[
+r_i\cdot c_i\cdot\Delta t~[gr].
+\]</div>
+<p>Notamos que la cantidad de sal <span class="math notranslate nohighlight">\(x\)</span> en un intervalo de tiempo infinitesimal es</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta x=\{gr~entrada\}-\{gr~salida\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\approx r_i\cdot c_i\cdot\Delta t-r_0\cdot c_0\cdot\Delta t~~\Rightarrow~~\frac{\Delta x}{\Delta t}\approx r_i\cdot c_i-r_0\cdot c_0.
+\]</div>
+<p>Haciendo <span class="math notranslate nohighlight">\(\Delta t\to0\)</span>, obtenemos la ED</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dx}{dt}=r_i\cdot c_i-r_0\cdot c_0.
+\]</div>
+<p>En general, la cantidad de sal que fluye hacia afuera del tanque, depende de la concentración <span class="math notranslate nohighlight">\(c_0(t)\)</span> de sal presente en la solución en el instante <span class="math notranslate nohighlight">\(t\)</span>. Pero</p>
+<div class="math notranslate nohighlight">
+\[
+c_0(t)=\frac{x(t)}{V(t)}
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(V(t)\)</span> es el volumen de la solución en el instante <span class="math notranslate nohighlight">\(t\)</span> (<span class="math notranslate nohighlight">\(V(t)\)</span> es no constante a menos que <span class="math notranslate nohighlight">\(r_i=r_0\)</span>). Reemplazando, obtenemos la ED</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dx}{dt}=r_i\cdot c_i-\frac{r_0}{V}\cdot x.
+\]</div>
+<p>Notamos que la razón de cambio del volumen en el tiempo, depende de la velocidad inicial <span class="math notranslate nohighlight">\(r_i\)</span> y final <span class="math notranslate nohighlight">\(r_0\)</span>; es decir,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dV}{dt}=r_i-r_0~~\Rightarrow~~V(t)=(r_i-r_0)t+K.
+\]</div>
+<p>Poniendo la condición inicial <span class="math notranslate nohighlight">\(V(0)=V_0\)</span>, obtenemos <span class="math notranslate nohighlight">\(V(t)=(r_i-r_0)t+V_0\)</span>.</p>
+<p>Por lo tanto, la ED que modela el problema de mezclas es</p>
+<div class="math notranslate nohighlight">
+\[
+\color{red}\boxed{\color{black}\frac{dx}{dt}=r_i\cdot c_i-\frac{r_0}{(r_i-r_0)t+V_0}\cdot x}
+\]</div>
+<p>¿Qué tipo de ecuación es esta?</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -625,8 +716,12 @@ v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clase-1-introduccion">Clase 1: Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clase-2">Clase 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-metodo-de-variables-separables">1.1. Introducción. Método de Variables Separables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-lineales-de-primer-orden">1.2. Ecuaciones Lineales de Primer Orden</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-enfriamiento-de-newton">1.2.1. Ley de Enfriamiento de Newton</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mezclas">1.2.2. Mezclas</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

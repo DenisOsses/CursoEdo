@@ -3,8 +3,10 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: Cap1
-  sections: 
-  - file: Clase 1
-  - file: Clase 2
+parts:
+  - caption: Unidades del curso
+    numbered: True
+    chapters:
+    - file: Cap1
+# chapters:
+# - file: Cap1
