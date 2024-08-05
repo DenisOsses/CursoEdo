@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Notebooks with MyST Markdown &#8212; Ecuaciones Diferenciales 2024-2</title>
+    <title>&lt;no title&gt; &#8212; Ecuaciones Diferenciales 2024-2</title>
   
   
   
@@ -58,7 +58,9 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'markdown-notebooks';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Ejercicios';</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -235,7 +237,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD/v2/gh/DenisOsses/CursoEdo/master?urlpath=tree/docs/markdown-notebooks.md" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD/v2/gh/DenisOsses/CursoEdo/master?urlpath=tree/docs/Ejercicios.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -253,7 +255,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb/github/DenisOsses/CursoEdo/blob/master/docs/markdown-notebooks.md" target="_blank"
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb/github/DenisOsses/CursoEdo/blob/master/docs/Ejercicios.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -319,7 +321,7 @@
       
       
       
-      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2Fmarkdown-notebooks.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2FEjercicios.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Abrir un problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,24 +351,7 @@
       
       
       
-      <li><a href="_sources/markdown-notebooks.ipynb" target="_blank"
-   class="btn btn-sm btn-download-notebook-button dropdown-item"
-   title="Descargar archivo de cuaderno"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="_sources/markdown-notebooks.md" target="_blank"
+      <li><a href="_sources/Ejercicios.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Descargar archivo fuente"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -376,7 +361,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -450,7 +435,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Notebooks with MyST Markdown</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -459,11 +444,9 @@ document.write(`
                 <h2> Contenido </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
+
             </nav>
         </div>
     </div>
@@ -474,52 +457,118 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="notebooks-with-myst-markdown">
-<h1>Notebooks with MyST Markdown<a class="headerlink" href="#notebooks-with-myst-markdown" title="Link to this heading">#</a></h1>
-<p>Jupyter Book also lets you write text-based notebooks using MyST Markdown.
-See <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">the Notebooks with MyST Markdown documentation</a> for more detailed instructions.
-This page shows off a notebook written in MyST Markdown.</p>
-<section id="an-example-cell">
-<h2>An example cell<a class="headerlink" href="#an-example-cell" title="Link to this heading">#</a></h2>
-<p>With MyST Markdown, you can define code cells with a directive like so:</p>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># función que entrega dv/dt</span>
+<span class="k">def</span> <span class="nf">modelo</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">dvdt</span> <span class="o">=</span> <span class="n">g</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">v</span><span class="o">/</span><span class="n">m</span>
+    <span class="k">return</span> <span class="n">dvdt</span>
+
+<span class="c1"># condición inicial</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1">#parámetros</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">1</span> 
+
+<span class="c1"># valores de tiempo</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># soluciones EDO para distintos k</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,))</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,))</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">v3</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span><span class="n">v0</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,))</span>
+
+<span class="c1"># gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;k=0.1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">v2</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;k=0.2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">v3</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;k=1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;v(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<img alt="_images/1bf35c2e50fa327e6517519ff65c882fb8bc8eb05da2ffaac83c200efc27adff.png" src="_images/1bf35c2e50fa327e6517519ff65c882fb8bc8eb05da2ffaac83c200efc27adff.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">dsolve</span>
+
+<span class="c1"># Símbolos</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span> <span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">v0</span><span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t, g, k, m, v0&quot;</span><span class="p">)</span>
+
+<span class="c1"># v es función del tiempo</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Derivada de v</span>
+<span class="n">dvdt</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Ecuación diferencial</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">dvdt</span> <span class="o">-</span> <span class="n">g</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">v</span><span class="o">/</span><span class="n">m</span>
+
+<span class="c1"># Solución de la EDO con la condición inicial v(0)=v0</span>
+<span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ics</span><span class="o">=</span><span class="p">{</span><span class="n">v</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="n">v0</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle v{\left(t \right)} = \frac{g m}{k} + \frac{\left(- g m + k v_{0}\right) e^{- \frac{k t}{m}}}{k}\]</div>
 </div>
-<p>When your book is built, the contents of any <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.</p>
-<div class="admonition seealso">
-<p class="admonition-title">Ver también</p>
-<p>Jupyter Book uses <a class="reference external" href="https://jupytext.readthedocs.io/en/latest/">Jupytext</a> to convert text-based files to notebooks, and can support <a class="reference external" href="https://jupyterbook.org/file-types/jupytext.html">many other text-based notebook files</a>.</p>
 </div>
-</section>
-<section id="create-a-notebook-with-myst-markdown">
-<h2>Create a notebook with MyST Markdown<a class="headerlink" href="#create-a-notebook-with-myst-markdown" title="Link to this heading">#</a></h2>
-<p>MyST Markdown notebooks are defined by two things:</p>
-<ol class="arabic simple">
-<li><p>YAML metadata that is needed to understand if / how it should convert text files to notebooks (including information about the kernel needed).
-See the YAML at the top of this page for example.</p></li>
-<li><p>The presence of <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> directives, which will be executed with your book.</p></li>
-</ol>
-<p>That’s all that is needed to get started!</p>
-</section>
-<section id="quickly-add-yaml-metadata-for-myst-notebooks">
-<h2>Quickly add YAML metadata for MyST Notebooks<a class="headerlink" href="#quickly-add-yaml-metadata-for-myst-notebooks" title="Link to this heading">#</a></h2>
-<p>If you have a markdown file and you’d like to quickly add YAML metadata to it, so that Jupyter Book will treat it as a MyST Markdown Notebook, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">myst</span> <span class="n">init</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">markdownfile</span><span class="o">.</span><span class="n">md</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># Parámetros de la ley de enfriamiento de Newton</span>
+<span class="n">k</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>  <span class="c1"># Constante de enfriamiento</span>
+
+<span class="c1"># Función que define la temperatura del medio variable en el tiempo</span>
+<span class="k">def</span> <span class="nf">T_m</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Definición de la EDO para la ley de enfriamiento de Newton</span>
+<span class="k">def</span> <span class="nf">Newton</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">T_m</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+<span class="c1"># Condición inicial</span>
+<span class="n">T0</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Temperatura inicial del objeto</span>
+
+<span class="c1"># Intervalo de tiempo para la simulación</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_span</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_span</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Resolver la EDO</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">Newton</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="p">[</span><span class="n">T0</span><span class="p">],</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+
+<span class="c1"># Graficar los resultados</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperatura del objeto&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">T_m</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperatura del medio&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperatura&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ley de Enfriamiento de Newton con Temperatura del Medio Variable&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/211ead16dade412cc38bd39a9ff1792cbdc4ce749c751890140b291256291acc.png" src="_images/211ead16dade412cc38bd39a9ff1792cbdc4ce749c751890140b291256291acc.png" />
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -566,11 +615,9 @@ See the YAML at the top of this page for example.</p></li>
     <i class="fa-solid fa-list"></i> Contenido
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
+
   </nav></div>
 
 </div></div>

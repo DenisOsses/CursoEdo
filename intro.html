@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="es" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MAT208 Ecuaciones Diferenciales &#8212; Ecuaciones Diferenciales 2024-1</title>
+    <title>MAT208 Ecuaciones Diferenciales &#8212; Ecuaciones Diferenciales 2024-2</title>
   
   
   
@@ -41,7 +41,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,6 +51,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -60,11 +61,11 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
     <link rel="next" title="1. Unidad 1" href="Cap1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="es"/>
   </head>
   
   
@@ -72,7 +73,7 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Saltar al contenido principal</a>
   
   <div id="pst-scroll-pixel-helper"></div>
   
@@ -153,8 +154,8 @@
       
     
     
-    <img src="_static/logomat.jpeg" class="logo__image only-light" alt="Ecuaciones Diferenciales 2024-1 - Home"/>
-    <script>document.write(`<img src="_static/logomat.jpeg" class="logo__image only-dark" alt="Ecuaciones Diferenciales 2024-1 - Home"/>`);</script>
+    <img src="_static/logomat.jpeg" class="logo__image only-light" alt="Ecuaciones Diferenciales 2024-2 - Home"/>
+    <script>document.write(`<img src="_static/logomat.jpeg" class="logo__image only-dark" alt="Ecuaciones Diferenciales 2024-2 - Home"/>`);</script>
   
   
 </a></div>
@@ -162,9 +163,9 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn navbar-btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
+    <span class="search-button__default-text">Búsqueda</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
    </button>
  `);
@@ -182,6 +183,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Unidades del curso</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Cap1.html">1. Unidad 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glosario.html">2. Glosario</a></li>
 </ul>
 
     </div>
@@ -238,7 +240,7 @@
       
       <li><a href="https://github.com/DenisOsses/CursoEdo" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
+   title="Repositorio de origen"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -255,7 +257,7 @@
       
       <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
+   title="Abrir un problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -276,7 +278,7 @@
 
 
 <div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
@@ -285,7 +287,7 @@
       
       <li><a href="_sources/intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
+   title="Descargar archivo fuente"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -303,7 +305,7 @@
       <li>
 <button onclick="window.print()"
   class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
+  title="Imprimir en PDF"
   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
@@ -323,7 +325,7 @@
 
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
+  title="Modo de pantalla completa"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
@@ -338,7 +340,7 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
     <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
     <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
@@ -349,7 +351,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -381,7 +383,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mat208-ecuaciones-diferenciales">
 <h1>MAT208 Ecuaciones Diferenciales<a class="headerlink" href="#mat208-ecuaciones-diferenciales" title="Link to this heading">#</a></h1>
-<p>El curso Ecuaciones Diferenciales Ordinarias (EDO) tiene como objetivos:</p>
+<p>El curso Ecuaciones Diferenciales Ordinarias (EDO) tiene como objetivos la modelación matemática, obtención de soluciones numéricas, análisis cuantitativo y cualitativo de dichas soluciones y uso de herramientas computacionales que apunten a profundizar y analizar los contenidos, en búsqueda de que un estudiante reflexione, se pregunte y conjeture resultados.</p>
 <p>Durante este semestre, EDO se realizará mediante la herramienta Jupyter Book (ver <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a> para más información) que nos permitirá una gran versatilidad matemática e interactividad con Python.</p>
 <p>Puedes acceder libremente a este libro vía <a class="reference external" href="https://github.com/DenisOsses/CursoEdo"><img alt="Jupyter Book Badge" src="https://jupyterbook.org/badge.svg" /></a> y <a class="reference external" href="https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
 <p>Las partes de este libro están compuestas por:</p>
@@ -389,6 +391,7 @@ document.write(`
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Unidades del curso</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Cap1.html">1. Unidad 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glosario.html">2. Glosario</a></li>
 </ul>
 </div>
 </section>
@@ -425,9 +428,9 @@ document.write(`
 <div class="prev-next-area">
     <a class="right-next"
        href="Cap1.html"
-       title="next page">
+       title="siguiente página">
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-subtitle">siguiente</p>
         <p class="prev-next-title"><span class="section-number">1. </span>Unidad 1</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
@@ -450,7 +453,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
+Por The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
 </p>
 
   </div>

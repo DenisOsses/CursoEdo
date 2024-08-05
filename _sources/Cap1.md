@@ -12,6 +12,9 @@ kernelspec:
   name: python3
 ---
 
+<!--######################################################################################################################################################################################################################################################################################################################################################
+-->
+
 +++
 
 (U1)=
@@ -28,15 +31,7 @@ kernelspec:
 
 ### Introducción. Método de Variables Separables -->
 
-+++
-
-**Segunda ley de Newton**: Mutationem motus proportionalem esse vi motrici impressae, \& fieri secundum lineam rectam qua vis illa imprimitur.
-
-"El cambio de movimiento es directamente proporcional a la fuerza motriz impresa y ocurre según la línea recta a lo largo de la cual aquella fuerza se imprime."
-
-+++
-
-Actualmente decimos: La aceleración $a$ de un cuerpo de masa $m$ es proporcional a la fuerza total $F$ ejercida sobre él: 
+**Segunda ley de Newton**: La aceleración $a$ de un cuerpo de masa $m$ es proporcional a la fuerza total $F$ ejercida sobre él: 
 
 ```{math}
 :label: eq1.1
@@ -50,9 +45,9 @@ Supongamos que un cuerpo de masa $m$ cae bajo la única influencia de la gravita
 m\frac{d^2y}{dt^2}=mg
 ```
 
-Esta es una **Ecuación Diferencial Ordinaria (EDO)** de **Segundo Orden**.
+Esta es una [**Ecuación Diferencial Ordinaria (EDO)**](EDO) de [**Segundo Orden**](SegundoOrden).
 
-La ecuación [](eq1.2) puede ser reescrita como una EDO de **Primer Orden**:
+La ecuación [](eq1.2) puede ser reescrita como una EDO de [**Primer Orden**](PrimerOrden):
 
 ```{math}
 :label: eq1.3
@@ -67,7 +62,7 @@ Si admitimos que el aire ejerce una fuerza de resistencia proporcional a la velo
 
 ¿Es posible determinar la velocidad $v(t)$ del cuerpo en cualquier instante $t$ si su velocidad inicial es $v(0)=v_0$?
 
-Si consideramos esta condición, tenemos el **Problema de Valor Inicial (PVI)**
+Si consideramos esta condición, tenemos el [**Problema de Valor Inicial (PVI)**](DefPVI)
 
 $$\mathbf{PVI}~~~~\left\{\begin{array}{ccc}m\dfrac{dv}{dt}&=&mg-kv\\&&\\ v(0)&=&v_0\end{array}\right.$$
 
@@ -112,13 +107,21 @@ plt.legend(shadow=True)
 plt.show()
 ```
 
-Para determinar una solcuón del PVI usamos el **método de separación de variables**, obteniendo 
+Para determinar una solución del PVI usamos el [**método de separación de variables**](SepVar):
+
+\begin{align*}
+    m\dfrac{dv}{dt}&=mg-kv~\Rightarrow~m\frac{dv}{mg-kv}=dt~\Rightarrow~m\int\frac{dv}{mg-kv}=\int dt\\
+    &\Rightarrow -\frac{m}{k}\ln\left|mg-kv\right|=t+K_1~\Rightarrow~\ln\left|mg-kv\right|=-\frac{k}{m}t+K_2\\
+    &\Rightarrow mg-kv=K_3e^{-\frac{k}{m}t}
+\end{align*}
+
+Si imponemos la condición $v(0)=v_0$ obtenemos que $K_3=mg-kv_0$. Finalmente, despejamos $v$ y la velocidad de caída del cuerpo en el instante $t$ es
 
 $$
 v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}
 $$
 
-Esta es una **solución explícita** del PVI y su **intervalo de definición** es $t\in\mathbb{R}_0^+$.
+Esta es una [**solución explícita**](Explicita) del PVI y su [**intervalo de definición**](Intervalo) es $t\in\mathbb{R}_0^+$.
 
 Python también nos permite encontrar una solución general del PVI:
 
@@ -142,19 +145,18 @@ eq = dvdt - g + k*v/m
 dsolve(eq, v, ics={v.subs(t, 0): v0})
 ```
 
-```{admonition} Ejercicio
+```{admonition} Ejercicio Aplicado y Teórico
 Establezca un PVI que exprese la posición $y(t)$ del cuerpo en cualquier instante $t$ si su posición inicial es $y(0)=y_0$. Sin resolver el PVI, visualice sus soluciones para distintos valores de los parámetros involucrados. ¿Qué ocurre cuando $t\to\infty$? Finalmente, determine la solución explícita del PVI de modo analítico y también usando Python. 
 ```
+
+<!--######################################################################################################################################################################################################################################################################################################################################################
+-->
+
 +++
 
 ## Ecuaciones Lineales de Primer Orden
 
-<!-- (Clase1.2)=
-## Clase 1.2 
-
-+++
-
-### Método de Variables Separables. Ecuaciones Lineales de Primer Orden.  -->
+En la clase anterior, analizamos una EDO a partir de un modelo dado, hoy comenzaremos con una situación similar y terminaremos con la construcción de una EDO de modo general siguiendo principios físicos y matemáticos.
 
 +++
 
@@ -170,7 +172,53 @@ $$
 \frac{dT}{dt}=k(T-T_m)
 $$ (eq2.1)
 
-Si $T_m$ es constante, la ecuación [](eq2.1) es de variables separables; en cambio, si $T_m=f(t)$ (varía en el tiempo), es una EDO **Lineal de Primer Orden** 
+Si $T_m$ es constante, la ecuación [](eq2.1) es de variables separables; en cambio, si $T_m=f(t)$ (varía en el tiempo), es una EDO [**Lineal de Primer Orden**](Lineal1er).
+
+En particular, si $T_m=20+10\sin(0.1t)$, $T(0)=100$ y $k=0.1$, la temperatura de un objeto se puede modelar como
+
+```{code-cell}
+:tags: [Ejer2-1]
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Parámetros de la ley de enfriamiento de Newton
+k = -0.1  # Constante de enfriamiento
+
+# Función que define la temperatura del medio variable en el tiempo
+def T_m(t):
+    return 20 + 10 * np.sin(0.1 * t)
+
+# Definición de la EDO para la ley de enfriamiento de Newton
+def Newton(t, T):
+    return k * (T - T_m(t))
+
+# Condición inicial
+T0 = 100  # Temperatura inicial del objeto
+
+# Intervalo de tiempo para la simulación
+t_span = (0, 100)
+t_eval = np.linspace(t_span[0], t_span[1], 1000)
+
+# Resolver la EDO
+sol = solve_ivp(Newton, t_span, [T0], t_eval=t_eval)
+
+# Graficar los resultados
+plt.plot(sol.t, sol.y[0], label='Temperatura del objeto')
+plt.plot(sol.t, T_m(sol.t), label='Temperatura del medio', linestyle='dashed')
+plt.xlabel('Tiempo')
+plt.ylabel('Temperatura')
+plt.legend()
+plt.title('Ley de Enfriamiento de Newton con Temperatura del Medio Variable')
+plt.show()
+```
+
+¿Es posible plantear un modelo más realista?
+
+```{admonition} Ejercicio Aplicado
+Obtenga los datos de la estación meteorológica del aeródromo de Tobalaba para un día cualquiera (Estación 330019). Ajuste esos datos a una curva y úsela como temperatura del medio. Estudie la situación anterior para este caso.
+```
 
 +++
 
@@ -235,9 +283,11 @@ Poniendo la condición inicial $V(0)=V_0$, obtenemos $V(t)=(r_i-r_0)t+V_0$.
 Por lo tanto, la ED que modela el problema de mezclas es 
 
 $$
-\color{red}\boxed{\color{black}\frac{dx}{dt}=r_i\cdot c_i-\frac{r_0}{(r_i-r_0)t+V_0}\cdot x}
+\frac{dx}{dt}=r_i\cdot c_i-\frac{r_0}{(r_i-r_0)t+V_0}\cdot x
 $$ 
 
 ¿Qué tipo de ecuación es esta?
 
-
+```{admonition} Ejercicio Aplicado y Teórico
+Determine la solución explícita de la ecuación anterior de modo analítico y también usando Python. 
+```
