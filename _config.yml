@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Ecuaciones Diferenciales 2024-1
+title: Ecuaciones Diferenciales 2024-2
 author: The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
 logo: logomat.jpeg
 
@@ -32,7 +32,9 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-  use_multitoc_numbering    : true
+  use_multitoc_numbering: true
+  analytics:
+    google_analytics_id: G-TW65QWSB9F
 
 # Enable parsing LaTeX-style math blocks with the amsmath MyST extension
 parse:
@@ -48,9 +50,15 @@ parse:
 launch_buttons:
   binderhub_url: "https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD"
   thebe: true
-  colab_url: "https://colab.research.google.com"
+  colab_url: "https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb"
+  #colab_url: "https://colab.research.google.com/drive/1IEkQuZPYjx--gsNEXcb5LGn84aPGGK9s"
+  #colab_url: "https://colab.research.google.com"
   #jupyterhub_url: "your-hub-url"
   
 extensions:
     myst_parser: true
     sphinx_design: true
+    
+sphinx:
+  config:
+    language: es
