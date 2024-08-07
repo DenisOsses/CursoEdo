@@ -362,7 +362,7 @@ donde $a=\beta_0-\alpha_0$ y $b=\beta_1$. Si $a,b>0$ entonces la EDO anterior se
 Estableciendo la condición inicial $P(0)=P_0$ y separando variables, podemos obtener la solución de la ecuación logística: 
 
 $$
-P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}}
+P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}
 $$
 
 <!-- La EDO logística es una ecuación autónoma, por lo que podemos estudiar su solución $P(t)$ de manera cualitativa: -->
