@@ -295,4 +295,76 @@ Determine la solución explícita de la ecuación anterior de modo analítico y 
 <!--######################################################################################################################################################################################################################################################################################################################################################
 -->
 
-## Crecimiento y Decaimiento. Ecuación Logística.
+## Crecimiento Poblacional. Ecuación Logística
+
++++
+
+### Crecimiento de Población
+
++++
+
+La razón con que una población $P(t)$ cambia en un cierto tiempo $t$ es proporcional a la población total $P(t)$ en ese tiempo 
+
+$$
+\frac{dP}{dt}=kP
+$$ 
+
+Esta EDO es de variables separables y su solución es $P(t)=P_0e^{kt}$, donde $P_0=P(0)$ es la población inicial. 
+
+```{admonition} Ejercicio Teórico
+De acuerdo a datos del [INE](https://www.ine.gob.cl/estadisticas/sociales/demografia-y-vitales/proyecciones-de-poblacion) la tasa de crecimiento demográfico de Chile en el año 2020 fue de un $1.12\%$ (Ver "Cuadros Estadísticos-Proyección Base 2017" documento "Estimaciones y Proyecciones 1992-2050"). Si ese año la población chilena era de $19458310$ y la tasa de crecimiento se mantiene constante, calcule la población chilena al año 2023. La estimación del INE para la población chilena del año 2023 fue de $19960889$, ¿hay alguna discrepancia con su cálculo?, ¿cómo podría explicarla para mejorar su modelo? 
+```
+
+### Un Modelo no Lineal: Ecuación Logística
+
+Suponga que la población $P(t)$ cambia sólo por la ocurrencia de nacimientos y muertes. Sean $\beta(t)$ y $\alpha(t)$ la tasa de nacimientos y muertes, respectivamente. 
+
+Entonces, el número de nacimientos y muertes que se registran durante el intervalo de tiempo $[t, t+\Delta t]$ está dado (aproximadamente) por 
+
+$$
+\text{nacimientos}: \beta(t)\cdot P(t)\cdot\Delta t~,~\text{muertes}: \alpha(t)\cdot P(t)\cdot\Delta t
+$$
+
+Por tanto, el cambio $\Delta P$ en la población durante el intervalo de tiempo $[t, t+\Delta t]$ es 
+
+$$
+\Delta P=[\text{nacimientos} - \text{muertes}]\approx\beta(t)\cdot P(t)\cdot\Delta t-\alpha(t)\cdot P(t)\cdot\Delta t
+$$
+
+Así 
+
+$$
+\frac{\Delta P}{\Delta t}\approx\big(\beta(t)-\alpha(t)\big)P(t)
+$$
+
+Haciendo $\Delta t\to 0$, obtenemos la ED= de **población general** 
+
+$$
+\frac{dP}{dt}=\big(\beta(t)-\alpha(t)\big)P(t)
+$$
+
+Habitualmente la tasa de nacimientos decrece en la medida en que una población se incrementa debido a, por ejemplo, una mayor sofisticación científica o cultural, hasta una limitación en el suministro de alimentos.
+
+Para simplificar el problema, supondremos que la tasa de nacimientos $\beta(t)$ es una función lineal decreciente del tamaño de la población $P(t)$, tal que $\beta(t)=\beta_0-\beta_1P$ donde $\beta_0,\beta_1$ son constantes positivas. Si la tasa de mortalidad $\alpha(t)=\alpha_0$ permanece constante, entonces la ecuación de población general toma la forma 
+
+$$
+\frac{dP}{dt}=\big(\beta_0-\beta_1P-\alpha_0\big)P
+$$
+
+Es decir 
+
+$$
+\frac{dP}{dt}=aP-bP^2
+$$ 
+
+donde $a=\beta_0-\alpha_0$ y $b=\beta_1$. Si $a,b>0$ entonces la EDO anterior se denomina **ecuación logística**. 
+
+
+
+<!-- Estableciendo la condición inicial $P(0)=P_0$ y separando variables, podemos obtener la solución de la ecuación logística:  -->
+
+<!-- $$
+P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}}
+$$ -->
+
+<!-- La EDO logística es una ecuación autónoma, por lo que podemos estudiar su solución $P(t)$ de manera cualitativa: -->

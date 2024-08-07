@@ -2,7 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Ecuaciones Diferenciales 2024-2
-author: The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
+author: The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses, denis.osses@uai.cl
+copyright: "2024-2"
 logo: logomat.jpeg
 
 # Force re-execution of notebooks on each build.
@@ -23,7 +24,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/DenisOsses/CursoEdo  # Online location of your book
+  url: https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejercicios.ipynb  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 

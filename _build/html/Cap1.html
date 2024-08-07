@@ -35,8 +35,6 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=4bd77a66" />
-    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/myfile-checkpoint.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -63,6 +61,8 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap1';</script>
+    <script src="_static/myfile.js?v=4bd77a66"></script>
+    <script src="_static/.ipynb_checkpoints/myfile-checkpoint.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
     <link rel="next" title="2. Glosario" href="Glosario.html" />
@@ -239,7 +239,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD/v2/gh/DenisOsses/CursoEdo/master?urlpath=tree/docs/Cap1.md" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD/v2/git/https%3A//colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejercicios.ipynb/master?urlpath=tree/docs/Cap1.md" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +257,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb/github/DenisOsses/CursoEdo/blob/master/docs/Cap1.md" target="_blank"
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb/github/main/Ejercicios.ipynb/blob/master/docs/Cap1.md" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -306,7 +306,7 @@
       
       
       
-      <li><a href="https://github.com/DenisOsses/CursoEdo" target="_blank"
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejercicios.ipynb" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Repositorio de origen"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -323,7 +323,7 @@
       
       
       
-      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2FCap1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejercicios.ipynb/issues/new?title=Issue%20on%20page%20%2FCap1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Abrir un problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -470,7 +470,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mezclas">1.2.2. Mezclas</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crecimiento-y-decaimiento-ecuacion-logistica">1.3. Crecimiento y Decaimiento. Ecuación Logística.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crecimiento-poblacional-ecuacion-logistica">1.3. Crecimiento Poblacional. Ecuación Logística</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crecimiento-de-poblacion">1.3.1. Crecimiento de Población</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-modelo-no-lineal-ecuacion-logistica">1.3.2. Un Modelo no Lineal: Ecuación Logística</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -723,8 +727,61 @@ c_0(t)=\frac{x(t)}{V(t)}
 -->
 </section>
 </section>
-<section id="crecimiento-y-decaimiento-ecuacion-logistica">
-<h2><span class="section-number">1.3. </span>Crecimiento y Decaimiento. Ecuación Logística.<a class="headerlink" href="#crecimiento-y-decaimiento-ecuacion-logistica" title="Link to this heading">#</a></h2>
+<section id="crecimiento-poblacional-ecuacion-logistica">
+<h2><span class="section-number">1.3. </span>Crecimiento Poblacional. Ecuación Logística<a class="headerlink" href="#crecimiento-poblacional-ecuacion-logistica" title="Link to this heading">#</a></h2>
+<section id="crecimiento-de-poblacion">
+<h3><span class="section-number">1.3.1. </span>Crecimiento de Población<a class="headerlink" href="#crecimiento-de-poblacion" title="Link to this heading">#</a></h3>
+<p>La razón con que una población <span class="math notranslate nohighlight">\(P(t)\)</span> cambia en un cierto tiempo <span class="math notranslate nohighlight">\(t\)</span> es proporcional a la población total <span class="math notranslate nohighlight">\(P(t)\)</span> en ese tiempo</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dP}{dt}=kP
+\]</div>
+<p>Esta EDO es de variables separables y su solución es <span class="math notranslate nohighlight">\(P(t)=P_0e^{kt}\)</span>, donde <span class="math notranslate nohighlight">\(P_0=P(0)\)</span> es la población inicial.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>De acuerdo a datos del <a class="reference external" href="https://www.ine.gob.cl/estadisticas/sociales/demografia-y-vitales/proyecciones-de-poblacion">INE</a> la tasa de crecimiento demográfico de Chile en el año 2020 fue de un <span class="math notranslate nohighlight">\(1.12\%\)</span> (Ver «Cuadros Estadísticos-Proyección Base 2017» documento «Estimaciones y Proyecciones 1992-2050»). Si ese año la población chilena era de <span class="math notranslate nohighlight">\(19458310\)</span> y la tasa de crecimiento se mantiene constante, calcule la población chilena al año 2023. La estimación del INE para la población chilena del año 2023 fue de <span class="math notranslate nohighlight">\(19960889\)</span>, ¿hay alguna discrepancia con su cálculo?, ¿cómo podría explicarla para mejorar su modelo?</p>
+</div>
+</section>
+<section id="un-modelo-no-lineal-ecuacion-logistica">
+<h3><span class="section-number">1.3.2. </span>Un Modelo no Lineal: Ecuación Logística<a class="headerlink" href="#un-modelo-no-lineal-ecuacion-logistica" title="Link to this heading">#</a></h3>
+<p>Suponga que la población <span class="math notranslate nohighlight">\(P(t)\)</span> cambia sólo por la ocurrencia de nacimientos y muertes. Sean <span class="math notranslate nohighlight">\(\beta(t)\)</span> y <span class="math notranslate nohighlight">\(\alpha(t)\)</span> la tasa de nacimientos y muertes, respectivamente.</p>
+<p>Entonces, el número de nacimientos y muertes que se registran durante el intervalo de tiempo <span class="math notranslate nohighlight">\([t, t+\Delta t]\)</span> está dado (aproximadamente) por</p>
+<div class="math notranslate nohighlight">
+\[
+\text{nacimientos}: \beta(t)\cdot P(t)\cdot\Delta t~,~\text{muertes}: \alpha(t)\cdot P(t)\cdot\Delta t
+\]</div>
+<p>Por tanto, el cambio <span class="math notranslate nohighlight">\(\Delta P\)</span> en la población durante el intervalo de tiempo <span class="math notranslate nohighlight">\([t, t+\Delta t]\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta P=[\text{nacimientos} - \text{muertes}]\approx\beta(t)\cdot P(t)\cdot\Delta t-\alpha(t)\cdot P(t)\cdot\Delta t
+\]</div>
+<p>Así</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Delta P}{\Delta t}\approx\big(\beta(t)-\alpha(t)\big)P(t)
+\]</div>
+<p>Haciendo <span class="math notranslate nohighlight">\(\Delta t\to 0\)</span>, obtenemos la ED= de <strong>población general</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dP}{dt}=\big(\beta(t)-\alpha(t)\big)P(t)
+\]</div>
+<p>Habitualmente la tasa de nacimientos decrece en la medida en que una población se incrementa debido a, por ejemplo, una mayor sofisticación científica o cultural, hasta una limitación en el suministro de alimentos.</p>
+<p>Para simplificar el problema, supondremos que la tasa de nacimientos <span class="math notranslate nohighlight">\(\beta(t)\)</span> es una función lineal decreciente del tamaño de la población <span class="math notranslate nohighlight">\(P(t)\)</span>, tal que <span class="math notranslate nohighlight">\(\beta(t)=\beta_0-\beta_1P\)</span> donde <span class="math notranslate nohighlight">\(\beta_0,\beta_1\)</span> son constantes positivas. Si la tasa de mortalidad <span class="math notranslate nohighlight">\(\alpha(t)=\alpha_0\)</span> permanece constante, entonces la ecuación de población general toma la forma</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dP}{dt}=\big(\beta_0-\beta_1P-\alpha_0\big)P
+\]</div>
+<p>Es decir</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dP}{dt}=aP-bP^2
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(a=\beta_0-\alpha_0\)</span> y <span class="math notranslate nohighlight">\(b=\beta_1\)</span>. Si <span class="math notranslate nohighlight">\(a,b&gt;0\)</span> entonces la EDO anterior se denomina <strong>ecuación logística</strong>.</p>
+<!-- Estableciendo la condición inicial $P(0)=P_0$ y separando variables, podemos obtener la solución de la ecuación logística:  -->
+<!-- $$
+P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}}
+$$ -->
+<!-- La EDO logística es una ecuación autónoma, por lo que podemos estudiar su solución $P(t)$ de manera cualitativa: --></section>
 </section>
 </section>
 
@@ -732,7 +789,7 @@ c_0(t)=\frac{x(t)}{V(t)}
     {
         requestKernel: true,
         binderOptions: {
-            repo: "DenisOsses/CursoEdo",
+            repo: "None/None",
             ref: "master",
         },
         codeMirrorConfig: {
@@ -798,7 +855,11 @@ c_0(t)=\frac{x(t)}{V(t)}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mezclas">1.2.2. Mezclas</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crecimiento-y-decaimiento-ecuacion-logistica">1.3. Crecimiento y Decaimiento. Ecuación Logística.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crecimiento-poblacional-ecuacion-logistica">1.3. Crecimiento Poblacional. Ecuación Logística</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crecimiento-de-poblacion">1.3.1. Crecimiento de Población</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-modelo-no-lineal-ecuacion-logistica">1.3.2. Un Modelo no Lineal: Ecuación Logística</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -813,7 +874,7 @@ c_0(t)=\frac{x(t)}{V(t)}
   <div class="footer-item">
     
 <p class="component-author">
-Por The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
+Por The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses, denis.osses@uai.cl
 </p>
 
   </div>
@@ -823,7 +884,7 @@ Por The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2024-2.
       <br/>
     
   </p>
