@@ -26,7 +26,7 @@ bibtex_bibfiles:
 repository:
   url: https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejercicios.ipynb  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: main  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
@@ -52,7 +52,7 @@ parse:
   myst_dmath_double_inline: true
   
 launch_buttons:
-  binderhub_url: "https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD"
+  binderhub_url: "https://mybinder.org/v2/gh/DenisOsses/CursoEdo/main"
   thebe: true
   colab_url: "https://colab.research.google.com"
   #colab_url: "https://colab.research.google.com/drive/1IEkQuZPYjx--gsNEXcb5LGn84aPGGK9s"
