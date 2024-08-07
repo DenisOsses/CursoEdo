@@ -337,7 +337,7 @@ $$
 \frac{\Delta P}{\Delta t}\approx\big(\beta(t)-\alpha(t)\big)P(t)
 $$
 
-Haciendo $\Delta t\to 0$, obtenemos la ED= de **población general** 
+Haciendo $\Delta t\to 0$, obtenemos la EDO de **población general** 
 
 $$
 \frac{dP}{dt}=\big(\beta(t)-\alpha(t)\big)P(t)
