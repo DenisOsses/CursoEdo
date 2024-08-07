@@ -54,7 +54,7 @@ parse:
 launch_buttons:
   binderhub_url: "https://mybinder.org/v2/gh/DenisOsses/CursoEdo/HEAD"
   thebe: true
-  colab_url: "https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb"
+  colab_url: "https://colab.research.google.com"
   #colab_url: "https://colab.research.google.com/drive/1IEkQuZPYjx--gsNEXcb5LGn84aPGGK9s"
   #colab_url: "https://colab.research.google.com"
   #jupyterhub_url: "your-hub-url"

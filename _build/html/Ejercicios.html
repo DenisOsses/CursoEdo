@@ -257,7 +257,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/main/Ejer1.ipynb/github/main/Ejercicios.ipynb/blob/master/docs/Ejercicios.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/main/Ejercicios.ipynb/blob/master/docs/Ejercicios.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -569,6 +569,55 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/211ead16dade412cc38bd39a9ff1792cbdc4ce749c751890140b291256291acc.png" src="_images/211ead16dade412cc38bd39a9ff1792cbdc4ce749c751890140b291256291acc.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Parámetros de la ecuación</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Tasa de crecimiento</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Tasa de competencia</span>
+
+<span class="c1"># Función para la derivada dP/dt</span>
+<span class="k">def</span> <span class="nf">dP_dt</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">P</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Encontrar puntos críticos</span>
+<span class="n">P_critical</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">]</span>
+
+<span class="c1"># Analizar la estabilidad de los puntos críticos</span>
+<span class="n">stability</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">P_critical</span><span class="p">:</span>
+    <span class="n">derivative_at_P</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span>
+    <span class="k">if</span> <span class="n">derivative_at_P</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">stability</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Estable&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">derivative_at_P</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">stability</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Inestable&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stability</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Indeterminado&quot;</span><span class="p">)</span>
+
+<span class="c1"># Graficar el campo de pendientes</span>
+<span class="n">P_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">dP_vals</span> <span class="o">=</span> <span class="n">dP_dt</span><span class="p">(</span><span class="n">P_vals</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P_vals</span><span class="p">,</span> <span class="n">dP_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{dP}{dt}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">P_critical</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Punto crítico P=</span><span class="si">{</span><span class="n">P_critical</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">stability</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">P_critical</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Punto crítico P=</span><span class="si">{</span><span class="n">P_critical</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">stability</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Población, P&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\frac</span><span class="si">{dP}{dt}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Análisis Cualitativo de la Ecuación Logística&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1317f362580f343ff9d1761a13058f99a923b4cbaf6308dd2b6c6f3cdd54d8bc.png" src="_images/1317f362580f343ff9d1761a13058f99a923b4cbaf6308dd2b6c6f3cdd54d8bc.png" />
 </div>
 </div>
 
