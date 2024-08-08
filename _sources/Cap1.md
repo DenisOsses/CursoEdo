@@ -317,7 +317,7 @@ De acuerdo a datos del [INE](https://www.ine.gob.cl/estadisticas/sociales/demogr
 
 ### Un Modelo no Lineal: Ecuación Logística
 
-Suponga que la población $P(t)$ cambia sólo por la ocurrencia de nacimientos y muertes. Sean $\beta(t)$ y $\alpha(t)$ la tasa de nacimientos y muertes, respectivamente. 
+El modelo anterior es uno de los más simples para la modelación del crecimiento poblacional. Para complejizarlo, podemos suponer que la tasa $k$ varía en el tiempo de la siguiente manera: Suponga que la población $P(t)$ cambia sólo por la ocurrencia de nacimientos y muertes. Sean $\beta(t)$ y $\alpha(t)$ la tasa de nacimientos y muertes, respectivamente. 
 
 Entonces, el número de nacimientos y muertes que se registran durante el intervalo de tiempo $[t, t+\Delta t]$ está dado (aproximadamente) por 
 
@@ -357,9 +357,46 @@ $$
 \frac{dP}{dt}=aP-bP^2
 $$ 
 
-donde $a=\beta_0-\alpha_0$ y $b=\beta_1$. Si $a,b>0$ entonces la EDO anterior se denomina **ecuación logística**. 
+donde $a=\beta_0-\alpha_0$ y $b=\beta_1$. Si $a,b>0$ entonces la EDO anterior se denomina **ecuación logística**. El parámetro $a$ se conoce habitualmente como la **tasa de crecimiento** y $b$ como la **tasa de competencia**.
 
-Estableciendo la condición inicial $P(0)=P_0$ y separando variables, podemos obtener la solución de la ecuación logística: 
+Estudiamos la ecuación logística en términos de los valores del signo de $\frac{dP}{dt}$, lo que nos permite analizar **cualitativamente** el comportamiento de la solución $P$
+
+```{code-cell}
+:tags: [Ejer3-1]
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# Parámetros de la ecuación
+a = 1.0  # Tasa de crecimiento
+b = 0.1  # Tasa de competencia
+
+# Ecuación diferencial logística
+def logistica_ec(P, t):
+    return a * P - b * P**2
+
+# Tiempo para la integración
+t = np.linspace(0, 10, 400)
+
+# Condiciones iniciales diferentes
+P0_vals = [0.1, 0.5, 2, 9, 10]
+
+# Soluciones para cada condición inicial
+sols = [odeint(logistica_ec, P0, t) for P0 in P0_vals]
+
+# Graficar el las soluciones
+plt.figure(figsize=(10, 6))
+for i, P0 in enumerate(P0_vals):
+    plt.plot(t, sols[i], label=f'P(0) = {P0}')
+plt.xlabel('Tiempo t')
+plt.ylabel('Población P(t)')
+plt.title('Soluciones de la Ecuación Logística')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+Estableciendo la condición inicial $P(0)=P_0$ y separando variables, podemos obtener la solución explícita de la ecuación logística: 
 
 $$
 P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}
