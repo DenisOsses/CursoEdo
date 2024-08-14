@@ -403,3 +403,16 @@ P(t)=\frac{aP_0}{bP_0+(a-bP_0)e^{-at}}
 $$
 
 <!-- La EDO logística es una ecuación autónoma, por lo que podemos estudiar su solución $P(t)$ de manera cualitativa: -->
+
+<!--######################################################################################################################################################################################################################################################################################################################################################
+-->
+
+## Análisis Cualitativo de las Soluciones de EDO
+
++++
+
+### Campos Direccionales
+
++++
+
+### Ecuaciones Diferenciales Autónomas
