@@ -85,3 +85,15 @@ $$
 Finalmente, integramos esta igualdad para obtener la solución $y(x)$ de la EDO:
 
 $$y(x)=\dfrac{1}{e^{\int P(x)~dx}}\left(\int e^{\int P(x)~dx}\cdot f(x)~dx\right)+C$$
+
+(DiagramaFase)=
+<u>**Diagrama de Fase**</u>: Es una representación geométrica de las soluciones de una EDO donde cada conjunto de condiciones iniciales está representado por un punto o curva diferente. 
+
+(FacInt)=
+<u>**Factores Integrantes**</u>: Si $\mu$ es un factor integrante de $Mdx+Ndy=0$ entonces 
+
+$$
+\frac{\partial(\mu M)}{\partial y}=\frac{\partial(\mu N)}{\partial x}~~\Rightarrow~~\frac{1}{\mu}\left(N\mu_x-M\mu_y\right)=M_y-N_x.
+$$
+
+Para simplificar, asumimos que $\mu(x,y)$ es función de una única variable: Si $\mu(x)$ es solo función de $x$ entonces $\mu_y=0$ y si $\mu(y)$ es solo función de $y$ entonces $\mu_x=0$.
