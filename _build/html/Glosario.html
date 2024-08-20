@@ -54,9 +54,22 @@
     <script src="_static/translations.js?v=efdbd0b9"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-TW65QWSB9F"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-TW65QWSB9F');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-TW65QWSB9F');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -493,6 +506,13 @@ e^{\int P(x)~dx}
 <p>Finalmente, integramos esta igualdad para obtener la solución <span class="math notranslate nohighlight">\(y(x)\)</span> de la EDO:</p>
 <div class="math notranslate nohighlight">
 \[y(x)=\dfrac{1}{e^{\int P(x)~dx}}\left(\int e^{\int P(x)~dx}\cdot f(x)~dx\right)+C\]</div>
+<p id="diagramafase"><u><strong>Diagrama de Fase</strong></u>: Es una representación geométrica de las soluciones de una EDO donde cada conjunto de condiciones iniciales está representado por un punto o curva diferente.</p>
+<p id="facint"><u><strong>Factores Integrantes</strong></u>: Si <span class="math notranslate nohighlight">\(\mu\)</span> es un factor integrante de <span class="math notranslate nohighlight">\(Mdx+Ndy=0\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial(\mu M)}{\partial y}=\frac{\partial(\mu N)}{\partial x}~~\Rightarrow~~\frac{1}{\mu}\left(N\mu_x-M\mu_y\right)=M_y-N_x.
+\]</div>
+<p>Para simplificar, asumimos que <span class="math notranslate nohighlight">\(\mu(x,y)\)</span> es función de una única variable: Si <span class="math notranslate nohighlight">\(\mu(x)\)</span> es solo función de <span class="math notranslate nohighlight">\(x\)</span> entonces <span class="math notranslate nohighlight">\(\mu_y=0\)</span> y si <span class="math notranslate nohighlight">\(\mu(y)\)</span> es solo función de <span class="math notranslate nohighlight">\(y\)</span> entonces <span class="math notranslate nohighlight">\(\mu_x=0\)</span>.</p>
 </section>
 
     <script type="text/x-thebe-config">

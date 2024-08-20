@@ -35,8 +35,9 @@ html:
   use_issues_button: true
   use_repository_button: true
   use_multitoc_numbering: true
-  analytics:
-    google_analytics_id: G-TW65QWSB9F
+  google_analytics_id: G-TW65QWSB9F
+  # analytics:
+  #   google_analytics_id: G-TW65QWSB9F
 
 # Enable parsing LaTeX-style math blocks with the amsmath MyST extension
 parse:
@@ -62,5 +63,5 @@ sphinx:
   config:
     language: es
     templates_path:
-             - _templates
+      - _templates
  
