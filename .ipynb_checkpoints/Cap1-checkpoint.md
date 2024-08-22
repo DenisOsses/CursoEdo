@@ -706,3 +706,57 @@ Resuelva las siguientes ecuaciones diferenciales:
 3. $y'-\frac{2}{x}y=-x^2y^2$
 4. $y'=(x+y)^2$
 ```
+
+<!--######################################################################################################################################################################################################################################################################################################################################################
+-->
+
+## Teorema de Existencia y Unicidad
+
+Consideremos los siguientes PVI:
+
+$$
+\mathbf{(1)}~\left\{\begin{array}{ccc}y'&=&2\sqrt{y}\\&&\\ y(2)&=&0\end{array}\right.
+$$
+
+Sus soluciones son $y(x)=0$ (trivial) e 
+
+$$
+y(x)=\left\{\begin{array}{ccc}
+    0 & \text{si} & x<2\\
+    (x-2)^2 & \text{si} & x\geq2 
+\end{array}\right.
+$$
+
+$$
+\mathbf{(2)}~\left\{\begin{array}{ccc}y'&=&2\sqrt{y}\\&&\\ y(0)&=&-1\end{array}\right.
+$$ 
+
+No tiene solución.
+
+$$
+\mathbf{(3)}~\left\{\begin{array}{ccc}y'&=&x\sqrt{y}\\&&\\ y(0)&=1\end{array}\right.
+$$ 
+
+Tiene solución única $y(x)=\frac{x^2}{2}+1$.
+
+$$
+\mathbf{(4)}~\left\{\begin{array}{ccc}xy'&=&y-1\\&&\\ y(0)&=&1\end{array}\right.
+$$ 
+
+Tiene infinitas soluciones $y(x)=1+cx$, $c\in\mathbb{R}$.
+
+¿Bajo qué condiciones un PVI tiene al menos una solución? ¿Bajo qué condiciones un PVI tiene una única solución?
+
+**Teorema de Existencia y Unicidad**: Sea $R$ un rectángulo tal que $(a,b)\in\mathbb{R}$. Si $f(x,y)$ y $\frac{\partial f}{\partial y}$ son continuas en $R$ entonces existe algún intervalo $I$ y una única función $y(x)$ definida en $I$ que es solución del PVI  
+
+$$
+\left\{\begin{array}{ccc}y'&=&f(x,y)\\ y(a)&=&b\end{array}\right.
+$$ 
+
+```{figure} TEU.png
+---
+height: 150px
+name: TEU
+---
+Teorema de Existencia y Unicidad
+```
