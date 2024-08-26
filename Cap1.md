@@ -441,16 +441,14 @@ Usando Python
 :  code_prompt_hide: "Ocultar el código"
 import numpy as np
 import matplotlib.pyplot as plt
-import ipywidgets as widgets
-from ipywidgets import interactive
 from scipy.integrate import solve_ivp
 
 # Definición de la EDO
 def f(x, y):
-    return np.sin(x)*np.cos(y)
+    return np.sin(x)*np.cos(y) #Se puede cambiar arbitrariamente
 
 # Definir la función para trazar el campo de pendientes y las soluciones.
-def plot_slope_field(a=-5, b=5, c=-5, d=5, n=20, x0=0, y0=1):
+def plot_slope_field(a, b, c, d, n, x0, y0=1):
     x = np.linspace(a, b, n)
     y = np.linspace(c, d, n)
     X, Y = np.meshgrid(x, y)
@@ -462,7 +460,7 @@ def plot_slope_field(a=-5, b=5, c=-5, d=5, n=20, x0=0, y0=1):
     U2, V2 = U/N, V/N
     
     plt.figure(figsize=(8, 6))
-    plt.quiver(X, Y, U2, V2, angles="xy")
+    plt.quiver(X, Y, U2, V2, angles="xy", color="b")
     plt.xlabel('x')
     plt.ylabel('y')
     plt.title('Campo de pendientes')
@@ -490,20 +488,7 @@ def plot_slope_field(a=-5, b=5, c=-5, d=5, n=20, x0=0, y0=1):
     plt.scatter([x0], [y0], color='red')  # Condición inicial
     plt.legend()
     plt.show()
-
-# Widgets interactivos
-a_slider = widgets.FloatSlider(value=-5, min=-10, max=0, step=0.1, description='a:')
-b_slider = widgets.FloatSlider(value=5, min=0, max=10, step=0.1, description='b:')
-c_slider = widgets.FloatSlider(value=-5, min=-10, max=0, step=0.1, description='c:')
-d_slider = widgets.FloatSlider(value=5, min=0, max=10, step=0.1, description='d:')
-n_slider = widgets.IntSlider(value=20, min=10, max=50, step=1, description='n:')
-x0_slider = widgets.FloatSlider(value=0, min=-10, max=10, step=0.1, description='x0:')
-y0_slider = widgets.FloatSlider(value=1, min=-10, max=10, step=0.1, description='y0:')
-
-interactive_plot = interactive(plot_slope_field, a=a_slider, b=b_slider, c=c_slider, d=d_slider, n=n_slider, x0=x0_slider, y0=y0_slider)
-output = interactive_plot.children[-1]
-output.layout.height = '400px'
-interactive_plot
+plot_slope_field(a=-5, b=5, c=-5, d=5, n=20, x0=2, y0=1)
 ```
 +++
 
@@ -718,14 +703,50 @@ $$
 \mathbf{(1)}~\left\{\begin{array}{ccc}y'&=&2\sqrt{y}\\&&\\ y(2)&=&0\end{array}\right.
 $$
 
-Sus soluciones son $y(x)=0$ (trivial) e 
+Sus soluciones son $y(x)=0$ (trivial) e $y(x)=(x-2)^2$ para $x\geq2$. En Python:
 
-$$
-y(x)=\left\{\begin{array}{ccc}
-    0 & \text{si} & x<2\\
-    (x-2)^2 & \text{si} & x\geq2 
-\end{array}\right.
-$$
+```{code-cell}
+:tags: [Ejer6-1]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Definimos la función f(x, y)
+def f(x, y):
+    return 2 * np.sqrt(y)
+
+# Condiciones iniciales
+x0 = 2
+y0 = 0
+
+# Intervalo de integración
+x_span = [x0, 5]
+
+# Resolver la EDO usando solve_ivp
+sol = solve_ivp(f, x_span, [y0], method='RK45', t_eval=np.linspace(x0, 5, 100))
+
+# Solución analítica: y(x) = (x - 2)^2
+x = np.linspace(2, 5, 100)
+y_analitica = (x - 2)**2
+
+# Solución trivial: y(x) = 0
+y_trivial = np.zeros_like(x)
+
+# Visualizar las soluciones
+plt.plot(sol.t, sol.y[0], label='Solución numérica (solve_ivp)')
+plt.plot(x, y_analitica, 'r--', label='Solución analítica: $(x-2)^2$')
+plt.plot(x, y_trivial, 'g--', label='Solución trivial: $y(x) = 0$')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title(r'Soluciones para $y\' = 2\sqrt{y}$ con $y(2) = 0$')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
 
 $$
 \mathbf{(2)}~\left\{\begin{array}{ccc}y'&=&2\sqrt{y}\\&&\\ y(0)&=&-1\end{array}\right.
@@ -743,11 +764,50 @@ $$
 \mathbf{(4)}~\left\{\begin{array}{ccc}xy'&=&y-1\\&&\\ y(0)&=&1\end{array}\right.
 $$ 
 
-Tiene infinitas soluciones $y(x)=1+cx$, $c\in\mathbb{R}$.
+Tiene infinitas soluciones $y(x)=1+cx$, $c\in\mathbb{R}$. En Python:
+
+```{code-cell}
+:tags: [Ejer6-4]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definimos la función f(x, y)
+def f(x, y):
+    # Evitamos la división por cero para x = 0
+    return np.divide(y-1, x, out=np.zeros_like(x), where=x!=0)
+
+# Condiciones iniciales
+x0 = 0
+y0 = 1
+
+# Intervalo de integración
+x = np.linspace(x0, 2, 100)
+
+# Soluciones para diferentes valores de C
+C_vals = [-1, 0, 1, 2]
+sols = [1+C * x for C in C_vals]
+
+# Visualizar las soluciones
+for i, y_sol in enumerate(sols):
+    plt.plot(x, y_sol, label=f'Solución con C={C_vals[i]}')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Infinitas soluciones para una única condición inicial')
+plt.axhline(1, color='black', linestyle='--', label='y(0) = 1')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+```
 
 ¿Bajo qué condiciones un PVI tiene al menos una solución? ¿Bajo qué condiciones un PVI tiene una única solución?
 
-**Teorema de Existencia y Unicidad**: Sea $R$ un rectángulo tal que $(a,b)\in\mathbb{R}$. Si $f(x,y)$ y $\frac{\partial f}{\partial y}$ son continuas en $R$ entonces existe algún intervalo $I$ y una única función $y(x)$ definida en $I$ que es solución del PVI  
+**Teorema de Existencia y Unicidad (TEU)**: Sea $R$ un rectángulo tal que $(a,b)\in\mathbb{R}$. Si $f(x,y)$ y $\frac{\partial f}{\partial y}$ son continuas en $R$ entonces existe algún intervalo $I$ y una única función $y(x)$ definida en $I$ que es solución del PVI  
 
 $$
 \left\{\begin{array}{ccc}y'&=&f(x,y)\\ y(a)&=&b\end{array}\right.
@@ -755,8 +815,16 @@ $$
 
 ```{figure} TEU.png
 ---
-height: 150px
+height: 200px
 name: TEU
 ---
 Teorema de Existencia y Unicidad
 ```
+La demostración del TEU excede los objetivos del curso. Para estudiarla, recomendamos ver el libro de George Simmons *Ecuaciones Diferenciales*, Segunda Edición, Página 571: **Teorema de Picard**.
+
+**Nota**: Las condiciones del TEU son suficientes, pero no necesarias. Si no se cumplen, puede ocurrir cualquier situación con las soluciones del PVI asociado.
+
+<!--######################################################################################################################################################################################################################################################################################################################################################
+-->
+
+## Actividad de Cierre Unidad 1
