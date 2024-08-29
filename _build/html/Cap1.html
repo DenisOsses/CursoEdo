@@ -483,7 +483,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-existencia-y-unicidad">1.6. Teorema de Existencia y Unicidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidad-1">1.7. Actividad de Cierre Unidad 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidad-1">1.7. Actividad de Cierre Unidad 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-1-resolucion-de-ecuaciones-diferenciales">1.7.1. Problema 1: Resolución de Ecuaciones Diferenciales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-2-modelamiento-y-analisis-cualitativo">1.7.2. Problema 2: Modelamiento y Análisis Cualitativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-3-teorema-de-existencia-y-unicidad">1.7.3. Problema 3: Teorema de Existencia y Unicidad</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -678,13 +683,13 @@ v(t)=\frac{mg}{k}+\left(v_0-\frac{mg}{k}\right)e^{-\frac{k}{m}t}
 </div>
 </section>
 <section id="mezclas">
-<h3><span class="section-number">1.2.2. </span>Mezclas<a class="headerlink" href="#mezclas" title="Link to this heading">#</a></h3>
+<span id="id1"></span><h3><span class="section-number">1.2.2. </span>Mezclas<a class="headerlink" href="#mezclas" title="Link to this heading">#</a></h3>
 <p>Consideremos un tanque que contiene una solución (mezcla de sal y solvente). Existen tanto flujos de entrada como de salida y se quiere calcular la cantidad <span class="math notranslate nohighlight">\(x(t)\)</span> de solución en el tanque en el instante <span class="math notranslate nohighlight">\(t\)</span>, donde la cantidad de solución (sal) inicial en el tanque es <span class="math notranslate nohighlight">\(x(0)=x_0\)</span>.</p>
 <p>Suponga que la sustancia, con una concentración constante de <span class="math notranslate nohighlight">\(c_i~[gr/lt]\)</span> de solución, fluye dentro del tanque a una velocidad constante de <span class="math notranslate nohighlight">\(r_i~[lt/seg]\)</span> y que la solución en el tanque (que permanece completamente mezclada por agitación) fluye hacia afuera a una velocidad constante de <span class="math notranslate nohighlight">\(r_0~[lt/seg]\)</span> con una concentración de <span class="math notranslate nohighlight">\(c_0~[gr/lt]\)</span>.</p>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id2">
 <a class="reference internal image-reference" href="_images/Mezclas.png"><img alt="_images/Mezclas.png" src="_images/Mezclas.png" style="height: 150px;" /></a>
 <figcaption>
-<p><span class="caption-number">Figura 1.1 </span><span class="caption-text">Modelo de Mezclas</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Figura 1.1 </span><span class="caption-text">Modelo de Mezclas</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Con el fin de determinar una ED0 para <span class="math notranslate nohighlight">\(x(t)\)</span>, estimamos el cambio <span class="math notranslate nohighlight">\(\Delta x\)</span> durante un breve intervalo de tiempo <span class="math notranslate nohighlight">\([t,t+\Delta t]\)</span>. La cantidad de sal que fluye dentro del tanque durante <span class="math notranslate nohighlight">\(\Delta t\)</span> segundos es</p>
@@ -1076,7 +1081,7 @@ z=ax+by+c~\Rightarrow ~z'=a+by'.
 <p>Reemplazando en la EDO y simplificando, obtenemos una ecuación de <a class="reference internal" href="Glosario.html#sepvar"><span class="std std-ref">variables separables</span></a> en <span class="math notranslate nohighlight">\(x\)</span> y <span class="math notranslate nohighlight">\(z\)</span>, a saber:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{dz}{bf(z)-a}=dx
+\frac{dz}{bf(z)+a}=dx
 \]</div>
 <div class="admonition-ejercicios-teoricos admonition">
 <p class="admonition-title">Ejercicios Teóricos</p>
@@ -1159,7 +1164,7 @@ z=ax+by+c~\Rightarrow ~z'=a+by'.
 \[\begin{split}
 \mathbf{(3)}~\left\{\begin{array}{ccc}y'&amp;=&amp;x\sqrt{y}\\&amp;&amp;\\ y(0)&amp;=1\end{array}\right.
 \end{split}\]</div>
-<p>Tiene solución única <span class="math notranslate nohighlight">\(y(x)=\frac{x^2}{2}+1\)</span>.</p>
+<p>Tiene solución única <span class="math notranslate nohighlight">\(y(x)=\left(\frac{x^2}{4}+1\right)^2\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \mathbf{(4)}~\left\{\begin{array}{ccc}xy'&amp;=&amp;y-1\\&amp;&amp;\\ y(0)&amp;=&amp;1\end{array}\right.
@@ -1229,6 +1234,82 @@ z=ax+by+c~\Rightarrow ~z'=a+by'.
 </section>
 <section id="actividad-de-cierre-unidad-1">
 <h2><span class="section-number">1.7. </span>Actividad de Cierre Unidad 1<a class="headerlink" href="#actividad-de-cierre-unidad-1" title="Link to this heading">#</a></h2>
+<section id="problema-1-resolucion-de-ecuaciones-diferenciales">
+<h3><span class="section-number">1.7.1. </span>Problema 1: Resolución de Ecuaciones Diferenciales<a class="headerlink" href="#problema-1-resolucion-de-ecuaciones-diferenciales" title="Link to this heading">#</a></h3>
+<p>(a) Determine la solución de <span class="math notranslate nohighlight">\(xy'+y=\ln(x)\)</span> con <span class="math notranslate nohighlight">\(y(1)=1\)</span>.</p>
+<p>(b) Resuelva la ecuación diferencial <span class="math notranslate nohighlight">\(y'=\dfrac{1-xy^2}{2x^2y}\)</span> usando el cambio de variables <span class="math notranslate nohighlight">\(y=zx^{-1/2}\)</span>.</p>
+</section>
+<section id="problema-2-modelamiento-y-analisis-cualitativo">
+<h3><span class="section-number">1.7.2. </span>Problema 2: Modelamiento y Análisis Cualitativo<a class="headerlink" href="#problema-2-modelamiento-y-analisis-cualitativo" title="Link to this heading">#</a></h3>
+<p>En la teoría del aprendizaje, se supone que la rapidez con que se memoriza algo es proporcional a la cantidad que queda por memorizar. Suponga que <span class="math notranslate nohighlight">\(M\)</span> denota la cantidad total de un tema que se debe memorizar y que <span class="math notranslate nohighlight">\(A(t)\)</span> es la cantidad memorizada al tiempo <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>(a) Plantee un PVI que modele la situación.</p>
+<p>(b) Estudie cualitativamente el problema anterior para diversas condiciones iniciales. El código siguiente puede ser de utilidad (rellene los símbolos ¿? con sus opciones):</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># Parámetros</span>
+<span class="c1"># Cantidad total a memorizar</span>
+<span class="n">M</span> <span class="o">=</span> <span class="c1">## ¿? </span>
+<span class="c1"># Valor fijo de la constante de proporcionalidad</span>
+<span class="n">k</span> <span class="o">=</span> <span class="c1">## ¿?  </span>
+
+<span class="c1"># Diferentes condiciones iniciales</span>
+<span class="n">A0_values</span> <span class="o">=</span> <span class="c1">## [¿?, ¿?, ¿?, ¿?]</span>
+
+<span class="c1"># Definición de la ecuación diferencial</span>
+<span class="k">def</span> <span class="nf">dA_dt</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="c1">## ¿? Ponga aquí su modelo del inciso (a)</span>
+
+<span class="c1"># Tiempo de integración</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># Resolver y graficar para diferentes condiciones iniciales</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">A0</span> <span class="ow">in</span> <span class="n">A0_values</span><span class="p">:</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">dA_dt</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="n">A0</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="p">,),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;A(0) = </span><span class="si">{</span><span class="n">A0</span><span class="o">/</span><span class="n">M</span><span class="si">}</span><span class="s1">M&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configuración del gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Memorización a lo largo del tiempo con diferentes condiciones iniciales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cantidad memorizada A(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;C:\Users\denis.osses\AppData\Local\Temp\ipykernel_28860\3181253743.py&quot;</span><span class="gt">, line </span><span class="mi">7</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="c1">## ¿?</span>
+        <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>(c) En la película <a class="reference external" href="https://es.wikipedia.org/wiki/The_Matrix"><strong>Matrix</strong></a> el protagonista <a class="reference external" href="https://es.wikipedia.org/wiki/Neo_(Matrix)"><em>Neo</em></a> aprende de manera automática tras descargar un programa en su cerebro. En este contexto (hipotético), podemos suponer que él es capaz de duplicar inicialmente la cantidad total de un tema que debe memorizar. ¿Qué ocurre en este escenario? ¿Es factible que su memoria crezca sin límite?</p>
+<p>(d) Proponga una mejora del modelo del inciso (a) haciendo hipótesis razonables. Explique sus suposiciones. Luego analice cualitativamente la solución del nuevo modelo.</p>
+</section>
+<section id="problema-3-teorema-de-existencia-y-unicidad">
+<h3><span class="section-number">1.7.3. </span>Problema 3: Teorema de Existencia y Unicidad<a class="headerlink" href="#problema-3-teorema-de-existencia-y-unicidad" title="Link to this heading">#</a></h3>
+<p>Determine la región <span class="math notranslate nohighlight">\(R\)</span> más grande en el plano <span class="math notranslate nohighlight">\(XY\)</span> tal que el PVI:</p>
+<div class="math notranslate nohighlight">
+\[
+y'=\frac{1}{\sqrt{y+x}}-1~~,~~y(x_0)=y_0
+\]</div>
+<p>tenga solución única. Esboce el gráfico de tal región <span class="math notranslate nohighlight">\(R\)</span>. Resuelva el PVI anterior con <span class="math notranslate nohighlight">\(y(0)=1\)</span>.</p>
+</section>
 </section>
 </section>
 
@@ -1320,7 +1401,12 @@ z=ax+by+c~\Rightarrow ~z'=a+by'.
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-existencia-y-unicidad">1.6. Teorema de Existencia y Unicidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidad-1">1.7. Actividad de Cierre Unidad 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidad-1">1.7. Actividad de Cierre Unidad 1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-1-resolucion-de-ecuaciones-diferenciales">1.7.1. Problema 1: Resolución de Ecuaciones Diferenciales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-2-modelamiento-y-analisis-cualitativo">1.7.2. Problema 2: Modelamiento y Análisis Cualitativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-3-teorema-de-existencia-y-unicidad">1.7.3. Problema 3: Teorema de Existencia y Unicidad</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

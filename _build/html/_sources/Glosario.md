@@ -84,7 +84,7 @@ $$
 
 Finalmente, integramos esta igualdad para obtener la solución $y(x)$ de la EDO:
 
-$$y(x)=\dfrac{1}{e^{\int P(x)~dx}}\left(\int e^{\int P(x)~dx}\cdot f(x)~dx\right)+C$$
+$$y(x)=\dfrac{1}{e^{\int P(x)~dx}}\left(\int e^{\int P(x)~dx}\cdot f(x)~dx+C\right)$$
 
 (DiagramaFase)=
 <u>**Diagrama de Fase**</u>: Es una representación geométrica de las soluciones de una EDO donde cada conjunto de condiciones iniciales está representado por un punto o curva diferente. 

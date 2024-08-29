@@ -222,6 +222,7 @@ Obtenga los datos de la estación meteorológica del aeródromo de Tobalaba para
 
 +++
 
+(Mezclas)=
 ### Mezclas
 
 +++
@@ -680,7 +681,7 @@ $$
 Reemplazando en la EDO y simplificando, obtenemos una ecuación de [variables separables](SepVar) en $x$ y $z$, a saber: 
 
 $$
-\frac{dz}{bf(z)-a}=dx
+\frac{dz}{bf(z)+a}=dx
 $$
 
 ```{admonition} Ejercicios Teóricos
@@ -758,7 +759,7 @@ $$
 \mathbf{(3)}~\left\{\begin{array}{ccc}y'&=&x\sqrt{y}\\&&\\ y(0)&=1\end{array}\right.
 $$ 
 
-Tiene solución única $y(x)=\frac{x^2}{2}+1$.
+Tiene solución única $y(x)=\left(\frac{x^2}{4}+1\right)^2$.
 
 $$
 \mathbf{(4)}~\left\{\begin{array}{ccc}xy'&=&y-1\\&&\\ y(0)&=&1\end{array}\right.
@@ -828,3 +829,73 @@ La demostración del TEU excede los objetivos del curso. Para estudiarla, recome
 -->
 
 ## Actividad de Cierre Unidad 1
+
+### Problema 1: Resolución de Ecuaciones Diferenciales 
+
+(a) Determine la solución de $xy'+y=\ln(x)$ con $y(1)=1$.
+
+(b) Resuelva la ecuación diferencial $y'=\dfrac{1-xy^2}{2x^2y}$ usando el cambio de variables $y=zx^{-1/2}$.
+
+### Problema 2: Modelamiento y Análisis Cualitativo 
+
+En la teoría del aprendizaje, se supone que la rapidez con que se memoriza algo es proporcional a la cantidad que queda por memorizar. Suponga que $M$ denota la cantidad total de un tema que se debe memorizar y que $A(t)$ es la cantidad memorizada al tiempo $t$.
+
+(a) Plantee un PVI que modele la situación.
+
+(b) Estudie cualitativamente el problema anterior para diversas condiciones iniciales. El código siguiente puede ser de utilidad (rellene los símbolos ¿? con sus opciones):
+
+```{code-cell}
+:tags: [Ejer7-2]
+:tags: [hide-cell]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Parámetros
+# Cantidad total a memorizar
+M = ## ¿? 
+# Valor fijo de la constante de proporcionalidad
+k = ## ¿?  
+
+# Diferentes condiciones iniciales
+A0_values = ## [¿?, ¿?, ¿?, ¿?]
+
+# Definición de la ecuación diferencial
+def dA_dt(t, A, k):
+    return ## ¿? Ponga aquí su modelo del inciso (a)
+
+# Tiempo de integración
+t_eval = np.linspace(0, 10, 300)
+
+# Resolver y graficar para diferentes condiciones iniciales
+plt.figure(figsize=(10, 6))
+
+for A0 in A0_values:
+    sol = solve_ivp(dA_dt, [0, 10], [A0], args=(k,), t_eval=t_eval)
+    plt.plot(sol.t, sol.y[0], label=f'A(0) = {A0/M}M')
+
+# Configuración del gráfico
+plt.title('Memorización a lo largo del tiempo con diferentes condiciones iniciales')
+plt.xlabel('Tiempo t')
+plt.ylabel('Cantidad memorizada A(t)')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+(c) En la película [**Matrix**](https://es.wikipedia.org/wiki/The_Matrix) el protagonista [*Neo*](https://es.wikipedia.org/wiki/Neo_(Matrix)) aprende de manera automática tras descargar un programa en su cerebro. En este contexto (hipotético), podemos suponer que él es capaz de duplicar inicialmente la cantidad total de un tema que debe memorizar. ¿Qué ocurre en este escenario? ¿Es factible que su memoria crezca sin límite?
+
+(d) Proponga una mejora del modelo del inciso (a) haciendo hipótesis razonables. Explique sus suposiciones. Luego analice cualitativamente la solución del nuevo modelo.
+
+### Problema 3: Teorema de Existencia y Unicidad
+
+Determine la región $R$ más grande en el plano $XY$ tal que el PVI:
+
+$$
+y'=\frac{1}{\sqrt{y+x}}-1~~,~~y(x_0)=y_0
+$$ 
+
+tenga solución única. Esboce el gráfico de tal región $R$. Resuelva el PVI anterior con $y(0)=1$.
