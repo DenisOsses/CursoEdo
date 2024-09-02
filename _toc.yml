@@ -8,4 +8,5 @@ parts:
     numbered: True
     chapters:
     - file: Cap1
+    - file: Cap2
     - file: Glosario

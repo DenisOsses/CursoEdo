@@ -1,0 +1,747 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Unidad 2 &#8212; Ecuaciones Diferenciales 2024-2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-TW65QWSB9F"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-TW65QWSB9F');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-TW65QWSB9F');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap2';</script>
+    <script src="_static/gtag.js?v=4bd77a66"></script>
+    <script src="_static/.ipynb_checkpoints/gtag-checkpoint.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="3. Glosario" href="Glosario.html" />
+    <link rel="prev" title="1. Unidad 1" href="Cap1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Saltar al contenido principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logomat.jpeg" class="logo__image only-light" alt="Ecuaciones Diferenciales 2024-2 - Home"/>
+    <script>document.write(`<img src="_static/logomat.jpeg" class="logo__image only-dark" alt="Ecuaciones Diferenciales 2024-2 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Búsqueda</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    MAT208 Ecuaciones Diferenciales
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Unidades del curso</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Cap1.html">1. Unidad 1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Unidad 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glosario.html">3. Glosario</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/master/Cap2.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/DenisOsses/CursoEdo" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repositorio de origen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2FCap2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Abrir un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Cap2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Descargar archivo de cuaderno"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="_sources/Cap2.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="claro/oscuro" aria-label="claro/oscuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Unidad 2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-diferenciales-de-orden-superior">2.1. Ecuaciones Diferenciales de Orden Superior</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-masa-resorte-movimiento-libre">2.1.1. Sistemas Masa-Resorte. Movimiento Libre</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-libre-amortiguado">2.1.2. Movimiento Libre Amortiguado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-forzado">2.1.3. Movimiento Forzado</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <!--######################################################################################################################################################################################################################################################################################################################################################
+--><section class="tex2jax_ignore mathjax_ignore" id="unidad-2">
+<span id="u2"></span><h1><span class="section-number">2. </span>Unidad 2<a class="headerlink" href="#unidad-2" title="Link to this heading">#</a></h1>
+<section id="ecuaciones-diferenciales-de-orden-superior">
+<h2><span class="section-number">2.1. </span>Ecuaciones Diferenciales de Orden Superior<a class="headerlink" href="#ecuaciones-diferenciales-de-orden-superior" title="Link to this heading">#</a></h2>
+<p>En el capítulo anterior, estudiamos diversas ecuaciones diferenciales de primer orden y cómo estas se aplican al análisis y soluciones de problemas. Es este capítulo, estudiaremos EDO donde aparezcan derivadas de orden mayor que <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<section id="sistemas-masa-resorte-movimiento-libre">
+<h3><span class="section-number">2.1.1. </span>Sistemas Masa-Resorte. Movimiento Libre<a class="headerlink" href="#sistemas-masa-resorte-movimiento-libre" title="Link to this heading">#</a></h3>
+<p>Un resorte se suspende verticalmente de un soporte rígido y luego se le fija una masa <span class="math notranslate nohighlight">\(m\)</span> a su extremo libre. La cantidad de alargamiento o elongación del resorte depende de la masa (mayor masa, mayor elongación). Por la <a class="reference external" href="https://en.wikipedia.org/wiki/Hooke%27s_law"><strong>ley de Hooke</strong></a>, el resorte mismo ejerce una fuerza restauradora <span class="math notranslate nohighlight">\(F_r\)</span> opuesta a la dirección de elongación, y es proporcional a la cantidad de elongación <span class="math notranslate nohighlight">\(s\)</span>. Se expresa como</p>
+<div class="math notranslate nohighlight">
+\[
+F_r=ks,
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(k\)</span> es una constante de proporcionalidad llamada <strong>constante del resorte</strong>.</p>
+<p>Después de que se une una masa <span class="math notranslate nohighlight">\(m\)</span> a un resorte, esta alarga el resorte una cantidad <span class="math notranslate nohighlight">\(s\)</span> y logra una posición de equilibrio en la cual su peso <span class="math notranslate nohighlight">\(W\)</span> se equilibra mediante la fuerza restauradora <span class="math notranslate nohighlight">\(ks\)</span>. La <strong>condición de equilibrio</strong> es <span class="math notranslate nohighlight">\(mg=ks\)</span>. Posteriormente, si la masa se desplaza una cantidad <span class="math notranslate nohighlight">\(x\)</span> de su posición de equilibrio, la fuerza restauradora del resorte es entonces <span class="math notranslate nohighlight">\(F_r=k(x+s)\)</span>.</p>
+<figure class="align-default" id="masa-resorte">
+<a class="reference internal image-reference" href="_images/masa1.png"><img alt="_images/masa1.png" src="_images/masa1.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 2.1 </span><span class="caption-text">Sistema Masa-Resorte</span><a class="headerlink" href="#masa-resorte" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Suponiendo que no hay fuerzas restauradoras adicionales que actúan sobre el sistema masa-resorte y suponiendo que la masa vibra libre de otras fuerzas externas (<strong>movimiento libre</strong>), usando la segunda ley de Newton, obtenemos</p>
+<div class="math notranslate nohighlight">
+\[
+m\ddot x=\sum F~\Rightarrow~m\ddot x=-F_r+W~,~\text{es decir}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d^2x}{dt^2}=-k(x+s)+mg~\Rightarrow~m\frac{d^2x}{dt^2}=-kx~\Leftrightarrow~\frac{d^2x}{dt^2}+\frac{k}{m}x=0.
+\]</div>
+<p>Esta es una EDO lineal de segundo orden con coeficientes constantes que puede ser reescrita como</p>
+<div class="math notranslate nohighlight" id="equation-eqmas">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-eqmas" title="Link to this equation">#</a></span>\[
+\frac{d^2x}{dt^2}+\omega^2x=0~~,~~\omega^2=\frac{k}{m}
+\]</div>
+<p>La EDO <a class="reference internal" href="#equation-eqmas">(2.1)</a> describe el <u><strong>movimiento armónico simple</strong></u> o <u><strong>movimiento libre no amortiguado</strong></u>. Podemos establecer un PVI considerando las condiciones de <strong>desplazamiento inicial</strong> <span class="math notranslate nohighlight">\(x(0)=x_0\)</span> y <strong>velocidad inicial</strong> <span class="math notranslate nohighlight">\(x'(0)=v_0\)</span>.</p>
+<p><strong>Convención</strong>: Los desplazamientos medidos abajo de la posición de equilibrio son positivos:</p>
+<figure class="align-default" id="masa-resorte2">
+<a class="reference internal image-reference" href="_images/masa2.png"><img alt="_images/masa2.png" src="_images/masa2.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 2.2 </span><span class="caption-text">Convención del Signo</span><a class="headerlink" href="#masa-resorte2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="movimiento-libre-amortiguado">
+<h3><span class="section-number">2.1.2. </span>Movimiento Libre Amortiguado<a class="headerlink" href="#movimiento-libre-amortiguado" title="Link to this heading">#</a></h3>
+<p>Supongamos ahora que la masa del sistema está sometida a una <strong>fuerza de amortiguamiento</strong> <span class="math notranslate nohighlight">\(F_a\)</span>, que es proporcional a la velocidad instantánea <span class="math notranslate nohighlight">\(\frac{dx}{dt}\)</span>, digamos que <span class="math notranslate nohighlight">\(F_a=\beta\frac{dx}{dt}\)</span>.</p>
+<figure class="align-default" id="masa-resorte3">
+<a class="reference internal image-reference" href="_images/masa5.png"><img alt="_images/masa5.png" src="_images/masa5.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 2.3 </span><span class="caption-text">Sistema Masa-Resorte sometido a una Fuerza Amortiguadora</span><a class="headerlink" href="#masa-resorte3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Cuando ninguna otra fuerza actúa sobre el sistema, se tiene que la segunda ley de Newton implica que</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d^2x}{dt^2}=-kx-\beta\frac{dx}{dt}
+\]</div>
+<p>O equivalentemente</p>
+<div class="math notranslate nohighlight" id="equation-mla">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-mla" title="Link to this equation">#</a></span>\[
+\frac{d^2x}{dt^2}+2\lambda\frac{dx}{dt}+\omega^2x=0~,~\omega^2=\frac{k}{m}~,~2\lambda=\frac{\beta}{m}.
+\]</div>
+<p>La EDO <a class="reference internal" href="#equation-mla">(2.2)</a> describe el <u><strong>movimiento libre amortiguado</strong></u>.</p>
+</section>
+<section id="movimiento-forzado">
+<h3><span class="section-number">2.1.3. </span>Movimiento Forzado<a class="headerlink" href="#movimiento-forzado" title="Link to this heading">#</a></h3>
+<p>Finalmente, suponga que existe una fuerza externa <span class="math notranslate nohighlight">\(f(t)\)</span> que actúa sobr el sistema masa-resorte amortiguado. La segunda ley de Newton implica que</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d^2x}{dt^2}=-kx-\beta\frac{dx}{dt}+f(t)
+\]</div>
+<p>o equivalentemente</p>
+<div class="math notranslate nohighlight" id="equation-mfa">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-mfa" title="Link to this equation">#</a></span>\[
+\frac{d^2x}{dt^2}+2\lambda\frac{dx}{dt}+\omega^2x=F(t)~,~F(t)=\frac{f(t)}{m}.
+\]</div>
+<p>La EDO <a class="reference internal" href="#equation-mfa">(2.3)</a> describe el <u><strong>movimiento forzado</strong></u>.</p>
+<p>Podemos visualizar en Python una comparación de estos 3 tipos de movimiento, considerando una fuerza externa del tipo  <span class="math notranslate nohighlight">\(f(t)=F_0\cos(\gamma t)\)</span>, donde <span class="math notranslate nohighlight">\(F_0\)</span> es la <strong>amplitud</strong> y <span class="math notranslate nohighlight">\(\gamma\)</span> la <strong>frecuencia</strong> de la fuerza externa:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># Parámetros del sistema</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c1"># masa</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c1"># constante del resorte</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># coeficiente de amortiguamiento</span>
+<span class="n">F0</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># amplitud de la fuerza externa (puede ser 0 si no hay fuerza externa)</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># frecuencia de la fuerza externa</span>
+
+<span class="c1"># Definir el sistema de ecuaciones diferenciales: Una EDO de 2do orden se &quot;separa&quot; como un sistema para aplicar el</span>
+<span class="c1">#el comando solve_ivp</span>
+<span class="k">def</span> <span class="nf">masa_resorte</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">F0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">dxdt</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">dvdt</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">beta</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="p">(</span><span class="n">F0</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="c1">#Fuerza externa F0*cos(gamma*t): se puede cambiar</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dxdt</span><span class="p">,</span> <span class="n">dvdt</span><span class="p">]</span>
+
+<span class="c1"># Condiciones iniciales</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>  <span class="c1"># posición inicial x(0)=1, velocidad inicial x&#39;(0)=0</span>
+
+<span class="c1"># Tiempo de simulación</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Resolver las ecuaciones diferenciales para los tres casos</span>
+<span class="n">sol_libre_sin_amort</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+<span class="n">sol_libre_amort</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+<span class="n">sol_forzado</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">F0</span><span class="p">,</span> <span class="n">omega</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+
+<span class="c1"># Graficar los resultados en un mismo gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_libre_sin_amort</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_libre_sin_amort</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Movimiento libre sin amortiguación&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_libre_amort</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_libre_amort</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Movimiento libre amortiguado&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol_forzado</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol_forzado</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Movimiento forzado&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Comparación de los Movimientos: Libre, Amortiguado y Forzado&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo (t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Posición (x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/acbae39790490d93e8845097189830dbf6b80b6de3b7db5bc707af9cfc4e3d71.png" src="_images/acbae39790490d93e8845097189830dbf6b80b6de3b7db5bc707af9cfc4e3d71.png" />
+</div>
+</div>
+<p>En los 3 casos anteriores, tenemos ecuaciones de segundo orden con coeficientes constantes: ¿Existe algún método para determinar sus soluciones de modo analítico? En las próximas sesiones, veremos un procedimiento para ello.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DenisOsses/CursoEdo",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Cap1.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Unidad 1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Glosario.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Glosario</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-diferenciales-de-orden-superior">2.1. Ecuaciones Diferenciales de Orden Superior</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-masa-resorte-movimiento-libre">2.1.1. Sistemas Masa-Resorte. Movimiento Libre</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-libre-amortiguado">2.1.2. Movimiento Libre Amortiguado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-forzado">2.1.3. Movimiento Forzado</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por The Jupyter Book Community/ Área de Matemáticas FIC UAI/ Denis Osses, denis.osses@uai.cl
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
