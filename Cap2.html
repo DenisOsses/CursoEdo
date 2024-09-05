@@ -466,6 +466,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-forzado">2.1.3. Movimiento Forzado</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-diferenciales-lineales-con-coeficientes-constantes">2.2. Ecuaciones Diferenciales Lineales con Coeficientes Constantes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-2">2.2.1. Orden 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-a-sistemas-masa-resorte">2.2.2. Aplicación a Sistemas Masa-Resorte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-de-orden-superior">2.2.3. Ecuaciones de Orden Superior</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-particulares">2.3. Soluciones Particulares</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-los-coeficientes-indeterminados">2.3.1. Método de los Coeficientes Indeterminados</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -570,9 +580,9 @@ m\frac{d^2x}{dt^2}=-kx-\beta\frac{dx}{dt}+f(t)
 <span class="c1"># Parámetros del sistema</span>
 <span class="n">m</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c1"># masa</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>   <span class="c1"># constante del resorte</span>
-<span class="n">c</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># coeficiente de amortiguamiento</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">0.5</span>   <span class="c1"># coeficiente de amortiguamiento</span>
 <span class="n">F0</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># amplitud de la fuerza externa (puede ser 0 si no hay fuerza externa)</span>
-<span class="n">omega</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># frecuencia de la fuerza externa</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># frecuencia de la fuerza externa</span>
 
 <span class="c1"># Definir el sistema de ecuaciones diferenciales: Una EDO de 2do orden se &quot;separa&quot; como un sistema para aplicar el</span>
 <span class="c1">#el comando solve_ivp</span>
@@ -591,8 +601,8 @@ m\frac{d^2x}{dt^2}=-kx-\beta\frac{dx}{dt}+f(t)
 
 <span class="c1"># Resolver las ecuaciones diferenciales para los tres casos</span>
 <span class="n">sol_libre_sin_amort</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
-<span class="n">sol_libre_amort</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
-<span class="n">sol_forzado</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">F0</span><span class="p">,</span> <span class="n">omega</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+<span class="n">sol_libre_amort</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+<span class="n">sol_forzado</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">F0</span><span class="p">,</span> <span class="n">gamma</span><span class="p">),</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
 
 <span class="c1"># Graficar los resultados en un mismo gráfico</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -616,7 +626,279 @@ m\frac{d^2x}{dt^2}=-kx-\beta\frac{dx}{dt}+f(t)
 </div>
 </div>
 <p>En los 3 casos anteriores, tenemos ecuaciones de segundo orden con coeficientes constantes: ¿Existe algún método para determinar sus soluciones de modo analítico? En las próximas sesiones, veremos un procedimiento para determinar dichas soluciones.</p>
+<!--######################################################################################################################################################################################################################################################################################################################################################
+--></section>
 </section>
+<section id="ecuaciones-diferenciales-lineales-con-coeficientes-constantes">
+<h2><span class="section-number">2.2. </span>Ecuaciones Diferenciales Lineales con Coeficientes Constantes<a class="headerlink" href="#ecuaciones-diferenciales-lineales-con-coeficientes-constantes" title="Link to this heading">#</a></h2>
+<section id="orden-2">
+<h3><span class="section-number">2.2.1. </span>Orden 2<a class="headerlink" href="#orden-2" title="Link to this heading">#</a></h3>
+<p>Nos interesa resolver la EDO Lineal Homogénea (es decir, igualada a <span class="math notranslate nohighlight">\(0\)</span>) con coeficientes constantes:</p>
+<div class="math notranslate nohighlight">
+\[
+ay''+by'+cy=0~~,~~a,b,c\in\mathbb{R},a\neq0.
+\]</div>
+<p>El procedimiento de resolución consiste en suponer que <span class="math notranslate nohighlight">\(y(x)=e^{mx}\)</span> es una solución para algún <span class="math notranslate nohighlight">\(m\in\mathbb{R}\)</span> (¿por qué se puede suponer esto?). Derivando y reemplazando, llegamos a la <strong>ecuación auxiliar</strong></p>
+<div class="math notranslate nohighlight">
+\[
+am^2+bm+c=0
+\]</div>
+<p>Las soluciones de esta ecuación cuadrática en <span class="math notranslate nohighlight">\(m\)</span> son</p>
+<div class="math notranslate nohighlight">
+\[
+m_1=\frac{-b+\sqrt{\Delta}}{2a}~,~m_2=\frac{-b-\sqrt{\Delta}}{2a}
+\]</div>
+<p>y, a partir de ellas, tenemos 3 casos:</p>
+<ol class="arabic simple">
+<li><p>Si <span class="math notranslate nohighlight">\(m_1,m_2\)</span> son <u>raíces reales distintas</u>: La solución es</p></li>
+</ol>
+<div class="math notranslate nohighlight" id="equation-rrd">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-rrd" title="Link to this equation">#</a></span>\[
+y_H(x)=c_1e^{m_1x}+c_2e^{m_2x}
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Si <span class="math notranslate nohighlight">\(m_1=m_2\)</span> es <u>una raíz real repetida</u>: La solución es</p></li>
+</ol>
+<div class="math notranslate nohighlight" id="equation-rri">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-rri" title="Link to this equation">#</a></span>\[
+y_H(x)=c_1e^{m_1x}+c_2xe^{m_1x}
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Si <span class="math notranslate nohighlight">\(m_1,m_2\)</span> son <u>raíces complejas conjugadas</u>: <span class="math notranslate nohighlight">\(m_1=\alpha+\beta i\)</span> y <span class="math notranslate nohighlight">\(m_2=\alpha-\beta i\)</span>, entonces la solución es</p></li>
+</ol>
+<div class="math notranslate nohighlight" id="equation-rcc">
+<span class="eqno">(2.6)<a class="headerlink" href="#equation-rcc" title="Link to this equation">#</a></span>\[
+y_H(x)=c_1e^{\alpha x}\cos(\beta x)+c_2e^{\alpha x}\sin(\beta x)
+\]</div>
+<p><strong>Nota</strong>: Advierta que para una EDO de orden 2, es necesario que existan dos soluciones básicas (o fundamentales) <span class="math notranslate nohighlight">\(y_1\)</span>, <span class="math notranslate nohighlight">\(y_2\)</span> que sean <a class="reference internal" href="Glosario.html#li"><span class="std std-ref"><strong>linealmente independientes</strong></span></a> y todas las <a class="reference internal" href="Glosario.html#cl"><span class="std std-ref"><strong>combinaciones lineales</strong></span></a> de ellas <a class="reference internal" href="Glosario.html#gen"><span class="std std-ref"><strong>generan</strong></span></a> la solución de esta EDO.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine la solución de <span class="math notranslate nohighlight">\(2y''-3y'+4y=0.\)</span></p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Definir la variable independiente y la función dependiente</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Definir la ecuación diferencial no homogénea</span>
+<span class="n">edo_no_homogenea</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Resolver la ecuación diferencial no homogénea</span>
+<span class="n">solucion_no_homogenea</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">edo_no_homogenea</span><span class="p">)</span>
+
+<span class="c1"># # Mostrar la solución general</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solución de la EDO no homogénea:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">solucion_no_homogenea</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solución de la EDO no homogénea:
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle y{\left(t \right)} = \left(C_{1} \sin{\left(\frac{\sqrt{23} t}{4} \right)} + C_{2} \cos{\left(\frac{\sqrt{23} t}{4} \right)}\right) e^{\frac{3 t}{4}}\]</div>
+</div>
+</div>
+</section>
+<section id="aplicacion-a-sistemas-masa-resorte">
+<h3><span class="section-number">2.2.2. </span>Aplicación a Sistemas Masa-Resorte<a class="headerlink" href="#aplicacion-a-sistemas-masa-resorte" title="Link to this heading">#</a></h3>
+<p>La ecuación <a class="reference internal" href="#equation-eqmas">(2.1)</a> describe el movimiento libre en un sistema masa-resorte. La ecuación auxiliar asociada es <span class="math notranslate nohighlight">\(M^2+\frac{k}{m}=0\)</span> o <span class="math notranslate nohighlight">\(M^2+\omega^2=0\)</span>, cuyas raíces complejas son <span class="math notranslate nohighlight">\(M=\sqrt{\frac{k}{m}}=\omega\)</span>, por lo que la solución de la EDO es</p>
+<div class="math notranslate nohighlight">
+\[
+x(t)=c_1\cos\left(\sqrt{\frac{k}{m}}t\right)+c_2\sin\left(\sqrt{\frac{k}{m}}t\right)=c_1\cos(\omega t)+c_2\sin(\omega t)
+\]</div>
+<p>La ecuación <a class="reference internal" href="#equation-mla">(2.2)</a> describe el movimiento amortiguado en un sistema masa-resorte. La ecuación auxiliar asociada es <span class="math notranslate nohighlight">\(M^2+\frac{\beta}{m}x+\frac{k}{m}=0\)</span> o <span class="math notranslate nohighlight">\(M^2+\frac{\beta}{m}M+\omega^2=0\)</span>, cuyas raíces son <span class="math notranslate nohighlight">\(M_1=-\lambda+\sqrt{\lambda^2-\omega^2}\)</span> y <span class="math notranslate nohighlight">\(M_2=-\lambda-\sqrt{\lambda^2-\omega^2}\)</span>, por lo que la solución de la EDO depende del signo de <span class="math notranslate nohighlight">\(\Delta=\lambda^2-\omega^2\)</span>:</p>
+<ol class="arabic simple">
+<li><p><u><span class="math notranslate nohighlight">\(\Delta&gt;0\)</span></u>: El sistema está <strong>sobreamortiguado</strong> porque el coeficiente de amortiguamiento <span class="math notranslate nohighlight">\(\beta\)</span> es grande comparado con la constante del resorte <span class="math notranslate nohighlight">\(k\)</span>. La solución en este caso es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+x(t)=e^{-\lambda t}\left(c_1e^{\sqrt{\Delta}t}+c_2e^{-\sqrt{\Delta}t}\right)~,~c_1,c_2\in\mathbb{R}
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p><u><span class="math notranslate nohighlight">\(\Delta=0\)</span></u>: EL sistema está <strong>críticamente amortiguado</strong> porque cualquier ligera disminución en la fuerza de amortiguamiento daría como resultado un movimiento oscilatorio. La solución en este caso es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+x(t)=e^{-\lambda t}\left(c_1+c_2t\right)~,~c_1,c_2\in\mathbb{R}
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p><u><span class="math notranslate nohighlight">\(\Delta&lt;0\)</span></u>: En este caso el sistema está <strong>subamortiguado</strong> puesto que el coeficiente de amortiguamiento es pequeño comparado con la constante del resorte. La solución en este caso es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+x(t)=e^{-\lambda t}\left(c_1\cos(\sqrt{-\Delta}t)+c_2\sin(\sqrt{-\Delta}t)\right)~,~c_1,c_2\in\mathbb{R}
+\]</div>
+</section>
+<section id="ecuaciones-de-orden-superior">
+<h3><span class="section-number">2.2.3. </span>Ecuaciones de Orden Superior<a class="headerlink" href="#ecuaciones-de-orden-superior" title="Link to this heading">#</a></h3>
+<p>En general, para resolver la EDO Lineal Homogénea con coeficientes constantes:</p>
+<div class="math notranslate nohighlight">
+\[
+a_ny^{(n)}+\cdots+a_1y'+a_0y=0~~,~~a_i\in\mathbb{R}, a_n\neq0
+\]</div>
+<p>se debe resolver una <strong>ecuación auxiliar</strong> de <span class="math notranslate nohighlight">\(n\)</span>-ésimo orden</p>
+<div class="math notranslate nohighlight">
+\[
+a_nm^n+\cdots+a_2m^2+a_1m+a_0=0.
+\]</div>
+<p>Si todas las raíces de esta ecuación auxiliar son reales y distintas, entonces la solución es</p>
+<div class="math notranslate nohighlight">
+\[
+y_H(x)=c_1e^{m_1x}+c_2e^{m_2x}+\cdots+c_ne^{m_nx}.
+\]</div>
+<p>Si la ecuación auxiliar de <span class="math notranslate nohighlight">\(n\)</span>-ésimo orden tiene raíces repetidas, digamos <span class="math notranslate nohighlight">\(m_1\)</span> es una raíz de multiplicidad <span class="math notranslate nohighlight">\(k\)</span>, es posible demostrar que las soluciones LI son</p>
+<div class="math notranslate nohighlight">
+\[
+e^{m_1x},xe^{m_1x},x^2e^{m_1x},\ldots,x^{k-1}e^{m_1x}
+\]</div>
+<p>y la solución general debe contener una combinación lineal de ellas.</p>
+<p>Por último, si <span class="math notranslate nohighlight">\(m_1=\alpha+\beta i\)</span>, <span class="math notranslate nohighlight">\(\beta&gt;0\)</span>, es una raíz compleja de multiplicidad <span class="math notranslate nohighlight">\(k\)</span> de una ecuación auxiliar con coeficientes reales, entonces su conjugada <span class="math notranslate nohighlight">\(m_2=\alpha-\beta i\)</span> es también una raíz de multiplicidad <span class="math notranslate nohighlight">\(k\)</span> y la solución general de la ecuación diferencial correspondiente debe tener una combinación lineal de las <span class="math notranslate nohighlight">\(2k\)</span> soluciones reales linealmente independientes</p>
+<div class="math notranslate nohighlight">
+\[
+e^{\alpha x}\cos(\beta x), xe^{\alpha x}\cos(\beta x),x^2e^{\alpha x}\cos(\beta x),\ldots,x^{k-1}e^{\alpha x}\cos(\beta x)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+e^{\alpha x}\sin(\beta x), xe^{\alpha x}\sin(\beta x), x^2e^{\alpha x}\sin(\beta x),\ldots,x^{k-1}e^{\alpha x}\sin(\beta x)
+\]</div>
+<div class="admonition-ejercicio-teorico-propuesto admonition">
+<p class="admonition-title">Ejercicio Teórico (Propuesto)</p>
+<p>Resuelva el PVI <span class="math notranslate nohighlight">\(y'''+2y''-5y'-6y=0\)</span> , <span class="math notranslate nohighlight">\(y(0)=y'(0)=0\)</span>, <span class="math notranslate nohighlight">\(y''(0)=1.\)</span></p>
+</div>
+</section>
+</section>
+<section id="soluciones-particulares">
+<h2><span class="section-number">2.3. </span>Soluciones Particulares<a class="headerlink" href="#soluciones-particulares" title="Link to this heading">#</a></h2>
+<p>Ya sabemos cómo resolver una EDO Lineal y Homogénea con coeficientes constantes (obteniendo <span class="math notranslate nohighlight">\(y_H(x)\)</span>), pero: ¿Es posible determinar una solución general de la EDO no homogénea</p>
+<div class="math notranslate nohighlight" id="equation-edol">
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-edol" title="Link to this equation">#</a></span>\[
+a_ny^{(n)}+\cdots+a_1y'+a_0y=g(x)
+\]</div>
+<p>como en la EDO <a class="reference internal" href="#equation-mfa">(2.3)</a> que modela el sistema masa-resorte forzado?</p>
+<p>Tal como en Álgebra Lineal, donde la solución de un sistema de ecuaciones lineales <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> es siempre de la forma <span class="math notranslate nohighlight">\(\vec{x}=\vec{x}_H+\vec{x}_P\)</span> (con <span class="math notranslate nohighlight">\(\vec{x}_H\)</span> solución del sistema homogéneo asociado <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span> y <span class="math notranslate nohighlight">\(\vec{x}_P\)</span> una solución particular del sistema general), la solución general de una EDO Lineal no homogénea se puede escribir como <span class="math notranslate nohighlight">\(y(x)=y_H(x)+y_P(x)\)</span>. Para determinar la solución particular <span class="math notranslate nohighlight">\(y_P(x)\)</span>, tenemos el siguiente método:</p>
+<section id="metodo-de-los-coeficientes-indeterminados">
+<h3><span class="section-number">2.3.1. </span>Método de los Coeficientes Indeterminados<a class="headerlink" href="#metodo-de-los-coeficientes-indeterminados" title="Link to this heading">#</a></h3>
+<p>La idea fundamental de este método es una conjetura acerca de la forma de <span class="math notranslate nohighlight">\(y_P(x)\)</span>, motivada por las clases de funciones que forman la función <span class="math notranslate nohighlight">\(g(x)\)</span>. El método general se limita a EDO lineales como <a class="reference internal" href="#equation-edol">(2.7)</a> donde <span class="math notranslate nohighlight">\(g(x)\)</span> es una <u>constante</u> <span class="math notranslate nohighlight">\(k\)</span>, una <u>función polinomial</u>, <u>exponencial</u> <span class="math notranslate nohighlight">\(e^{ax}\)</span>, o <u>trigonométrica</u> del tipo <span class="math notranslate nohighlight">\(\sin(\beta x)\)</span>, <span class="math notranslate nohighlight">\(\cos(\beta x)\)</span> o sumas finitas y productos de estas funciones.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Resuelva la EDO dada ensayando una solución particular adecuada: <span class="math notranslate nohighlight">\(2y''-3y'+4y=x+1.\)</span></p>
+</div>
+<p><strong>Nota</strong>: Este método no es aplicable a EDO donde <span class="math notranslate nohighlight">\(g(x)\)</span> es <span class="math notranslate nohighlight">\(\ln(x)\)</span>, <span class="math notranslate nohighlight">\(\frac{1}{x}\)</span>, <span class="math notranslate nohighlight">\(\tan(x)\)</span>, <span class="math notranslate nohighlight">\(\arcsin(x)\)</span>, etc.</p>
+<p><strong>Tabla de Ensayos</strong></p>
+<figure class="align-default" id="tabla-ensayo">
+<a class="reference internal image-reference" href="_images/Tabla.png"><img alt="_images/Tabla.png" src="_images/Tabla.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 2.4 </span><span class="caption-text">Tabla con posibles ensayos de soluciones particulares</span><a class="headerlink" href="#tabla-ensayo" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Nota</strong>: Si <span class="math notranslate nohighlight">\(g(x)\)</span> consiste en una suma de <span class="math notranslate nohighlight">\(m\)</span> términos de las clases listadas en la tabla, entonces el ensayo de una solución particular <span class="math notranslate nohighlight">\(y_P(x)\)</span> consiste en la suma de las <span class="math notranslate nohighlight">\(m\)</span> funciones de ensayo menores <span class="math notranslate nohighlight">\(y_{p_1},y_{p_2},\ldots,y_{p_m}\)</span>, es decir</p>
+<div class="math notranslate nohighlight">
+\[
+y_P(x)=y_{p_1}+y_{p_2}+\cdots+y_{p_m}
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine una solución particular de: <span class="math notranslate nohighlight">\(y''-y'+\frac{1}{4}y=2x+e^x.\)</span></p>
+</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Use el método de los coeficientes indeterminados para encontrar una solución particular de <span class="math notranslate nohighlight">\(y''-2y'+2y=e^x\sin(x).\)</span> ¿Qué ocurre con su solución particular de ensayo?</p>
+</div>
+<p><strong>Nota</strong>: Si <span class="math notranslate nohighlight">\(g(x)\)</span> consiste en una suma de <span class="math notranslate nohighlight">\(m\)</span> términos de la clase listada en la tabla, donde una solución particular es <span class="math notranslate nohighlight">\(y_P(x)=y_{p_1}+y_{p_2}+\cdots+y_{p_m}\)</span> pero alguna <span class="math notranslate nohighlight">\(y_{p_i}\)</span> contiene términos que <strong>duplican</strong> los términos de la solución homogénea <span class="math notranslate nohighlight">\(y_H(x)\)</span>, entonces esa <span class="math notranslate nohighlight">\(y_{p_i}\)</span> debe multiplicarse por <span class="math notranslate nohighlight">\(x^n\)</span>, donde <span class="math notranslate nohighlight">\(n\)</span> es el entero positivo más pequeño que elimina esa duplicación.</p>
+<!-- +++
+
+## Ecuaciones Lineales de Orden Superior
+
++++
+
+### Teoría Preliminar
+
+Un PVI es **lineal** de $\mathbf{n}$-**ésimo orden** si es de la forma 
+
+$$
+\left\{\begin{array}{c}
+   a_n(x)\dfrac{d^ny}{dx^n}+\cdots+a_1(x)\dfrac{dy}{dx}+a_0(x)y=g(x)\\
+   y(x_0)=y_0,\ldots, y^{(n-1)}(x_0)=y_{n-1}
+\end{array}\right.
+$$ 
+
+Si $g(x)=0$ diremos que la ED es **homogénea** (escribimos EDH) y si $g(x)\neq0$ diremos que es **no homogénea**.
+
+**Existencia y Unicidad**: Supondremos que $a_0(x),\ldots,a_{n}(x)$, $g(x)$ son funciones continuas y que $a_n(x)\neq0$ para todo $x$ en un intervalo $I$. Si $x=x_0\in I$ entonces existe una solución única $y(x)$ del PVI.
+
+**Operadores Diferenciales**: Usando la notación de Leibniz para la derivada, escribimos 
+
+$$
+Dy=\frac{dy}{dx}, D^2y=\frac{d^2y}{dx^2},\ldots, D^ny=\frac{d^ny}{dx^n}
+$$ 
+
+Con esto definimos el **operador diferencial** $L$ como 
+
+$$
+L=a_n(x)D^n+a_{n-1}(x)D^{n-1}+\cdots+a_1(x)D+a_0(x)
+$$ 
+
+y podemos escribir la EDO lineal de orden $n$ como 
+
+$$
+L(y)=g(x)~~\textrm{o}~~Ly=g(x)
+$$ 
+
+Este operador es **lineal**: $L(af(x)+bg(x))=aLf+bLg$, $a,b\in\mathbb{R}$.
+
+**Nota**: Toda ED puede expresarse en términos del operador diferencial $D$: por ejemplo 
+
+$$
+y''+\cos(x)y'+6y=e^x+2~~\Leftrightarrow~~(D^2+\cos(x)D+6)y=e^x+2
+$$
+
+
++++
+
+### Ecuaciones Homogéneas. Principio de Superposición
+
+**Principio de Superposición**: La suma o **superposición** de 2 o más soluciones de una EDH también es solución.
+
+**Teorema**: Sean $y_1(x), y_2(x),\ldots, y_k(x)$ soluciones de la EDH de orden $n$ en un intervalo $I$. Entonces la combinación lineal 
+
+$$
+y(x)=c_1y_1(x)+c_2y_2(x)+\cdots+c_ky_k(x)~~,~~c_i\in\mathbb{R}
+$$ 
+
+también es una solución en el intervalo $I$. 
+
+**Corolario**:
+
+1. Si $y_1(x)$ es una solución de la EDH entonces un múltiplo constante de ella $y(x)=cy_1(x)$ también es solución de la EDH.
+2. Una EDH tiene siempre la solución trivial $y(x)=0$.
+
+Ejemplo: $y_1(x)=e^x$ e $y_2(x)=xe^x$ son soluciones de la EDH $y''-2y'+y=0$ entonces $$y(x)=c_1e^x+c_2xe^x$$ es también solución de la EDH, para todo $x\in\mathbb{R}$.
+
++++
+
+### Dependencia e Independencia Linea. Wronskiano
+
+El conjunto de funciones $\{f_1(x),f_2(x),\ldots,f_n(x)\}$ es **linealmente dependiente (LD)** en el intervalo $I$ si existen constantes $c_1,\ldots,c_n\in\mathbb{R}$, no todas nulas, tal que 
+
+$$
+c_1f_1(x)+\cdots+c_nf_n(x)=0~~,~~\text{para todo}~x\in~I.
+$$ 
+
+Si el conjunto de funciones no es LD, diremos que es **linealmente independiente (LI)**.
+
+**Ejemplo**: El conjunto $\{\sen(2x), \sen(x)\cos(x)\}$ es LD.
+ --></section>
 </section>
 </section>
 
@@ -688,6 +970,16 @@ m\frac{d^2x}{dt^2}=-kx-\beta\frac{dx}{dt}+f(t)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-masa-resorte-movimiento-libre">2.1.1. Sistemas Masa-Resorte. Movimiento Libre</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-libre-amortiguado">2.1.2. Movimiento Libre Amortiguado</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#movimiento-forzado">2.1.3. Movimiento Forzado</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-diferenciales-lineales-con-coeficientes-constantes">2.2. Ecuaciones Diferenciales Lineales con Coeficientes Constantes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-2">2.2.1. Orden 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-a-sistemas-masa-resorte">2.2.2. Aplicación a Sistemas Masa-Resorte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-de-orden-superior">2.2.3. Ecuaciones de Orden Superior</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-particulares">2.3. Soluciones Particulares</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-los-coeficientes-indeterminados">2.3.1. Método de los Coeficientes Indeterminados</a></li>
 </ul>
 </li>
 </ul>

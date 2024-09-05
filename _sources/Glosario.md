@@ -97,3 +97,26 @@ $$
 $$
 
 Para simplificar, asumimos que $\mu(x,y)$ es función de una única variable: Si $\mu(x)$ es solo función de $x$ entonces $\mu_y=0$ y si $\mu(y)$ es solo función de $y$ entonces $\mu_x=0$.
+
+(LI)=
+<u>**Independencia Lineal**</u>: Sean $\vec{v}_1$ y $\vec{v}_2$ vectores en un [espacio vectorial](https://en.wikipedia.org/wiki/Vector_space) $V$. Decimos que son **linealmente independientes (LI)** si existen constantes $c_1, c_2\in\mathbb{R}$, no ambas nulas, tales que 
+
+$$
+c_1\vec{v}_1+c_2\vec{v}_2=\vec{0}
+$$
+
+(CL)=
+<u>**Combinación Lineal**</u>: Sean $\vec{v}_1$ y $\vec{v}_2\in V$. Una combinación lineal de ellos es un nuevo vector
+
+$$ 
+\vec{w}=\alpha_1\vec{v}_1+\alpha_2\vec{v}_2
+$$
+
+donde $\alpha_1, \alpha_2\in\mathbb{R}$.
+
+(Gen)=
+<u>**Conjunto Generado**</u>: El conjunto generado por $\vec{v}_1$ y $\vec{v}_2\in V$ es el conjunto de todas las combinaciones lineales posibles entre estos vectores. Anotamos 
+
+$$
+gen(\vec{v}_1,\vec{v}_2)=\{\alpha\vec{v}_1+\beta\vec{v}_2,\alpha,\beta\in\mathbb{R}\}
+$$
