@@ -474,6 +474,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-particulares">2.3. Soluciones Particulares</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-los-coeficientes-indeterminados">2.3.1. Método de los Coeficientes Indeterminados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resonancia">2.3.2. Resonancia</a></li>
 </ul>
 </li>
 </ul>
@@ -713,30 +714,30 @@ y_H(x)=c_1e^{\alpha x}\cos(\beta x)+c_2e^{\alpha x}\sin(\beta x)
 <section id="aplicacion-a-sistemas-masa-resorte">
 <h3><span class="section-number">2.2.2. </span>Aplicación a Sistemas Masa-Resorte<a class="headerlink" href="#aplicacion-a-sistemas-masa-resorte" title="Link to this heading">#</a></h3>
 <p>La ecuación <a class="reference internal" href="#equation-eqmas">(2.1)</a> describe el movimiento libre en un sistema masa-resorte. La ecuación auxiliar asociada es <span class="math notranslate nohighlight">\(M^2+\frac{k}{m}=0\)</span> o <span class="math notranslate nohighlight">\(M^2+\omega^2=0\)</span>, cuyas raíces complejas son <span class="math notranslate nohighlight">\(M=\sqrt{\frac{k}{m}}=\omega\)</span>, por lo que la solución de la EDO es</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-soleqmas">
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-soleqmas" title="Link to this equation">#</a></span>\[
 x(t)=c_1\cos\left(\sqrt{\frac{k}{m}}t\right)+c_2\sin\left(\sqrt{\frac{k}{m}}t\right)=c_1\cos(\omega t)+c_2\sin(\omega t)
 \]</div>
 <p>La ecuación <a class="reference internal" href="#equation-mla">(2.2)</a> describe el movimiento amortiguado en un sistema masa-resorte. La ecuación auxiliar asociada es <span class="math notranslate nohighlight">\(M^2+\frac{\beta}{m}x+\frac{k}{m}=0\)</span> o <span class="math notranslate nohighlight">\(M^2+\frac{\beta}{m}M+\omega^2=0\)</span>, cuyas raíces son <span class="math notranslate nohighlight">\(M_1=-\lambda+\sqrt{\lambda^2-\omega^2}\)</span> y <span class="math notranslate nohighlight">\(M_2=-\lambda-\sqrt{\lambda^2-\omega^2}\)</span>, por lo que la solución de la EDO depende del signo de <span class="math notranslate nohighlight">\(\Delta=\lambda^2-\omega^2\)</span>:</p>
 <ol class="arabic simple">
 <li><p><u><span class="math notranslate nohighlight">\(\Delta&gt;0\)</span></u>: El sistema está <strong>sobreamortiguado</strong> porque el coeficiente de amortiguamiento <span class="math notranslate nohighlight">\(\beta\)</span> es grande comparado con la constante del resorte <span class="math notranslate nohighlight">\(k\)</span>. La solución en este caso es</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-solmla1">
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-solmla1" title="Link to this equation">#</a></span>\[
 x(t)=e^{-\lambda t}\left(c_1e^{\sqrt{\Delta}t}+c_2e^{-\sqrt{\Delta}t}\right)~,~c_1,c_2\in\mathbb{R}
 \]</div>
 <ol class="arabic simple" start="2">
 <li><p><u><span class="math notranslate nohighlight">\(\Delta=0\)</span></u>: EL sistema está <strong>críticamente amortiguado</strong> porque cualquier ligera disminución en la fuerza de amortiguamiento daría como resultado un movimiento oscilatorio. La solución en este caso es</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-solmla2">
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-solmla2" title="Link to this equation">#</a></span>\[
 x(t)=e^{-\lambda t}\left(c_1+c_2t\right)~,~c_1,c_2\in\mathbb{R}
 \]</div>
 <ol class="arabic simple" start="3">
 <li><p><u><span class="math notranslate nohighlight">\(\Delta&lt;0\)</span></u>: En este caso el sistema está <strong>subamortiguado</strong> puesto que el coeficiente de amortiguamiento es pequeño comparado con la constante del resorte. La solución en este caso es</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-solmla3">
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-solmla3" title="Link to this equation">#</a></span>\[
 x(t)=e^{-\lambda t}\left(c_1\cos(\sqrt{-\Delta}t)+c_2\sin(\sqrt{-\Delta}t)\right)~,~c_1,c_2\in\mathbb{R}
 \]</div>
 </section>
@@ -782,14 +783,14 @@ e^{\alpha x}\sin(\beta x), xe^{\alpha x}\sin(\beta x), x^2e^{\alpha x}\sin(\beta
 <h2><span class="section-number">2.3. </span>Soluciones Particulares<a class="headerlink" href="#soluciones-particulares" title="Link to this heading">#</a></h2>
 <p>Ya sabemos cómo resolver una EDO Lineal y Homogénea con coeficientes constantes (obteniendo <span class="math notranslate nohighlight">\(y_H(x)\)</span>), pero: ¿Es posible determinar una solución general de la EDO no homogénea</p>
 <div class="math notranslate nohighlight" id="equation-edol">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-edol" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-edol" title="Link to this equation">#</a></span>\[
 a_ny^{(n)}+\cdots+a_1y'+a_0y=g(x)
 \]</div>
 <p>como en la EDO <a class="reference internal" href="#equation-mfa">(2.3)</a> que modela el sistema masa-resorte forzado?</p>
 <p>Tal como en Álgebra Lineal, donde la solución de un sistema de ecuaciones lineales <span class="math notranslate nohighlight">\(A\vec{x}=\vec{b}\)</span> es siempre de la forma <span class="math notranslate nohighlight">\(\vec{x}=\vec{x}_H+\vec{x}_P\)</span> (con <span class="math notranslate nohighlight">\(\vec{x}_H\)</span> solución del sistema homogéneo asociado <span class="math notranslate nohighlight">\(A\vec{x}=\vec{0}\)</span> y <span class="math notranslate nohighlight">\(\vec{x}_P\)</span> una solución particular del sistema general), la solución general de una EDO Lineal no homogénea se puede escribir como <span class="math notranslate nohighlight">\(y(x)=y_H(x)+y_P(x)\)</span>. Para determinar la solución particular <span class="math notranslate nohighlight">\(y_P(x)\)</span>, tenemos el siguiente método:</p>
 <section id="metodo-de-los-coeficientes-indeterminados">
 <h3><span class="section-number">2.3.1. </span>Método de los Coeficientes Indeterminados<a class="headerlink" href="#metodo-de-los-coeficientes-indeterminados" title="Link to this heading">#</a></h3>
-<p>La idea fundamental de este método es una conjetura acerca de la forma de <span class="math notranslate nohighlight">\(y_P(x)\)</span>, motivada por las clases de funciones que forman la función <span class="math notranslate nohighlight">\(g(x)\)</span>. El método general se limita a EDO lineales como <a class="reference internal" href="#equation-edol">(2.7)</a> donde <span class="math notranslate nohighlight">\(g(x)\)</span> es una <u>constante</u> <span class="math notranslate nohighlight">\(k\)</span>, una <u>función polinomial</u>, <u>exponencial</u> <span class="math notranslate nohighlight">\(e^{ax}\)</span>, o <u>trigonométrica</u> del tipo <span class="math notranslate nohighlight">\(\sin(\beta x)\)</span>, <span class="math notranslate nohighlight">\(\cos(\beta x)\)</span> o sumas finitas y productos de estas funciones.</p>
+<p>La idea fundamental de este método es una conjetura acerca de la forma de <span class="math notranslate nohighlight">\(y_P(x)\)</span>, motivada por las clases de funciones que forman la función <span class="math notranslate nohighlight">\(g(x)\)</span>. El método general se limita a EDO lineales como <a class="reference internal" href="#equation-edol">(2.11)</a> donde <span class="math notranslate nohighlight">\(g(x)\)</span> es una <u>constante</u> <span class="math notranslate nohighlight">\(k\)</span>, una <u>función polinomial</u>, <u>exponencial</u> <span class="math notranslate nohighlight">\(e^{ax}\)</span>, o <u>trigonométrica</u> del tipo <span class="math notranslate nohighlight">\(\sin(\beta x)\)</span>, <span class="math notranslate nohighlight">\(\cos(\beta x)\)</span> o sumas finitas y productos de estas funciones.</p>
 <div class="admonition-ejercicio-teorico admonition">
 <p class="admonition-title">Ejercicio Teórico</p>
 <p>Resuelva la EDO dada ensayando una solución particular adecuada: <span class="math notranslate nohighlight">\(2y''-3y'+4y=x+1.\)</span></p>
@@ -797,7 +798,7 @@ a_ny^{(n)}+\cdots+a_1y'+a_0y=g(x)
 <p><strong>Nota</strong>: Este método no es aplicable a EDO donde <span class="math notranslate nohighlight">\(g(x)\)</span> es <span class="math notranslate nohighlight">\(\ln(x)\)</span>, <span class="math notranslate nohighlight">\(\frac{1}{x}\)</span>, <span class="math notranslate nohighlight">\(\tan(x)\)</span>, <span class="math notranslate nohighlight">\(\arcsin(x)\)</span>, etc.</p>
 <p><strong>Tabla de Ensayos</strong></p>
 <figure class="align-default" id="tabla-ensayo">
-<a class="reference internal image-reference" href="_images/Tabla.png"><img alt="_images/Tabla.png" src="_images/Tabla.png" style="height: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/Tabla.png"><img alt="_images/Tabla.png" src="_images/Tabla.png" style="height: 250px;" /></a>
 <figcaption>
 <p><span class="caption-number">Figura 2.4 </span><span class="caption-text">Tabla con posibles ensayos de soluciones particulares</span><a class="headerlink" href="#tabla-ensayo" title="Link to this image">#</a></p>
 </figcaption>
@@ -816,6 +817,95 @@ y_P(x)=y_{p_1}+y_{p_2}+\cdots+y_{p_m}
 <p>Use el método de los coeficientes indeterminados para encontrar una solución particular de <span class="math notranslate nohighlight">\(y''-2y'+2y=e^x\sin(x).\)</span> ¿Qué ocurre con su solución particular de ensayo?</p>
 </div>
 <p><strong>Nota</strong>: Si <span class="math notranslate nohighlight">\(g(x)\)</span> consiste en una suma de <span class="math notranslate nohighlight">\(m\)</span> términos de la clase listada en la tabla, donde una solución particular es <span class="math notranslate nohighlight">\(y_P(x)=y_{p_1}+y_{p_2}+\cdots+y_{p_m}\)</span> pero alguna <span class="math notranslate nohighlight">\(y_{p_i}\)</span> contiene términos que <strong>duplican</strong> los términos de la solución homogénea <span class="math notranslate nohighlight">\(y_H(x)\)</span>, entonces esa <span class="math notranslate nohighlight">\(y_{p_i}\)</span> debe multiplicarse por <span class="math notranslate nohighlight">\(x^n\)</span>, donde <span class="math notranslate nohighlight">\(n\)</span> es el entero positivo más pequeño que elimina esa duplicación.</p>
+</section>
+<section id="resonancia">
+<h3><span class="section-number">2.3.2. </span>Resonancia<a class="headerlink" href="#resonancia" title="Link to this heading">#</a></h3>
+<p>Con el aparataje técnico anterior, podemos resolver la ecuación diferencial <a class="reference internal" href="#equation-mfa">(2.3)</a> para una fuerza externa <span class="math notranslate nohighlight">\(f(t)\)</span>. La EDH asociada tiene solución <span class="math notranslate nohighlight">\(x_H(t)\)</span> como en <a class="reference internal" href="#equation-solmla1">(2.8)</a>, <a class="reference internal" href="#equation-solmla2">(2.9)</a> o <a class="reference internal" href="#equation-solmla3">(2.10)</a>, dependiendo del signo de <span class="math notranslate nohighlight">\(\Delta=\lambda^2-\omega^2=\left(\frac{\beta}{2m}\right)^2-\frac{k}{m}\)</span>. La solución particular <span class="math notranslate nohighlight">\(x_P(t)\)</span> se obtiene por el método de los coeficientes indeterminados y depende de la forma de la fuerza externa</p>
+<p>En particular, si <span class="math notranslate nohighlight">\(\beta=0\)</span>, tenemos la solución de <a class="reference internal" href="#equation-soleqmas">(2.7)</a> como <span class="math notranslate nohighlight">\(x_H(t)=c_1\cos(\omega t)+c_2\sin(\omega t)\)</span>. Ahora consideramos el</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{PVI}~~~~\left\{\begin{array}{ccc}\dfrac{d^2x}{dt^2}+\omega^2x&amp;=&amp;F_0\cos(\gamma t)\\ x(0)&amp;=&amp;0\\ x'(0)&amp;=&amp;0\end{array}\right.
+\end{split}\]</div>
+<p>con una fuerza externa periódica <span class="math notranslate nohighlight">\(F_0\cos(\gamma t)\)</span>. Observamos su solución en Python para diversos valores de los parámetros involucrados:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+
+<span class="c1"># Parámetros del sistema</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mf">1.0</span>       <span class="c1"># masa (kg)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span>       <span class="c1"># constante del resorte (N/m)</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># coeficiente de amortiguamiento (kg/s)</span>
+<span class="n">F0</span> <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># amplitud de la fuerza externa (N)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># frecuencia de la fuerza externa (rad/s)</span>
+
+<span class="c1"># Frecuencia natural del sistema</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># Definimos el sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">sistema_masa_resorte</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">y</span>  <span class="c1"># y = [x, v], donde x es la posición y v la velocidad</span>
+    <span class="n">dxdt</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">dvdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">F0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">m</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dxdt</span><span class="p">,</span> <span class="n">dvdt</span><span class="p">]</span>
+
+<span class="c1"># Condiciones iniciales</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Posición inicial (m)</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Velocidad inicial (m/s)</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">v0</span><span class="p">]</span>
+
+<span class="c1"># Tiempo de simulación</span>
+<span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Tiempo desde 0 hasta 100 segundos</span>
+<span class="n">t_eval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_span</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t_span</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Puntos de evaluación</span>
+
+<span class="c1"># Resolver la EDO</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">sistema_masa_resorte</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t_eval</span><span class="p">)</span>
+
+<span class="c1"># Extraer la solución</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Posición de la masa</span>
+
+<span class="c1"># Graficar la posición en función del tiempo</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Posición $x(t)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fenómeno de resonancia en el sistema masa-resorte&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo (s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Posición (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/50c0781792e757b2b05a452494c4ca910de5211353c86b98bc7427beb81c184f.png" src="_images/50c0781792e757b2b05a452494c4ca910de5211353c86b98bc7427beb81c184f.png" />
+</div>
+</div>
+<p>La solución analítica particular es <span class="math notranslate nohighlight">\(x_P(t)=\frac{F_0}{\omega^2-\gamma^2}\cos(\gamma t)\)</span> para <span class="math notranslate nohighlight">\(\gamma\neq\omega\)</span>, por lo que la solución del PVI es</p>
+<div class="math notranslate nohighlight">
+\[
+x(t)=-\frac{F_0}{\omega^2-\gamma^2}\cos(\omega t)+\frac{F_0}{\omega^2-\gamma^2}\cos(\gamma t)~,~\gamma\neq\omega
+\]</div>
+<p>(donde las constantes <span class="math notranslate nohighlight">\(c_1,c_2\)</span> se obtienen a partir de las condiciones iniciales).</p>
+<p>¿Qué ocurre si <span class="math notranslate nohighlight">\(\gamma=\omega\)</span>? En este caso hay duplicación, por lo que debemos ensayar una solución particular del tipo</p>
+<div class="math notranslate nohighlight">
+\[
+x_P(t)=At\cos(\omega t)+Bt\sin(\omega t)
+\]</div>
+<p>Derivamos y simplificamos, para obtener que <span class="math notranslate nohighlight">\(A=0\)</span> y <span class="math notranslate nohighlight">\(B=\frac{F_0}{2\omega}\)</span>. De este modo, la solución del PVI es</p>
+<div class="math notranslate nohighlight">
+\[
+x(t)=\frac{F_0}{2\omega}t\sin(\omega t)
+\]</div>
+<p>Claramenente <span class="math notranslate nohighlight">\(\displaystyle\lim_{t\to+\infty}x(t)=+\infty\)</span>. Esto se conoce como el fenómeno de <strong>resonancia pura</strong>. Podemos observar la resonancia en el <a class="reference external" href="https://es.wikipedia.org/wiki/Puente_de_Tacoma_(1940)">Puente de Tacoma</a> (aunque hay hipótesis que apuntan a otras variables para explicar el colapso del puente colgante).</p>
 <!-- +++
 
 ## Ecuaciones Lineales de Orden Superior
@@ -980,6 +1070,7 @@ Si el conjunto de funciones no es LD, diremos que es **linealmente independiente
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-particulares">2.3. Soluciones Particulares</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-los-coeficientes-indeterminados">2.3.1. Método de los Coeficientes Indeterminados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resonancia">2.3.2. Resonancia</a></li>
 </ul>
 </li>
 </ul>

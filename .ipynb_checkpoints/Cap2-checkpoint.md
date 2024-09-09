@@ -262,7 +262,7 @@ La ecuación [](eqMAS) describe el movimiento libre en un sistema masa-resorte. 
 
 $$
 x(t)=c_1\cos\left(\sqrt{\frac{k}{m}}t\right)+c_2\sin\left(\sqrt{\frac{k}{m}}t\right)=c_1\cos(\omega t)+c_2\sin(\omega t)
-$$
+$$ (soleqMAS)
 
 La ecuación [](MLA) describe el movimiento amortiguado en un sistema masa-resorte. La ecuación auxiliar asociada es $M^2+\frac{\beta}{m}x+\frac{k}{m}=0$ o $M^2+\frac{\beta}{m}M+\omega^2=0$, cuyas raíces son $M_1=-\lambda+\sqrt{\lambda^2-\omega^2}$ y $M_2=-\lambda-\sqrt{\lambda^2-\omega^2}$, por lo que la solución de la EDO depende del signo de $\Delta=\lambda^2-\omega^2$:
 
@@ -270,19 +270,19 @@ La ecuación [](MLA) describe el movimiento amortiguado en un sistema masa-resor
 
 $$
 x(t)=e^{-\lambda t}\left(c_1e^{\sqrt{\Delta}t}+c_2e^{-\sqrt{\Delta}t}\right)~,~c_1,c_2\in\mathbb{R}
-$$
+$$ (solMLA1)
 
 2. <u>$\Delta=0$</u>: EL sistema está **críticamente amortiguado** porque cualquier ligera disminución en la fuerza de amortiguamiento daría como resultado un movimiento oscilatorio. La solución en este caso es
 
 $$
 x(t)=e^{-\lambda t}\left(c_1+c_2t\right)~,~c_1,c_2\in\mathbb{R}
-$$
+$$ (solMLA2)
 
 3. <u>$\Delta<0$</u>: En este caso el sistema está **subamortiguado** puesto que el coeficiente de amortiguamiento es pequeño comparado con la constante del resorte. La solución en este caso es
 
 $$
 x(t)=e^{-\lambda t}\left(c_1\cos(\sqrt{-\Delta}t)+c_2\sin(\sqrt{-\Delta}t)\right)~,~c_1,c_2\in\mathbb{R}
-$$
+$$ (solMLA3)
 
 +++
 
@@ -356,7 +356,7 @@ Resuelva la EDO dada ensayando una solución particular adecuada: $2y''-3y'+4y=x
 
 ```{figure} Tabla.png
 ---
-height: 200px
+height: 250px
 name: Tabla Ensayo
 ---
 Tabla con posibles ensayos de soluciones particulares
@@ -377,6 +377,96 @@ Use el método de los coeficientes indeterminados para encontrar una solución p
 ```
 
 **Nota**: Si $g(x)$ consiste en una suma de $m$ términos de la clase listada en la tabla, donde una solución particular es $y_P(x)=y_{p_1}+y_{p_2}+\cdots+y_{p_m}$ pero alguna $y_{p_i}$ contiene términos que **duplican** los términos de la solución homogénea $y_H(x)$, entonces esa $y_{p_i}$ debe multiplicarse por $x^n$, donde $n$ es el entero positivo más pequeño que elimina esa duplicación.
+
+### Resonancia
+
+Con el aparataje técnico anterior, podemos resolver la ecuación diferencial [](MFA) para una fuerza externa $f(t)$. La EDH asociada tiene solución $x_H(t)$ como en [](solMLA1), [](solMLA2) o [](solMLA3), dependiendo del signo de $\Delta=\lambda^2-\omega^2=\left(\frac{\beta}{2m}\right)^2-\frac{k}{m}$. La solución particular $x_P(t)$ se obtiene por el método de los coeficientes indeterminados y depende de la forma de la fuerza externa
+
+En particular, si $\beta=0$, tenemos la solución de [](soleqMAS) como $x_H(t)=c_1\cos(\omega t)+c_2\sin(\omega t)$. Ahora consideramos el 
+
+$$
+\mathbf{PVI}~~~~\left\{\begin{array}{ccc}\dfrac{d^2x}{dt^2}+\omega^2x&=&F_0\cos(\gamma t)\\ x(0)&=&0\\ x'(0)&=&0\end{array}\right.
+$$ 
+
+con una fuerza externa periódica $F_0\cos(\gamma t)$. Observamos su solución en Python para diversos valores de los parámetros involucrados:
+
+```{code-cell}
+:tags: [SMR]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Parámetros del sistema
+m = 1.0       # masa (kg)
+k = 1.0       # constante del resorte (N/m)
+beta = 0      # coeficiente de amortiguamiento (kg/s)
+F0 = 1.0      # amplitud de la fuerza externa (N)
+gamma = 1.0  # frecuencia de la fuerza externa (rad/s)
+
+# Frecuencia natural del sistema
+omega = np.sqrt(k / m)
+
+# Definimos el sistema de ecuaciones diferenciales
+def sistema_masa_resorte(t, y):
+    x, v = y  # y = [x, v], donde x es la posición y v la velocidad
+    dxdt = v
+    dvdt = (F0 * np.cos(gamma * t) - beta * v - k * x) / m
+    return [dxdt, dvdt]
+
+# Condiciones iniciales
+x0 = 0.0  # Posición inicial (m)
+v0 = 0.0  # Velocidad inicial (m/s)
+y0 = [x0, v0]
+
+# Tiempo de simulación
+t_span = (0, 100)  # Tiempo desde 0 hasta 100 segundos
+t_eval = np.linspace(t_span[0], t_span[1], 1000)  # Puntos de evaluación
+
+# Resolver la EDO
+sol = solve_ivp(sistema_masa_resorte, t_span, y0, t_eval=t_eval)
+
+# Extraer la solución
+t = sol.t
+x = sol.y[0]  # Posición de la masa
+
+# Graficar la posición en función del tiempo
+plt.figure(figsize=(10, 6))
+plt.plot(t, x, label='Posición $x(t)$', color='r')
+plt.axhline(0, color='k',linewidth=0.5)
+plt.title('Fenómeno de resonancia en el sistema masa-resorte')
+plt.xlabel('Tiempo (s)')
+plt.ylabel('Posición (m)')
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+La solución analítica particular es $x_P(t)=\frac{F_0}{\omega^2-\gamma^2}\cos(\gamma t)$ para $\gamma\neq\omega$, por lo que la solución del PVI es 
+
+$$
+x(t)=-\frac{F_0}{\omega^2-\gamma^2}\cos(\omega t)+\frac{F_0}{\omega^2-\gamma^2}\cos(\gamma t)~,~\gamma\neq\omega
+$$
+
+(donde las constantes $c_1,c_2$ se obtienen a partir de las condiciones iniciales).
+
+¿Qué ocurre si $\gamma=\omega$? En este caso hay duplicación, por lo que debemos ensayar una solución particular del tipo 
+
+$$
+x_P(t)=At\cos(\omega t)+Bt\sin(\omega t)
+$$
+
+Derivamos y simplificamos, para obtener que $A=0$ y $B=\frac{F_0}{2\omega}$. De este modo, la solución del PVI es
+
+$$
+x(t)=\frac{F_0}{2\omega}t\sin(\omega t)
+$$
+
+Claramenente $\displaystyle\lim_{t\to+\infty}x(t)=+\infty$. Esto se conoce como el fenómeno de **resonancia pura**. Podemos observar la resonancia en el [Puente de Tacoma](https://es.wikipedia.org/wiki/Puente_de_Tacoma_(1940)) (aunque hay hipótesis que apuntan a otras variables para explicar el colapso del puente colgante).
+
 
 
 <!-- +++
