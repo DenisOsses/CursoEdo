@@ -469,15 +469,15 @@ Claramenente $\displaystyle\lim_{t\to+\infty}x(t)=+\infty$. Esto se conoce como 
 
 
 
-<!-- +++
++++
 
-## Ecuaciones Lineales de Orden Superior
+## Teoría Ecuaciones Lineales de Orden Superior
 
 +++
 
-### Teoría Preliminar
+### Preliminares
 
-Un PVI es **lineal** de $\mathbf{n}$-**ésimo orden** si es de la forma 
+Un PVI es **lineal** de $n$-**ésimo orden** si es de la forma 
 
 $$
 \left\{\begin{array}{c}
@@ -508,7 +508,7 @@ $$
 L(y)=g(x)~~\textrm{o}~~Ly=g(x)
 $$ 
 
-Este operador es **lineal**: $L(af(x)+bg(x))=aLf+bLg$, $a,b\in\mathbb{R}$.
+Este operador es una [**transformación lineal**](TL): $L(af(x)+bg(x))=aLf+bLg$, $a,b\in\mathbb{R}$.
 
 **Nota**: Toda ED puede expresarse en términos del operador diferencial $D$: por ejemplo 
 
@@ -536,19 +536,186 @@ también es una solución en el intervalo $I$.
 1. Si $y_1(x)$ es una solución de la EDH entonces un múltiplo constante de ella $y(x)=cy_1(x)$ también es solución de la EDH.
 2. Una EDH tiene siempre la solución trivial $y(x)=0$.
 
-Ejemplo: $y_1(x)=e^x$ e $y_2(x)=xe^x$ son soluciones de la EDH $y''-2y'+y=0$ entonces $$y(x)=c_1e^x+c_2xe^x$$ es también solución de la EDH, para todo $x\in\mathbb{R}$.
+```{admonition} Ejercicio Teórico
+Compruebe que $y_1(x)=e^x$ e $y_2(x)=xe^x$ son soluciones de la EDH $y''-2y'+y=0$ y que
+
+$$
+y(x)=c_1e^x+c_2xe^x
+$$ 
+
+es también solución de la EDH, para todo $x\in\mathbb{R}$.
+```
+
+```{code-cell}
+:tags: [Superposicion]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+from sympy import symbols, diff, exp
+
+# Definir la variable independiente y las funciones
+x = symbols('x')
+y1 = exp(x)
+y2 = x* exp(x)
+
+# Definir la ecuación diferencial
+def check_solucion(y):
+    # Derivadas
+    y_primera = diff(y, x)
+    y_segunda = diff(y_primera, x)
+    
+    # Sustituir en la ecuación diferencial y'' - 2y' + y = 0
+    return y_segunda - 2*y_primera + y
+
+# Modificar la función para que devuelva una respuesta clara
+def check_solucion_verbal(y, label):
+    result = check_solucion(y)
+    if result == 0:
+        return f"{label} es solución."
+    else:
+        return f"{label} no es solución."
+
+# Verificar si y1 y y2 son soluciones
+check_y1_verbal = check_solucion_verbal(y1, "y1(x) = e^x")
+check_y2_verbal = check_solucion_verbal(y2, "y2(x) = xe^x")
+
+check_y1_verbal, check_y2_verbal
+```
 
 +++
 
-### Dependencia e Independencia Linea. Wronskiano
+### Dependencia e Independencia Lineal. Wronskiano
 
 El conjunto de funciones $\{f_1(x),f_2(x),\ldots,f_n(x)\}$ es **linealmente dependiente (LD)** en el intervalo $I$ si existen constantes $c_1,\ldots,c_n\in\mathbb{R}$, no todas nulas, tal que 
 
 $$
-c_1f_1(x)+\cdots+c_nf_n(x)=0~~,~~\text{para todo}~x\in~I.
+c_1f_1(x)+\cdots+c_nf_n(x)=0~~,~~\forall~x\in~I.
 $$ 
 
 Si el conjunto de funciones no es LD, diremos que es **linealmente independiente (LI)**.
 
-**Ejemplo**: El conjunto $\{\sen(2x), \sen(x)\cos(x)\}$ es LD.
- -->
+```{admonition} Ejercicio Teórico
+Pruebe que el conjunto de funciones $\{\sin(2x), \sin(x)\cos(x)\}$ es LD.
+```
+
+**Wronskiano**: Supongamos que las funciones $f_1(x),f_2(x),\ldots,f_n(x)$ tienen al menos $n-1$ derivadas. El determinante
+
+$$
+W(f_1,f_2,\ldots,f_n)=\left|\begin{array}{cccc}
+    f_1 & f_2 & \cdots & f_n \\
+    f_1' & f_2' & \cdots & f_n' \\
+    \vdots & \vdots & \cdots & \vdots\\ 
+    f_1^{(n-1)} & f_2^{(n-1)} & \cdots & f_n^{(n-1)} \\
+\end{array}\right|
+$$ 
+
+se llama **Wronskiano** de tales funciones.
+
+**Teorema 1**: Sea $\{y_1(x), y_2(x),\ldots, y_n(x)\}$ un conjunto de $n$ soluciones de la EDH de orden $n$: $L(y)=0$ en un intervalo $I$. 
+
+$$
+\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LD}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)=0, \forall~x\in I.
+$$
+
+Equivalentemente:
+
+**Teorema 2**: Sea $\{y_1(x), y_2(x),\ldots, y_n(x)\}$ un conjunto de $n$ soluciones de la EDH de orden $n$: $L(y)=0$ en un intervalo $I$. 
+
+$$
+\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LI}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)\neq0,
+$$ 
+
+para algún $x\in I.$
+
+**Nota**: En el Teorema 1, se puede debilitar la condición: 
+
+$$
+W(y_1,y_2,\ldots,y_n)(x_0)=0,~\textrm{para algún}~x_0\in I\Rightarrow~W(y_1,y_2,\ldots,y_n)=0,
+$$ 
+
+$\forall~x\in I~\Rightarrow~\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LD}$.
+
+<!-- La demostración de estos Teoremas que relacionan dependencia e independencia lineal de soluciones con el Wronskiano excede los objetivos del curso. Para estudiarla, recomendamos ver el libro de George Simmons *Ecuaciones Diferenciales*, Segunda Edición, Página 571: **Teorema de Picard**. -->
+
+```{admonition} Ejercicio Teórico
+Pruebe que el conjunto de funciones $\{\sin(2x), \sin(x)\cos(x)\}$ es LD usando el Wronskiano.
+```
+
+```{code-cell}
+:tags: [Wronskiano]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import sympy as sp
+
+# Definir la variable simbólica
+x = sp.symbols('x')
+
+# Definir las funciones
+f1 = sp.sin(2*x)
+f2 = sp.sin(x)*sp.cos(x)
+
+# Calcular las derivadas
+f1_deriv = sp.diff(f1, x)
+f2_deriv = sp.diff(f2, x)
+
+# Crear la matriz de Wronskiano
+wronskiano = sp.Matrix([[f1, f2], [f1_deriv, f2_deriv]])
+
+# Calcular el determinante del Wronskiano
+det_wronskiano = wronskiano.det()
+
+# Simplificar el determinante
+det_simplificado = sp.simplify(det_wronskiano)
+
+# Mostrar el resultado
+f"El wronskiano es {det_simplificado}"
+```
+
+### Conjunto Fundamental de Soluciones
+
+**Definición**: Cualquier conjunto $\{y_1(x), y_2(x),\ldots, y_n(x)\}$ de $n$ soluciones LI de la EDH de orden $n$, $L(y)=0$ en $I$, es un **conjunto fundamental de soluciones** de la EDH.
+
+**Teorema**: Sea $\{y_1(x), y_2(x),\ldots, y_n(x)\}$ un conjunto fundamental de soluciones de la EDH de orden $n$, $L(y)=0$. Entonces la **solución general** de la EDH en $I$ es 
+
+$$
+y(x)=c_1y_1(x)+c_2y_2(x)+\cdots+c_ny_n(x)~~,~~c_i\in\mathbb{R}
+$$
+
+<!-- **Ejemplo**: Determine la solución general de la EDH 
+
+$$
+y''-2y'+y=0
+$$ -->
+
+**Definición**: Cualquier solución $y_p(x)$ (libre de constantes o parámetros) de una ED se denomina **solución particular** de una ED.
+
+**Teorema**: (Solución general de ED no homogéneas). Sea $y_p(x)$ cualquier solución particular de la ED no homogénea de orden $n$, $L(y)=g(x)$ en $I$, y sea $\{y_1(x),\ldots,y_n(x)\}$ un conjunto fundamental de soluciones de la EDH asociada. Entonces la solución general de la ED no homogénea en $I$ es 
+
+$$
+y(x)=\underbrace{c_1y_1(x)+\cdots+c_ny_n(x)}_{y_h(x)}+y_p(x)=y_h(x)+y_p(x).
+$$
+
+```{admonition} Ejercicio Teórico
+Compruebe que 
+
+$$
+y(x)=c_1e^{2x}+c_2e^{5x}+6e^x
+$$ 
+
+es la solución general de la ED: $y''-7y'+10y=24e^x$, para todo $x\in\mathbb{R}$. 
+```
+
+**Nota**: A partir del teorema anterior, nos interesaremos en determinar $y_h(x)$ e $y_p(x)$ para $L(y)=g(x)$.
+
++++ 
+
+## Reducción de Orden. Fórmula de Abel
+
++++
+
+## Método de Variación de Parámetros
+
++++

@@ -477,6 +477,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resonancia">2.3.2. Resonancia</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teoria-ecuaciones-lineales-de-orden-superior">2.4. Teoría Ecuaciones Lineales de Orden Superior</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminares">2.4.1. Preliminares</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-homogeneas-principio-de-superposicion">2.4.2. Ecuaciones Homogéneas. Principio de Superposición</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencia-e-independencia-lineal-wronskiano">2.4.3. Dependencia e Independencia Lineal. Wronskiano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-fundamental-de-soluciones">2.4.4. Conjunto Fundamental de Soluciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-orden-formula-de-abel">2.5. Reducción de Orden. Fórmula de Abel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-variacion-de-parametros">2.6. Método de Variación de Parámetros</a></li>
 </ul>
             </nav>
         </div>
@@ -906,89 +915,238 @@ x_P(t)=At\cos(\omega t)+Bt\sin(\omega t)
 x(t)=\frac{F_0}{2\omega}t\sin(\omega t)
 \]</div>
 <p>Claramenente <span class="math notranslate nohighlight">\(\displaystyle\lim_{t\to+\infty}x(t)=+\infty\)</span>. Esto se conoce como el fenómeno de <strong>resonancia pura</strong>. Podemos observar la resonancia en el <a class="reference external" href="https://es.wikipedia.org/wiki/Puente_de_Tacoma_(1940)">Puente de Tacoma</a> (aunque hay hipótesis que apuntan a otras variables para explicar el colapso del puente colgante).</p>
-<!-- +++
-
-## Ecuaciones Lineales de Orden Superior
-
-+++
-
-### Teoría Preliminar
-
-Un PVI es **lineal** de $\mathbf{n}$-**ésimo orden** si es de la forma 
-
-$$
+</section>
+</section>
+<section id="teoria-ecuaciones-lineales-de-orden-superior">
+<h2><span class="section-number">2.4. </span>Teoría Ecuaciones Lineales de Orden Superior<a class="headerlink" href="#teoria-ecuaciones-lineales-de-orden-superior" title="Link to this heading">#</a></h2>
+<section id="preliminares">
+<h3><span class="section-number">2.4.1. </span>Preliminares<a class="headerlink" href="#preliminares" title="Link to this heading">#</a></h3>
+<p>Un PVI es <strong>lineal</strong> de <span class="math notranslate nohighlight">\(n\)</span>-<strong>ésimo orden</strong> si es de la forma</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \left\{\begin{array}{c}
    a_n(x)\dfrac{d^ny}{dx^n}+\cdots+a_1(x)\dfrac{dy}{dx}+a_0(x)y=g(x)\\
    y(x_0)=y_0,\ldots, y^{(n-1)}(x_0)=y_{n-1}
 \end{array}\right.
-$$ 
-
-Si $g(x)=0$ diremos que la ED es **homogénea** (escribimos EDH) y si $g(x)\neq0$ diremos que es **no homogénea**.
-
-**Existencia y Unicidad**: Supondremos que $a_0(x),\ldots,a_{n}(x)$, $g(x)$ son funciones continuas y que $a_n(x)\neq0$ para todo $x$ en un intervalo $I$. Si $x=x_0\in I$ entonces existe una solución única $y(x)$ del PVI.
-
-**Operadores Diferenciales**: Usando la notación de Leibniz para la derivada, escribimos 
-
-$$
+\end{split}\]</div>
+<p>Si <span class="math notranslate nohighlight">\(g(x)=0\)</span> diremos que la ED es <strong>homogénea</strong> (escribimos EDH) y si <span class="math notranslate nohighlight">\(g(x)\neq0\)</span> diremos que es <strong>no homogénea</strong>.</p>
+<p><strong>Existencia y Unicidad</strong>: Supondremos que <span class="math notranslate nohighlight">\(a_0(x),\ldots,a_{n}(x)\)</span>, <span class="math notranslate nohighlight">\(g(x)\)</span> son funciones continuas y que <span class="math notranslate nohighlight">\(a_n(x)\neq0\)</span> para todo <span class="math notranslate nohighlight">\(x\)</span> en un intervalo <span class="math notranslate nohighlight">\(I\)</span>. Si <span class="math notranslate nohighlight">\(x=x_0\in I\)</span> entonces existe una solución única <span class="math notranslate nohighlight">\(y(x)\)</span> del PVI.</p>
+<p><strong>Operadores Diferenciales</strong>: Usando la notación de Leibniz para la derivada, escribimos</p>
+<div class="math notranslate nohighlight">
+\[
 Dy=\frac{dy}{dx}, D^2y=\frac{d^2y}{dx^2},\ldots, D^ny=\frac{d^ny}{dx^n}
-$$ 
-
-Con esto definimos el **operador diferencial** $L$ como 
-
-$$
+\]</div>
+<p>Con esto definimos el <strong>operador diferencial</strong> <span class="math notranslate nohighlight">\(L\)</span> como</p>
+<div class="math notranslate nohighlight">
+\[
 L=a_n(x)D^n+a_{n-1}(x)D^{n-1}+\cdots+a_1(x)D+a_0(x)
-$$ 
-
-y podemos escribir la EDO lineal de orden $n$ como 
-
-$$
+\]</div>
+<p>y podemos escribir la EDO lineal de orden <span class="math notranslate nohighlight">\(n\)</span> como</p>
+<div class="math notranslate nohighlight">
+\[
 L(y)=g(x)~~\textrm{o}~~Ly=g(x)
-$$ 
-
-Este operador es **lineal**: $L(af(x)+bg(x))=aLf+bLg$, $a,b\in\mathbb{R}$.
-
-**Nota**: Toda ED puede expresarse en términos del operador diferencial $D$: por ejemplo 
-
-$$
+\]</div>
+<p>Este operador es una <a class="reference internal" href="Glosario.html#tl"><span class="std std-ref"><strong>transformación lineal</strong></span></a>: <span class="math notranslate nohighlight">\(L(af(x)+bg(x))=aLf+bLg\)</span>, <span class="math notranslate nohighlight">\(a,b\in\mathbb{R}\)</span>.</p>
+<p><strong>Nota</strong>: Toda ED puede expresarse en términos del operador diferencial <span class="math notranslate nohighlight">\(D\)</span>: por ejemplo</p>
+<div class="math notranslate nohighlight">
+\[
 y''+\cos(x)y'+6y=e^x+2~~\Leftrightarrow~~(D^2+\cos(x)D+6)y=e^x+2
-$$
-
-
-+++
-
-### Ecuaciones Homogéneas. Principio de Superposición
-
-**Principio de Superposición**: La suma o **superposición** de 2 o más soluciones de una EDH también es solución.
-
-**Teorema**: Sean $y_1(x), y_2(x),\ldots, y_k(x)$ soluciones de la EDH de orden $n$ en un intervalo $I$. Entonces la combinación lineal 
-
-$$
+\]</div>
+</section>
+<section id="ecuaciones-homogeneas-principio-de-superposicion">
+<h3><span class="section-number">2.4.2. </span>Ecuaciones Homogéneas. Principio de Superposición<a class="headerlink" href="#ecuaciones-homogeneas-principio-de-superposicion" title="Link to this heading">#</a></h3>
+<p><strong>Principio de Superposición</strong>: La suma o <strong>superposición</strong> de 2 o más soluciones de una EDH también es solución.</p>
+<p><strong>Teorema</strong>: Sean <span class="math notranslate nohighlight">\(y_1(x), y_2(x),\ldots, y_k(x)\)</span> soluciones de la EDH de orden <span class="math notranslate nohighlight">\(n\)</span> en un intervalo <span class="math notranslate nohighlight">\(I\)</span>. Entonces la combinación lineal</p>
+<div class="math notranslate nohighlight">
+\[
 y(x)=c_1y_1(x)+c_2y_2(x)+\cdots+c_ky_k(x)~~,~~c_i\in\mathbb{R}
-$$ 
+\]</div>
+<p>también es una solución en el intervalo <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p><strong>Corolario</strong>:</p>
+<ol class="arabic simple">
+<li><p>Si <span class="math notranslate nohighlight">\(y_1(x)\)</span> es una solución de la EDH entonces un múltiplo constante de ella <span class="math notranslate nohighlight">\(y(x)=cy_1(x)\)</span> también es solución de la EDH.</p></li>
+<li><p>Una EDH tiene siempre la solución trivial <span class="math notranslate nohighlight">\(y(x)=0\)</span>.</p></li>
+</ol>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Compruebe que <span class="math notranslate nohighlight">\(y_1(x)=e^x\)</span> e <span class="math notranslate nohighlight">\(y_2(x)=xe^x\)</span> son soluciones de la EDH <span class="math notranslate nohighlight">\(y''-2y'+y=0\)</span> y que</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=c_1e^x+c_2xe^x
+\]</div>
+<p>es también solución de la EDH, para todo <span class="math notranslate nohighlight">\(x\in\mathbb{R}\)</span>.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">exp</span>
 
-también es una solución en el intervalo $I$. 
+<span class="c1"># Definir la variable independiente y las funciones</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-**Corolario**:
+<span class="c1"># Definir la ecuación diferencial</span>
+<span class="k">def</span> <span class="nf">check_solucion</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="c1"># Derivadas</span>
+    <span class="n">y_primera</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">y_segunda</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">y_primera</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    
+    <span class="c1"># Sustituir en la ecuación diferencial y&#39;&#39; - 2y&#39; + y = 0</span>
+    <span class="k">return</span> <span class="n">y_segunda</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">y_primera</span> <span class="o">+</span> <span class="n">y</span>
 
-1. Si $y_1(x)$ es una solución de la EDH entonces un múltiplo constante de ella $y(x)=cy_1(x)$ también es solución de la EDH.
-2. Una EDH tiene siempre la solución trivial $y(x)=0$.
+<span class="c1"># Modificar la función para que devuelva una respuesta clara</span>
+<span class="k">def</span> <span class="nf">check_solucion_verbal</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">check_solucion</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> es solución.&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> no es solución.&quot;</span>
 
-Ejemplo: $y_1(x)=e^x$ e $y_2(x)=xe^x$ son soluciones de la EDH $y''-2y'+y=0$ entonces $$y(x)=c_1e^x+c_2xe^x$$ es también solución de la EDH, para todo $x\in\mathbb{R}$.
+<span class="c1"># Verificar si y1 y y2 son soluciones</span>
+<span class="n">check_y1_verbal</span> <span class="o">=</span> <span class="n">check_solucion_verbal</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="s2">&quot;y1(x) = e^x&quot;</span><span class="p">)</span>
+<span class="n">check_y2_verbal</span> <span class="o">=</span> <span class="n">check_solucion_verbal</span><span class="p">(</span><span class="n">y2</span><span class="p">,</span> <span class="s2">&quot;y2(x) = xe^x&quot;</span><span class="p">)</span>
 
-+++
+<span class="n">check_y1_verbal</span><span class="p">,</span> <span class="n">check_y2_verbal</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;y1(x) = e^x es solución.&#39;, &#39;y2(x) = xe^x es solución.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dependencia-e-independencia-lineal-wronskiano">
+<h3><span class="section-number">2.4.3. </span>Dependencia e Independencia Lineal. Wronskiano<a class="headerlink" href="#dependencia-e-independencia-lineal-wronskiano" title="Link to this heading">#</a></h3>
+<p>El conjunto de funciones <span class="math notranslate nohighlight">\(\{f_1(x),f_2(x),\ldots,f_n(x)\}\)</span> es <strong>linealmente dependiente (LD)</strong> en el intervalo <span class="math notranslate nohighlight">\(I\)</span> si existen constantes <span class="math notranslate nohighlight">\(c_1,\ldots,c_n\in\mathbb{R}\)</span>, no todas nulas, tal que</p>
+<div class="math notranslate nohighlight">
+\[
+c_1f_1(x)+\cdots+c_nf_n(x)=0~~,~~\forall~x\in~I.
+\]</div>
+<p>Si el conjunto de funciones no es LD, diremos que es <strong>linealmente independiente (LI)</strong>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Pruebe que el conjunto de funciones <span class="math notranslate nohighlight">\(\{\sin(2x), \sin(x)\cos(x)\}\)</span> es LD.</p>
+</div>
+<p><strong>Wronskiano</strong>: Supongamos que las funciones <span class="math notranslate nohighlight">\(f_1(x),f_2(x),\ldots,f_n(x)\)</span> tienen al menos <span class="math notranslate nohighlight">\(n-1\)</span> derivadas. El determinante</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+W(f_1,f_2,\ldots,f_n)=\left|\begin{array}{cccc}
+    f_1 &amp; f_2 &amp; \cdots &amp; f_n \\
+    f_1' &amp; f_2' &amp; \cdots &amp; f_n' \\
+    \vdots &amp; \vdots &amp; \cdots &amp; \vdots\\ 
+    f_1^{(n-1)} &amp; f_2^{(n-1)} &amp; \cdots &amp; f_n^{(n-1)} \\
+\end{array}\right|
+\end{split}\]</div>
+<p>se llama <strong>Wronskiano</strong> de tales funciones.</p>
+<p><strong>Teorema 1</strong>: Sea <span class="math notranslate nohighlight">\(\{y_1(x), y_2(x),\ldots, y_n(x)\}\)</span> un conjunto de <span class="math notranslate nohighlight">\(n\)</span> soluciones de la EDH de orden <span class="math notranslate nohighlight">\(n\)</span>: <span class="math notranslate nohighlight">\(L(y)=0\)</span> en un intervalo <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LD}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)=0, \forall~x\in I.
+\]</div>
+<p>Equivalentemente:</p>
+<p><strong>Teorema 2</strong>: Sea <span class="math notranslate nohighlight">\(\{y_1(x), y_2(x),\ldots, y_n(x)\}\)</span> un conjunto de <span class="math notranslate nohighlight">\(n\)</span> soluciones de la EDH de orden <span class="math notranslate nohighlight">\(n\)</span>: <span class="math notranslate nohighlight">\(L(y)=0\)</span> en un intervalo <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LI}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)\neq0,
+\]</div>
+<p>para algún <span class="math notranslate nohighlight">\(x\in I.\)</span></p>
+<p><strong>Nota</strong>: En el Teorema 1, se puede debilitar la condición:</p>
+<div class="math notranslate nohighlight">
+\[
+W(y_1,y_2,\ldots,y_n)(x_0)=0,~\textrm{para algún}~x_0\in I\Rightarrow~W(y_1,y_2,\ldots,y_n)=0,
+\]</div>
+<p><span class="math notranslate nohighlight">\(\forall~x\in I~\Rightarrow~\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LD}\)</span>.</p>
+<!-- La demostración de estos Teoremas que relacionan dependencia e independencia lineal de soluciones con el Wronskiano excede los objetivos del curso. Para estudiarla, recomendamos ver el libro de George Simmons *Ecuaciones Diferenciales*, Segunda Edición, Página 571: **Teorema de Picard**. -->
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Pruebe que el conjunto de funciones <span class="math notranslate nohighlight">\(\{\sin(2x), \sin(x)\cos(x)\}\)</span> es LD usando el Wronskiano.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
 
-### Dependencia e Independencia Linea. Wronskiano
+<span class="c1"># Definir la variable simbólica</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 
-El conjunto de funciones $\{f_1(x),f_2(x),\ldots,f_n(x)\}$ es **linealmente dependiente (LD)** en el intervalo $I$ si existen constantes $c_1,\ldots,c_n\in\mathbb{R}$, no todas nulas, tal que 
+<span class="c1"># Definir las funciones</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Calcular las derivadas</span>
+<span class="n">f1_deriv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">f2_deriv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Crear la matriz de Wronskiano</span>
+<span class="n">wronskiano</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">],</span> <span class="p">[</span><span class="n">f1_deriv</span><span class="p">,</span> <span class="n">f2_deriv</span><span class="p">]])</span>
+
+<span class="c1"># Calcular el determinante del Wronskiano</span>
+<span class="n">det_wronskiano</span> <span class="o">=</span> <span class="n">wronskiano</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
+
+<span class="c1"># Simplificar el determinante</span>
+<span class="n">det_simplificado</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">det_wronskiano</span><span class="p">)</span>
+
+<span class="c1"># Mostrar el resultado</span>
+<span class="sa">f</span><span class="s2">&quot;El wronskiano es </span><span class="si">{</span><span class="n">det_simplificado</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;El wronskiano es 0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conjunto-fundamental-de-soluciones">
+<h3><span class="section-number">2.4.4. </span>Conjunto Fundamental de Soluciones<a class="headerlink" href="#conjunto-fundamental-de-soluciones" title="Link to this heading">#</a></h3>
+<p><strong>Definición</strong>: Cualquier conjunto <span class="math notranslate nohighlight">\(\{y_1(x), y_2(x),\ldots, y_n(x)\}\)</span> de <span class="math notranslate nohighlight">\(n\)</span> soluciones LI de la EDH de orden <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(L(y)=0\)</span> en <span class="math notranslate nohighlight">\(I\)</span>, es un <strong>conjunto fundamental de soluciones</strong> de la EDH.</p>
+<p><strong>Teorema</strong>: Sea <span class="math notranslate nohighlight">\(\{y_1(x), y_2(x),\ldots, y_n(x)\}\)</span> un conjunto fundamental de soluciones de la EDH de orden <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(L(y)=0\)</span>. Entonces la <strong>solución general</strong> de la EDH en <span class="math notranslate nohighlight">\(I\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=c_1y_1(x)+c_2y_2(x)+\cdots+c_ny_n(x)~~,~~c_i\in\mathbb{R}
+\]</div>
+<!-- **Ejemplo**: Determine la solución general de la EDH 
 
 $$
-c_1f_1(x)+\cdots+c_nf_n(x)=0~~,~~\text{para todo}~x\in~I.
-$$ 
-
-Si el conjunto de funciones no es LD, diremos que es **linealmente independiente (LI)**.
-
-**Ejemplo**: El conjunto $\{\sen(2x), \sen(x)\cos(x)\}$ es LD.
- --></section>
+y''-2y'+y=0
+$$ -->
+<p><strong>Definición</strong>: Cualquier solución <span class="math notranslate nohighlight">\(y_p(x)\)</span> (libre de constantes o parámetros) de una ED se denomina <strong>solución particular</strong> de una ED.</p>
+<p><strong>Teorema</strong>: (Solución general de ED no homogéneas). Sea <span class="math notranslate nohighlight">\(y_p(x)\)</span> cualquier solución particular de la ED no homogénea de orden <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(L(y)=g(x)\)</span> en <span class="math notranslate nohighlight">\(I\)</span>, y sea <span class="math notranslate nohighlight">\(\{y_1(x),\ldots,y_n(x)\}\)</span> un conjunto fundamental de soluciones de la EDH asociada. Entonces la solución general de la ED no homogénea en <span class="math notranslate nohighlight">\(I\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=\underbrace{c_1y_1(x)+\cdots+c_ny_n(x)}_{y_h(x)}+y_p(x)=y_h(x)+y_p(x).
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Compruebe que</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=c_1e^{2x}+c_2e^{5x}+6e^x
+\]</div>
+<p>es la solución general de la ED: <span class="math notranslate nohighlight">\(y''-7y'+10y=24e^x\)</span>, para todo <span class="math notranslate nohighlight">\(x\in\mathbb{R}\)</span>.</p>
+</div>
+<p><strong>Nota</strong>: A partir del teorema anterior, nos interesaremos en determinar <span class="math notranslate nohighlight">\(y_h(x)\)</span> e <span class="math notranslate nohighlight">\(y_p(x)\)</span> para <span class="math notranslate nohighlight">\(L(y)=g(x)\)</span>.</p>
+</section>
+</section>
+<section id="reduccion-de-orden-formula-de-abel">
+<h2><span class="section-number">2.5. </span>Reducción de Orden. Fórmula de Abel<a class="headerlink" href="#reduccion-de-orden-formula-de-abel" title="Link to this heading">#</a></h2>
+</section>
+<section id="metodo-de-variacion-de-parametros">
+<h2><span class="section-number">2.6. </span>Método de Variación de Parámetros<a class="headerlink" href="#metodo-de-variacion-de-parametros" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -1073,6 +1231,15 @@ Si el conjunto de funciones no es LD, diremos que es **linealmente independiente
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resonancia">2.3.2. Resonancia</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teoria-ecuaciones-lineales-de-orden-superior">2.4. Teoría Ecuaciones Lineales de Orden Superior</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminares">2.4.1. Preliminares</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuaciones-homogeneas-principio-de-superposicion">2.4.2. Ecuaciones Homogéneas. Principio de Superposición</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencia-e-independencia-lineal-wronskiano">2.4.3. Dependencia e Independencia Lineal. Wronskiano</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjunto-fundamental-de-soluciones">2.4.4. Conjunto Fundamental de Soluciones</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-orden-formula-de-abel">2.5. Reducción de Orden. Fórmula de Abel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-variacion-de-parametros">2.6. Método de Variación de Parámetros</a></li>
 </ul>
   </nav></div>
 

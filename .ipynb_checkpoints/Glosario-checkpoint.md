@@ -120,3 +120,9 @@ donde $\alpha_1, \alpha_2\in\mathbb{R}$.
 $$
 gen(\vec{v}_1,\vec{v}_2)=\{\alpha\vec{v}_1+\beta\vec{v}_2,\alpha,\beta\in\mathbb{R}\}
 $$
+
+(TL)=
+<u>**Transformación Lineal**</u>: Considere dos espacios vectoriales $V$ y $W$ sobre $\mathbb{R}$ (o cualquier cuerpo, en realidad). Una transformación $T:V\to W$ es **lineal** si para cada par de vectores $u,v\in V$ si:
+
+1. $T(u+v)=T(u)+T(v)$.
+2. $T(ku)=kT(u)$, $k\in\mathbb{R}$.
