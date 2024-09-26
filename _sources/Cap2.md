@@ -623,18 +623,8 @@ Equivalentemente:
 **Teorema 2**: Sea $\{y_1(x), y_2(x),\ldots, y_n(x)\}$ un conjunto de $n$ soluciones de la EDH de orden $n$: $L(y)=0$ en un intervalo $I$. 
 
 $$
-\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LI}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)\neq0,
+\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LI}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)\neq0, \forall~x\in I.
 $$ 
-
-para algún $x\in I.$
-
-**Nota**: En el Teorema 1, se puede debilitar la condición: 
-
-$$
-W(y_1,y_2,\ldots,y_n)(x_0)=0,~\textrm{para algún}~x_0\in I\Rightarrow~W(y_1,y_2,\ldots,y_n)=0,
-$$ 
-
-$\forall~x\in I~\Rightarrow~\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LD}$.
 
 <!-- La demostración de estos Teoremas que relacionan dependencia e independencia lineal de soluciones con el Wronskiano excede los objetivos del curso. Para estudiarla, recomendamos ver el libro de George Simmons *Ecuaciones Diferenciales*, Segunda Edición, Página 571: **Teorema de Picard**. -->
 
@@ -716,6 +706,202 @@ es la solución general de la ED: $y''-7y'+10y=24e^x$, para todo $x\in\mathbb{R}
 
 +++
 
+Consideremos la EDH de segundo orden:
+
+$$
+a_2(x)y''+a_1(x)y'+a_0(x)y=0
+$$ 
+
+Escribimos esta ecuación en forma estándar 
+
+$$
+y''+P(x)y'+Q(x)y=0
+$$ (eqAbel)
+
+Si de algún modo **conocemos una solución** $y_1(x)$ explícitamente, podemos construir una segunda solución $y_2(x)$ de la ecuación [](eqAbel) a partir de $y_1(x)$ asumiendo que 
+
+$$
+y_2(x)=u(x)y_1(x).
+$$ 
+
+Si derivamos esta solución, reemplazamos en [](eqAbel) y simplificamos, obtenemos una ED= de variables separables, a saber 
+
+$$
+\frac{u''}{u'}=2\frac{y_1'}{y_1}+P(x)~\Rightarrow~u(x)=\int\frac{e^{-\int P(x)~dx}}{y^2_1(x)}~dx
+$$ 
+
+La función $u(x)$ es conocida como **fórmula de Abel**.
+
+```{admonition} Ejercicio Teórico (Propuesto)
+Probar que $\{y_1(x),y_2(x)\}$ es un conjunto fundamental de soluciones de la ED [](eqAbel).
+```
+
+```{admonition} Ejercicio Teórico
+Hallar la solución general de 
+
+$$
+x^2y''-x(x+2)y'+(x+2)y=0
+$$ 
+sabiendo que $y(x)=x$ es una solución.
+```
+
+```{code-cell}
+:tags: [EjerAbel]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import sympy as sp
+
+# Definimos la variable independiente
+x = sp.symbols('x')
+
+# Definimos P(x) y y1(x)
+P = -(x+2)/x
+y1 = x
+
+# Calculamos y2(x) con la fórmula de Abel
+exp_integral = sp.exp(-sp.integrate(P, x))  # e^(-∫P(x)dx)
+integral = sp.integrate(exp_integral / y1**2, x)  # ∫(e^(-∫P(x)dx) / y1^2)dx
+y2 = y1 * integral  # y2(x)
+
+# Simplificamos el resultado
+y2_simple = sp.simplify(y2)
+
+# Mostrar el resultado
+y2_simple
+```
+
++++
+
 ## Método de Variación de Parámetros
+
+Nos interesa encontrar una solución particular $y_p(x)$ de la ED de segundo orden 
+
+$$
+a_2(x)y''+a_1(x)y'+a_0(x)y=g(x)
+$$ 
+
+Para ello, la escribimos en su forma estándar 
+
+$$
+y''+P(x)y'+Q(x)y=f(x) 
+$$ (eqVarPar)
+
+donde $P(x), Q(x), f(x)$ son continuas en algún intervalo $I$. 
+
+Por otro lado, sabemos que la solución de la EDH asociada a [](eqVarPar) es de la forma 
+
+$$
+y_H(x)=c_1y_1(x)+c_2y_2(x),~~c_1,c_2\in\mathbb{R}.
+$$
+
+El método de **variación de los parámetros** consiste en suponer que una solución particular de [](eqVarPar) es de la forma 
+
+$$
+y_p(x)=u_1(x)y_1(x)+u_2(x)y_2(x)
+$$ 
+
+donde se hacen *variar los parámetros* $c_1$ y $c_2$ de la solución $y_H(x)$, y se interpretan como funciones incógnitas $u_1(x)$ y $u_2(x)$ que deben ser determinadas (se supone que $y_1(x)$ e $y_2(x)$ son conocidas). Reemplazando $y_p(x)$, $y_p'(x)$ e $y_p''(x)$ en [](eqVarPar) y estableciendo las condiciones
+
+$$
+\begin{aligned}
+y_1u_1'+y_2u_2'&=0\\ 
+y_1'u_1'+y_2'u_2'&=f(x)
+\end{aligned}
+$$
+
+obtenemos un sistema de ecuaciones para $u_1'$ y $u_2'$, cuyas soluciones son 
+
+$$
+u_1'=\frac{W_1(y_1,y_2)}{W(y_1,y_2)}~~,~~u_2'=\frac{W_2(y_1,y_2)}{W(y_1,y_2)}
+$$ 
+
+donde 
+
+$$
+W(y_1,y_2)=\begin{vmatrix}y_1&y_2\\ y_1'&y_2'\end{vmatrix}~,~W_1(y_1,y_2)=\begin{vmatrix}0&y_2\\ f(x)&y_2'\end{vmatrix}
+$$ 
+
+$$
+W_2(y_1,y_2)=\begin{vmatrix}y_1&0\\ y_1'&f(x)\end{vmatrix}
+$$ 
+
+($W$ es el Wronskiano de $y_1$ e $y_2$). Finalmente, se integran $u_1'$ y $u_2'$ con respecto a $x$, y se reemplazan para obtener la solución particular.
+
+```{admonition} Ejercicio Teórico
+Hallar la solución de $y''+2y'+y=e^{-x}\ln(x).$
+```
+
+```{code-cell}
+:tags: [EjerVarPar]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import sympy as sp
+
+# Activar impresión bonita
+sp.init_printing()
+
+# Definir las variables y la función dependiente
+x = sp.symbols('x')
+y = sp.Function('y')(x)
+
+# Definir la ecuación diferencial
+eq = sp.Eq(y.diff(x, 2) + 2*y.diff(x) + y, sp.exp(-x) * sp.ln(x))
+
+# Resolver la ecuación homogénea asociada
+eq_homogenea = sp.Eq(y.diff(x, 2) + 2*y.diff(x) + y, 0)
+sol_homogenea = sp.dsolve(eq_homogenea, y)
+
+# Imprimir la solución homogénea
+print("Solución homogénea:")
+display(sol_homogenea)
+
+# Resolver la ecuación completa
+sol_completa = sp.dsolve(eq, y)
+
+# Separar la solución homogénea de la particular
+sol_particular = sp.simplify(sol_completa.rhs - sol_homogenea.rhs)
+
+# Mostrar la solución particular y completa
+print("\nSolución particular:")
+display(sol_particular)
+
+print("\nSolución general (completa):")
+display(sol_completa)
+```
+
+**Caso General**: Para encontrar una solución particular la ED 
+
+$$
+y^{(n)}+P_{n-1}y^{(n-1)}+\cdots+P_1(x)y'+P_0(x)y=f(x)
+$$ (eqVarGen)
+
+variamos los parámetros de la solución de la EDH asociada y suponemos que una solución particular es de la forma
+
+$$
+y_p(x)=u_1(x)y_1(x)+\cdots+u_n(x)y_n(x).
+$$ 
+
+Reemplazamos $y_p(x), y_p(x)',\ldots,y_p^{(n)}$ es la ED [](eqVarGen) y estableciendo las condiciones 
+
+$$
+\begin{eqnarray*}y_1u_1'+y_2u_2'+\cdots+y_nu_n'&=&0\\ y_1'u_1'+y_2'u_2'+\cdots+y_n'u_n'&=&0\\ \vdots&&\vdots\\ y_1^{(n-1)}u_1'+y_2^{(n-1)}u_2'+\cdots+y_n^{(n-1)}u_n'&=&f(x)
+\end{eqnarray*} 
+$$
+
+obtenemos un sistema de ecuaciones para $u_1',u_2',\ldots,u_n'$ cuyas soluciones son 
+
+$$
+u_k'=\frac{W_k}{W}~~,~~k=1,2,\ldots,n
+$$ 
+
+donde $W$ es el Wronskiano de $y_1,y_2,\ldots,y_n$, y $W_k$ es el determinante que se obtiene al reemplazar la $k$-ésima columna de $W$ por la columna formada por $(0,0,\ldots,0,f(x))^t$. 
+ 
+```{admonition} Ejercicio Teórico (Propuesto)
+Resolver $y'''+y'=\tan(x).$
+```
 
 +++
