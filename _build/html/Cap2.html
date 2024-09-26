@@ -1055,15 +1055,8 @@ W(f_1,f_2,\ldots,f_n)=\left|\begin{array}{cccc}
 <p><strong>Teorema 2</strong>: Sea <span class="math notranslate nohighlight">\(\{y_1(x), y_2(x),\ldots, y_n(x)\}\)</span> un conjunto de <span class="math notranslate nohighlight">\(n\)</span> soluciones de la EDH de orden <span class="math notranslate nohighlight">\(n\)</span>: <span class="math notranslate nohighlight">\(L(y)=0\)</span> en un intervalo <span class="math notranslate nohighlight">\(I\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
-\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LI}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)\neq0,
+\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LI}~\Leftrightarrow~W(y_1,y_2,\ldots,y_n)\neq0, \forall~x\in I.
 \]</div>
-<p>para algún <span class="math notranslate nohighlight">\(x\in I.\)</span></p>
-<p><strong>Nota</strong>: En el Teorema 1, se puede debilitar la condición:</p>
-<div class="math notranslate nohighlight">
-\[
-W(y_1,y_2,\ldots,y_n)(x_0)=0,~\textrm{para algún}~x_0\in I\Rightarrow~W(y_1,y_2,\ldots,y_n)=0,
-\]</div>
-<p><span class="math notranslate nohighlight">\(\forall~x\in I~\Rightarrow~\{y_1(x), y_2(x),\ldots, y_n(x)\}~\text{es LD}\)</span>.</p>
 <!-- La demostración de estos Teoremas que relacionan dependencia e independencia lineal de soluciones con el Wronskiano excede los objetivos del curso. Para estudiarla, recomendamos ver el libro de George Simmons *Ecuaciones Diferenciales*, Segunda Edición, Página 571: **Teorema de Picard**. -->
 <div class="admonition-ejercicio-teorico admonition">
 <p class="admonition-title">Ejercicio Teórico</p>
@@ -1144,9 +1137,210 @@ y(x)=c_1e^{2x}+c_2e^{5x}+6e^x
 </section>
 <section id="reduccion-de-orden-formula-de-abel">
 <h2><span class="section-number">2.5. </span>Reducción de Orden. Fórmula de Abel<a class="headerlink" href="#reduccion-de-orden-formula-de-abel" title="Link to this heading">#</a></h2>
+<p>Consideremos la EDH de segundo orden:</p>
+<div class="math notranslate nohighlight">
+\[
+a_2(x)y''+a_1(x)y'+a_0(x)y=0
+\]</div>
+<p>Escribimos esta ecuación en forma estándar</p>
+<div class="math notranslate nohighlight" id="equation-eqabel">
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-eqabel" title="Link to this equation">#</a></span>\[
+y''+P(x)y'+Q(x)y=0
+\]</div>
+<p>Si de algún modo <strong>conocemos una solución</strong> <span class="math notranslate nohighlight">\(y_1(x)\)</span> explícitamente, podemos construir una segunda solución <span class="math notranslate nohighlight">\(y_2(x)\)</span> de la ecuación <a class="reference internal" href="#equation-eqabel">(2.12)</a> a partir de <span class="math notranslate nohighlight">\(y_1(x)\)</span> asumiendo que</p>
+<div class="math notranslate nohighlight">
+\[
+y_2(x)=u(x)y_1(x).
+\]</div>
+<p>Si derivamos esta solución, reemplazamos en <a class="reference internal" href="#equation-eqabel">(2.12)</a> y simplificamos, obtenemos una ED= de variables separables, a saber</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{u''}{u'}=2\frac{y_1'}{y_1}+P(x)~\Rightarrow~u(x)=\int\frac{e^{-\int P(x)~dx}}{y^2_1(x)}~dx
+\]</div>
+<p>La función <span class="math notranslate nohighlight">\(u(x)\)</span> es conocida como <strong>fórmula de Abel</strong>.</p>
+<div class="admonition-ejercicio-teorico-propuesto admonition">
+<p class="admonition-title">Ejercicio Teórico (Propuesto)</p>
+<p>Probar que <span class="math notranslate nohighlight">\(\{y_1(x),y_2(x)\}\)</span> es un conjunto fundamental de soluciones de la ED <a class="reference internal" href="#equation-eqabel">(2.12)</a>.</p>
+</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Hallar la solución general de</p>
+<div class="math notranslate nohighlight">
+\[
+x^2y''-x(x+2)y'+(x+2)y=0
+\]</div>
+<p>sabiendo que <span class="math notranslate nohighlight">\(y(x)=x\)</span> es una solución.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Definimos la variable independiente</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="c1"># Definimos P(x) y y1(x)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">x</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">x</span>
+
+<span class="c1"># Calculamos y2(x) con la fórmula de Abel</span>
+<span class="n">exp_integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>  <span class="c1"># e^(-∫P(x)dx)</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">exp_integral</span> <span class="o">/</span> <span class="n">y1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># ∫(e^(-∫P(x)dx) / y1^2)dx</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">*</span> <span class="n">integral</span>  <span class="c1"># y2(x)</span>
+
+<span class="c1"># Simplificamos el resultado</span>
+<span class="n">y2_simple</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span>
+
+<span class="c1"># Mostrar el resultado</span>
+<span class="n">y2_simple</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x e^{x}\]</div>
+</div>
+</div>
 </section>
 <section id="metodo-de-variacion-de-parametros">
 <h2><span class="section-number">2.6. </span>Método de Variación de Parámetros<a class="headerlink" href="#metodo-de-variacion-de-parametros" title="Link to this heading">#</a></h2>
+<p>Nos interesa encontrar una solución particular <span class="math notranslate nohighlight">\(y_p(x)\)</span> de la ED de segundo orden</p>
+<div class="math notranslate nohighlight">
+\[
+a_2(x)y''+a_1(x)y'+a_0(x)y=g(x)
+\]</div>
+<p>Para ello, la escribimos en su forma estándar</p>
+<div class="math notranslate nohighlight" id="equation-eqvarpar">
+<span class="eqno">(2.13)<a class="headerlink" href="#equation-eqvarpar" title="Link to this equation">#</a></span>\[
+y''+P(x)y'+Q(x)y=f(x) 
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(P(x), Q(x), f(x)\)</span> son continuas en algún intervalo <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>Por otro lado, sabemos que la solución de la EDH asociada a <a class="reference internal" href="#equation-eqvarpar">(2.13)</a> es de la forma</p>
+<div class="math notranslate nohighlight">
+\[
+y_H(x)=c_1y_1(x)+c_2y_2(x),~~c_1,c_2\in\mathbb{R}.
+\]</div>
+<p>El método de <strong>variación de los parámetros</strong> consiste en suponer que una solución particular de <a class="reference internal" href="#equation-eqvarpar">(2.13)</a> es de la forma</p>
+<div class="math notranslate nohighlight">
+\[
+y_p(x)=u_1(x)y_1(x)+u_2(x)y_2(x)
+\]</div>
+<p>donde se hacen <em>variar los parámetros</em> <span class="math notranslate nohighlight">\(c_1\)</span> y <span class="math notranslate nohighlight">\(c_2\)</span> de la solución <span class="math notranslate nohighlight">\(y_H(x)\)</span>, y se interpretan como funciones incógnitas <span class="math notranslate nohighlight">\(u_1(x)\)</span> y <span class="math notranslate nohighlight">\(u_2(x)\)</span> que deben ser determinadas (se supone que <span class="math notranslate nohighlight">\(y_1(x)\)</span> e <span class="math notranslate nohighlight">\(y_2(x)\)</span> son conocidas). Reemplazando <span class="math notranslate nohighlight">\(y_p(x)\)</span>, <span class="math notranslate nohighlight">\(y_p'(x)\)</span> e <span class="math notranslate nohighlight">\(y_p''(x)\)</span> en <a class="reference internal" href="#equation-eqvarpar">(2.13)</a> y estableciendo las condiciones</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+y_1u_1'+y_2u_2'&amp;=0\\ 
+y_1'u_1'+y_2'u_2'&amp;=f(x)
+\end{aligned}
+\end{split}\]</div>
+<p>obtenemos un sistema de ecuaciones para <span class="math notranslate nohighlight">\(u_1'\)</span> y <span class="math notranslate nohighlight">\(u_2'\)</span>, cuyas soluciones son</p>
+<div class="math notranslate nohighlight">
+\[
+u_1'=\frac{W_1(y_1,y_2)}{W(y_1,y_2)}~~,~~u_2'=\frac{W_2(y_1,y_2)}{W(y_1,y_2)}
+\]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+W(y_1,y_2)=\begin{vmatrix}y_1&amp;y_2\\ y_1'&amp;y_2'\end{vmatrix}~,~W_1(y_1,y_2)=\begin{vmatrix}0&amp;y_2\\ f(x)&amp;y_2'\end{vmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+W_2(y_1,y_2)=\begin{vmatrix}y_1&amp;0\\ y_1'&amp;f(x)\end{vmatrix}
+\end{split}\]</div>
+<p>(<span class="math notranslate nohighlight">\(W\)</span> es el Wronskiano de <span class="math notranslate nohighlight">\(y_1\)</span> e <span class="math notranslate nohighlight">\(y_2\)</span>). Finalmente, se integran <span class="math notranslate nohighlight">\(u_1'\)</span> y <span class="math notranslate nohighlight">\(u_2'\)</span> con respecto a <span class="math notranslate nohighlight">\(x\)</span>, y se reemplazan para obtener la solución particular.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Hallar la solución de <span class="math notranslate nohighlight">\(y''+2y'+y=e^{-x}\ln(x).\)</span></p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Activar impresión bonita</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">init_printing</span><span class="p">()</span>
+
+<span class="c1"># Definir las variables y la función dependiente</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Definir la ecuación diferencial</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">ln</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Resolver la ecuación homogénea asociada</span>
+<span class="n">eq_homogenea</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">sol_homogenea</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq_homogenea</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Imprimir la solución homogénea</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solución homogénea:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sol_homogenea</span><span class="p">)</span>
+
+<span class="c1"># Resolver la ecuación completa</span>
+<span class="n">sol_completa</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Separar la solución homogénea de la particular</span>
+<span class="n">sol_particular</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">sol_completa</span><span class="o">.</span><span class="n">rhs</span> <span class="o">-</span> <span class="n">sol_homogenea</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
+
+<span class="c1"># Mostrar la solución particular y completa</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Solución particular:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sol_particular</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Solución general (completa):&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sol_completa</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solución homogénea:
+</pre></div>
+</div>
+<img alt="_images/923528e8f7b3bb7ad674661c9d191f55b28f45878f2e475e32ac206f6b84a6ae.png" src="_images/923528e8f7b3bb7ad674661c9d191f55b28f45878f2e475e32ac206f6b84a6ae.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solución particular:
+</pre></div>
+</div>
+<img alt="_images/07b7fb4491fd2668a369ca4efd82180fc045552d0e76ab5d9ceea3f57565356c.png" src="_images/07b7fb4491fd2668a369ca4efd82180fc045552d0e76ab5d9ceea3f57565356c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solución general (completa):
+</pre></div>
+</div>
+<img alt="_images/ac493241a20e3d876b3ee250256900d2bf0b5474a205267de141a7a72255c6ae.png" src="_images/ac493241a20e3d876b3ee250256900d2bf0b5474a205267de141a7a72255c6ae.png" />
+</div>
+</div>
+<p><strong>Caso General</strong>: Para encontrar una solución particular la ED</p>
+<div class="math notranslate nohighlight" id="equation-eqvargen">
+<span class="eqno">(2.14)<a class="headerlink" href="#equation-eqvargen" title="Link to this equation">#</a></span>\[
+y^{(n)}+P_{n-1}y^{(n-1)}+\cdots+P_1(x)y'+P_0(x)y=f(x)
+\]</div>
+<p>variamos los parámetros de la solución de la EDH asociada y suponemos que una solución particular es de la forma</p>
+<div class="math notranslate nohighlight">
+\[
+y_p(x)=u_1(x)y_1(x)+\cdots+u_n(x)y_n(x).
+\]</div>
+<p>Reemplazamos <span class="math notranslate nohighlight">\(y_p(x), y_p(x)',\ldots,y_p^{(n)}\)</span> es la ED <a class="reference internal" href="#equation-eqvargen">(2.14)</a> y estableciendo las condiciones</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}y_1u_1'+y_2u_2'+\cdots+y_nu_n'&amp;=&amp;0\\ y_1'u_1'+y_2'u_2'+\cdots+y_n'u_n'&amp;=&amp;0\\ \vdots&amp;&amp;\vdots\\ y_1^{(n-1)}u_1'+y_2^{(n-1)}u_2'+\cdots+y_n^{(n-1)}u_n'&amp;=&amp;f(x)
+\end{eqnarray*} 
+\end{split}\]</div>
+<p>obtenemos un sistema de ecuaciones para <span class="math notranslate nohighlight">\(u_1',u_2',\ldots,u_n'\)</span> cuyas soluciones son</p>
+<div class="math notranslate nohighlight">
+\[
+u_k'=\frac{W_k}{W}~~,~~k=1,2,\ldots,n
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(W\)</span> es el Wronskiano de <span class="math notranslate nohighlight">\(y_1,y_2,\ldots,y_n\)</span>, y <span class="math notranslate nohighlight">\(W_k\)</span> es el determinante que se obtiene al reemplazar la <span class="math notranslate nohighlight">\(k\)</span>-ésima columna de <span class="math notranslate nohighlight">\(W\)</span> por la columna formada por <span class="math notranslate nohighlight">\((0,0,\ldots,0,f(x))^t\)</span>.</p>
+<div class="admonition-ejercicio-teorico-propuesto admonition">
+<p class="admonition-title">Ejercicio Teórico (Propuesto)</p>
+<p>Resolver <span class="math notranslate nohighlight">\(y'''+y'=\tan(x).\)</span></p>
+</div>
 </section>
 </section>
 
