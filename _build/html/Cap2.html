@@ -486,6 +486,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-orden-formula-de-abel">2.5. Reducción de Orden. Fórmula de Abel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-variacion-de-parametros">2.6. Método de Variación de Parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-diferencial-de-cauchy-euler">2.7. Ecuación Diferencial de Cauchy-Euler</a></li>
 </ul>
             </nav>
         </div>
@@ -1342,6 +1343,86 @@ u_k'=\frac{W_k}{W}~~,~~k=1,2,\ldots,n
 <p>Resolver <span class="math notranslate nohighlight">\(y'''+y'=\tan(x).\)</span></p>
 </div>
 </section>
+<section id="ecuacion-diferencial-de-cauchy-euler">
+<h2><span class="section-number">2.7. </span>Ecuación Diferencial de Cauchy-Euler<a class="headerlink" href="#ecuacion-diferencial-de-cauchy-euler" title="Link to this heading">#</a></h2>
+<p>En mecánica de Fluidos, las <a class="reference external" href="https://en.wikipedia.org/wiki/Navier-Stokes_equations">ecuaciones de Navier-Stokes</a> describen el movimiento de los fluidos <a class="reference external" href="https://en.wikipedia.org/wiki/Incompressible_flow">incompresibles</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+\rho\left(\frac{\partial\mathbf{v}}{\partial t}+\mathbf{v}\cdot\nabla\mathbf{v}\right)&amp;=&amp;-\nabla\mathbf{p}+\mu\nabla^2\mathbf{v}+\mathbf{F}\\
+\nabla\cdot\mathbf{v}&amp;=&amp;0
+\end{eqnarray*}
+\end{split}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> es el campo vectorial de la velocidad del fluido en el punto <span class="math notranslate nohighlight">\((\mathbf{x},t)\)</span>, <span class="math notranslate nohighlight">\(\rho\)</span> la densidad, <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> la presión, <span class="math notranslate nohighlight">\(\mu\)</span> la viscosidad y <span class="math notranslate nohighlight">\(\mathbf{F}\)</span> fuerzas externas. Hasta el día de hoy, no se sabe si esta ecuación tiene soluciones suaves (infinitamente diferenciables), por lo que el <a class="reference external" href="https://www.claymath.org/">Instituto Clay de Matemáticas</a> lo consideró dentro de la lista de los 7 <a class="reference external" href="https://en.wikipedia.org/wiki/Millennium_Prize_Problems">Problemas del Milenio</a> y ofreció 1 millón de dólares para quien encuentre su solución.</p>
+<p>Este es un problema de Ecuaciones Diferenciales Parciales, pero podemos realizar algunas suposiciones para estudiar un caso especial que podamos resolver en una variable: el fluido de Taylor-Couette. Este fluido está contenido en el anillo entre dos cilindros concéntricos de radios <span class="math notranslate nohighlight">\(a_1\)</span> y <span class="math notranslate nohighlight">\(a_2\)</span>, y se encuentra rotando con velocidades angulares <span class="math notranslate nohighlight">\(\Omega_1\)</span> y <span class="math notranslate nohighlight">\(\Omega_2\)</span></p>
+<figure class="align-default" id="teu">
+<a class="reference internal image-reference" href="_images/couette.png"><img alt="_images/couette.png" src="_images/couette.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 2.5 </span><span class="caption-text">Flujo rotatorio de Couette</span><a class="headerlink" href="#teu" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Nos interesa conocer la velocidad del fluido dentro del anillo. Usamos coordenadas cilíndricas <span class="math notranslate nohighlight">\(r, \theta, z\)</span>, y podemos reescribir el operador <span class="math notranslate nohighlight">\(\nabla\)</span> para el <a class="reference external" href="https://en.wikipedia.org/wiki/Cylindrical_coordinate_system">gradiente, divergencia y laplaciano</a>. Con esto, podemos transformar la Ecuación de Navier-Stokes a cilíndricas y simplificarla:</p>
+<div class="math notranslate nohighlight" id="equation-navierstokescil">
+<span class="eqno">(2.15)<a class="headerlink" href="#equation-navierstokescil" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{eqnarray}
+\frac{d^2v}{dr^2}+\frac{1}{r}\frac{dv}{dr}-\frac{v}{r^2}&amp;=&amp;0\\ 
+\frac{\rho v^2}{r}&amp;=&amp;-\frac{dp}{dr}\nonumber
+\end{eqnarray}
+\end{split}\]</div>
+<p>con las condiciones iniciales <span class="math notranslate nohighlight">\(v(a_1)=\Omega_1 a_1\)</span>, <span class="math notranslate nohighlight">\(v(a_2)=\Omega_2 a_2\)</span>. ¿Cómo resolver la ecuación <a class="reference internal" href="#equation-navierstokescil">(2.15)</a>?</p>
+<p><strong>Definición</strong>: En general, una ecuación diferencial de la forma</p>
+<div class="math notranslate nohighlight">
+\[
+a_nx^n\frac{d^ny}{dx^n}+\cdots+a_1x\frac{dy}{dx}+a_0y=g(x)~~,~~a_i\in\mathbb{R}
+\]</div>
+<p>se denomina <strong>Ecuación de Cauchy-Euler</strong> de orden <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>En primer lugar resolvemos la Ecuación de Cauchy-Euler de orden 2 homogénea:</p>
+<div class="math notranslate nohighlight">
+\[
+ax^2y''+bxy'+cy=0
+\]</div>
+<p>suponiendo que <span class="math notranslate nohighlight">\(y(x)=x^m\)</span> es una solución de ella. Derivando y reemplazando, obtenemos la <strong>ecuación auxiliar</strong></p>
+<div class="math notranslate nohighlight">
+\[
+am(m-1)+bm+c=0~\Leftrightarrow~am^2+(b-a)m+c=0.
+\]</div>
+<p>Tenemos 3 casos en términos de la raíces <span class="math notranslate nohighlight">\(m_1\)</span> y <span class="math notranslate nohighlight">\(m_2\)</span> de esta ecuación auxiliar:</p>
+<ol class="arabic simple">
+<li><p><u>Raíces reales distintas</u>: La solución es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+y_H(x)=c_1x^{m_1}+c_2x^{m_2}.
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p><u>Raíces reales repetidas</u>: La solución es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+y_H(x)=c_1x^{m_1}+c_2x^{m_1}\ln(x).
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p><u>Raíces complejas conjugadas</u>: Con <span class="math notranslate nohighlight">\(m_1=\alpha+\beta i\)</span> y <span class="math notranslate nohighlight">\(m_2=\alpha-\beta i\)</span>, donde <span class="math notranslate nohighlight">\(\alpha,\beta&gt;0\)</span>. La solución es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+y_H(x)=c_1x^{\alpha}\cos(\beta\ln(x))+c_2x^{\alpha}\sin(\beta\ln(x)).
+\]</div>
+<p><strong>Nota</strong>: Para ecuaciones de orden superior, si <span class="math notranslate nohighlight">\(m_1\)</span> es una raíz real de multiplicidad <span class="math notranslate nohighlight">\(k\)</span>, entonces se puede demostrar que</p>
+<div class="math notranslate nohighlight">
+\[
+x^{m_1},x^{m_1}\ln(x), x^{m_1}(\ln(x))^2,\ldots,x^{m_1}(\ln(x))^{k-1}
+\]</div>
+<p>son <span class="math notranslate nohighlight">\(k\)</span> soluciones lI. Luego, la solución general de la EDO debe contener una combinación lineal de estas <span class="math notranslate nohighlight">\(k\)</span> soluciones.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Encuentre la solución general de <span class="math notranslate nohighlight">\(x^2y''+xy'-y=\dfrac{1}{x+1}\)</span>.</p>
+</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Pruebe que la sustitución <span class="math notranslate nohighlight">\(x=e^t\)</span> transforma la Ecuación de Cauchy-Euler <span class="math notranslate nohighlight">\(ax^2y''+bxy'+cy=0\)</span> en una EDO de coeficientes constantes.</p>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1434,6 +1515,7 @@ u_k'=\frac{W_k}{W}~~,~~k=1,2,\ldots,n
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-orden-formula-de-abel">2.5. Reducción de Orden. Fórmula de Abel</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-variacion-de-parametros">2.6. Método de Variación de Parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-diferencial-de-cauchy-euler">2.7. Ecuación Diferencial de Cauchy-Euler</a></li>
 </ul>
   </nav></div>
 

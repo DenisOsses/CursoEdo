@@ -903,5 +903,95 @@ donde $W$ es el Wronskiano de $y_1,y_2,\ldots,y_n$, y $W_k$ es el determinante q
 ```{admonition} Ejercicio Teórico (Propuesto)
 Resolver $y'''+y'=\tan(x).$
 ```
++++
+
+## Ecuación Diferencial de Cauchy-Euler
+
+En mecánica de Fluidos, las [ecuaciones de Navier-Stokes](https://en.wikipedia.org/wiki/Navier-Stokes_equations) describen el movimiento de los fluidos [incompresibles](https://en.wikipedia.org/wiki/Incompressible_flow):
+
+$$
+\begin{eqnarray*}
+\rho\left(\frac{\partial\mathbf{v}}{\partial t}+\mathbf{v}\cdot\nabla\mathbf{v}\right)&=&-\nabla\mathbf{p}+\mu\nabla^2\mathbf{v}+\mathbf{F}\\
+\nabla\cdot\mathbf{v}&=&0
+\end{eqnarray*}
+$$
+
+donde $\mathbf{v}$ es el campo vectorial de la velocidad del fluido en el punto $(\mathbf{x},t)$, $\rho$ la densidad, $\mathbf{p}$ la presión, $\mu$ la viscosidad y $\mathbf{F}$ fuerzas externas. Hasta el día de hoy, no se sabe si esta ecuación tiene soluciones suaves (infinitamente diferenciables), por lo que el [Instituto Clay de Matemáticas](https://www.claymath.org/) lo consideró dentro de la lista de los 7 [Problemas del Milenio](https://en.wikipedia.org/wiki/Millennium_Prize_Problems) y ofreció 1 millón de dólares para quien encuentre su solución.
+
+Este es un problema de Ecuaciones Diferenciales Parciales, pero podemos realizar algunas suposiciones para estudiar un caso especial que podamos resolver en una variable: el fluido de Taylor-Couette. Este fluido está contenido en el anillo entre dos cilindros concéntricos de radios $a_1$ y $a_2$, y se encuentra rotando con velocidades angulares $\Omega_1$ y $\Omega_2$
+
+```{figure} couette.png
+---
+height: 200px
+name: TEU
+---
+Flujo rotatorio de Couette
+```
+
+Nos interesa conocer la velocidad del fluido dentro del anillo. Usamos coordenadas cilíndricas $r, \theta, z$, y podemos reescribir el operador $\nabla$ para el [gradiente, divergencia y laplaciano](https://en.wikipedia.org/wiki/Cylindrical_coordinate_system). Con esto, podemos transformar la Ecuación de Navier-Stokes a cilíndricas y simplificarla:
+
+$$
+\begin{eqnarray}
+\frac{d^2v}{dr^2}+\frac{1}{r}\frac{dv}{dr}-\frac{v}{r^2}&=&0\\ 
+\frac{\rho v^2}{r}&=&-\frac{dp}{dr}\nonumber
+\end{eqnarray}
+$$ (NavierStokesCil)
+
+con las condiciones iniciales $v(a_1)=\Omega_1 a_1$, $v(a_2)=\Omega_2 a_2$. ¿Cómo resolver la ecuación [](NavierStokesCil)?
+
+**Definición**: En general, una ecuación diferencial de la forma 
+
+$$
+a_nx^n\frac{d^ny}{dx^n}+\cdots+a_1x\frac{dy}{dx}+a_0y=g(x)~~,~~a_i\in\mathbb{R}
+$$ 
+
+se denomina **Ecuación de Cauchy-Euler** de orden $n$.
+
+En primer lugar resolvemos la Ecuación de Cauchy-Euler de orden 2 homogénea: 
+
+$$
+ax^2y''+bxy'+cy=0
+$$ 
+
+suponiendo que $y(x)=x^m$ es una solución de ella. Derivando y reemplazando, obtenemos la **ecuación auxiliar** 
+
+$$
+am(m-1)+bm+c=0~\Leftrightarrow~am^2+(b-a)m+c=0.
+$$
+
+Tenemos 3 casos en términos de la raíces $m_1$ y $m_2$ de esta ecuación auxiliar:
+
+1. <u>Raíces reales distintas</u>: La solución es
+
+$$
+y_H(x)=c_1x^{m_1}+c_2x^{m_2}.
+$$
+
+2. <u>Raíces reales repetidas</u>: La solución es
+
+$$
+y_H(x)=c_1x^{m_1}+c_2x^{m_1}\ln(x).
+$$
+
+3. <u>Raíces complejas conjugadas</u>: Con $m_1=\alpha+\beta i$ y $m_2=\alpha-\beta i$, donde $\alpha,\beta>0$. La solución es
+
+$$
+y_H(x)=c_1x^{\alpha}\cos(\beta\ln(x))+c_2x^{\alpha}\sin(\beta\ln(x)).
+$$
+
+**Nota**: Para ecuaciones de orden superior, si $m_1$ es una raíz real de multiplicidad $k$, entonces se puede demostrar que
+
+$$
+x^{m_1},x^{m_1}\ln(x), x^{m_1}(\ln(x))^2,\ldots,x^{m_1}(\ln(x))^{k-1}
+$$ 
+son $k$ soluciones lI. Luego, la solución general de la EDO debe contener una combinación lineal de estas $k$ soluciones.
+
+```{admonition} Ejercicio Teórico
+Encuentre la solución general de $x^2y''+xy'-y=\dfrac{1}{x+1}$.
+```
+
+```{admonition} Ejercicio Teórico
+Pruebe que la sustitución $x=e^t$ transforma la Ecuación de Cauchy-Euler $ax^2y''+bxy'+cy=0$ en una EDO de coeficientes constantes.
+```
 
 +++
