@@ -9,4 +9,5 @@ parts:
     chapters:
     - file: Cap1
     - file: Cap2
+    - file: Cap3
     - file: Glosario

@@ -154,6 +154,7 @@ Establezca un PVI que exprese la posición $y(t)$ del cuerpo en cualquier instan
 
 +++
 
+(EDOLineal)=
 ## Ecuaciones Lineales de Primer Orden
 
 En la clase anterior, analizamos una EDO a partir de un modelo dado, hoy comenzaremos con una situación similar y terminaremos con la construcción de una EDO de modo general siguiendo principios físicos y matemáticos.
