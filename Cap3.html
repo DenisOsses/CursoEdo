@@ -464,8 +464,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-ecuaciones-diferenciales">3.1. Sistemas de Ecuaciones Diferenciales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">3.1.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teoria-preliminar-sistemas-lineales">3.1.2. Teoría Preliminar: Sistemas Lineales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teoria-general">3.1.3. Teoría General</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-homogeneos">3.2. Sistemas Homogéneos</a></li>
 </ul>
             </nav>
         </div>
@@ -636,6 +638,307 @@ m_2x_2''&amp;=&amp;-k_2(x_2-x_1)
 </div>
 </div>
 </section>
+<section id="teoria-general">
+<h3><span class="section-number">3.1.3. </span>Teoría General<a class="headerlink" href="#teoria-general" title="Link to this heading">#</a></h3>
+<p>La teoría de sistemas de <span class="math notranslate nohighlight">\(n\)</span> ecuaciones diferenciales de primer orden es similar a la de las ecuaciones diferenciales de <span class="math notranslate nohighlight">\(n\)</span>-ésimo orden: Si <span class="math notranslate nohighlight">\(t_0\in I\)</span> entonces el PVI asociado es</p>
+<div class="math notranslate nohighlight" id="equation-pvisist">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-pvisist" title="Link to this equation">#</a></span>\[\begin{split}
+\mathbf{PVI}~~~~\left\{\begin{array}{ccc}\mathbf{X}'(t)&amp;=&amp;\mathbf{A}(t)\mathbf{X}(t)+\mathbf{F}(t)\\&amp;&amp;\\ \mathbf{X}(t_0)&amp;=&amp;\mathbf{X}_0\end{array}\right.
+\end{split}\]</div>
+<p><strong>Teorema</strong>: Si las funciones componentes de <span class="math notranslate nohighlight">\(\mathbf{A}(t)\)</span> y <span class="math notranslate nohighlight">\(\mathbf{F}(t)\)</span> son continuas en <span class="math notranslate nohighlight">\(I\)</span> y <span class="math notranslate nohighlight">\(t_0\in I\)</span>, entonces el PVI <a class="reference internal" href="#equation-pvisist">(3.4)</a> tiene una solución única en <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p><strong>Teorema</strong>: Si el sistema homogéneo <span class="math notranslate nohighlight">\(\mathbf{X}'(t)=\mathbf{A}(t)\mathbf{X}(t)\)</span> tiene <span class="math notranslate nohighlight">\(n\)</span> soluciones LI: <span class="math notranslate nohighlight">\(\mathbf{X}_1, \mathbf{X}_2,\ldots, \mathbf{X}_n\)</span> (es decir su wronskiano <span class="math notranslate nohighlight">\(W(\mathbf{X}_1, \mathbf{X}_2,\ldots, \mathbf{X}_n)\neq0\)</span>) entonces éstas forman un conjunto fundamental de soluciones y</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{X}_H=c_1\mathbf{X}_1+c_2\mathbf{X}_2+\cdots+c_n\mathbf{X}_n~~,~~c_i\in\mathbb{R}
+\]</div>
+<p>es la solución general del sistema homogéneo. Para resolver <span class="math notranslate nohighlight">\(\mathbf{X}'(t)=\mathbf{A}(t)\mathbf{X}(t)+\mathbf{F}(t)\)</span> completamente, se debe determinar una solución particular <span class="math notranslate nohighlight">\(\mathbf{X}_P\)</span>, con lo cual</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{X}=\mathbf{X}_H+\mathbf{X}_P
+\]</div>
+<p>es la <strong>solución general</strong> del sistema no homogéneo.</p>
+</section>
+</section>
+<section id="sistemas-homogeneos">
+<h2><span class="section-number">3.2. </span>Sistemas Homogéneos<a class="headerlink" href="#sistemas-homogeneos" title="Link to this heading">#</a></h2>
+<p>Dado el sistema homogéneo <span class="math notranslate nohighlight">\(\mathbf{X}'(t)=\mathbf{A}\mathbf{X}(t)\)</span>, donde <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> es una <u><strong>matriz de constantes</strong></u>, ¿es posible determinar una solución de la forma <span class="math notranslate nohighlight">\(\mathbf{X}=\mathbf{K}e^{\lambda t}\)</span>? Sabemos que esto lleva a calcular <span class="math notranslate nohighlight">\(\det(\mathbf{A}-\lambda\mathbf{I})=0\)</span> para determinar los valores propios de <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> y luego obtener los vectores propios <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> tales que <span class="math notranslate nohighlight">\((\mathbf{A}-\lambda\mathbf{I})\mathbf{K}=\mathbf{0}\)</span>. Estudiaremos 3 casos:</p>
+<ol class="arabic simple">
+<li><p><u><strong>Valores Propios Reales y Distintos</strong></u>: Si <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> (matriz de <span class="math notranslate nohighlight">\(n\times n\)</span>) tiene <span class="math notranslate nohighlight">\(n\)</span> valores propios distintos <span class="math notranslate nohighlight">\(\lambda_1,\lambda_2,\ldots,\lambda_n\)</span>, entonces siempre se puede encontrar un conjunto de <span class="math notranslate nohighlight">\(n\)</span> vectores propios LI <span class="math notranslate nohighlight">\(\mathbf{K}_1,\mathbf{K}_2,\ldots,\mathbf{K}_n\)</span> tales que la solución del sistema homogéneo es</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{X}_H=c_1\mathbf{K}_1e^{\lambda_1 t}+c_2\mathbf{K}_2e^{\lambda_2 t}+\cdots+c_n\mathbf{K}_ne^{\lambda_n t}~~,~~c_i\in\mathbb{R}~,~t\in\mathbb{R}.
+\]</div>
+<p><strong>Plano de Fase</strong>: Las funciones componentes <span class="math notranslate nohighlight">\(\mathbf{x}_1(t), \mathbf{x}_2(t),\ldots,\mathbf{x}_n(t)\)</span>, <span class="math notranslate nohighlight">\(t\in I\)</span> de la solución del sistema pueden interpretarse como las ecuaciones paramétricas de curvas en <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. Para cada condición inicial, tenemos una trayectoria particular que indica el flujo de los puntos sobre la curva. El conjunto de las trayectorias se denomina <strong>plano o diagrama de fase</strong> para el sistema.</p>
+<div class="admonition-ejercicio-aplicado admonition">
+<p class="admonition-title">Ejercicio Aplicado</p>
+<p>En Python, esboce el plano de fase del sistema de mezclas <a class="reference internal" href="#equation-sistmezclas">(3.1)</a>. ¿Qué observa para la condición inicial dada?, ¿qué ocurre con las curvas solución en el largo plazo?</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="c1"># Definir la matriz del sistema</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">50</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">]])</span>
+
+<span class="c1"># Calcular los valores propios y vectores propios</span>
+<span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Crear un grid de puntos</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Definir las ecuaciones diferenciales del sistema</span>
+<span class="n">U</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span> <span class="o">*</span> <span class="n">Y</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span> <span class="o">*</span> <span class="n">Y</span>
+
+<span class="c1"># Configurar la gráfica del plano de fase</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>  <span class="c1"># Graficar el campo vectorial</span>
+
+<span class="c1"># Condiciones iniciales para diferentes trayectorias</span>
+<span class="n">initial_conditions</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Definimos el sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">dxdt</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">50</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>
+    <span class="n">dydt</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">/</span><span class="mi">25</span><span class="p">)</span><span class="o">*</span><span class="n">y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dxdt</span><span class="p">,</span> <span class="n">dydt</span><span class="p">]</span>
+
+<span class="c1"># Graficamos las trayectorias continuas</span>
+<span class="k">for</span> <span class="n">ic</span> <span class="ow">in</span> <span class="n">initial_conditions</span><span class="p">:</span>
+    <span class="n">traj</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">ic</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">traj</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">traj</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Graficar los ejes formados por los vectores propios. Se multiplica por +-40 para mejor visualización</span>
+<span class="k">for</span> <span class="n">eigenvector</span> <span class="ow">in</span> <span class="n">eigenvectors</span><span class="o">.</span><span class="n">T</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">40</span><span class="o">*</span><span class="n">eigenvector</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">40</span><span class="o">*</span><span class="n">eigenvector</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+             <span class="p">[</span><span class="o">-</span><span class="mi">40</span><span class="o">*</span><span class="n">eigenvector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">40</span><span class="o">*</span><span class="n">eigenvector</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Añadir detalles a la gráfica</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plano de Fase del Sistema&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/4f5f78d9c8e20c82079b2d8fa27742c5289725dab7b0c63cb0dd589dda9181b3.png" src="_images/4f5f78d9c8e20c82079b2d8fa27742c5289725dab7b0c63cb0dd589dda9181b3.png" />
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><u><strong>Valores Propios Reales Repetidos</strong></u>: Si <span class="math notranslate nohighlight">\(\lambda\)</span> es un valor propio con multiplicidad <span class="math notranslate nohighlight">\(m\)</span> (repetido <span class="math notranslate nohighlight">\(m\)</span> veces), podemos tener algunos casos como los siguientes (no cubren todas las opciones):</p></li>
+</ol>
+<p>(a). Para algunas matrices <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> es posible encontrar <span class="math notranslate nohighlight">\(m\)</span> vectores propios <span class="math notranslate nohighlight">\(\mathbf{K}_1, \mathbf{K}_2,\ldots,\mathbf{K}_m\)</span> LI. Para este caso, la solución contiene la combinación lineal</p>
+<div class="math notranslate nohighlight">
+\[
+c_1\mathbf{K}_1e^{\lambda t}+c_2\mathbf{K}_2e^{\lambda t}+\cdots+c_m\mathbf{K}_me^{\lambda t}
+\]</div>
+<p>(b). Si sólo hay un único vector propio asociado al valor propio <span class="math notranslate nohighlight">\(\lambda\)</span> con multiplicidad <span class="math notranslate nohighlight">\(m\)</span>, entonces siempre se pueden encontrar <span class="math notranslate nohighlight">\(m\)</span> soluciones LI de la forma:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+\mathbf{X}_1&amp;=&amp;\mathbf{K}_{11}e^{\lambda t}\\
+\mathbf{X}_2&amp;=&amp;\mathbf{K}_{21}te^{\lambda t}+\mathbf{K}_{22}e^{\lambda t}\\
+&amp;\vdots&amp;\\
+\mathbf{X}_m&amp;=&amp;\mathbf{K}_{m1}\frac{t^{m-1}}{(m-1)!}e^{\lambda t}+\mathbf{K}_{m2}\frac{t^{m-2}}{(m-2)!}e^{\lambda t}+\cdots+ \mathbf{K}_{mm}e^{\lambda t}
+\end{eqnarray*}
+\end{split}\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine la solución del sistema</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X}'=\begin{pmatrix}3&amp;-18\\2&amp;-9\end{pmatrix}\mathbf{X}
+\end{split}\]</div>
+<p>Luego esboce su plano de fase</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Rational</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Activar impresión bonita</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">init_printing</span><span class="p">()</span>
+
+<span class="c1"># Definir la matriz A usando fracciones exactas ## SE PUEDE MODIFICAR</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="o">-</span><span class="mi">18</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span>
+            <span class="p">[</span><span class="n">Rational</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Rational</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]])</span>
+
+<span class="c1"># Calcular los vectores y valores propios con fracciones</span>
+<span class="n">val_propios</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">()</span>  <span class="c1"># Valores propios</span>
+<span class="n">vec_propios</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">eigenvects</span><span class="p">()</span>  <span class="c1"># Vectores propios</span>
+
+<span class="n">vec_propios</span> <span class="c1">#El output tiene el siguiente orden: valor propio, multiplicidad, vector propio</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/f2ad7690f28bb5f403615fde6032165879fd4dcf5d919ac62a367e253adc39e0.png" src="_images/f2ad7690f28bb5f403615fde6032165879fd4dcf5d919ac62a367e253adc39e0.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definimos el sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">dxdt</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span><span class="mi">18</span><span class="o">*</span><span class="n">y</span>
+    <span class="n">dydt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span><span class="mi">9</span><span class="o">*</span><span class="n">y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dxdt</span><span class="p">,</span> <span class="n">dydt</span><span class="p">]</span>
+
+<span class="c1"># Definimos el espacio de puntos para las condiciones iniciales</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Creamos una malla de puntos</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">)</span>
+
+<span class="c1"># Calculamos las derivadas para cada punto de la malla</span>
+<span class="n">u</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">X</span> <span class="o">-</span><span class="mi">18</span><span class="o">*</span><span class="n">Y</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span> <span class="o">-</span><span class="mi">9</span><span class="o">*</span><span class="n">Y</span>
+
+<span class="c1"># Graficamos el campo vectorial usando streamplot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas de los ejes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plano de Fase&#39;</span><span class="p">)</span>
+
+<span class="c1"># Ajustamos los límites del gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+
+<span class="c1"># Mostramos el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/88c7e585621b4785402147ded302c5df0e6ce35fca61ace986651dce63142659.png" src="_images/88c7e585621b4785402147ded302c5df0e6ce35fca61ace986651dce63142659.png" />
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><u><strong>Valores Propios Complejos</strong></u>: Si <span class="math notranslate nohighlight">\(\lambda=\alpha+\beta i\)</span>, <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>, es un valor propio complejo de la matriz <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> y <span class="math notranslate nohighlight">\(\mathbf{K}\)</span> es su vector propio correspondiente entonces</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+\mathbf{X}_1&amp;=&amp;\left(\mathbf{B}_1\cos(\beta t)-\mathbf{B}_2\sin(\beta t)\right)e^{\alpha t}\\
+\mathbf{X}_2&amp;=&amp;\left(\mathbf{B}_2\cos(\beta t)+\mathbf{B}_1\sin(\beta t)\right)e^{\alpha t}
+\end{eqnarray*}
+\end{split}\]</div>
+<p>son soluciones LI del sistema homogéneo para <span class="math notranslate nohighlight">\(t\in\mathbb{R}\)</span>, donde <span class="math notranslate nohighlight">\(\mathbf{B}_1=\frac{1}{2}\left(\mathbf{K}_1+ \overline{\mathbf{K}}_1\right)\)</span> y <span class="math notranslate nohighlight">\(\mathbf{B}_2=\frac{i}{2}\left(-\mathbf{K}_1+\overline{\mathbf{K}}_1\right)\)</span>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine la solución del sistema</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X}'=\begin{pmatrix}2&amp;8\\-1&amp;-2\end{pmatrix}\mathbf{X}
+\end{split}\]</div>
+<p>Luego esboce su plano de fase</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definimos el sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">dxdt</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span><span class="mi">8</span><span class="o">*</span><span class="n">y</span>
+    <span class="n">dydt</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">dxdt</span><span class="p">,</span> <span class="n">dydt</span><span class="p">]</span>
+
+<span class="c1"># Definimos el espacio de puntos para las condiciones iniciales</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Creamos una malla de puntos</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">y_vals</span><span class="p">)</span>
+
+<span class="c1"># Calculamos las derivadas para cada punto de la malla</span>
+<span class="n">u</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span> <span class="o">+</span><span class="mi">8</span><span class="o">*</span><span class="n">Y</span>
+<span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">X</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">Y</span>
+
+<span class="c1"># Graficamos el campo vectorial usando streamplot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Etiquetas de los ejes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plano de Fase&#39;</span><span class="p">)</span>
+
+<span class="c1"># Ajustamos los límites del gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+
+<span class="c1"># Mostramos el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/a4419029dc5e34f9423f119bb2a200aea284469e985d19593f10880d50e4a4b7.png" src="_images/a4419029dc5e34f9423f119bb2a200aea284469e985d19593f10880d50e4a4b7.png" />
+</div>
+</div>
+<p><strong>Nota</strong>: Si consideramos el sistema homogéneo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X}'=\begin{pmatrix}a&amp;b\\c&amp;d\end{pmatrix}\mathbf{X}
+\end{split}\]</div>
+<p>podemos calcular su traza <span class="math notranslate nohighlight">\(T=a+d\)</span> y su determinante <span class="math notranslate nohighlight">\(D=ad-bc\)</span>. Así, la ecuación característica asociada a los valores propios de <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> es <span class="math notranslate nohighlight">\(\lambda^2-T\lambda+D=0\)</span>. Esta cuadrática en <span class="math notranslate nohighlight">\(\lambda\)</span> es importante ya que sus raíces son los valores propios de <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> y su carácter -raíces reales distintas, repetidas o complejas- depende del signo de <span class="math notranslate nohighlight">\(T^2-4D\)</span>. Si ponemos en ele eje horizontal a <span class="math notranslate nohighlight">\(T\)</span> y en el vertical a <span class="math notranslate nohighlight">\(D\)</span>, obtenemos el <strong>plano Traza-Determinante</strong> que nos permite estudiar la estabilidad del sistema en el largo plazo.</p>
+<p>Un resumen gráfico:</p>
+<figure class="align-default" id="trazadet">
+<a class="reference internal image-reference" href="_images/PlanoTrazaDet.png"><img alt="_images/PlanoTrazaDet.png" src="_images/PlanoTrazaDet.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 3.3 </span><span class="caption-text">Estabilidad de un Sistema de Ecuaciones Diferenciales de Primer Orden</span><a class="headerlink" href="#trazadet" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 
@@ -706,8 +1009,10 @@ m_2x_2''&amp;=&amp;-k_2(x_2-x_1)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-ecuaciones-diferenciales">3.1. Sistemas de Ecuaciones Diferenciales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">3.1.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teoria-preliminar-sistemas-lineales">3.1.2. Teoría Preliminar: Sistemas Lineales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teoria-general">3.1.3. Teoría General</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-homogeneos">3.2. Sistemas Homogéneos</a></li>
 </ul>
   </nav></div>
 
