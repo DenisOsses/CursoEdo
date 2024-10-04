@@ -190,3 +190,290 @@ print("Solución x1(t) y x2(t):")
 display(x1_exp)
 display(x2_exp)
 ```
++++
+
+### Teoría General
+
+La teoría de sistemas de $n$ ecuaciones diferenciales de primer orden es similar a la de las ecuaciones diferenciales de $n$-ésimo orden: Si $t_0\in I$ entonces el PVI asociado es 
+
+$$
+\mathbf{PVI}~~~~\left\{\begin{array}{ccc}\mathbf{X}'(t)&=&\mathbf{A}(t)\mathbf{X}(t)+\mathbf{F}(t)\\&&\\ \mathbf{X}(t_0)&=&\mathbf{X}_0\end{array}\right.
+$$ (PVIsist)
+
+**Teorema**: Si las funciones componentes de $\mathbf{A}(t)$ y $\mathbf{F}(t)$ son continuas en $I$ y $t_0\in I$, entonces el PVI [](PVIsist) tiene una solución única en $I$.
+
+**Teorema**: Si el sistema homogéneo $\mathbf{X}'(t)=\mathbf{A}(t)\mathbf{X}(t)$ tiene $n$ soluciones LI: $\mathbf{X}_1, \mathbf{X}_2,\ldots, \mathbf{X}_n$ (es decir su wronskiano $W(\mathbf{X}_1, \mathbf{X}_2,\ldots, \mathbf{X}_n)\neq0$) entonces éstas forman un conjunto fundamental de soluciones y 
+
+$$
+\mathbf{X}_H=c_1\mathbf{X}_1+c_2\mathbf{X}_2+\cdots+c_n\mathbf{X}_n~~,~~c_i\in\mathbb{R}
+$$
+
+es la solución general del sistema homogéneo. Para resolver $\mathbf{X}'(t)=\mathbf{A}(t)\mathbf{X}(t)+\mathbf{F}(t)$ completamente, se debe determinar una solución particular $\mathbf{X}_P$, con lo cual 
+
+$$
+\mathbf{X}=\mathbf{X}_H+\mathbf{X}_P
+$$
+
+es la **solución general** del sistema no homogéneo.
+
++++
+
+## Sistemas Homogéneos
+
+Dado el sistema homogéneo $\mathbf{X}'(t)=\mathbf{A}\mathbf{X}(t)$, donde $\mathbf{A}$ es una <u>**matriz de constantes**</u>, ¿es posible determinar una solución de la forma $\mathbf{X}=\mathbf{K}e^{\lambda t}$? Sabemos que esto lleva a calcular $\det(\mathbf{A}-\lambda\mathbf{I})=0$ para determinar los valores propios de $\mathbf{A}$ y luego obtener los vectores propios $\mathbf{K}$ tales que $(\mathbf{A}-\lambda\mathbf{I})\mathbf{K}=\mathbf{0}$. Estudiaremos 3 casos:
+
+1. <u>**Valores Propios Reales y Distintos**</u>: Si $\mathbf{A}$ (matriz de $n\times n$) tiene $n$ valores propios distintos $\lambda_1,\lambda_2,\ldots,\lambda_n$, entonces siempre se puede encontrar un conjunto de $n$ vectores propios LI $\mathbf{K}_1,\mathbf{K}_2,\ldots,\mathbf{K}_n$ tales que la solución del sistema homogéneo es
+
+$$
+\mathbf{X}_H=c_1\mathbf{K}_1e^{\lambda_1 t}+c_2\mathbf{K}_2e^{\lambda_2 t}+\cdots+c_n\mathbf{K}_ne^{\lambda_n t}~~,~~c_i\in\mathbb{R}~,~t\in\mathbb{R}.
+$$
+
+**Plano de Fase**: Las funciones componentes $\mathbf{x}_1(t), \mathbf{x}_2(t),\ldots,\mathbf{x}_n(t)$, $t\in I$ de la solución del sistema pueden interpretarse como las ecuaciones paramétricas de curvas en $\mathbb{R}^n$. Para cada condición inicial, tenemos una trayectoria particular que indica el flujo de los puntos sobre la curva. El conjunto de las trayectorias se denomina **plano o diagrama de fase** para el sistema.
+
+```{admonition} Ejercicio Aplicado
+En Python, esboce el plano de fase del sistema de mezclas [](SistMezclas). ¿Qué observa para la condición inicial dada?, ¿qué ocurre con las curvas solución en el largo plazo?
+```
+```{code-cell}
+:tags: [PlanoFase1]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
+
+# Definir la matriz del sistema
+A = np.array([[-2/25, 1/50],
+              [2/25, -2/25]])
+
+# Calcular los valores propios y vectores propios
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+# Crear un grid de puntos
+x = np.linspace(-30, 30, 10)
+y = np.linspace(-30, 30, 10)
+X, Y = np.meshgrid(x, y)
+
+# Definir las ecuaciones diferenciales del sistema
+U = (-2/25) * X + (1/50) * Y
+V = (2/25) * X + (-2/25) * Y
+
+# Configurar la gráfica del plano de fase
+plt.figure(figsize=(8, 8))
+plt.streamplot(X, Y, U, V, color='b')  # Graficar el campo vectorial
+
+# Condiciones iniciales para diferentes trayectorias
+initial_conditions = [(5, 25), (30, 30), (25, 0), (10, 30), (20, 20), (10, 10)]
+
+t = np.linspace(0, 10, 200)
+
+# Definimos el sistema de ecuaciones diferenciales
+def system(X, t):
+    x, y = X
+    dxdt = (-2/25)*x + (1/50)*y
+    dydt = (2/25)*x + (-2/25)*y
+    return [dxdt, dydt]
+
+# Graficamos las trayectorias continuas
+for ic in initial_conditions:
+    traj = odeint(system, ic, t)
+    plt.plot(traj[:, 0], traj[:, 1], lw=2)
+
+# Graficar los ejes formados por los vectores propios. Se multiplica por +-40 para mejor visualización
+for eigenvector in eigenvectors.T:
+    plt.plot([-40*eigenvector[0], 40*eigenvector[0]],
+             [-40*eigenvector[1], 40*eigenvector[1]], 'r--', lw=2)
+
+# Añadir detalles a la gráfica
+plt.xlim([0, 30])
+plt.ylim([0, 30])
+plt.axhline(0, color='black',linewidth=1)
+plt.axvline(0, color='black',linewidth=1)
+plt.title('Plano de Fase del Sistema')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid(True)
+plt.show()
+```
+
+2. <u>**Valores Propios Reales Repetidos**</u>: Si $\lambda$ es un valor propio con multiplicidad $m$ (repetido $m$ veces), podemos tener algunos casos como los siguientes (no cubren todas las opciones):
+
+(a). Para algunas matrices $\mathbf{A}$ es posible encontrar $m$ vectores propios $\mathbf{K}_1, \mathbf{K}_2,\ldots,\mathbf{K}_m$ LI. Para este caso, la solución contiene la combinación lineal 
+
+$$
+c_1\mathbf{K}_1e^{\lambda t}+c_2\mathbf{K}_2e^{\lambda t}+\cdots+c_m\mathbf{K}_me^{\lambda t}
+$$
+
+(b). Si sólo hay un único vector propio asociado al valor propio $\lambda$ con multiplicidad $m$, entonces siempre se pueden encontrar $m$ soluciones LI de la forma:
+
+$$
+\begin{eqnarray*}
+\mathbf{X}_1&=&\mathbf{K}_{11}e^{\lambda t}\\
+\mathbf{X}_2&=&\mathbf{K}_{21}te^{\lambda t}+\mathbf{K}_{22}e^{\lambda t}\\
+&\vdots&\\
+\mathbf{X}_m&=&\mathbf{K}_{m1}\frac{t^{m-1}}{(m-1)!}e^{\lambda t}+\mathbf{K}_{m2}\frac{t^{m-2}}{(m-2)!}e^{\lambda t}+\cdots+ \mathbf{K}_{mm}e^{\lambda t}
+\end{eqnarray*}
+$$
+
+```{admonition} Ejercicio Teórico
+Determine la solución del sistema 
+
+$$
+\mathbf{X}'=\begin{pmatrix}3&-18\\2&-9\end{pmatrix}\mathbf{X}
+$$
+
+Luego esboce su plano de fase
+```
+
+```{code-cell}
+:tags: [PlanoFase2]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+from sympy import Matrix, Rational
+import sympy as sp
+
+# Activar impresión bonita
+sp.init_printing()
+
+# Definir la matriz A usando fracciones exactas ## SE PUEDE MODIFICAR
+A = Matrix([[Rational(3,1), Rational(-18,1)],
+            [Rational(2, 1), Rational(-9, 1)]])
+
+# Calcular los vectores y valores propios con fracciones
+val_propios = A.eigenvals()  # Valores propios
+vec_propios = A.eigenvects()  # Vectores propios
+
+vec_propios #El output tiene el siguiente orden: valor propio, multiplicidad, vector propio
+```
+
+```{code-cell}
+:tags: [PlanoFase22]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import pylab as plt
+
+# Definimos el sistema de ecuaciones diferenciales
+def system(X, t):
+    x, y = X
+    dxdt = 3*x -18*y
+    dydt = 2*x -9*y
+    return [dxdt, dydt]
+
+# Definimos el espacio de puntos para las condiciones iniciales
+x_vals = np.linspace(-20, 20, 20)
+y_vals = np.linspace(-20, 20, 20)
+
+# Creamos una malla de puntos
+X, Y = np.meshgrid(x_vals, y_vals)
+
+# Calculamos las derivadas para cada punto de la malla
+u = 3*X -18*Y
+v = 2*X -9*Y
+
+# Graficamos el campo vectorial usando streamplot
+plt.figure(figsize=(8, 8))
+plt.streamplot(X, Y, u, v, color='b', linewidth=1)
+
+# Etiquetas de los ejes
+plt.xlabel('$x$')
+plt.ylabel('$y$')
+plt.title('Plano de Fase')
+
+# Ajustamos los límites del gráfico
+plt.xlim([-20, 20])
+plt.ylim([-20, 20])
+
+# Mostramos el gráfico
+plt.grid()
+plt.show()
+```
+
+3. <u>**Valores Propios Complejos**</u>: Si $\lambda=\alpha+\beta i$, $\alpha,\beta\in\mathbb{R}$, es un valor propio complejo de la matriz $\mathbf{A}$ y $\mathbf{K}$ es su vector propio correspondiente entonces
+
+$$
+\begin{eqnarray*}
+\mathbf{X}_1&=&\left(\mathbf{B}_1\cos(\beta t)-\mathbf{B}_2\sin(\beta t)\right)e^{\alpha t}\\
+\mathbf{X}_2&=&\left(\mathbf{B}_2\cos(\beta t)+\mathbf{B}_1\sin(\beta t)\right)e^{\alpha t}
+\end{eqnarray*}
+$$
+
+son soluciones LI del sistema homogéneo para $t\in\mathbb{R}$, donde $\mathbf{B}_1=\frac{1}{2}\left(\mathbf{K}_1+ \overline{\mathbf{K}}_1\right)$ y $\mathbf{B}_2=\frac{i}{2}\left(-\mathbf{K}_1+\overline{\mathbf{K}}_1\right)$.
+
+```{admonition} Ejercicio Teórico
+Determine la solución del sistema 
+
+$$
+\mathbf{X}'=\begin{pmatrix}2&8\\-1&-2\end{pmatrix}\mathbf{X}
+$$
+
+Luego esboce su plano de fase
+```
+
+```{code-cell}
+:tags: [PlanoFase3]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import pylab as plt
+
+# Definimos el sistema de ecuaciones diferenciales
+def system(X, t):
+    x, y = X
+    dxdt = 2*x +8*y
+    dydt = -1*x -2*y
+    return [dxdt, dydt]
+
+# Definimos el espacio de puntos para las condiciones iniciales
+x_vals = np.linspace(-20, 20, 20)
+y_vals = np.linspace(-20, 20, 20)
+
+# Creamos una malla de puntos
+X, Y = np.meshgrid(x_vals, y_vals)
+
+# Calculamos las derivadas para cada punto de la malla
+u = 2*X +8*Y
+v = -1*X -2*Y
+
+# Graficamos el campo vectorial usando streamplot
+plt.figure(figsize=(8, 8))
+plt.streamplot(X, Y, u, v, color='b', linewidth=1)
+
+# Etiquetas de los ejes
+plt.xlabel('$x$')
+plt.ylabel('$y$')
+plt.title('Plano de Fase')
+
+# Ajustamos los límites del gráfico
+plt.xlim([-20, 20])
+plt.ylim([-20, 20])
+
+# Mostramos el gráfico
+plt.grid()
+plt.show()
+```
+
+**Nota**: Si consideramos el sistema homogéneo 
+
+$$
+\mathbf{X}'=\begin{pmatrix}a&b\\c&d\end{pmatrix}\mathbf{X}
+$$
+
+podemos calcular su traza $T=a+d$ y su determinante $D=ad-bc$. Así, la ecuación característica asociada a los valores propios de $\mathbf{A}$ es $\lambda^2-T\lambda+D=0$. Esta cuadrática en $\lambda$ es importante ya que sus raíces son los valores propios de $\mathbf{A}$ y su carácter -raíces reales distintas, repetidas o complejas- depende del signo de $T^2-4D$. Si ponemos en ele eje horizontal a $T$ y en el vertical a $D$, obtenemos el **plano Traza-Determinante** que nos permite estudiar la estabilidad del sistema en el largo plazo. 
+
+Un resumen gráfico:
+
+```{figure} PlanoTrazaDet.png
+---
+height: 400px
+name: TrazaDet
+---
+Estabilidad de un Sistema de Ecuaciones Diferenciales de Primer Orden
+```
