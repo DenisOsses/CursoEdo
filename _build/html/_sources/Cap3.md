@@ -222,7 +222,9 @@ es la **solución general** del sistema no homogéneo.
 
 Dado el sistema homogéneo $\mathbf{X}'(t)=\mathbf{A}\mathbf{X}(t)$, donde $\mathbf{A}$ es una <u>**matriz de constantes**</u>, ¿es posible determinar una solución de la forma $\mathbf{X}=\mathbf{K}e^{\lambda t}$? Sabemos que esto lleva a calcular $\det(\mathbf{A}-\lambda\mathbf{I})=0$ para determinar los valores propios de $\mathbf{A}$ y luego obtener los vectores propios $\mathbf{K}$ tales que $(\mathbf{A}-\lambda\mathbf{I})\mathbf{K}=\mathbf{0}$. Estudiaremos 3 casos:
 
-1. <u>**Valores Propios Reales y Distintos**</u>: Si $\mathbf{A}$ (matriz de $n\times n$) tiene $n$ valores propios distintos $\lambda_1,\lambda_2,\ldots,\lambda_n$, entonces siempre se puede encontrar un conjunto de $n$ vectores propios LI $\mathbf{K}_1,\mathbf{K}_2,\ldots,\mathbf{K}_n$ tales que la solución del sistema homogéneo es
+### Valores Propios Reales y Distintos: 
+
+Si $\mathbf{A}$ (matriz de $n\times n$) tiene $n$ valores propios distintos $\lambda_1,\lambda_2,\ldots,\lambda_n$, entonces siempre se puede encontrar un conjunto de $n$ vectores propios LI $\mathbf{K}_1,\mathbf{K}_2,\ldots,\mathbf{K}_n$ tales que la solución del sistema homogéneo es
 
 $$
 \mathbf{X}_H=c_1\mathbf{K}_1e^{\lambda_1 t}+c_2\mathbf{K}_2e^{\lambda_2 t}+\cdots+c_n\mathbf{K}_ne^{\lambda_n t}~~,~~c_i\in\mathbb{R}~,~t\in\mathbb{R}.
@@ -297,15 +299,17 @@ plt.grid(True)
 plt.show()
 ```
 
-2. <u>**Valores Propios Reales Repetidos**</u>: Si $\lambda$ es un valor propio con multiplicidad $m$ (repetido $m$ veces), podemos tener algunos casos como los siguientes (no cubren todas las opciones):
+### Valores Propios Reales Repetidos
 
-(a). Para algunas matrices $\mathbf{A}$ es posible encontrar $m$ vectores propios $\mathbf{K}_1, \mathbf{K}_2,\ldots,\mathbf{K}_m$ LI. Para este caso, la solución contiene la combinación lineal 
+Si $\lambda$ es un valor propio con multiplicidad $m$ (repetido $m$ veces), podemos tener algunos casos como los siguientes (no cubren todas las opciones):
+
+1. Para algunas matrices $\mathbf{A}$ es posible encontrar $m$ vectores propios $\mathbf{K}_1, \mathbf{K}_2,\ldots,\mathbf{K}_m$ LI. Para este caso, la solución contiene la combinación lineal 
 
 $$
 c_1\mathbf{K}_1e^{\lambda t}+c_2\mathbf{K}_2e^{\lambda t}+\cdots+c_m\mathbf{K}_me^{\lambda t}
 $$
 
-(b). Si sólo hay un único vector propio asociado al valor propio $\lambda$ con multiplicidad $m$, entonces siempre se pueden encontrar $m$ soluciones LI de la forma:
+2. Si sólo hay un único vector propio asociado al valor propio $\lambda$ con multiplicidad $m$, entonces siempre se pueden encontrar $m$ soluciones LI de la forma:
 
 $$
 \begin{eqnarray*}
@@ -315,6 +319,29 @@ $$
 \mathbf{X}_m&=&\mathbf{K}_{m1}\frac{t^{m-1}}{(m-1)!}e^{\lambda t}+\mathbf{K}_{m2}\frac{t^{m-2}}{(m-2)!}e^{\lambda t}+\cdots+ \mathbf{K}_{mm}e^{\lambda t}
 \end{eqnarray*}
 $$
+
+En particular, si $\mathbf{A}$ es de $2\times2$, entonces $\lambda$ tiene multiplicidad 2 y las soluciones LI son: 
+
+$$
+\begin{eqnarray*}
+\mathbf{X}_1&=&\mathbf{K}_1e^{\lambda t}\\
+\mathbf{X}_2&=&\mathbf{K}_1te^{\lambda t}+\mathbf{K}_2e^{\lambda t}
+\end{eqnarray*}
+$$
+
+donde $\mathbf{K}_2$ se obtiene al resolver: $(\mathbf{A}-\lambda\mathbf{I})\mathbf{K}_2=\mathbf{K}_1$.
+
+También, si $\mathbf{A}$ es de $3\times3$ y $\lambda$ tiene multiplicidad 3, las soluciones LI son:
+
+$$
+\begin{eqnarray*}
+\mathbf{X}_1&=&\mathbf{K}_1e^{\lambda t}\\
+\mathbf{X}_2&=&\mathbf{K}_1te^{\lambda t}+\mathbf{K}_2e^{\lambda t}\\
+\mathbf{X}_3&=&\mathbf{K}_1\frac{t^2}{2}e^{\lambda t}+\mathbf{K}_2te^{\lambda t}+\mathbf{K}_3e^{\lambda t}
+\end{eqnarray*}
+$$
+
+donde $\mathbf{K}_3$ se obtiene al resolver: $(\mathbf{A}-\lambda\mathbf{I})\mathbf{K}_3=\mathbf{K}_2$.
 
 ```{admonition} Ejercicio Teórico
 Determine la solución del sistema 
@@ -394,7 +421,9 @@ plt.grid()
 plt.show()
 ```
 
-3. <u>**Valores Propios Complejos**</u>: Si $\lambda=\alpha+\beta i$, $\alpha,\beta\in\mathbb{R}$, es un valor propio complejo de la matriz $\mathbf{A}$ y $\mathbf{K}$ es su vector propio correspondiente entonces
+### Valores Propios Complejos
+
+Si $\lambda=\alpha+\beta i$, $\alpha,\beta\in\mathbb{R}$, es un valor propio complejo de la matriz $\mathbf{A}$ y $\mathbf{K}$ es su vector propio correspondiente entonces
 
 $$
 \begin{eqnarray*}
@@ -403,7 +432,7 @@ $$
 \end{eqnarray*}
 $$
 
-son soluciones LI del sistema homogéneo para $t\in\mathbb{R}$, donde $\mathbf{B}_1=\frac{1}{2}\left(\mathbf{K}_1+ \overline{\mathbf{K}}_1\right)$ y $\mathbf{B}_2=\frac{i}{2}\left(-\mathbf{K}_1+\overline{\mathbf{K}}_1\right)$.
+son soluciones LI del sistema homogéneo para $t\in\mathbb{R}$, donde $\mathbf{B}_1=\frac{1}{2}\left(\mathbf{K}_1+ \overline{\mathbf{K}}_1\right)=Re(\mathbf{B}_1)$ y $\mathbf{B}_2=\frac{i}{2}\left(-\mathbf{K}_1+\overline{\mathbf{K}}_1\right)=Im(\mathbf{B}_1)$.
 
 ```{admonition} Ejercicio Teórico
 Determine la solución del sistema 
@@ -466,14 +495,37 @@ $$
 \mathbf{X}'=\begin{pmatrix}a&b\\c&d\end{pmatrix}\mathbf{X}
 $$
 
-podemos calcular su traza $T=a+d$ y su determinante $D=ad-bc$. Así, la ecuación característica asociada a los valores propios de $\mathbf{A}$ es $\lambda^2-T\lambda+D=0$. Esta cuadrática en $\lambda$ es importante ya que sus raíces son los valores propios de $\mathbf{A}$ y su carácter -raíces reales distintas, repetidas o complejas- depende del signo de $T^2-4D$. Si ponemos en ele eje horizontal a $T$ y en el vertical a $D$, obtenemos el **plano Traza-Determinante** que nos permite estudiar la estabilidad del sistema en el largo plazo. 
 
-Un resumen gráfico:
+notamos que $\mathbf{A}\mathbf{X}=\mathbf{0}$ si $\mathbf{X}=(0,0)$ (para $\det(\mathbf{A})=0$) y este es el único **punto crítico** del sistema. Podemos establecer su **estabilidad** en términos de la traza $T=a+d$ y el determinante $D=ad-bc$ de $\mathbf{A}$. Así, la ecuación característica asociada a los valores propios de $\mathbf{A}$ es $\lambda^2-T\lambda+D=0$. Esta cuadrática en $\lambda$ es importante ya que sus raíces son los valores propios de $\mathbf{A}$ y su carácter -raíces reales distintas, repetidas o complejas- depende del signo de $\Delta=T^2-4D$. En resumen:
+
+1. **Nodo** si $D>0$ y $\Delta\geq0$.
+2. **Punto Silla** si $D<0$.
+3. **Punto Espiral** si $T\neq0$ y $\Delta<0$.
+4. **Centro** si $T=0$ y $D>0$.
+
+Si ponemos en el eje horizontal a $T$ y en el vertical a $D$, obtenemos el **plano Traza-Determinante** que nos permite estudiar la estabilidad del sistema en el largo plazo. En resumen:
+
+1. **Atractor** (asintóticamente estable) si $D>0$ y $T<0$.
+2. **Estable** si $D>0$ y $T=0$.
+3. **Repulsor** si $D<0$ o $T>0$.
+
+Gráficamente:
 
 ```{figure} PlanoTrazaDet.png
 ---
-height: 400px
+height: 500px
 name: TrazaDet
 ---
 Estabilidad de un Sistema de Ecuaciones Diferenciales de Primer Orden
 ```
+
+```{admonition} Ejercicio Teórico
+Determine el carácter y estabilidad del punto crítico $(0,0)$ para los sistemas
+
+$$
+\mathbf{X}'=\begin{pmatrix}3&-18\\2&-9\end{pmatrix}\mathbf{X}\quad\text{y}\quad\mathbf{X}'=\begin{pmatrix}2&8\\-1&-2\end{pmatrix}\mathbf{X}
+$$
+```
++++
+
+## Sistemas Autónomos
