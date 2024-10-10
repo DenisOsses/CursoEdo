@@ -529,3 +529,142 @@ $$
 +++
 
 ## Sistemas Autónomos
+
+Consideremos el sistema de ecuaciones diferenciales **autónomas** de orden 2:
+
+$$
+\begin{eqnarray*}
+\frac{dx}{dt}&=&F(x,y)\\
+\frac{dy}{dt}&=&G(x,y)\quad\Leftrightarrow\quad\mathbf{X}'(t)=\mathbf{f}(\mathbf{x})~,~\mathbf{x}(t_0)=\mathbf{x}^0\\
+x(t_0)=x_0~&,&y(t_0)=y_0
+\end{eqnarray*}
+$$ (SistAutonomo)
+
+donde $F$ y $G$ son continuas en $D\in\mathbb{R}$ y $(x_0,y_0)\in D$. Esto implica que el sistema [](SistAutonomo) tiene solución única (una curva $(x(t),y(t))$ para $t\in I$ que contiene a $t_0$). 
+
+Si existen puntos $(x,y)$ tales que $F(x,y)=0$ y $G(x,y)=0$ o, equivalentemente $\mathbf{f}(\mathbf{x})=\mathbf{0}$, los denominamos **puntos críticos** del sistema. También en estos puntos $\mathbf{X}'=\mathbf{0}$ por lo que corresponden a soluciones constantes o de **equilibrio** del sistema. 
+
+```{admonition} Ejercicio Teórico
+Considere el sistema de ecuaciones 
+
+$$
+\begin{eqnarray*}
+\frac{dx}{dt}&=&-(x-y)(1-x-y)\\
+\frac{dy}{dt}&=&x(2+y)
+\end{eqnarray*}
+$$
+
+Determine sus puntos críticos y esboce su plano de fase. A partir del plano fase, establezca el carácter y estabilidad de los puntos críticos.
+```
+
+Código para determinar los puntos críticos:
+
+```{code-cell}
+:tags: [PuntosCriticos]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+from sympy import symbols, Eq, solve
+
+# Definimos las variables simbólicas
+x, y = symbols('x y')
+
+# Definimos las ecuaciones del sistema
+eq1 = Eq(-(x - y) * (1 - x - y), 0)  # x' = 0
+eq2 = Eq(x * (2 + y), 0)             # y' = 0
+
+# Resolvemos el sistema de ecuaciones
+puntos_criticos = solve([eq1, eq2], (x, y))
+puntos_criticos
+```
+
+Código para determinar los puntos críticos:
+
+```{code-cell}
+:tags: [PlanoFase4]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definimos las funciones del sistema de ecuaciones diferenciales
+def dx_dt(x, y):
+    return -(x - y) * (1 - x - y)
+
+def dy_dt(x, y):
+    return x * (2 + y)
+
+# Definimos el rango de valores para x e y
+x_values = np.linspace(-5, 5, 20)
+y_values = np.linspace(-5, 5, 20)
+
+# Creamos una malla de puntos
+X, Y = np.meshgrid(x_values, y_values)
+
+# Calculamos los valores del campo vectorial
+U = dx_dt(X, Y)
+V = dy_dt(X, Y)
+
+# Graficamos el plano de fase
+plt.figure(figsize=(8, 8))
+plt.streamplot(X, Y, U, V, color='b')
+plt.title("Retrato de fase del sistema")
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axhline(0, color='black',linewidth=0.5)
+plt.axvline(0, color='black',linewidth=0.5)
+plt.grid(True)
+plt.show()
+```
+
+Nos interesa determinar el comportamiento de las soluciones curvas solución del sistema [](SistAutonomo) en la cercanía de sus puntos críticos $(x_0,y_0)$. Para ello, la idea es **linealizar** (mediante el plano tangente) $F(x,y)$ y $G(x,y)$ en torno a tales puntos:
+
+$$
+\begin{eqnarray*}
+F(x,y)&=&\cancelto{0}{F(x_0,y_0)}+F_x(x_0,y_0)(x-x_0)+F_y(x_0,y_0)(y-y_0)+h_1(x,y)\\
+G(x,y)&=&\cancelto{0}{G(x_0,y_0)}+G_x(x_0,y_0)(x-x_0)+G_y(x_0,y_0)(y-y_0)+h_2(x,y)
+\end{eqnarray*}
+$$
+
+Así, podemos reescribir el sistema como
+
+$$
+\begin{eqnarray*}
+\frac{d}{dt}\begin{pmatrix}x-x_0\\y-y_0\end{pmatrix}=\begin{pmatrix}F_x(x_0,y_0)& F_y(x_0,y_0)\\ G_x(x_0,y_0)& G_y(x_0,y_0)\end{pmatrix}\begin{pmatrix}x-x_0\\y-y_0\end{pmatrix}+\begin{pmatrix}h_1(x,y)\\h_2(x,y)\end{pmatrix}
+\end{eqnarray*}
+$$
+
+o vectorialmente $\mathbf{U}'=\mathbf{J}(x_0,y_0)\mathbf{U}+\mathbf{H}(\mathbf{x})$, donde $\mathbf{J}$ es la **matriz jacobiana** de las funciones $F$ y $G$, y asumimos que $\frac{||\mathbf{H}||}{||\mathbf{x}-\mathbf{x}^0||}\to0$ cuando $\mathbf{x}\to\mathbf{x}^0$-(el sistema de EDO es **localmente lineal**-. De este modo, nos quedamos con el sistema linealizado $\mathbf{U}'=\mathbf{J}(x_0,y_0)\mathbf{U}$ para analizar localmente los puntos críticos. 
+
+Una tabla resumen comparativa del tipo de puntos críticos y su estabilidad se presenta a continuación para sistemas lineales y localmente lineales:
+
+|                           | Sistema Lineal         |                         | Sistema Localmente Lineal |                         |
+|---------------------------|------------------------|-------------------------|---------------------------|-------------------------|
+| Valores Propios           | Tipo                   | Estabilidad             | Tipo                      | Estabilidad             |
+| $r_1>r_2>0$               | Nodo                   | Inestable               | Nodo                      | Inestable               |
+| $r_1<r_2<0$               | Nodo                   | Asintóticamente Estable | Nodo                      | Asintóticamente Estable |
+| $r_2<0<r_1$               | Punto Silla            | Inestable               | Punto Silla               | Inestable               |
+| $r_1=r_2>0$               | Nodo Propio o Impropio | Inestable               | Nodo o Espiral            | Inestable               |
+| $r_1=r_2<0$               | Nodo Propio o Impropio | Asintóticamente Estable | Nodo o Espiral            | Asintóticamente Estable |
+| $r_1,r_2=\lambda\pm\mu i$ |                        |                         |                           |                         |
+| $\lambda>0$               | Espiral                | Inestable               | Espiral                   | Inestable               |
+| $\lambda<0$               | Espiral                | Asintóticamente Estable | Espiral                   | Asintóticamente Estable |
+| $\lambda=0$               | Centro                 | Estable                 | Centro o Espiral          | Indeterminado           |
+
+```{admonition} Ejercicio Teórico
+Para el sistema de ecuaciones del ejercicio anterior
+
+$$
+\begin{eqnarray*}
+\frac{dx}{dt}&=&-(x-y)(1-x-y)\\
+\frac{dy}{dt}&=&x(2+y)
+\end{eqnarray*}
+$$
+
+Establezca el carácter y estabilidad de los puntos críticos.
+```
+
+**Nota**: La linealización es un proceso muy útil para estudiar el carácter de los puntos críticos en sistemas de ecuaciones diferenciales de orden $2$, $3$ o superior. Existen muchos sistemas de ecuaciones no lineales que modelan diversas situaciones interesantes: Las [Ecuaciones de Lorenz](https://en.wikipedia.org/wiki/Lorenz_system) usadas inicialmente en Meteorología, el [modelo de Hindmarsh–Rose](https://en.wikipedia.org/wiki/Hindmarsh%E2%80%93Rose_model) para la actividad neuronal o el [modelo de Lotka-Volterra](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations) que describe sistemas biológicos donde interactúan especies. 
