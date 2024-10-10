@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Glosario &#8212; Ecuaciones Diferenciales 2024-2</title>
+    <title>4. Unidad 4 &#8212; Ecuaciones Diferenciales 2024-2</title>
   
   
   
@@ -73,12 +73,13 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Glosario';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap4';</script>
     <script src="_static/gtag.js?v=4bd77a66"></script>
     <script src="_static/.ipynb_checkpoints/gtag-checkpoint.js"></script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="prev" title="4. Unidad 4" href="Cap4.html" />
+    <link rel="next" title="5. Glosario" href="Glosario.html" />
+    <link rel="prev" title="3. Unidad 3" href="Cap3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   </head>
@@ -198,8 +199,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Cap1.html">1. Unidad 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Cap2.html">2. Unidad 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Cap3.html">3. Unidad 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Cap4.html">4. Unidad 4</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Glosario</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Unidad 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glosario.html">5. Glosario</a></li>
 </ul>
 
     </div>
@@ -254,7 +255,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/master/Glosario.md" target="_blank"
+      <li><a href="https://colab.research.google.com/github/DenisOsses/CursoEdo/blob/master/Cap4.md" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -320,7 +321,7 @@
       
       
       
-      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2FGlosario.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/DenisOsses/CursoEdo/issues/new?title=Issue%20on%20page%20%2FCap4.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Abrir un problema"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -350,7 +351,7 @@
       
       
       
-      <li><a href="_sources/Glosario.ipynb" target="_blank"
+      <li><a href="_sources/Cap4.ipynb" target="_blank"
    class="btn btn-sm btn-download-notebook-button dropdown-item"
    title="Descargar archivo de cuaderno"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -367,7 +368,7 @@
       
       
       
-      <li><a href="_sources/Glosario.md" target="_blank"
+      <li><a href="_sources/Cap4.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Descargar archivo fuente"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -438,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -449,11 +452,23 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Glosario</h1>
+    <h1>Unidad 4</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-laplace">4.1. Transformada de Laplace</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-y-existencia">4.1.1. Definición y Existencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformadas-basicas">4.1.2. Transformadas Básicas</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -464,79 +479,120 @@ document.write(`
                 <article class="bd-article">
                   
   <!--######################################################################################################################################################################################################################################################################################################################################################
---><section class="tex2jax_ignore mathjax_ignore" id="glosario">
-<span id="id1"></span><h1><span class="section-number">5. </span>Glosario<a class="headerlink" href="#glosario" title="Link to this heading">#</a></h1>
-<p id="edo"><u><strong>Ecuación Diferencial Ordinaria (EDO)</strong></u>: Una Ecuación Diferencial es una ecuación que tiene como incógnita a una función (usualmente <span class="math notranslate nohighlight">\(y\)</span>) de una variable independiente (habitualmente <span class="math notranslate nohighlight">\(x\)</span> o <span class="math notranslate nohighlight">\(t\)</span>) junto a sus derivadas. Se puede representar de modo general como</p>
+--><section class="tex2jax_ignore mathjax_ignore" id="unidad-4">
+<span id="u4"></span><h1><span class="section-number">4. </span>Unidad 4<a class="headerlink" href="#unidad-4" title="Link to this heading">#</a></h1>
+<section id="transformada-de-laplace">
+<h2><span class="section-number">4.1. </span>Transformada de Laplace<a class="headerlink" href="#transformada-de-laplace" title="Link to this heading">#</a></h2>
+<p>En este capítulo estudiaremos una herramienta muy útil para resolver EDO Lineales: La <a class="reference external" href="https://en.wikipedia.org/wiki/Integral_transform"><strong>transformada integral</strong></a> de Laplace, que mapea o transforma una función <span class="math notranslate nohighlight">\(f(t)\)</span> en otra función <span class="math notranslate nohighlight">\(F(s)\)</span> mediante una integración:</p>
 <div class="math notranslate nohighlight">
 \[
-F(x,y,y',y'',\ldots,y^{(n)})=0
+T\left(f(t)\right)=\int_{t_1}^{t_2}K(s,t)f(t)~dt=F(s)
 \]</div>
-<p id="primerorden"><u><strong>EDO de Primer Orden</strong></u>: Una EDO se llama de Primer Orden si sólo contiene hasta la primera derivada de una función, digamos <span class="math notranslate nohighlight">\(F(x,y,y')=0\)</span>.</p>
-<p id="segundoorden"><u><strong>EDO de Segundo Orden</strong></u>: Una EDO se llama de Segundo Orden si contiene hasta la segunda derivada de una función, digamos <span class="math notranslate nohighlight">\(F(x,y,y',y'')=0\)</span>.</p>
-<p id="defpvi"><u><strong>Problema de Valor Inicial (PVI)</strong></u>: Un PVI consiste de una EDO <span class="math notranslate nohighlight">\(F(x,y,y',y'',\ldots,y^{(n)})=0\)</span> junto a las <span class="math notranslate nohighlight">\(n\)</span> condiciones iniciales <span class="math notranslate nohighlight">\(y^{(i)}(x_0)=y_i\)</span>, para <span class="math notranslate nohighlight">\(i=0,1,2,\ldots,n-1\)</span>.</p>
-<p id="sepvar"><u><strong>Método de separación de variables</strong></u>: Una EDO está en variables separables si es de la forma</p>
+<p>donde <span class="math notranslate nohighlight">\(K\)</span> es conocida como el <strong>núcleo</strong> o <strong>kernel</strong> de la transformación y <span class="math notranslate nohighlight">\(t_1,t_2\)</span> son valores que dependen de la definición particular que se utilice, pudiendo ser <span class="math notranslate nohighlight">\(\pm\infty\)</span>.</p>
+<p>La esencia de toda transformada integral es <em>transformar</em> un problema complicado -que involucre a <span class="math notranslate nohighlight">\(f(t)\)</span>- en uno nuevo para <span class="math notranslate nohighlight">\(F(s)\)</span> que simplifique el original, para luego retornar a éste mediante una <em>transformada inversa</em> y resolverlo.</p>
+<section id="definicion-y-existencia">
+<h3><span class="section-number">4.1.1. </span>Definición y Existencia<a class="headerlink" href="#definicion-y-existencia" title="Link to this heading">#</a></h3>
+<p><strong>Definición</strong>: Si <span class="math notranslate nohighlight">\(f(t)\)</span> es una función definida <span class="math notranslate nohighlight">\(\forall~t&gt;0\)</span>, entonces se dice que la integral</p>
+<div class="math notranslate nohighlight" id="equation-laplace">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-laplace" title="Link to this equation">#</a></span>\[
+\mathscr{L}\{f(t)\}=\int_0^\infty e^{-st}f(t)~dt=F(s)
+\]</div>
+<p>es la <strong>Transformada de Laplace</strong> de <span class="math notranslate nohighlight">\(f(t)\)</span>, siempre que la integral impropia converja.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule la Transformada de Laplace de <span class="math notranslate nohighlight">\(f(t)=e^{at}\)</span>, donde <span class="math notranslate nohighlight">\(a\in\mathbb{R}\)</span>.</p>
+</div>
+<p>En Python:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Definir la variable simbólica &#39;t&#39; (tiempo) y &#39;s&#39; (frecuencia en el dominio de Laplace), a constante</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t s a&#39;</span><span class="p">)</span>
+
+<span class="c1"># Definir algunas funciones simbólicas en el tiempo</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># Función exponencial</span>
+
+<span class="c1"># Calcular las transformadas de Laplace</span>
+<span class="n">laplace_f1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">laplace_transform</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="c1"># Mostrar los resultados</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transformada de Laplace de exp(at): </span><span class="si">{</span><span class="n">laplace_f1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transformada de Laplace de exp(at): 1/(-a + s)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Propiedad</strong>: La transformada de Laplace es lineal:</p>
 <div class="math notranslate nohighlight">
 \[
-\frac{dy}{dx}=g(x)h(y).
+\mathscr{L}\{\alpha f(t)+\beta g(t)\}=\alpha\mathscr{L}\{f(t)\}+\beta\mathscr{L}\{g(t)\}
 \]</div>
-<p>Se resuelve dejando todas las variables de un tipo a un lado de la ED0 e integrando:</p>
-<div class="math notranslate nohighlight">
-\[
-\int\frac{1}{h(y)}dy=\int g(x)~dx.
-\]</div>
-<p id="explicita"><u><strong>Solución explícita</strong></u>: Es la solución de un PVI que se obtiene mediante un método analítico y tiene la forma <span class="math notranslate nohighlight">\(y=f(x)\)</span>, para <span class="math notranslate nohighlight">\(x\in~I\)</span>, donde <span class="math notranslate nohighlight">\(I\)</span> es un intervalo.</p>
-<p id="intervalo"><u><strong>Intervalo de definición</strong></u>: Es el conjunto <span class="math notranslate nohighlight">\(I\)</span> donde la solución de una EDO existe.</p>
-<p id="lineal1er"><u><strong>Lineal de Primer Orden</strong></u>: Una EDO es lineal de primer orden si tiene la forma</p>
-<div class="math notranslate nohighlight">
-\[
-a_1(x)\frac{dy}{dx}+a_0(x)y=g(x).
-\]</div>
-<p>Para resolver esta EDO, la escribimos en su <strong>forma estándar</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\frac{dy}{dx}+P(x)y=f(x),
-\]</div>
-<p>donde <span class="math notranslate nohighlight">\(P(x)\)</span> y <span class="math notranslate nohighlight">\(f(x)\)</span> son funciones continuas en un intervalo <span class="math notranslate nohighlight">\(I\)</span>. Luego identificamos la función <span class="math notranslate nohighlight">\(P(x)\)</span> y calculamos el <strong>factor integrante</strong></p>
-<div class="math notranslate nohighlight">
-\[
-e^{\int P(x)~dx}
-\]</div>
-<p>Posteriormente, multiplicamos la EDO (en su forma estándar) por este factor integrante. Notamos que obtenemos la derivada de un producto:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{d}{dx}\left(e^{\int P(x)~dx}\cdot y\right)=e^{\int P(x)~dx}\cdot f(x).
-\]</div>
-<p>Finalmente, integramos esta igualdad para obtener la solución <span class="math notranslate nohighlight">\(y(x)\)</span> de la EDO:</p>
-<div class="math notranslate nohighlight">
-\[y(x)=\dfrac{1}{e^{\int P(x)~dx}}\left(\int e^{\int P(x)~dx}\cdot f(x)~dx+C\right)\]</div>
-<p id="diagramafase"><u><strong>Diagrama de Fase</strong></u>: Es una representación geométrica de las soluciones de una EDO donde cada conjunto de condiciones iniciales está representado por un punto o curva diferente.</p>
-<p id="facint"><u><strong>Factores Integrantes</strong></u>: Si <span class="math notranslate nohighlight">\(\mu\)</span> es un factor integrante de <span class="math notranslate nohighlight">\(Mdx+Ndy=0\)</span> entonces</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial(\mu M)}{\partial y}=\frac{\partial(\mu N)}{\partial x}~~\Rightarrow~~\frac{1}{\mu}\left(N\mu_x-M\mu_y\right)=M_y-N_x.
-\]</div>
-<p>Para simplificar, asumimos que <span class="math notranslate nohighlight">\(\mu(x,y)\)</span> es función de una única variable: Si <span class="math notranslate nohighlight">\(\mu(x)\)</span> es solo función de <span class="math notranslate nohighlight">\(x\)</span> entonces <span class="math notranslate nohighlight">\(\mu_y=0\)</span> y si <span class="math notranslate nohighlight">\(\mu(y)\)</span> es solo función de <span class="math notranslate nohighlight">\(y\)</span> entonces <span class="math notranslate nohighlight">\(\mu_x=0\)</span>.</p>
-<p id="li"><u><strong>Independencia Lineal</strong></u>: Sean <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> y <span class="math notranslate nohighlight">\(\vec{v}_2\)</span> vectores en un <a class="reference external" href="https://en.wikipedia.org/wiki/Vector_space">espacio vectorial</a> <span class="math notranslate nohighlight">\(V\)</span>. Decimos que son <strong>linealmente independientes (LI)</strong> si existen constantes <span class="math notranslate nohighlight">\(c_1, c_2\in\mathbb{R}\)</span>, no ambas nulas, tales que</p>
-<div class="math notranslate nohighlight">
-\[
-c_1\vec{v}_1+c_2\vec{v}_2=\vec{0}
-\]</div>
-<p id="cl"><u><strong>Combinación Lineal</strong></u>: Sean <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> y <span class="math notranslate nohighlight">\(\vec{v}_2\in V\)</span>. Una combinación lineal de ellos es un nuevo vector</p>
-<div class="math notranslate nohighlight">
-\[ 
-\vec{w}=\alpha_1\vec{v}_1+\alpha_2\vec{v}_2
-\]</div>
-<p>donde <span class="math notranslate nohighlight">\(\alpha_1, \alpha_2\in\mathbb{R}\)</span>.</p>
-<p id="gen"><u><strong>Conjunto Generado</strong></u>: El conjunto generado por <span class="math notranslate nohighlight">\(\vec{v}_1\)</span> y <span class="math notranslate nohighlight">\(\vec{v}_2\in V\)</span> es el conjunto de todas las combinaciones lineales posibles entre estos vectores. Anotamos</p>
-<div class="math notranslate nohighlight">
-\[
-gen(\vec{v}_1,\vec{v}_2)=\{\alpha\vec{v}_1+\beta\vec{v}_2,\alpha,\beta\in\mathbb{R}\}
-\]</div>
-<p id="tl"><u><strong>Transformación Lineal</strong></u>: Considere dos espacios vectoriales <span class="math notranslate nohighlight">\(V\)</span> y <span class="math notranslate nohighlight">\(W\)</span> sobre <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> (o cualquier cuerpo, en realidad). Una transformación <span class="math notranslate nohighlight">\(T:V\to W\)</span> es <strong>lineal</strong> si para cada par de vectores <span class="math notranslate nohighlight">\(u,v\in V\)</span> si:</p>
+<p>para todo <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>.</p>
+<p><strong>Condiciones Suficientes para la Existencia de la Transformada de Laplace.</strong> Las condiciones suficientes que garantizan la existencia de <span class="math notranslate nohighlight">\(\mathscr{L}\{f(t)\}\)</span> son que:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(T(u+v)=T(u)+T(v)\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(T(ku)=kT(u)\)</span>, <span class="math notranslate nohighlight">\(k\in\mathbb{R}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(t)\)</span> sea continua por tramos en <span class="math notranslate nohighlight">\([0,\infty[~\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(t)\)</span> sea de orden exponencial <span class="math notranslate nohighlight">\(c\)</span>, para todo <span class="math notranslate nohighlight">\(t&gt;T\)</span>.</p></li>
 </ol>
+<figure class="align-default" id="teu">
+<a class="reference internal image-reference" href="_images/Laplace1.png"><img alt="_images/Laplace1.png" src="_images/Laplace1.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.1 </span><span class="caption-text">Continuidad por Tramos</span><a class="headerlink" href="#teu" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/Laplace2.png"><img alt="_images/Laplace2.png" src="_images/Laplace2.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.2 </span><span class="caption-text">Orden Exponencial</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Que <span class="math notranslate nohighlight">\(f(t)\)</span> sea de orden exponencial <span class="math notranslate nohighlight">\(c\)</span> significa que existen constantes <span class="math notranslate nohighlight">\(c,M&gt;0\)</span> tales que</p>
+<div class="math notranslate nohighlight">
+\[
+|f(t)|\leq Me^{ct}
+\]</div>
+<p>es decir, <span class="math notranslate nohighlight">\(f(t)\)</span> no crece más rápido que <span class="math notranslate nohighlight">\(e^{ct}\)</span>.</p>
+<p><strong>Teorema}</strong>: Si <span class="math notranslate nohighlight">\(f(t)\)</span> es continua por tramos en <span class="math notranslate nohighlight">\([0,\infty[\)</span> y de orden exponencial <span class="math notranslate nohighlight">\(c\)</span> entonces <span class="math notranslate nohighlight">\(\mathscr{L}\{f(t)\}\)</span> existe para <span class="math notranslate nohighlight">\(s&gt;c\)</span>.</p>
+<p><strong>Teorema</strong>: Si <span class="math notranslate nohighlight">\(f(t)\)</span> es continua por tramos en <span class="math notranslate nohighlight">\([0,\infty[\)</span> y de orden exponencial <span class="math notranslate nohighlight">\(c\)</span>, con <span class="math notranslate nohighlight">\(\mathscr{L}\{f(t)\}=F(s)\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\lim_{s\to\infty}F(s)=0.
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Justifique que <span class="math notranslate nohighlight">\(\mathscr{L}\{\frac{1}{t}\}\)</span>, <span class="math notranslate nohighlight">\(\mathscr{L}\{e^{t^2}\}\)</span> no existen.</p>
+</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>¿Existe una <span class="math notranslate nohighlight">\(f(t)\)</span> continua por tramos en <span class="math notranslate nohighlight">\([0,\infty[\)</span> y de orden exponencial <span class="math notranslate nohighlight">\(c\)</span> tal que <span class="math notranslate nohighlight">\(\mathscr{L}\{f(t)\}=s^2\)</span>?</p>
+</div>
+</section>
+<section id="transformadas-basicas">
+<h3><span class="section-number">4.1.2. </span>Transformadas Básicas<a class="headerlink" href="#transformadas-basicas" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}\{1\}=\frac{1}{s}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}\{t\}=\frac{1}{s^2}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}\{t^n\}=\frac{n!}{s^{n+1}}\)</span>, <span class="math notranslate nohighlight">\(n\in\mathbb{N}_0\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}\{e^{at}\}=\frac{1}{s-a}\)</span>, <span class="math notranslate nohighlight">\(s&gt;a\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}\{\sin(kt)\}=\frac{k}{s^2+k^2}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}\{\cos(kt)\}=\frac{s}{s^2+k^2}\)</span>.</p></li>
+</ol>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule <span class="math notranslate nohighlight">\(\mathscr{L}\{\cos^2(t)\}\)</span>.</p>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -570,13 +626,22 @@ gen(\vec{v}_1,\vec{v}_2)=\{\alpha\vec{v}_1+\beta\vec{v}_2,\alpha,\beta\in\mathbb
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Cap4.html"
+       href="Cap3.html"
        title="página anterior">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">anterior</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Unidad 4</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Unidad 3</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Glosario.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Glosario</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -585,7 +650,24 @@ gen(\vec{v}_1,\vec{v}_2)=\{\alpha\vec{v}_1+\beta\vec{v}_2,\alpha,\beta\in\mathbb
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-laplace">4.1. Transformada de Laplace</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-y-existencia">4.1.1. Definición y Existencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformadas-basicas">4.1.2. Transformadas Básicas</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
