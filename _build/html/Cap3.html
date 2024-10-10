@@ -994,6 +994,206 @@ c_1\mathbf{K}_1e^{\lambda t}+c_2\mathbf{K}_2e^{\lambda t}+\cdots+c_m\mathbf{K}_m
 </section>
 <section id="sistemas-autonomos">
 <h2><span class="section-number">3.3. </span>Sistemas Autónomos<a class="headerlink" href="#sistemas-autonomos" title="Link to this heading">#</a></h2>
+<p>Consideremos el sistema de ecuaciones diferenciales <strong>autónomas</strong> de orden 2:</p>
+<div class="math notranslate nohighlight" id="equation-sistautonomo">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-sistautonomo" title="Link to this equation">#</a></span>\[\begin{split}
+\begin{eqnarray*}
+\frac{dx}{dt}&amp;=&amp;F(x,y)\\
+\frac{dy}{dt}&amp;=&amp;G(x,y)\quad\Leftrightarrow\quad\mathbf{X}'(t)=\mathbf{f}(\mathbf{x})~,~\mathbf{x}(t_0)=\mathbf{x}^0\\
+x(t_0)=x_0~&amp;,&amp;y(t_0)=y_0
+\end{eqnarray*}
+\end{split}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(F\)</span> y <span class="math notranslate nohighlight">\(G\)</span> son continuas en <span class="math notranslate nohighlight">\(D\in\mathbb{R}\)</span> y <span class="math notranslate nohighlight">\((x_0,y_0)\in D\)</span>. Esto implica que el sistema <a class="reference internal" href="#equation-sistautonomo">(3.5)</a> tiene solución única (una curva <span class="math notranslate nohighlight">\((x(t),y(t))\)</span> para <span class="math notranslate nohighlight">\(t\in I\)</span> que contiene a <span class="math notranslate nohighlight">\(t_0\)</span>).</p>
+<p>Si existen puntos <span class="math notranslate nohighlight">\((x,y)\)</span> tales que <span class="math notranslate nohighlight">\(F(x,y)=0\)</span> y <span class="math notranslate nohighlight">\(G(x,y)=0\)</span> o, equivalentemente <span class="math notranslate nohighlight">\(\mathbf{f}(\mathbf{x})=\mathbf{0}\)</span>, los denominamos <strong>puntos críticos</strong> del sistema. También en estos puntos <span class="math notranslate nohighlight">\(\mathbf{X}'=\mathbf{0}\)</span> por lo que corresponden a soluciones constantes o de <strong>equilibrio</strong> del sistema.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Considere el sistema de ecuaciones</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+\frac{dx}{dt}&amp;=&amp;-(x-y)(1-x-y)\\
+\frac{dy}{dt}&amp;=&amp;x(2+y)
+\end{eqnarray*}
+\end{split}\]</div>
+<p>Determine sus puntos críticos y esboce su plano de fase. A partir del plano fase, establezca el carácter y estabilidad de los puntos críticos.</p>
+</div>
+<p>Código para determinar los puntos críticos:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">solve</span>
+
+<span class="c1"># Definimos las variables simbólicas</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+
+<span class="c1"># Definimos las ecuaciones del sistema</span>
+<span class="n">eq1</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># x&#39; = 0</span>
+<span class="n">eq2</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>             <span class="c1"># y&#39; = 0</span>
+
+<span class="c1"># Resolvemos el sistema de ecuaciones</span>
+<span class="n">puntos_criticos</span> <span class="o">=</span> <span class="n">solve</span><span class="p">([</span><span class="n">eq1</span><span class="p">,</span> <span class="n">eq2</span><span class="p">],</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<span class="n">puntos_criticos</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/0eb1068d2ca93a67c7c7f49fd23432f135135dd1196cd71ca27e52c70574579b.png" src="_images/0eb1068d2ca93a67c7c7f49fd23432f135135dd1196cd71ca27e52c70574579b.png" />
+</div>
+</div>
+<p>Código para determinar los puntos críticos:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definimos las funciones del sistema de ecuaciones diferenciales</span>
+<span class="k">def</span> <span class="nf">dx_dt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dy_dt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Definimos el rango de valores para x e y</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Creamos una malla de puntos</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">)</span>
+
+<span class="c1"># Calculamos los valores del campo vectorial</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">dx_dt</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">dy_dt</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># Graficamos el plano de fase</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Retrato de fase del sistema&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/276a8546c416a401bc721b8fb526aadaa3f987f25efd14504fe1ab54c19137de.png" src="_images/276a8546c416a401bc721b8fb526aadaa3f987f25efd14504fe1ab54c19137de.png" />
+</div>
+</div>
+<p>Nos interesa determinar el comportamiento de las soluciones curvas solución del sistema <a class="reference internal" href="#equation-sistautonomo">(3.5)</a> en la cercanía de sus puntos críticos <span class="math notranslate nohighlight">\((x_0,y_0)\)</span>. Para ello, la idea es <strong>linealizar</strong> (mediante el plano tangente) <span class="math notranslate nohighlight">\(F(x,y)\)</span> y <span class="math notranslate nohighlight">\(G(x,y)\)</span> en torno a tales puntos:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+F(x,y)&amp;=&amp;\cancelto{0}{F(x_0,y_0)}+F_x(x_0,y_0)(x-x_0)+F_y(x_0,y_0)(y-y_0)+h_1(x,y)\\
+G(x,y)&amp;=&amp;\cancelto{0}{G(x_0,y_0)}+G_x(x_0,y_0)(x-x_0)+G_y(x_0,y_0)(y-y_0)+h_2(x,y)
+\end{eqnarray*}
+\end{split}\]</div>
+<p>Así, podemos reescribir el sistema como</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+\frac{d}{dt}\begin{pmatrix}x-x_0\\y-y_0\end{pmatrix}=\begin{pmatrix}F_x(x_0,y_0)&amp; F_y(x_0,y_0)\\ G_x(x_0,y_0)&amp; G_y(x_0,y_0)\end{pmatrix}\begin{pmatrix}x-x_0\\y-y_0\end{pmatrix}+\begin{pmatrix}h_1(x,y)\\h_2(x,y)\end{pmatrix}
+\end{eqnarray*}
+\end{split}\]</div>
+<p>o vectorialmente <span class="math notranslate nohighlight">\(\mathbf{U}'=\mathbf{J}(x_0,y_0)\mathbf{U}+\mathbf{H}(\mathbf{x})\)</span>, donde <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> es la <strong>matriz jacobiana</strong> de las funciones <span class="math notranslate nohighlight">\(F\)</span> y <span class="math notranslate nohighlight">\(G\)</span>, y asumimos que <span class="math notranslate nohighlight">\(\frac{||\mathbf{H}||}{||\mathbf{x}-\mathbf{x}^0||}\to0\)</span> cuando <span class="math notranslate nohighlight">\(\mathbf{x}\to\mathbf{x}^0\)</span>-(el sistema de EDO es <strong>localmente lineal</strong>-. De este modo, nos quedamos con el sistema linealizado <span class="math notranslate nohighlight">\(\mathbf{U}'=\mathbf{J}(x_0,y_0)\mathbf{U}\)</span> para analizar localmente los puntos críticos.</p>
+<p>Una tabla resumen comparativa del tipo de puntos críticos y su estabilidad se presenta a continuación para sistemas lineales y localmente lineales:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Sistema Lineal</p></th>
+<th class="head"><p></p></th>
+<th class="head"><p>Sistema Localmente Lineal</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Valores Propios</p></td>
+<td><p>Tipo</p></td>
+<td><p>Estabilidad</p></td>
+<td><p>Tipo</p></td>
+<td><p>Estabilidad</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(r_1&gt;r_2&gt;0\)</span></p></td>
+<td><p>Nodo</p></td>
+<td><p>Inestable</p></td>
+<td><p>Nodo</p></td>
+<td><p>Inestable</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(r_1&lt;r_2&lt;0\)</span></p></td>
+<td><p>Nodo</p></td>
+<td><p>Asintóticamente Estable</p></td>
+<td><p>Nodo</p></td>
+<td><p>Asintóticamente Estable</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(r_2&lt;0&lt;r_1\)</span></p></td>
+<td><p>Punto Silla</p></td>
+<td><p>Inestable</p></td>
+<td><p>Punto Silla</p></td>
+<td><p>Inestable</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(r_1=r_2&gt;0\)</span></p></td>
+<td><p>Nodo Propio o Impropio</p></td>
+<td><p>Inestable</p></td>
+<td><p>Nodo o Espiral</p></td>
+<td><p>Inestable</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(r_1=r_2&lt;0\)</span></p></td>
+<td><p>Nodo Propio o Impropio</p></td>
+<td><p>Asintóticamente Estable</p></td>
+<td><p>Nodo o Espiral</p></td>
+<td><p>Asintóticamente Estable</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(r_1,r_2=\lambda\pm\mu i\)</span></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\lambda&gt;0\)</span></p></td>
+<td><p>Espiral</p></td>
+<td><p>Inestable</p></td>
+<td><p>Espiral</p></td>
+<td><p>Inestable</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\lambda&lt;0\)</span></p></td>
+<td><p>Espiral</p></td>
+<td><p>Asintóticamente Estable</p></td>
+<td><p>Espiral</p></td>
+<td><p>Asintóticamente Estable</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\lambda=0\)</span></p></td>
+<td><p>Centro</p></td>
+<td><p>Estable</p></td>
+<td><p>Centro o Espiral</p></td>
+<td><p>Indeterminado</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Para el sistema de ecuaciones del ejercicio anterior</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{eqnarray*}
+\frac{dx}{dt}&amp;=&amp;-(x-y)(1-x-y)\\
+\frac{dy}{dt}&amp;=&amp;x(2+y)
+\end{eqnarray*}
+\end{split}\]</div>
+<p>Establezca el carácter y estabilidad de los puntos críticos.</p>
+</div>
+<p><strong>Nota</strong>: La linealización es un proceso muy útil para estudiar el carácter de los puntos críticos en sistemas de ecuaciones diferenciales de orden <span class="math notranslate nohighlight">\(2\)</span>, <span class="math notranslate nohighlight">\(3\)</span> o superior. Existen muchos sistemas de ecuaciones no lineales que modelan diversas situaciones interesantes: Las <a class="reference external" href="https://en.wikipedia.org/wiki/Lorenz_system">Ecuaciones de Lorenz</a> usadas inicialmente en Meteorología, el <a class="reference external" href="https://en.wikipedia.org/wiki/Hindmarsh%E2%80%93Rose_model">modelo de Hindmarsh–Rose</a> para la actividad neuronal o el <a class="reference external" href="https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations">modelo de Lotka-Volterra</a> que describe sistemas biológicos donde interactúan especies.</p>
 </section>
 </section>
 
