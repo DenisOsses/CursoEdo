@@ -467,6 +467,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformadas-basicas">4.1.2. Transformadas Básicas</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformadas-inversas-y-transformadas-de-derivadas">4.2. Transformadas Inversas y Transformadas de Derivadas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-inversa">4.2.1. Transformada Inversa</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-una-derivada">4.2.2. Transformada de una Derivada</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-i">4.3. Propiedades Operacionales I</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traslacion-en-el-eje-s">4.3.1. Traslación en el Eje <span class="math notranslate nohighlight">\(s\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-escalon-unitario">4.3.2. Función Escalón Unitario</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -593,6 +603,256 @@ T\left(f(t)\right)=\int_{t_1}^{t_2}K(s,t)f(t)~dt=F(s)
 </div>
 </section>
 </section>
+<section id="transformadas-inversas-y-transformadas-de-derivadas">
+<h2><span class="section-number">4.2. </span>Transformadas Inversas y Transformadas de Derivadas<a class="headerlink" href="#transformadas-inversas-y-transformadas-de-derivadas" title="Link to this heading">#</a></h2>
+<section id="transformada-inversa">
+<h3><span class="section-number">4.2.1. </span>Transformada Inversa<a class="headerlink" href="#transformada-inversa" title="Link to this heading">#</a></h3>
+<p><strong>Definición</strong>: Si <span class="math notranslate nohighlight">\(\mathscr{L}\{f(t)\}=F(s)\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}^{-1}\{F(s)\}=f(t)
+\]</div>
+<p>se denomina la <strong>Transformada Inversa de Laplace</strong> de <span class="math notranslate nohighlight">\(F(s)\)</span>.</p>
+<p><strong>Propiedad}</strong>: La transformada inversa de Laplace es lineal:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}^{-1}\{\alpha F(s)+\beta G(s)\}=\alpha\mathscr{L}^{-1}\{F(s)\}+\beta\mathscr{L}^{-1}\{G(s)\}
+\]</div>
+<p>para todo <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}^{-1}\left\{\frac{1}{s^8}\right\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}^{-1}\left\{\frac{1}{s^2+8}\right\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathscr{L}^{-1}\left\{\frac{s}{(s^2+4)(s+2)}\right\}\)</span>.</p></li>
+</ol>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sympy.printing.latex</span> <span class="kn">import</span> <span class="n">LatexPrinter</span>
+
+<span class="k">class</span> <span class="nc">MyLatexPrinter</span><span class="p">(</span><span class="n">LatexPrinter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_print_Heaviside</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">pargs</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">pargs</span><span class="p">)</span>
+        <span class="n">tex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;u\left(</span><span class="si">%s</span><span class="s2">\right)&quot;</span> <span class="o">%</span> <span class="n">pargs</span>
+        <span class="k">if</span> <span class="n">exp</span><span class="p">:</span>
+            <span class="n">tex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\left(</span><span class="si">%s</span><span class="s2">\right)^{</span><span class="si">%s</span><span class="s2">}&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tex</span>
+
+<span class="k">def</span> <span class="nf">my_latex</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">MyLatexPrinter</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+<span class="n">init_printing</span><span class="p">(</span><span class="n">latex_printer</span><span class="o">=</span><span class="n">my_latex</span><span class="p">)</span>
+
+<span class="n">var</span><span class="p">(</span><span class="s2">&quot;s, t&quot;</span><span class="p">,</span><span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">s</span><span class="o">**</span><span class="mi">8</span>
+<span class="n">inv_lap</span> <span class="o">=</span> <span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">inv_lap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/f4eebadbb8effd4e5b58127cd090c7a4e0bfc1a41ef3e09f6bbd446e4b166070.png" src="_images/f4eebadbb8effd4e5b58127cd090c7a4e0bfc1a41ef3e09f6bbd446e4b166070.png" />
+</div>
+</div>
+</section>
+<section id="transformada-de-una-derivada">
+<h3><span class="section-number">4.2.2. </span>Transformada de una Derivada<a class="headerlink" href="#transformada-de-una-derivada" title="Link to this heading">#</a></h3>
+<p>Para utilizar la Transformada de Laplace con el fin de resolver una ecuación diferencial, debemos preguntarnos: ¿Es posible calcular la transformada de Laplace de <span class="math notranslate nohighlight">\(f'(t)\)</span>?</p>
+<p><strong>Teorema</strong>: Si <span class="math notranslate nohighlight">\(f(t), f'(t),\ldots,f^{(n-1)}(t)\)</span> son continuas en <span class="math notranslate nohighlight">\([0,\infty[\)</span>, <span class="math notranslate nohighlight">\(f^{(n)}(t)\)</span> es continua por tramos y <span class="math notranslate nohighlight">\(f(t)\)</span> de orden exponencial en <span class="math notranslate nohighlight">\([0,\infty[\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{f^{(n)}(t)\}=s^nF(s)-s^{n-1}f(0)-s^{n-2}f'(0)-\cdots-f^{(n-1)}(0)
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(F(s)=\mathscr{L}\{f(t)\}\)</span>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Resuelva</p>
+<div class="math notranslate nohighlight">
+\[
+y''+y=\sqrt{2}\sin(\sqrt{2}t)~,~y(0)=y'(0)=0.
+\]</div>
+</div>
+<p>Gráfico de la solución en Python:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+
+<span class="k">def</span> <span class="nf">laplace_solution</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Generar puntos para graficar</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Calcular solución</span>
+<span class="n">y_laplace</span> <span class="o">=</span> <span class="n">laplace_solution</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Graficar resultados</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_laplace</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Solución por Laplace&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Solución de y&#39;&#39; + y = √2 sen(√2t), y(0) = y&#39;(0) = 0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/bd944d44aae0e862c9a504aed2b6109eb4f4ce82f4993429920de40593a5ab20.png" src="_images/bd944d44aae0e862c9a504aed2b6109eb4f4ce82f4993429920de40593a5ab20.png" />
+</div>
+</div>
+<p>Solución explícita en Python (mediante la Transformada de Laplace):</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Definir las variables simbólicas (t como positiva)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="c1"># Definir la transformada de Laplace de y&#39;&#39;</span>
+<span class="n">L_y_double_prime</span> <span class="o">=</span> <span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">s</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Definir la transformada de Laplace de y</span>
+<span class="n">L_y</span> <span class="o">=</span> <span class="n">Y</span>
+
+<span class="c1"># Definir la transformada de Laplace de √2*sin(√2*t)</span>
+<span class="n">L_f</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Formar la ecuación en el dominio de Laplace</span>
+<span class="n">laplace_eq</span> <span class="o">=</span> <span class="n">L_y_double_prime</span> <span class="o">+</span> <span class="n">L_y</span> <span class="o">-</span> <span class="n">L_f</span>
+
+<span class="c1"># Resolver para Y</span>
+<span class="n">Y_solved</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">laplace_eq</span><span class="p">,</span> <span class="n">Y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Aplicar la transformada inversa de Laplace</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">Y_solved</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Simplificar la solución</span>
+<span class="n">y_simplified</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La solución explícita es:&quot;</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">y_simplified</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución explícita es:
+2⋅sin(t) - √2⋅sin(√2⋅t)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-ejercicio-teorico-propuesto admonition">
+<p class="admonition-title">Ejercicio Teórico (Propuesto)</p>
+<p>Calcule <span class="math notranslate nohighlight">\(\mathscr{L}\{te^t\}\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="propiedades-operacionales-i">
+<h2><span class="section-number">4.3. </span>Propiedades Operacionales I<a class="headerlink" href="#propiedades-operacionales-i" title="Link to this heading">#</a></h2>
+<section id="traslacion-en-el-eje-s">
+<h3><span class="section-number">4.3.1. </span>Traslación en el Eje <span class="math notranslate nohighlight">\(s\)</span><a class="headerlink" href="#traslacion-en-el-eje-s" title="Link to this heading">#</a></h3>
+<p>¿Cuál es el efecto que produce la función <span class="math notranslate nohighlight">\(e^{at}\)</span> sobre una función <span class="math notranslate nohighlight">\(f(t)\)</span> al aplicar la Transformada de Laplace?</p>
+<p><strong>Primer Teorema de Traslación</strong>:  Si <span class="math notranslate nohighlight">\(\mathscr{L}\{f(t)\}=F(s)\)</span> y <span class="math notranslate nohighlight">\(a\in\mathbb{R}\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{e^{at}f(t)\}=F(s-a)
+\]</div>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/Laplace3.png"><img alt="_images/Laplace3.png" src="_images/Laplace3.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.3 </span><span class="caption-text">Traslación en el eje <span class="math notranslate nohighlight">\(s\)</span></span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Notación</strong>: Usualmente escribimos</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{e^{at}f(t)\}=\mathscr{L}\{f(t)\}\Big|_{s\mapsto s-a}
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule <span class="math notranslate nohighlight">\(\mathscr{L}\{e^{2t}\sin(7t)\}\)</span>.</p>
+</div>
+<p><strong>Forma Inversa</strong>: <span class="math notranslate nohighlight">\(\mathscr{L}^{-1}\{F(s-a)\}=\mathscr{L}^{-1}\{F(s)\}_{s\mapsto s-a}=e^{at}f(t)\)</span>, donde <span class="math notranslate nohighlight">\(f(t)=\mathscr{L}^{-1}\{F(s)\}\)</span>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Resuelva el PVI:</p>
+<div class="math notranslate nohighlight">
+\[
+y''-2y'+5y=1+t~~,~~y(0)=0~,~y'(0)=4.
+\]</div>
+</div>
+</section>
+<section id="funcion-escalon-unitario">
+<h3><span class="section-number">4.3.2. </span>Función Escalón Unitario<a class="headerlink" href="#funcion-escalon-unitario" title="Link to this heading">#</a></h3>
+<p><strong>Definición</strong>: Se define la <strong>Función Escalón Unitario</strong> <span class="math notranslate nohighlight">\(\mathscr{U}(t-a)\)</span> como</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathscr{U}(t-a)=\left\{\begin{array}{ccc}0&amp;\text{si}&amp;0\leq t&lt;a\\ 1&amp;\text{si}&amp; t\geq a\end{array}\right.
+\end{split}\]</div>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/Laplace4.png"><img alt="_images/Laplace4.png" src="_images/Laplace4.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.4 </span><span class="caption-text">Función Escalón Unitario</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Toda función por tramos se puede escribir en términos de la función escalón unitario. Por ejemplo,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(t)=\left\{\begin{array}{ccc}g(t)&amp;\text{si}&amp;t&lt;a\\ h(t)&amp;\text{si}&amp; t\geq a\end{array}\right.
+\end{split}\]</div>
+<p>puede escribirse como</p>
+<div class="math notranslate nohighlight">
+\[
+f(t)=g(t)\big(1-\mathscr{U}(t-a)\big)+h(t)\mathscr{U}(t-a).
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Escriba la función dada en términos del escalón unitario</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ f(t)=\left\{\begin{array}{ccc}g(t)&amp;\text{si}&amp;t&lt;a\\ h(t)&amp;\text{si}&amp; a\leq t&lt;b\\ k(t)&amp;\text{si}&amp;t\geq b\end{array}\right.
+ \end{split}\]</div>
+</div>
+<p>El efecto que tiene la función <span class="math notranslate nohighlight">\(\mathscr{U}(t-a)\)</span> sobre una función cualquiera <span class="math notranslate nohighlight">\(f(t)\)</span>, donde <span class="math notranslate nohighlight">\(t\geq 0\)</span>, es</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f(t-a)\mathscr{U}(t-a)=\left\{\begin{array}{ccc}0&amp;\text{si}&amp;0\leq t&lt;a\\ f(t-a)&amp;\text{si}&amp; t\geq a\end{array}\right.
+\end{split}\]</div>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/Laplace5.png"><img alt="_images/Laplace5.png" src="_images/Laplace5.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.5 </span><span class="caption-text">Desplazamiento en el eje <span class="math notranslate nohighlight">\(t\)</span></span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -662,6 +922,16 @@ T\left(f(t)\right)=\int_{t_1}^{t_2}K(s,t)f(t)~dt=F(s)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-laplace">4.1. Transformada de Laplace</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-y-existencia">4.1.1. Definición y Existencia</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformadas-basicas">4.1.2. Transformadas Básicas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformadas-inversas-y-transformadas-de-derivadas">4.2. Transformadas Inversas y Transformadas de Derivadas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-inversa">4.2.1. Transformada Inversa</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-una-derivada">4.2.2. Transformada de una Derivada</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-i">4.3. Propiedades Operacionales I</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traslacion-en-el-eje-s">4.3.1. Traslación en el Eje <span class="math notranslate nohighlight">\(s\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-escalon-unitario">4.3.2. Función Escalón Unitario</a></li>
 </ul>
 </li>
 </ul>
