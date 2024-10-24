@@ -668,3 +668,54 @@ Establezca el carácter y estabilidad de los puntos críticos.
 ```
 
 **Nota**: La linealización es un proceso muy útil para estudiar el carácter de los puntos críticos en sistemas de ecuaciones diferenciales de orden $2$, $3$ o superior. Existen muchos sistemas de ecuaciones no lineales que modelan diversas situaciones interesantes: Las [Ecuaciones de Lorenz](https://en.wikipedia.org/wiki/Lorenz_system) usadas inicialmente en Meteorología, el [modelo de Hindmarsh–Rose](https://en.wikipedia.org/wiki/Hindmarsh%E2%80%93Rose_model) para la actividad neuronal o el [modelo de Lotka-Volterra](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations) que describe sistemas biológicos donde interactúan especies. 
+
++++
+
+## Actividad de Cierre Unidad 3
+
++++
+
+### Problema 1: Modelamiento Sistema de Mezcla
+
+Considere el sistema de dos tanques de la figura:
+
+```{figure} tanques.png
+---
+height: 120px
+name: TEU
+---
+Sistema de tanques
+```
+
+(a) Si la tasa de entrada y salida de ambos tanques es $r$, el tanque 1 contiene un volumen $V_1$ de agua (con $x_0$ gramos de sal disuelta), el tanque 2 contiene un volumen $V_2$ de agua (con $y_0$ gramos de sal disuelta), establezca un sistema de ecuaciones lineales que modele la cantidad de sal $x$ e $y$ en cada tanque, respectivamente, en el instante $t$.
+
+(b) Considere que $V_1=50$ y $V_2=25$, $r=10$, $x_0=15$ e $y_0=0$, determine explícitamente las soluciones $x(t)$ e $y(t)$, y luego realice su gráfico.
+
+(c) Ahora suponga que agua pura entra al tanque 1 a una tasa un porcentaje menor a $r$ ($kr$ con $0\leq k<1$) y que sale mezcla del tanque 2 a la misma tasa. Para los valores del inciso antrior, estudie el carácter y estabilidad del punto crítico $(0,0)$. Esboce el plano de fase en este caso.
+
++++
+
+### Problema 2: Modelamiento Competencia entre 2 Especies
+
+Imagina un ecosistema en el que coexisten dos especies de plantas $A$ y $B$ que compiten por un recurso limitado, como los nutrientes del suelo. Ambas especies dependen de los nutrientes para crecer, pero el recurso no es infinito, y a medida que la población de una especie crece, afecta la disponibilidad de nutrientes para la otra especie. Queremos modelar este sistema usando un conjunto de dos ecuaciones diferenciales no lineales que describan cómo varían las poblaciones de plantas con el tiempo bajo competencia.
+
+Sean $x(t)$ e $y(t)$ la poblaciones de las especies de plantas $A$ y $B$ en el instante, respectivamente. Suponga que:
+
+1. Cada especie, cuando no está en competencia con la otra, crece según una tasa de crecimiento natural limitada por la cantidad de nutrientes en el suelo. Para la especie $A$, su tasa de crecimiento en condiciones ideales es $r_Ax$ donde $r_A$  es la tasa de crecimiento natural de $A$. Análogamente $r_By$ para $B$.
+2. Dado que el recurso es limitado, el crecimiento de cada población estará sujeto a competencia con la otra. La competencia entre especies puede modelarse utilizando términos que describan la reducción en la tasa de crecimiento debido a la presencia de la otra especie:
+
+(i) **Competencia intraespecífica**: Cada especie afecta su propio crecimiento debido a la sobrepoblación. A medida que aumenta la densidad de una especie, los nutrientes se vuelven menos accesibles para sus propios individuos. Este efecto se puede modelar con un término cuadrático de la forma $a_{AA}x^2$, donde $a_{AA}$ representa la competencia dentro de la especie $A$. Similarmente, la especie $B$ está sujeta a $a_{BB}y^2$.
+
+(ii) **Competencia interespecífica**: La especie $A$ también afecta el crecimiento de la especie $B$ y viceversa -hay una interacción entre ellas-. Este efecto puede modelarse con un término que dependa de ambas poblaciones como $a_{AB}xy$ para la influencia de $A$ sobre $B$, y $a_{BA}xy$ para la influencia de $B$ sobre $A$. 
+
+A partir de las consideraciones anteriores:
+
+(a) Establezca un sistema de ecuaciones diferenciales no lineal que modele esta competencia entre 2 especies de plantas.
+
+(b) Considere los valores: $r_A=0.2$, $r_B=0.1$, $a_{AA}=0.1$, $a_{BB}=0.05$, $a_{AB}=0.01$ y $a_{BA}=0.02$. Determine los puntos críticos del sistema.
+
+(c) Linealice el sistema y estudie la estabilidad de sus puntos críticos.
+
+(d) Esboce el planos de fase correspondiente. Interprete sus resultados en relación a la extinción o subsistencia de las plantas $A$ y $B$ en el largo plazo.
+
+

@@ -475,6 +475,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-autonomos">3.3. Sistemas Autónomos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidad-3">3.4. Actividad de Cierre Unidad 3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-1-modelamiento-sistema-de-mezcla">3.4.1. Problema 1: Modelamiento Sistema de Mezcla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-2-modelamiento-competencia-entre-2-especies">3.4.2. Problema 2: Modelamiento Competencia entre 2 Especies</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -1196,6 +1201,38 @@ G(x,y)&amp;=&amp;\cancelto{0}{G(x_0,y_0)}+G_x(x_0,y_0)(x-x_0)+G_y(x_0,y_0)(y-y_0
 </div>
 <p><strong>Nota</strong>: La linealización es un proceso muy útil para estudiar el carácter de los puntos críticos en sistemas de ecuaciones diferenciales de orden <span class="math notranslate nohighlight">\(2\)</span>, <span class="math notranslate nohighlight">\(3\)</span> o superior. Existen muchos sistemas de ecuaciones no lineales que modelan diversas situaciones interesantes: Las <a class="reference external" href="https://en.wikipedia.org/wiki/Lorenz_system">Ecuaciones de Lorenz</a> usadas inicialmente en Meteorología, el <a class="reference external" href="https://en.wikipedia.org/wiki/Hindmarsh%E2%80%93Rose_model">modelo de Hindmarsh–Rose</a> para la actividad neuronal o el <a class="reference external" href="https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations">modelo de Lotka-Volterra</a> que describe sistemas biológicos donde interactúan especies.</p>
 </section>
+<section id="actividad-de-cierre-unidad-3">
+<h2><span class="section-number">3.4. </span>Actividad de Cierre Unidad 3<a class="headerlink" href="#actividad-de-cierre-unidad-3" title="Link to this heading">#</a></h2>
+<section id="problema-1-modelamiento-sistema-de-mezcla">
+<h3><span class="section-number">3.4.1. </span>Problema 1: Modelamiento Sistema de Mezcla<a class="headerlink" href="#problema-1-modelamiento-sistema-de-mezcla" title="Link to this heading">#</a></h3>
+<p>Considere el sistema de dos tanques de la figura:</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/tanques.png"><img alt="_images/tanques.png" src="_images/tanques.png" style="height: 120px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 3.4 </span><span class="caption-text">Sistema de tanques</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>(a) Si la tasa de entrada y salida de ambos tanques es <span class="math notranslate nohighlight">\(r\)</span>, el tanque 1 contiene un volumen <span class="math notranslate nohighlight">\(V_1\)</span> de agua (con <span class="math notranslate nohighlight">\(x_0\)</span> gramos de sal disuelta), el tanque 2 contiene un volumen <span class="math notranslate nohighlight">\(V_2\)</span> de agua (con <span class="math notranslate nohighlight">\(y_0\)</span> gramos de sal disuelta), establezca un sistema de ecuaciones lineales que modele la cantidad de sal <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> en cada tanque, respectivamente, en el instante <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>(b) Considere que <span class="math notranslate nohighlight">\(V_1=50\)</span> y <span class="math notranslate nohighlight">\(V_2=25\)</span>, <span class="math notranslate nohighlight">\(r=10\)</span>, <span class="math notranslate nohighlight">\(x_0=15\)</span> e <span class="math notranslate nohighlight">\(y_0=0\)</span>, determine explícitamente las soluciones <span class="math notranslate nohighlight">\(x(t)\)</span> e <span class="math notranslate nohighlight">\(y(t)\)</span>, y luego realice su gráfico.</p>
+<p>(c) Ahora suponga que agua pura entra al tanque 1 a una tasa un porcentaje menor a <span class="math notranslate nohighlight">\(r\)</span> (<span class="math notranslate nohighlight">\(kr\)</span> con <span class="math notranslate nohighlight">\(0\leq k&lt;1\)</span>) y que sale mezcla del tanque 2 a la misma tasa. Para los valores del inciso antrior, estudie el carácter y estabilidad del punto crítico <span class="math notranslate nohighlight">\((0,0)\)</span>. Esboce el plano de fase en este caso.</p>
+</section>
+<section id="problema-2-modelamiento-competencia-entre-2-especies">
+<h3><span class="section-number">3.4.2. </span>Problema 2: Modelamiento Competencia entre 2 Especies<a class="headerlink" href="#problema-2-modelamiento-competencia-entre-2-especies" title="Link to this heading">#</a></h3>
+<p>Imagina un ecosistema en el que coexisten dos especies de plantas <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(B\)</span> que compiten por un recurso limitado, como los nutrientes del suelo. Ambas especies dependen de los nutrientes para crecer, pero el recurso no es infinito, y a medida que la población de una especie crece, afecta la disponibilidad de nutrientes para la otra especie. Queremos modelar este sistema usando un conjunto de dos ecuaciones diferenciales no lineales que describan cómo varían las poblaciones de plantas con el tiempo bajo competencia.</p>
+<p>Sean <span class="math notranslate nohighlight">\(x(t)\)</span> e <span class="math notranslate nohighlight">\(y(t)\)</span> la poblaciones de las especies de plantas <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(B\)</span> en el instante, respectivamente. Suponga que:</p>
+<ol class="arabic simple">
+<li><p>Cada especie, cuando no está en competencia con la otra, crece según una tasa de crecimiento natural limitada por la cantidad de nutrientes en el suelo. Para la especie <span class="math notranslate nohighlight">\(A\)</span>, su tasa de crecimiento en condiciones ideales es <span class="math notranslate nohighlight">\(r_Ax\)</span> donde <span class="math notranslate nohighlight">\(r_A\)</span>  es la tasa de crecimiento natural de <span class="math notranslate nohighlight">\(A\)</span>. Análogamente <span class="math notranslate nohighlight">\(r_By\)</span> para <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
+<li><p>Dado que el recurso es limitado, el crecimiento de cada población estará sujeto a competencia con la otra. La competencia entre especies puede modelarse utilizando términos que describan la reducción en la tasa de crecimiento debido a la presencia de la otra especie:</p></li>
+</ol>
+<p>(i) <strong>Competencia intraespecífica</strong>: Cada especie afecta su propio crecimiento debido a la sobrepoblación. A medida que aumenta la densidad de una especie, los nutrientes se vuelven menos accesibles para sus propios individuos. Este efecto se puede modelar con un término cuadrático de la forma <span class="math notranslate nohighlight">\(a_{AA}x^2\)</span>, donde <span class="math notranslate nohighlight">\(a_{AA}\)</span> representa la competencia dentro de la especie <span class="math notranslate nohighlight">\(A\)</span>. Similarmente, la especie <span class="math notranslate nohighlight">\(B\)</span> está sujeta a <span class="math notranslate nohighlight">\(a_{BB}y^2\)</span>.</p>
+<p>(ii) <strong>Competencia interespecífica</strong>: La especie <span class="math notranslate nohighlight">\(A\)</span> también afecta el crecimiento de la especie <span class="math notranslate nohighlight">\(B\)</span> y viceversa -hay una interacción entre ellas-. Este efecto puede modelarse con un término que dependa de ambas poblaciones como <span class="math notranslate nohighlight">\(a_{AB}xy\)</span> para la influencia de <span class="math notranslate nohighlight">\(A\)</span> sobre <span class="math notranslate nohighlight">\(B\)</span>, y <span class="math notranslate nohighlight">\(a_{BA}xy\)</span> para la influencia de <span class="math notranslate nohighlight">\(B\)</span> sobre <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>A partir de las consideraciones anteriores:</p>
+<p>(a) Establezca un sistema de ecuaciones diferenciales no lineal que modele esta competencia entre 2 especies de plantas.</p>
+<p>(b) Considere los valores: <span class="math notranslate nohighlight">\(r_A=0.2\)</span>, <span class="math notranslate nohighlight">\(r_B=0.1\)</span>, <span class="math notranslate nohighlight">\(a_{AA}=0.1\)</span>, <span class="math notranslate nohighlight">\(a_{BB}=0.05\)</span>, <span class="math notranslate nohighlight">\(a_{AB}=0.01\)</span> y <span class="math notranslate nohighlight">\(a_{BA}=0.02\)</span>. Determine los puntos críticos del sistema.</p>
+<p>(c) Linealice el sistema y estudie la estabilidad de sus puntos críticos.</p>
+<p>(d) Esboce el planos de fase correspondiente. Interprete sus resultados en relación a la extinción o subsistencia de las plantas <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(B\)</span> en el largo plazo.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1275,6 +1312,11 @@ G(x,y)&amp;=&amp;\cancelto{0}{G(x_0,y_0)}+G_x(x_0,y_0)(x-x_0)+G_y(x_0,y_0)(y-y_0
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-autonomos">3.3. Sistemas Autónomos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidad-3">3.4. Actividad de Cierre Unidad 3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-1-modelamiento-sistema-de-mezcla">3.4.1. Problema 1: Modelamiento Sistema de Mezcla</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-2-modelamiento-competencia-entre-2-especies">3.4.2. Problema 2: Modelamiento Competencia entre 2 Especies</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

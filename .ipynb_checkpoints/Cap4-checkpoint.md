@@ -388,3 +388,10 @@ name: TEU
 ---
 Desplazamiento en el eje $t$
 ```
+
+```{admonition} Ejercicio Teórico
+Pruebe que
+
+1. $\mathscr{L}\left\{\mathscr{U}(t-a)\right\}=\dfrac{e^{-as}}{s}$.
+2. $\mathscr{L}\left\{f(t-a)\mathscr{U}(t-a)\right\}=e^{-as}F(s)$, donde $F(s)=\mathscr{L}\{f(t)\}$.
+```
