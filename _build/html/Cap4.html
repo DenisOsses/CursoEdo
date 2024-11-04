@@ -477,6 +477,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-escalon-unitario">4.3.2. Función Escalón Unitario</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-ii">4.4. Propiedades Operacionales II</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivadas-de-transformadas">4.4.1. Derivadas de Transformadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolucion">4.4.2. Convolución</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -861,6 +866,38 @@ f(t-a)\mathscr{U}(t-a)=\left\{\begin{array}{ccc}0&amp;\text{si}&amp;0\leq t&lt;a
 </div>
 </section>
 </section>
+<section id="propiedades-operacionales-ii">
+<h2><span class="section-number">4.4. </span>Propiedades Operacionales II<a class="headerlink" href="#propiedades-operacionales-ii" title="Link to this heading">#</a></h2>
+<section id="derivadas-de-transformadas">
+<h3><span class="section-number">4.4.1. </span>Derivadas de Transformadas<a class="headerlink" href="#derivadas-de-transformadas" title="Link to this heading">#</a></h3>
+<p>Suponga que <span class="math notranslate nohighlight">\(F(s)=\mathscr{L}\{f(t)\}\)</span> existe y que es posible intercambiar el orden de la derivada y la integral. Así</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{ds}F(s)=-\mathscr{L}\{tf(t)\}~~\Rightarrow~~\mathscr{L}\{tf(t)\}=-\frac{d}{ds}F(s).
+\]</div>
+<p>Luego</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{t^2f(t)\}=\frac{d^2}{ds^2}F(s).
+\]</div>
+<p><strong>Teorema</strong>: Si <span class="math notranslate nohighlight">\(F(s)=\mathscr{L}\{f(t)\}\)</span> y <span class="math notranslate nohighlight">\(n\in\mathbb{N}\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{t^nf(t)\}=(-1)^n\frac{d^n}{ds^n}F(s)
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule <span class="math notranslate nohighlight">\(\mathscr{L}\{t\cos(kt)\}\)</span> y <span class="math notranslate nohighlight">\(\mathscr{L}\{t^2e^{4t}\}\)</span>.</p>
+</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule <span class="math notranslate nohighlight">\(\mathscr{L}^{-1}\left\{\arctan\left(\dfrac{3}{s+2}\right)\right\}\)</span>.</p>
+</div>
+</section>
+<section id="convolucion">
+<h3><span class="section-number">4.4.2. </span>Convolución<a class="headerlink" href="#convolucion" title="Link to this heading">#</a></h3>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -940,6 +977,11 @@ f(t-a)\mathscr{U}(t-a)=\left\{\begin{array}{ccc}0&amp;\text{si}&amp;0\leq t&lt;a
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-i">4.3. Propiedades Operacionales I</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#traslacion-en-el-eje-s">4.3.1. Traslación en el Eje <span class="math notranslate nohighlight">\(s\)</span></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-escalon-unitario">4.3.2. Función Escalón Unitario</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-ii">4.4. Propiedades Operacionales II</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivadas-de-transformadas">4.4.1. Derivadas de Transformadas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolucion">4.4.2. Convolución</a></li>
 </ul>
 </li>
 </ul>

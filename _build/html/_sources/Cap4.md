@@ -395,3 +395,40 @@ Pruebe que
 1. $\mathscr{L}\left\{\mathscr{U}(t-a)\right\}=\dfrac{e^{-as}}{s}$.
 2. $\mathscr{L}\left\{f(t-a)\mathscr{U}(t-a)\right\}=e^{-as}F(s)$, donde $F(s)=\mathscr{L}\{f(t)\}$.
 ```
+
++++
+
+## Propiedades Operacionales II
+
++++
+
+### Derivadas de Transformadas
+
+Suponga que $F(s)=\mathscr{L}\{f(t)\}$ existe y que es posible intercambiar el orden de la derivada y la integral. Así 
+
+$$
+\frac{d}{ds}F(s)=-\mathscr{L}\{tf(t)\}~~\Rightarrow~~\mathscr{L}\{tf(t)\}=-\frac{d}{ds}F(s).
+$$ 
+
+Luego 
+
+$$
+\mathscr{L}\{t^2f(t)\}=\frac{d^2}{ds^2}F(s).
+$$
+
+**Teorema**: Si $F(s)=\mathscr{L}\{f(t)\}$ y $n\in\mathbb{N}$ entonces 
+
+$$
+\mathscr{L}\{t^nf(t)\}=(-1)^n\frac{d^n}{ds^n}F(s)
+$$
+
+```{admonition} Ejercicio Teórico
+Calcule $\mathscr{L}\{t\cos(kt)\}$ y $\mathscr{L}\{t^2e^{4t}\}$.
+```
+
+```{admonition} Ejercicio Teórico
+Calcule $\mathscr{L}^{-1}\left\{\arctan\left(\dfrac{3}{s+2}\right)\right\}$.
+```
+
+### Convolución
+
