@@ -480,8 +480,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-ii">4.4. Propiedades Operacionales II</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivadas-de-transformadas">4.4.1. Derivadas de Transformadas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolucion">4.4.2. Convolución</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-una-integral">4.4.3. Transformada de una Integral</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-delta-de-dirac">4.5. Función Delta de Dirac</a></li>
 </ul>
             </nav>
         </div>
@@ -896,7 +898,84 @@ f(t-a)\mathscr{U}(t-a)=\left\{\begin{array}{ccc}0&amp;\text{si}&amp;0\leq t&lt;a
 </section>
 <section id="convolucion">
 <h3><span class="section-number">4.4.2. </span>Convolución<a class="headerlink" href="#convolucion" title="Link to this heading">#</a></h3>
+<p>Si <span class="math notranslate nohighlight">\(f\)</span> y <span class="math notranslate nohighlight">\(g\)</span> son funciones continuas por tramos en <span class="math notranslate nohighlight">\([0,\infty[\)</span> entonces la <strong>convolución</strong> <span class="math notranslate nohighlight">\(\ast\)</span> de <span class="math notranslate nohighlight">\(f\)</span> con <span class="math notranslate nohighlight">\(g\)</span> se define como</p>
+<div class="math notranslate nohighlight">
+\[
+f\ast g=\int_0^tf(\tau)g(t-\tau)~d\tau
+\]</div>
+<p>¿Qué se trata de expresar mediante la convolución? Podemos interpretar <span class="math notranslate nohighlight">\(f\ast g\)</span> como una medida de la superposición o interacción entre <span class="math notranslate nohighlight">\(f\)</span> y una versión trasladada e invertida de <span class="math notranslate nohighlight">\(g\)</span>. Una visualización de la convolución está disponible en <a class="reference external" href="https://www.youtube.com/watch?v=IOXzLMqcLbg&amp;amp;ab_channel=SignalSense">Youtube</a> donde se muestra como un filtro de señales o una versión discreta en el canal <a class="reference external" href="https://www.youtube.com/watch?v=KuXjwB4LzSA&amp;amp;ab_channel=3Blue1Brown">3B1B</a> donde se ejemplifica como filtro de imágenes.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Calcule <span class="math notranslate nohighlight">\(e^t\ast t^2\)</span>.</p>
+</div>
+<p>Solución explícita en Python:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Definir la variable simbólica</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">tau</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;t tau&#39;</span><span class="p">)</span>
+
+<span class="c1"># Definir las funciones f(tau) y g(t - tau)</span>
+<span class="n">f_tau</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>  <span class="c1"># f(tau) = exp(tau) para tau &gt;= 0</span>
+<span class="n">g_t_tau</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">tau</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># g(t - tau) = (t - tau)**2 para t - tau &gt;= 0</span>
+
+<span class="c1"># Definir la convolución explícita</span>
+<span class="n">convolucion_integral</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f_tau</span> <span class="o">*</span> <span class="n">g_t_tau</span><span class="p">,</span> <span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+
+<span class="c1"># Simplificar la expresión resultante</span>
+<span class="n">convolucion</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">convolucion_integral</span><span class="p">)</span>
+
+<span class="c1"># Mostrar la solución explícita de la convolución</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La convolución es:&quot;</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">convolucion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La convolución es:
+   2            t    
+- t  - 2⋅t + 2⋅ℯ  - 2
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Propiedad</strong>: La convolución es conmutativa: <span class="math notranslate nohighlight">\(f\ast g=g\ast f\)</span>.</p>
+<p><strong>Teorema</strong>: Si <span class="math notranslate nohighlight">\(f(t)\)</span> y <span class="math notranslate nohighlight">\(g(t)\)</span> son funciones continuas por tramos en <span class="math notranslate nohighlight">\([0,\infty[\)</span> y de orden exponencial, entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{f\ast g\}=\mathscr{L}\{f(t)\}\cdot\mathscr{L}\{f(t)\}=F(s)\cdot G(s)
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine <span class="math notranslate nohighlight">\(\displaystyle\mathscr{L}\left\{\int_0^te^\tau(t-\tau)^2~d\tau\right\}.\)</span></p>
+</div>
 </section>
+<section id="transformada-de-una-integral">
+<h3><span class="section-number">4.4.3. </span>Transformada de una Integral<a class="headerlink" href="#transformada-de-una-integral" title="Link to this heading">#</a></h3>
+<p>Usando el teorema de la transformada de Laplace de una convolución con <span class="math notranslate nohighlight">\(g(t)=1\)</span>, obtenemos que</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\left\{\int_0^tf(\tau)~d\tau\right\}=\frac{F(s)}{s}
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Resolver la ecuación integro-diferencial</p>
+<div class="math notranslate nohighlight">
+\[
+y'(t)=1-\sin(t)-\int_0^ty(\tau)~d\tau~~,~~y(0)=0
+\]</div>
+</div>
+</section>
+</section>
+<section id="funcion-delta-de-dirac">
+<h2><span class="section-number">4.5. </span>Función Delta de Dirac<a class="headerlink" href="#funcion-delta-de-dirac" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -982,8 +1061,10 @@ f(t-a)\mathscr{U}(t-a)=\left\{\begin{array}{ccc}0&amp;\text{si}&amp;0\leq t&lt;a
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-operacionales-ii">4.4. Propiedades Operacionales II</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivadas-de-transformadas">4.4.1. Derivadas de Transformadas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolucion">4.4.2. Convolución</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformada-de-una-integral">4.4.3. Transformada de una Integral</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-delta-de-dirac">4.5. Función Delta de Dirac</a></li>
 </ul>
   </nav></div>
 
