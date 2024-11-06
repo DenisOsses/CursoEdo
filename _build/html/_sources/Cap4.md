@@ -430,5 +430,80 @@ Calcule $\mathscr{L}\{t\cos(kt)\}$ y $\mathscr{L}\{t^2e^{4t}\}$.
 Calcule $\mathscr{L}^{-1}\left\{\arctan\left(\dfrac{3}{s+2}\right)\right\}$.
 ```
 
++++
+
 ### Convolución
+
+Si $f$ y $g$ son funciones continuas por tramos en $[0,\infty[$ entonces la **convolución** $\ast$ de $f$ con $g$ se define como 
+
+$$
+f\ast g=\int_0^tf(\tau)g(t-\tau)~d\tau
+$$
+
+¿Qué se trata de expresar mediante la convolución? Podemos interpretar $f\ast g$ como una medida de la superposición o interacción entre $f$ y una versión trasladada e invertida de $g$. Una visualización de la convolución está disponible en [Youtube](https://www.youtube.com/watch?v=IOXzLMqcLbg&ab_channel=SignalSense) donde se muestra como un filtro de señales o una versión discreta en el canal [3B1B](https://www.youtube.com/watch?v=KuXjwB4LzSA&ab_channel=3Blue1Brown) donde se ejemplifica como filtro de imágenes.
+
+
+```{admonition} Ejercicio Teórico
+Calcule $e^t\ast t^2$.
+```
+
+Solución explícita en Python:
+
+```{code-cell}
+:tags: [LaplaceDer2]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import sympy as sp
+
+# Definir la variable simbólica
+t, tau = sp.symbols('t tau')
+
+# Definir las funciones f(tau) y g(t - tau)
+f_tau = sp.exp(tau)  # f(tau) = exp(tau) para tau >= 0
+g_t_tau = (t - tau)**2 # g(t - tau) = (t - tau)**2 para t - tau >= 0
+
+# Definir la convolución explícita
+convolucion_integral = sp.integrate(f_tau * g_t_tau, (tau, 0, t))
+
+# Simplificar la expresión resultante
+convolucion = sp.simplify(convolucion_integral)
+
+# Mostrar la solución explícita de la convolución
+print("La convolución es:")
+sp.pprint(convolucion)
+```
+
+**Propiedad**: La convolución es conmutativa: $f\ast g=g\ast f$. 
+
+**Teorema**: Si $f(t)$ y $g(t)$ son funciones continuas por tramos en $[0,\infty[$ y de orden exponencial, entonces 
+
+$$
+\mathscr{L}\{f\ast g\}=\mathscr{L}\{f(t)\}\cdot\mathscr{L}\{f(t)\}=F(s)\cdot G(s)
+$$
+
+```{admonition} Ejercicio Teórico
+Determine $\displaystyle\mathscr{L}\left\{\int_0^te^\tau(t-\tau)^2~d\tau\right\}.$
+```
+
++++
+
+### Transformada de una Integral
+
+Usando el teorema de la transformada de Laplace de una convolución con $g(t)=1$, obtenemos que 
+
+$$
+\mathscr{L}\left\{\int_0^tf(\tau)~d\tau\right\}=\frac{F(s)}{s}
+$$
+
+```{admonition} Ejercicio Teórico
+Resolver la ecuación integro-diferencial 
+
+$$
+y'(t)=1-\sin(t)-\int_0^ty(\tau)~d\tau~~,~~y(0)=0
+$$
+```
+
+## Función Delta de Dirac
 
