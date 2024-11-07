@@ -976,6 +976,145 @@ y'(t)=1-\sin(t)-\int_0^ty(\tau)~d\tau~~,~~y(0)=0
 </section>
 <section id="funcion-delta-de-dirac">
 <h2><span class="section-number">4.5. </span>Función Delta de Dirac<a class="headerlink" href="#funcion-delta-de-dirac" title="Link to this heading">#</a></h2>
+<p>Consideremos la función</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\delta_a(t-t_0)=\left\{\begin{array}{ccc}
+     0 &amp; \text{si} &amp; 0\leq t &lt;t_0-a\\
+    \frac{1}{2a} &amp; \text{si} &amp; t_0-a&lt; t &lt;t_0+a\\ 
+     0 &amp; \text{si} &amp; t\geq t_0-a\\
+\end{array}\right.
+\end{split}\]</div>
+<p>que se conoce como <strong>función impulso unitario</strong>.</p>
+<figure class="align-default" id="dirac1">
+<a class="reference internal image-reference" href="_images/Dirac1.png"><img alt="_images/Dirac1.png" src="_images/Dirac1.png" style="height: 100px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.6 </span><span class="caption-text">Función Impulso Unitario</span><a class="headerlink" href="#dirac1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Propiedad</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_0^\infty\delta_a(t-t_0)~dt=1
+\]</div>
+<p><strong>Definición</strong>: La <strong>función delta <span class="math notranslate nohighlight">\(\delta\)</span> de Dirac</strong> se define como</p>
+<div class="math notranslate nohighlight">
+\[
+\delta(t-t_0)=\lim_{a\to0}\delta_a(t-t_0)
+\]</div>
+<figure class="align-default" id="dirac2">
+<a class="reference internal image-reference" href="_images/Dirac1.png"><img alt="_images/Dirac1.png" src="_images/Dirac1.png" style="height: 100px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 4.7 </span><span class="caption-text">Función Delta de Dirac</span><a class="headerlink" href="#dirac2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>La función delta de Dirac tiene las siguientes propiedades:</p>
+<ol class="arabic">
+<li><div class="math notranslate nohighlight">
+\[\begin{split}
+\delta(t-t_0)=\left\{\begin{array}{ccc}
+    \infty &amp; \text{si} &amp; t=t_0\\
+    0 &amp; \text{si} &amp; t\neq t_0 
+\end{array}\right.
+\end{split}\]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[
+\int_0^\infty\delta(t-t_0)~dt=1
+\]</div>
+</li>
+</ol>
+<p><strong>Teorema</strong>. Si <span class="math notranslate nohighlight">\(\mathscr{L}\{\delta(t-t_0)\}=\displaystyle\lim_{a\to0}\mathscr{L}\{\delta_a(t-t_0)\}\)</span> y <span class="math notranslate nohighlight">\(t_0&gt;0\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{\delta(t-t_0)\}=e^{-st_0}
+\]</div>
+<p>En particular, si <span class="math notranslate nohighlight">\(t_0=0\)</span> entonces</p>
+<div class="math notranslate nohighlight">
+\[
+\mathscr{L}\{\delta(t)\}=1.
+\]</div>
+<div class="admonition-ejercicio-aplicado admonition">
+<p class="admonition-title">Ejercicio Aplicado</p>
+<p>Una masa de <span class="math notranslate nohighlight">\(1\)</span> <span class="math notranslate nohighlight">\(kg.\)</span>, sujeta a un resorte de constante <span class="math notranslate nohighlight">\(k=1\)</span>, se suelta desde el reposo a <span class="math notranslate nohighlight">\(1\)</span> <span class="math notranslate nohighlight">\(m.\)</span> por debajo de la posición de equilibrio del sistema masa-resorte. Después de <span class="math notranslate nohighlight">\(\frac{\pi}{2}~seg.\)</span>, la masa es golpeada hacia abajo con un martillo que ejerce un impulso de magnitud <span class="math notranslate nohighlight">\(3\)</span> sobre la masa.</p>
+<ol class="arabic simple">
+<li><p>Determine la EDO que modela esta situación y resuélvala.</p></li>
+<li><p>¿Qué le sucede a la masa después de ser golpeada? Interprete gráficamente.</p></li>
+</ol>
+</div>
+<p>En Python:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span>
+
+<span class="c1"># Definir variables simbólicas</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+
+<span class="c1"># Definir las condiciones iniciales</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># x(0)</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># x&#39;(0)</span>
+
+<span class="c1"># La transformada de Laplace de la delta de Dirac desplazada δ(t-a) es e^(-as)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>  <span class="c1"># El desplazamiento de la delta</span>
+<span class="n">L_delta</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Transformada de la delta desplazada</span>
+
+<span class="c1"># Aplicar la transformada de Laplace a la ecuación. Este cálculo es manual</span>
+<span class="c1"># L{x&#39;&#39;} + L{x} = 3L{δ(t-π/2)}</span>
+<span class="c1"># s²X(s) - sx(0) - x&#39;(0) + X(s) = 3e^(-πs/2)</span>
+<span class="c1"># (s² + 1)X(s) = sx₀ + v₀ + 3e^(-πs/2)</span>
+<span class="c1"># X(s) = (sx₀ + v₀ + 3e^(-πs/2))/(s² + 1)</span>
+
+<span class="n">X_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">L_delta</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Calcular la transformada inversa</span>
+<span class="n">x_t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Simplificar la expresión</span>
+<span class="n">x_t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">x_t</span><span class="p">)</span>
+
+<span class="c1"># Convertir la solución simbólica a una función numérica para graficar</span>
+<span class="n">x_t_lambda</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;numpy&#39;</span><span class="p">])</span>
+
+<span class="c1"># Crear puntos para graficar</span>
+<span class="n">t_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">x_t_lambda</span><span class="p">(</span><span class="n">t_vals</span><span class="p">)</span>
+
+<span class="c1"># Graficar la solución</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Posición x(t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Solución de x</span><span class="se">\&#39;\&#39;</span><span class="s1"> + x = 3δ(t-π/2), x(0)=1, x</span><span class="se">\&#39;</span><span class="s1">(0)=0&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t=π/2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Imprimir la solución simbólica</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La solución simbólica es:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución simbólica es:
+(Heaviside(t) - 3*Heaviside(t - pi/2))*cos(t)
+</pre></div>
+</div>
+<img alt="_images/6e9acc296f5e0438ad2258d5445400b43f3b7f3cddde683e202ed631ffb94936.png" src="_images/6e9acc296f5e0438ad2258d5445400b43f3b7f3cddde683e202ed631ffb94936.png" />
+</div>
+</div>
 </section>
 </section>
 
