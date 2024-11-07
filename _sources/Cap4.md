@@ -504,6 +504,141 @@ $$
 y'(t)=1-\sin(t)-\int_0^ty(\tau)~d\tau~~,~~y(0)=0
 $$
 ```
++++
 
 ## Función Delta de Dirac
 
+Consideremos la función 
+
+$$
+\delta_a(t-t_0)=\left\{\begin{array}{ccc}
+     0 & \text{si} & 0\leq t <t_0-a\\
+    \frac{1}{2a} & \text{si} & t_0-a< t <t_0+a\\ 
+     0 & \text{si} & t\geq t_0-a\\
+\end{array}\right.
+$$ 
+
+que se conoce como **función impulso unitario**. 
+
+```{figure} Dirac1.png
+---
+height: 100px
+name: Dirac1
+---
+Función Impulso Unitario
+```
+
+**Propiedad**:
+
+$$
+\int_0^\infty\delta_a(t-t_0)~dt=1
+$$
+
+**Definición**: La **función delta $\delta$ de Dirac** se define como
+
+$$
+\delta(t-t_0)=\lim_{a\to0}\delta_a(t-t_0)
+$$
+
+```{figure} Dirac1.png
+---
+height: 100px
+name: Dirac2
+---
+Función Delta de Dirac
+```
+
+La función delta de Dirac tiene las siguientes propiedades:
+
+1. $$
+\delta(t-t_0)=\left\{\begin{array}{ccc}
+    \infty & \text{si} & t=t_0\\
+    0 & \text{si} & t\neq t_0 
+\end{array}\right.
+$$
+
+3. $$
+\int_0^\infty\delta(t-t_0)~dt=1
+$$
+
+**Teorema**. Si $\mathscr{L}\{\delta(t-t_0)\}=\displaystyle\lim_{a\to0}\mathscr{L}\{\delta_a(t-t_0)\}$ y $t_0>0$ entonces 
+
+$$
+\mathscr{L}\{\delta(t-t_0)\}=e^{-st_0}
+$$
+
+En particular, si $t_0=0$ entonces 
+
+$$
+\mathscr{L}\{\delta(t)\}=1.
+$$
+
+```{admonition} Ejercicio Aplicado
+Una masa de $1$ $kg.$, sujeta a un resorte de constante $k=1$, se suelta desde el reposo a $1$ $m.$ por debajo de la posición de equilibrio del sistema masa-resorte. Después de $\frac{\pi}{2}~seg.$, la masa es golpeada hacia abajo con un martillo que ejerce un impulso de magnitud $3$ sobre la masa.
+
+1. Determine la EDO que modela esta situación y resuélvala.
+2. ¿Qué le sucede a la masa después de ser golpeada? Interprete gráficamente.
+```
+
+En Python:
+
+```{code-cell}
+:tags: [Laplace1]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+from sympy.abc import t, s
+
+# Definir variables simbólicas
+t = sp.Symbol('t', real=True)
+s = sp.Symbol('s')
+
+# Definir las condiciones iniciales
+x0 = 1  # x(0)
+v0 = 0  # x'(0)
+
+# La transformada de Laplace de la delta de Dirac desplazada δ(t-a) es e^(-as)
+a = sp.pi/2  # El desplazamiento de la delta
+L_delta = sp.exp(-a*s)  # Transformada de la delta desplazada
+
+# Aplicar la transformada de Laplace a la ecuación. Este cálculo es manual
+# L{x''} + L{x} = 3L{δ(t-π/2)}
+# s²X(s) - sx(0) - x'(0) + X(s) = 3e^(-πs/2)
+# (s² + 1)X(s) = sx₀ + v₀ + 3e^(-πs/2)
+# X(s) = (sx₀ + v₀ + 3e^(-πs/2))/(s² + 1)
+
+X_s = (s*x0 + v0 + 3*L_delta)/(s**2 + 1)
+
+# Calcular la transformada inversa
+x_t = sp.inverse_laplace_transform(X_s, s, t)
+
+# Simplificar la expresión
+x_t = sp.simplify(x_t)
+
+# Convertir la solución simbólica a una función numérica para graficar
+x_t_lambda = sp.lambdify(t, x_t, modules=['numpy'])
+
+# Crear puntos para graficar
+t_vals = np.linspace(0, 4*np.pi, 1000)
+x_vals = x_t_lambda(t_vals)
+
+# Graficar la solución
+plt.figure(figsize=(12, 6))
+plt.plot(t_vals, x_vals)
+plt.grid(True)
+plt.xlabel('Tiempo t')
+plt.ylabel('Posición x(t)')
+plt.title('Solución de x\'\' + x = 3δ(t-π/2), x(0)=1, x\'(0)=0')
+plt.axvline(x=np.pi/2, color='r', linestyle='--', alpha=0.3, label='t=π/2')
+plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
+plt.legend()
+
+# Imprimir la solución simbólica
+print("La solución simbólica es:")
+print(x_t)
+plt.show()
+```
