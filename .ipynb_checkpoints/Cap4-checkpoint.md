@@ -580,7 +580,7 @@ Una masa de $1$ $kg.$, sujeta a un resorte de constante $k=1$, se suelta desde e
 2. ¿Qué le sucede a la masa después de ser golpeada? Interprete gráficamente.
 ```
 
-En Python:
+En Python (Gracias a Alonso Tamayo por su amable colaboración):
 
 ```{code-cell}
 :tags: [Laplace1]
@@ -588,57 +588,110 @@ En Python:
 :mystnb:
 :  code_prompt_show: "Mostrar el código fuente"
 :  code_prompt_hide: "Ocultar el código"
+# Importar módulos necesarios
 import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
-from sympy.abc import t, s
 
 # Definir variables simbólicas
-t = sp.Symbol('t', real=True)
+t = sp.Symbol('t', real = True)
 s = sp.Symbol('s')
 
-# Definir las condiciones iniciales
-x0 = 1  # x(0)
-v0 = 0  # x'(0)
+# Definir función x y sus derivadas
+x = sp.Function('x')(t)
+dx_dt = x.diff(t)
+dx2_dt = dx_dt.diff(t)
 
-# La transformada de Laplace de la delta de Dirac desplazada δ(t-a) es e^(-as)
-a = sp.pi/2  # El desplazamiento de la delta
-L_delta = sp.exp(-a*s)  # Transformada de la delta desplazada
+# Definir función F que reemplaza a la transformada de Laplace
+F = sp.Function('F')(s)
 
-# Aplicar la transformada de Laplace a la ecuación. Este cálculo es manual
-# L{x''} + L{x} = 3L{δ(t-π/2)}
-# s²X(s) - sx(0) - x'(0) + X(s) = 3e^(-πs/2)
-# (s² + 1)X(s) = sx₀ + v₀ + 3e^(-πs/2)
-# X(s) = (sx₀ + v₀ + 3e^(-πs/2))/(s² + 1)
+##################################################
+#    EDITAR AQUÍ    #
+#####################
+# Definir el/los desplazamiento(s) de la(s) delta(s)
+a = [sp.pi/2]
 
-X_s = (s*x0 + v0 + 3*L_delta)/(s**2 + 1)
+# Definir la EDO
+EDO = sp.Eq(dx2_dt + x, 3*sp.DiracDelta(t - a[0]))
 
-# Calcular la transformada inversa
-x_t = sp.inverse_laplace_transform(X_s, s, t)
+# Definir las condiciones del PVI
+x_0 = 1
+dx_0 = 0
 
-# Simplificar la expresión
-x_t = sp.simplify(x_t)
+# Definir intervalo de t para graficar
+Valores_t = np.linspace(0, 4*np.pi, 1000)
 
-# Convertir la solución simbólica a una función numérica para graficar
-x_t_lambda = sp.lambdify(t, x_t, modules=['numpy'])
+##################################################
 
-# Crear puntos para graficar
-t_vals = np.linspace(0, 4*np.pi, 1000)
-x_vals = x_t_lambda(t_vals)
+# Definir las ecuaciones para mostrar las condiciones del PVI
+x_t_0 = sp.Eq(x.subs(t, 0), x_0)
+dx_t_0 = sp.Eq(sp.Symbol("x'(0)"), dx_0)
 
-# Graficar la solución
-plt.figure(figsize=(12, 6))
-plt.plot(t_vals, x_vals)
-plt.grid(True)
-plt.xlabel('Tiempo t')
-plt.ylabel('Posición x(t)')
-plt.title('Solución de x\'\' + x = 3δ(t-π/2), x(0)=1, x\'(0)=0')
-plt.axvline(x=np.pi/2, color='r', linestyle='--', alpha=0.3, label='t=π/2')
-plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
-plt.legend()
+# Imprimir la EDO a resolver
+print('EDO a resolver:')
+display(EDO)
+print('Con PVI:')
+display(x_t_0)
+display(dx_t_0)
+
+# Aplicar la transformada de Laplace a la ecuación
+# usa directamente la transformada sin intentar acceder al índice
+lhs_transform = sp.laplace_transform(EDO.lhs, t, s)
+rhs_transform = sp.laplace_transform(EDO.rhs, t, s)
+
+if isinstance(lhs_transform, tuple):
+    lhs_transform = lhs_transform[0]
+if isinstance(rhs_transform, tuple):
+    rhs_transform = rhs_transform[0]
+
+Ecuacion_Laplace = sp.Eq(lhs_transform, rhs_transform)
+
+# Imprimir expresión de la ecuación con transformada de Laplace
+print('\n\nEcuación después de aplicar la transformada de Laplace sin aplicar las condiciones del PVI:')
+display(Ecuacion_Laplace)
+
+# Aplicar los valores del PVI a la ecuación
+Ecuacion_Laplace_PVI = Ecuacion_Laplace.subs({
+    sp.LaplaceTransform(x, t, s): F,
+    x.subs(t, 0): x_0,
+    dx_dt.subs(t, 0): dx_0})
+
+# Imprimir la ecuación con transformada de Laplace considerando las condiciones del PVI
+print('Ecuación después de aplicar la transformada de Laplace aplicando las condiciones PVI:')
+display(Ecuacion_Laplace_PVI.subs({F: sp.LaplaceTransform(x, t, s)}))
+
+# Resolver por la transformada de Laplace
+Solucion_Laplace = sp.solve(Ecuacion_Laplace_PVI, F)[0]
+
+# Imprimir la ecuación de la transformada de Laplace
+print('Transformada de Laplace:')
+display(sp.Eq(sp.LaplaceTransform(x, t, s), Solucion_Laplace.simplify()))
+
+# Calcular la transformada inversa y simplificar la expresión
+Solucion = sp.inverse_laplace_transform(Solucion_Laplace, s, t).doit().simplify()
 
 # Imprimir la solución simbólica
-print("La solución simbólica es:")
-print(x_t)
+print('\n\nLa solución simbólica es:')
+display(sp.Eq(x, Solucion))
+
+# Convertir la solución simbólica a una función numérica para graficar
+x_Lambda = sp.lambdify(t, Solucion, modules = ['numpy'])
+
+# Crear puntos para graficar
+Valores_x = x_Lambda(Valores_t)
+
+# Graficar la solución
+plt.figure(1, (12, 6))
+plt.clf()
+plt.plot(Valores_t, Valores_x)
+plt.grid(True)
+plt.title(f'Solución de ${sp.latex(EDO)}$, con PVI: ${sp.latex(x_t_0)}$, ${sp.latex(dx_t_0)}$')
+plt.xlabel('Tiempo $t$')
+plt.ylabel('Posición $x(t)$')
+[plt.axvline(_a, color = 'r', linestyle = '--', alpha = 0.3, label = f'$t={sp.latex(_a)}$') for _a in a]
+plt.axhline(0, color = 'k', linestyle = '-', alpha = 0.3)
+plt.legend()
 plt.show()
+
+### Gracias a Alonso Tamayo por su amable colaboración.
 ```

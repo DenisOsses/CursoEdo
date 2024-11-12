@@ -469,6 +469,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-solucion-mediante-series">5.1.3. Método de Solución Mediante Series</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-singulares-regulares-teorema-de-frobenius">5.2. Puntos Singulares Regulares. Teorema de Frobenius</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-frobenius">5.2.1. Teorema de Frobenius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-indicial">5.2.2. Ecuación Indicial</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -539,6 +544,217 @@ y=\sum_{n=0}^\infty c_nx^n
 <div class="admonition-ejercicio-teorico admonition">
 <p class="admonition-title">Ejercicio Teórico</p>
 <p>Resuelva la ecuación diferencial de Airy (con <span class="math notranslate nohighlight">\(k=1\)</span>): <span class="math notranslate nohighlight">\(y''+xy=0\)</span> en torno al punto ordinario <span class="math notranslate nohighlight">\(x_0=0\)</span>.</p>
+</div>
+<p>En python podemos construir un código que calcule automáticamente la derivación y reemplazo de la serie de potencias en la ecuación diferencial y dé el desarrollo de la solución en serie de potencias, pero la relación de recurrencia entre coeficientes debe ser determinada manualmente:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">interactive</span><span class="o">.</span><span class="n">printing</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="s1">&#39;mathjax&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">serie_EDO</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+    <span class="c1">#   N = Número de términos de la serie</span>
+    <span class="c1">#   a = Coeficiente de y&#39;&#39;</span>
+    <span class="c1">#   b = Coeficiente de y&#39;</span>
+    <span class="c1">#   c = Coeficiente de y</span>
+    <span class="c1">#   Observación: En caso de ingresar una fraccion numérica realizarlo de la</span>
+    <span class="c1">#                forma: sp.Rational(p,q) donde p=numerador y q=denominador.</span>
+
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Función que calcula N términos de la serie de potencias centrada en 0,</span>
+<span class="sd">    asociada a la expresión ay&#39;&#39;+by&#39;+cy, donde a,b,c son funciones que</span>
+<span class="sd">    dependen de x.&#39;&#39;&#39;</span>
+
+    <span class="n">coef</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;c0:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coef</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">)])</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">co</span> <span class="o">=</span> <span class="p">[</span><span class="n">expr</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    <span class="n">serie</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">co</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">serie</span>
+
+<span class="n">serie_EDO</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 2 c_{2} + x \left(c_{0} + 6 c_{3}\right) + x^{2} \left(c_{1} + 12 c_{4}\right) + x^{3} \left(c_{2} + 20 c_{5}\right) + x^{4} \left(c_{3} + 30 c_{6}\right) + x^{5} \left(c_{4} + 42 c_{7}\right) + x^{6} \left(c_{5} + 56 c_{8}\right) + x^{7} \left(c_{6} + 72 c_{9}\right) + x^{8} \cdot \left(c_{7} + 90 c_{10}\right) + x^{9} \cdot \left(c_{8} + 110 c_{11}\right)\]</div>
+</div>
+</div>
+<p>También podemos generar un código que dé el desarrollo de la serie de potencias solución:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="c1"># Definimos los símbolos y parámetros</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">interactive</span><span class="o">.</span><span class="n">printing</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="s1">&#39;mathjax&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">)</span>
+
+<span class="c1"># Función para calcular la solución en términos de solo c0 y c1</span>
+<span class="k">def</span> <span class="nf">calcular_solucion_en_terminos_de_c0_c1</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="c1"># Definimos los coeficientes de la serie de potencias</span>
+    <span class="n">coef</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;c0:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coef</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">)])</span>
+    <span class="c1"># Expandimos la expresión de la EDO</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># Obtenemos los coeficientes de x^i</span>
+    <span class="n">co</span> <span class="o">=</span> <span class="p">[</span><span class="n">expr</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    
+    <span class="c1"># Calculamos la relación de recurrencia</span>
+    <span class="n">relacion_recurrencia</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">co</span><span class="p">)):</span>
+        <span class="c1"># Resolviendo cada ecuación en función de coeficientes c_i</span>
+        <span class="n">eq</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">co</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">solucion</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])</span>  <span class="c1"># Relación en términos de coeficientes previos</span>
+        <span class="n">relacion_recurrencia</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">coef</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="n">solucion</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">if</span> <span class="n">solucion</span> <span class="k">else</span> <span class="p">(</span><span class="n">coef</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">))</span>
+    
+    <span class="c1"># Expresamos los coeficientes solo en función de c0 y c1</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;c0 c1&#39;</span><span class="p">)</span>
+    <span class="n">coef_valores</span> <span class="o">=</span> <span class="p">{</span><span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">c0</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">c1</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">valor</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">relacion_recurrencia</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">valor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Sustituimos cada coeficiente en términos de c0 y c1</span>
+            <span class="n">coef_valores</span><span class="p">[</span><span class="n">ci</span><span class="p">]</span> <span class="o">=</span> <span class="n">valor</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">coef_valores</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">coef_valores</span><span class="p">[</span><span class="n">ci</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># Construimos la solución en términos de c0 y c1</span>
+    <span class="n">y_solucion</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">coef_valores</span><span class="p">[</span><span class="n">coef</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">relacion_recurrencia</span><span class="p">,</span> <span class="n">y_solucion</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+
+<span class="c1"># Ejecutamos el cálculo con N=10, a=1, b=0, c=x ### Acá se introducen los parámetros</span>
+<span class="n">relacion_recurrencia</span><span class="p">,</span> <span class="n">y_solucion</span> <span class="o">=</span> <span class="n">calcular_solucion_en_terminos_de_c0_c1</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> 
+<span class="n">y_solucion</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle c_{0} + c_{1} x - \frac{c_{0} x^{3}}{6} - \frac{c_{1} x^{4}}{12} + \frac{c_{0} x^{6}}{180} + \frac{c_{1} x^{7}}{504} - \frac{c_{0} x^{9}}{12960}\]</div>
+</div>
+</div>
+</section>
+</section>
+<section id="puntos-singulares-regulares-teorema-de-frobenius">
+<h2><span class="section-number">5.2. </span>Puntos Singulares Regulares. Teorema de Frobenius<a class="headerlink" href="#puntos-singulares-regulares-teorema-de-frobenius" title="Link to this heading">#</a></h2>
+<p><strong>Definición</strong>: Un punto singular <span class="math notranslate nohighlight">\(x_0\)</span> de la EDO lineal homogénea <a class="reference internal" href="#equation-serie1">(5.3)</a> y su forma estándar <a class="reference internal" href="#equation-serie2">(5.4)</a> se denomina <strong>regular</strong> si las funciones</p>
+<div class="math notranslate nohighlight">
+\[
+a(x)=(x-x_0)P(x)~~\text{y}~~b(x)=(x-x_0)^2Q(x)
+\]</div>
+<p>son analíticas en <span class="math notranslate nohighlight">\(x_0\)</span>. Un punto singular que no es regular se denomina <strong>irregular</strong>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Clasifique los puntos singulares como regulares o irregulares para la ecuación</p>
+<div class="math notranslate nohighlight">
+\[
+(x^2-x)y''-3xy'+y=0.
+\]</div>
+</div>
+<p>Para resolver la EDO <a class="reference internal" href="#equation-serie1">(5.3)</a> respecto a un punto singular regular, se emplea el siguiente teorema debido a Frobenius:</p>
+<section id="teorema-de-frobenius">
+<h3><span class="section-number">5.2.1. </span>Teorema de Frobenius<a class="headerlink" href="#teorema-de-frobenius" title="Link to this heading">#</a></h3>
+<p>Si <span class="math notranslate nohighlight">\(x_0\)</span> es un punto singular regular de la ecuación diferencial <a class="reference internal" href="#equation-serie1">(5.3)</a>, entonces existe <strong>al menos</strong> una solución de la forma</p>
+<div class="math notranslate nohighlight">
+\[
+y=\sum_{n=0}^\infty c_n(x-x_0)^{n+r}
+\]</div>
+<p>donde el número <span class="math notranslate nohighlight">\(r\)</span> es una constante por determinar. La serie converge por lo menos en algún intervalo <span class="math notranslate nohighlight">\(0&lt;x-x_0&lt;R\)</span>.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Encuentre la solución general en <span class="math notranslate nohighlight">\(]0,\infty[\)</span> de la ecuación diferencial dada en torno al punto singular regular <span class="math notranslate nohighlight">\(x_0=0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+2xy''-y'+2y=0.
+\]</div>
+</div>
+</section>
+<section id="ecuacion-indicial">
+<h3><span class="section-number">5.2.2. </span>Ecuación Indicial<a class="headerlink" href="#ecuacion-indicial" title="Link to this heading">#</a></h3>
+<p>Al resolver la ecuación</p>
+<div class="math notranslate nohighlight">
+\[
+xy''+y=0
+\]</div>
+<p>en torno al punto singular regular <span class="math notranslate nohighlight">\(x_0=0\)</span>, encontramos una única solución:</p>
+<div class="math notranslate nohighlight">
+\[
+y_1(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!(n+1)!}x^{n+1}.
+\]</div>
+<p>¿Bajo qué condiciones podemos encontrar 2 soluciones L.I.?</p>
+<p>Si <span class="math notranslate nohighlight">\(x_0=0\)</span> es punto singular regular de la ED <a class="reference internal" href="#equation-serie1">(5.3)</a> entonces las funciones</p>
+<div class="math notranslate nohighlight">
+\[
+a(x)=xP(x)~~\text{y}~~b(x)=x^2Q(x)
+\]</div>
+<p>son analíticas en torno a <span class="math notranslate nohighlight">\(x_0=0\)</span>, es decir</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ccc}
+     a(x)=xP(x)&amp;=&amp;a_0+a_1x+a_2x^2+a_3x^3+\cdots  \\
+     b(x)=x^2Q(x)&amp;=&amp;b_0+b_1x+b_2x^2+b_3x^3+\cdots
+\end{array}
+\end{split}\]</div>
+<p>Sustituyendo la solución <span class="math notranslate nohighlight">\(\displaystyle y=\sum_{n=0}^\infty c_nx^{n+r}\)</span> en</p>
+<div class="math notranslate nohighlight">
+\[
+x^2y''+x\left[xP(x)\right]y'+\left[x^2Q(x)\right]y=0
+\]</div>
+<p>(luego de multiplicar la EDO en forma estándar por <span class="math notranslate nohighlight">\(x^2\)</span>)</p>
+<p>obtenemos la <strong>ecuación indicial</strong></p>
+<div class="math notranslate nohighlight">
+\[
+r(r-1)+a_0r+b_0=0
+\]</div>
+<p>Esta es una ecuación cuadrática en <span class="math notranslate nohighlight">\(r\)</span>, por lo que tenemos 3 casos en función de sus raíces <span class="math notranslate nohighlight">\(r_1\)</span> y <span class="math notranslate nohighlight">\(r_2\)</span> (solo consideramos el caso en que son reales):</p>
+<ol class="arabic simple">
+<li><p>Si <span class="math notranslate nohighlight">\(r_1\)</span> y <span class="math notranslate nohighlight">\(r_2\)</span> son distintas y la diferencia <span class="math notranslate nohighlight">\(r_1-r_2\)</span> no es un entero positivo, entonces existen dos soluciones L.I. de la ecuación <a class="reference internal" href="#equation-serie1">(5.3)</a> de la forma</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+y_1(x)=\sum_{n=0}^\infty c_nx^{n+r_1}~~,~~y_2(x)=\sum_{n=0}^\infty b_nx^{n+r_2}~~,~~b_0,c_0\neq0.
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Si <span class="math notranslate nohighlight">\(r_1\)</span> y <span class="math notranslate nohighlight">\(r_2\)</span> son distintas y la diferencia <span class="math notranslate nohighlight">\(r_1-r_2\)</span> es un entero positivo, entonces existen dos soluciones de la ecuación <a class="reference internal" href="#equation-serie1">(5.3)</a> L.I. de la forma</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ccc}
+       &amp;y_1(x)=\displaystyle\sum_{n=0}^\infty c_nx^{n+r_1}~~,&amp;c_0\neq0 \\
+        &amp;y_2(x)=\displaystyle Cy_1(x)\ln(x)+\sum_{n=0}^\infty b_nx^{n+r_2}~~,&amp;b_0\neq0
+    \end{array}
+\end{split}\]</div>
+<p>donde <span class="math notranslate nohighlight">\(C\)</span> es una constante que podría ser cero.</p>
+<ol class="arabic simple" start="3">
+<li><p>Si <span class="math notranslate nohighlight">\(r_1\)</span> y <span class="math notranslate nohighlight">\(r_2\)</span> son iguales, entonces existen dos soluciones L.I. de la ecuación <a class="reference internal" href="#equation-serie1">(5.3)</a> de la forma</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ccc}
+       &amp;&amp;y_1(x)=\displaystyle\sum_{n=0}^\infty c_nx^{n+r_1}~~,~~c_0\neq0 \\
+        &amp;&amp;y_2(x)=\displaystyle y_1(x)\ln(x)+\sum_{n=1}^\infty b_nx^{n+r_1}
+    \end{array}
+\end{split}\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Encuentre la forma de la solución general en <span class="math notranslate nohighlight">\(]0,\infty[\)</span> de la ecuación</p>
+<div class="math notranslate nohighlight">
+\[
+xy''+(1-x)y'-y=0
+\]</div>
 </div>
 </section>
 </section>
@@ -612,6 +828,11 @@ y=\sum_{n=0}^\infty c_nx^n
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-sistemas-masa-resorte-con-resorte-variable">5.1.1. Introducción. Sistemas Masa-Resorte con Resorte Variable</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-respecto-a-puntos-ordinarios">5.1.2. Soluciones Respecto a Puntos Ordinarios</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-solucion-mediante-series">5.1.3. Método de Solución Mediante Series</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-singulares-regulares-teorema-de-frobenius">5.2. Puntos Singulares Regulares. Teorema de Frobenius</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-frobenius">5.2.1. Teorema de Frobenius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-indicial">5.2.2. Ecuación Indicial</a></li>
 </ul>
 </li>
 </ul>

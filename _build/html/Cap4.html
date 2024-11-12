@@ -1043,7 +1043,7 @@ y'(t)=1-\sin(t)-\int_0^ty(\tau)~d\tau~~,~~y(0)=0
 <li><p>¿Qué le sucede a la masa después de ser golpeada? Interprete gráficamente.</p></li>
 </ol>
 </div>
-<p>En Python:</p>
+<p>En Python (Gracias a Alonso Tamayo por su amable colaboración):</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1051,69 +1051,143 @@ y'(t)=1-\sin(t)-\int_0^ty(\tau)~d\tau~~,~~y(0)=0
 <span class="expanded">Ocultar el código</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar módulos necesarios</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">sympy.abc</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span>
 
 <span class="c1"># Definir variables simbólicas</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="n">real</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
 
-<span class="c1"># Definir las condiciones iniciales</span>
-<span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># x(0)</span>
-<span class="n">v0</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># x&#39;(0)</span>
+<span class="c1"># Definir función x y sus derivadas</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">dx_dt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">dx2_dt</span> <span class="o">=</span> <span class="n">dx_dt</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-<span class="c1"># La transformada de Laplace de la delta de Dirac desplazada δ(t-a) es e^(-as)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>  <span class="c1"># El desplazamiento de la delta</span>
-<span class="n">L_delta</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>  <span class="c1"># Transformada de la delta desplazada</span>
+<span class="c1"># Definir función F que reemplaza a la transformada de Laplace</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)(</span><span class="n">s</span><span class="p">)</span>
 
-<span class="c1"># Aplicar la transformada de Laplace a la ecuación. Este cálculo es manual</span>
-<span class="c1"># L{x&#39;&#39;} + L{x} = 3L{δ(t-π/2)}</span>
-<span class="c1"># s²X(s) - sx(0) - x&#39;(0) + X(s) = 3e^(-πs/2)</span>
-<span class="c1"># (s² + 1)X(s) = sx₀ + v₀ + 3e^(-πs/2)</span>
-<span class="c1"># X(s) = (sx₀ + v₀ + 3e^(-πs/2))/(s² + 1)</span>
+<span class="c1">##################################################</span>
+<span class="c1">#    EDITAR AQUÍ    #</span>
+<span class="c1">#####################</span>
+<span class="c1"># Definir el/los desplazamiento(s) de la(s) delta(s)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
 
-<span class="n">X_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">L_delta</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Definir la EDO</span>
+<span class="n">EDO</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">dx2_dt</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">sp</span><span class="o">.</span><span class="n">DiracDelta</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-<span class="c1"># Calcular la transformada inversa</span>
-<span class="n">x_t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="c1"># Definir las condiciones del PVI</span>
+<span class="n">x_0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">dx_0</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="c1"># Simplificar la expresión</span>
-<span class="n">x_t</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">x_t</span><span class="p">)</span>
+<span class="c1"># Definir intervalo de t para graficar</span>
+<span class="n">Valores_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="c1"># Convertir la solución simbólica a una función numérica para graficar</span>
-<span class="n">x_t_lambda</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;numpy&#39;</span><span class="p">])</span>
+<span class="c1">##################################################</span>
 
-<span class="c1"># Crear puntos para graficar</span>
-<span class="n">t_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">x_vals</span> <span class="o">=</span> <span class="n">x_t_lambda</span><span class="p">(</span><span class="n">t_vals</span><span class="p">)</span>
+<span class="c1"># Definir las ecuaciones para mostrar las condiciones del PVI</span>
+<span class="n">x_t_0</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">x_0</span><span class="p">)</span>
+<span class="n">dx_t_0</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;x&#39;(0)&quot;</span><span class="p">),</span> <span class="n">dx_0</span><span class="p">)</span>
 
-<span class="c1"># Graficar la solución</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vals</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo t&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Posición x(t)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Solución de x</span><span class="se">\&#39;\&#39;</span><span class="s1"> + x = 3δ(t-π/2), x(0)=1, x</span><span class="se">\&#39;</span><span class="s1">(0)=0&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t=π/2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1"># Imprimir la EDO a resolver</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;EDO a resolver:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">EDO</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Con PVI:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">x_t_0</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">dx_t_0</span><span class="p">)</span>
+
+<span class="c1"># Aplicar la transformada de Laplace a la ecuación</span>
+<span class="c1"># usa directamente la transformada sin intentar acceder al índice</span>
+<span class="n">lhs_transform</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">laplace_transform</span><span class="p">(</span><span class="n">EDO</span><span class="o">.</span><span class="n">lhs</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">rhs_transform</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">laplace_transform</span><span class="p">(</span><span class="n">EDO</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lhs_transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+    <span class="n">lhs_transform</span> <span class="o">=</span> <span class="n">lhs_transform</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rhs_transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+    <span class="n">rhs_transform</span> <span class="o">=</span> <span class="n">rhs_transform</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">Ecuacion_Laplace</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">lhs_transform</span><span class="p">,</span> <span class="n">rhs_transform</span><span class="p">)</span>
+
+<span class="c1"># Imprimir expresión de la ecuación con transformada de Laplace</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">Ecuación después de aplicar la transformada de Laplace sin aplicar las condiciones del PVI:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Ecuacion_Laplace</span><span class="p">)</span>
+
+<span class="c1"># Aplicar los valores del PVI a la ecuación</span>
+<span class="n">Ecuacion_Laplace_PVI</span> <span class="o">=</span> <span class="n">Ecuacion_Laplace</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">LaplaceTransform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span> <span class="n">F</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="n">x_0</span><span class="p">,</span>
+    <span class="n">dx_dt</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="n">dx_0</span><span class="p">})</span>
+
+<span class="c1"># Imprimir la ecuación con transformada de Laplace considerando las condiciones del PVI</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ecuación después de aplicar la transformada de Laplace aplicando las condiciones PVI:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Ecuacion_Laplace_PVI</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">F</span><span class="p">:</span> <span class="n">sp</span><span class="o">.</span><span class="n">LaplaceTransform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">)}))</span>
+
+<span class="c1"># Resolver por la transformada de Laplace</span>
+<span class="n">Solucion_Laplace</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Ecuacion_Laplace_PVI</span><span class="p">,</span> <span class="n">F</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Imprimir la ecuación de la transformada de Laplace</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transformada de Laplace:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">LaplaceTransform</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">),</span> <span class="n">Solucion_Laplace</span><span class="o">.</span><span class="n">simplify</span><span class="p">()))</span>
+
+<span class="c1"># Calcular la transformada inversa y simplificar la expresión</span>
+<span class="n">Solucion</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">inverse_laplace_transform</span><span class="p">(</span><span class="n">Solucion_Laplace</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
 
 <span class="c1"># Imprimir la solución simbólica</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;La solución simbólica es:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x_t</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">La solución simbólica es:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Solucion</span><span class="p">))</span>
+
+<span class="c1"># Convertir la solución simbólica a una función numérica para graficar</span>
+<span class="n">x_Lambda</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Solucion</span><span class="p">,</span> <span class="n">modules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;numpy&#39;</span><span class="p">])</span>
+
+<span class="c1"># Crear puntos para graficar</span>
+<span class="n">Valores_x</span> <span class="o">=</span> <span class="n">x_Lambda</span><span class="p">(</span><span class="n">Valores_t</span><span class="p">)</span>
+
+<span class="c1"># Graficar la solución</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Valores_t</span><span class="p">,</span> <span class="n">Valores_x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Solución de $</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">EDO</span><span class="p">)</span><span class="si">}</span><span class="s1">$, con PVI: $</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">x_t_0</span><span class="p">)</span><span class="si">}</span><span class="s1">$, $</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">dx_t_0</span><span class="p">)</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo $t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Posición $x(t)$&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;$t=</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">_a</span><span class="p">)</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">_a</span> <span class="ow">in</span> <span class="n">a</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">### Gracias a Alonso Tamayo por su amable colaboración.</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución simbólica es:
-(Heaviside(t) - 3*Heaviside(t - pi/2))*cos(t)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EDO a resolver:
 </pre></div>
 </div>
-<img alt="_images/6e9acc296f5e0438ad2258d5445400b43f3b7f3cddde683e202ed631ffb94936.png" src="_images/6e9acc296f5e0438ad2258d5445400b43f3b7f3cddde683e202ed631ffb94936.png" />
+<img alt="_images/dfe2a3a49ee7b77450b6cafe0e54013d7c9e553ae208f99c51b4da1b36031c61.png" src="_images/dfe2a3a49ee7b77450b6cafe0e54013d7c9e553ae208f99c51b4da1b36031c61.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Con PVI:
+</pre></div>
+</div>
+<img alt="_images/ed74803ef1f63b014cbea1f01621350c092380fc2b58d3677075187a39c0176c.png" src="_images/ed74803ef1f63b014cbea1f01621350c092380fc2b58d3677075187a39c0176c.png" />
+<img alt="_images/743b281a8c3a1a44e49dd20857235fffd9a7fde9687af52fef114b978c6e0d9e.png" src="_images/743b281a8c3a1a44e49dd20857235fffd9a7fde9687af52fef114b978c6e0d9e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ecuación después de aplicar la transformada de Laplace sin aplicar las condiciones del PVI:
+</pre></div>
+</div>
+<img alt="_images/492147aa6139cd2ba6f863ac48d8dcbba07fdfcd5f0760a698c3f01cb64e3b1c.png" src="_images/492147aa6139cd2ba6f863ac48d8dcbba07fdfcd5f0760a698c3f01cb64e3b1c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ecuación después de aplicar la transformada de Laplace aplicando las condiciones PVI:
+</pre></div>
+</div>
+<img alt="_images/1be49b10f884ff031db9c61c8d756fd9b1bc9097ae65dd088ae7bec44cfc3157.png" src="_images/1be49b10f884ff031db9c61c8d756fd9b1bc9097ae65dd088ae7bec44cfc3157.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transformada de Laplace:
+</pre></div>
+</div>
+<img alt="_images/e1c351ffdb6d7ad1da111b93920023ca8e41d2592d61696bbb130c257921aed9.png" src="_images/e1c351ffdb6d7ad1da111b93920023ca8e41d2592d61696bbb130c257921aed9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución simbólica es:
+</pre></div>
+</div>
+<img alt="_images/1ae9e51430aba5be5ad5aaa85e33c19d243f8716f4544dbfc0492ae89fdf874a.png" src="_images/1ae9e51430aba5be5ad5aaa85e33c19d243f8716f4544dbfc0492ae89fdf874a.png" />
+<img alt="_images/7571d157abad79438382a73e2b5ac53b843fe8a7b6f8581f7343ba64a95149ce.png" src="_images/7571d157abad79438382a73e2b5ac53b843fe8a7b6f8581f7343ba64a95149ce.png" />
 </div>
 </div>
 </section>
