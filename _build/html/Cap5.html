@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. Unidad 5 &#8212; Ecuaciones Diferenciales 2024-2</title>
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -854,12 +854,41 @@ J_{-\nu}(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!\cdot\Gamma(1-\nu+n)}\left(\frac{x}
 \[
 y(x)=c_1J_\nu(x)+c_2J_{-\nu}(x)~~,~~\nu\not\in\mathbb{Z}
 \]</div>
-<figure class="align-default" id="bessel1">
-<a class="reference internal image-reference" href="_images/Bessel1.png"><img alt="_images/Bessel1.png" src="_images/Bessel1.png" style="height: 200px;" /></a>
-<figcaption>
-<p><span class="caption-number">Figura 5.1 </span><span class="caption-text">Función de Bessel</span><a class="headerlink" href="#bessel1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Gráficamente, en Python:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">jv</span>
+
+<span class="c1"># Definir valores de x para el gráfico</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Una lista de funciones de Bessel de 1ra especie</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">jv</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+
+<span class="c1"># Gráfico</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;J</span><span class="si">{}</span><span class="s1">(x)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;J(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Funciones de Bessel de Primera Especie&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/afab1049c53fdfc76d4a78f2992853ca7e101c38128113d9fec2a733de7e8e81.png" src="_images/afab1049c53fdfc76d4a78f2992853ca7e101c38128113d9fec2a733de7e8e81.png" />
+</div>
+</div>
 </section>
 <section id="funciones-de-bessel-de-segunda-clase">
 <h3><span class="section-number">5.3.2. </span>Funciones de Bessel de Segunda Clase<a class="headerlink" href="#funciones-de-bessel-de-segunda-clase" title="Link to this heading">#</a></h3>
@@ -879,12 +908,42 @@ Y_m(x)=\lim_{\nu\to m} Y_\nu(x)
 y(x)=c_1J_\nu(x)+c_2Y_{\nu}(x)
 \]</div>
 <p>para todo valor de <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
-<figure class="align-default" id="bessel2">
-<a class="reference internal image-reference" href="_images/Bessel2.png"><img alt="_images/Bessel2.png" src="_images/Bessel2.png" style="height: 200px;" /></a>
-<figcaption>
-<p><span class="caption-number">Figura 5.2 </span><span class="caption-text">Función de Bessel</span><a class="headerlink" href="#bessel2" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+<p>Gráficamente, en Python:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">yn</span>
+
+<span class="c1"># Se puede cambiar yn por yv para órdenes fraccionarios</span>
+<span class="c1"># al importar yv  </span>
+
+<span class="c1"># Definir valores de x para el gráfico</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Una lista de funciones de Bessel de 2da especie</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">yn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+
+<span class="c1"># Gráfico</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Y</span><span class="si">{}</span><span class="s1">(x)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Funciones de Bessel de Segunda Especie&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/378ca34c9ecc4871d54f92821f9a6f104c55220b9e487a700b40dc0d5669276d.png" src="_images/378ca34c9ecc4871d54f92821f9a6f104c55220b9e487a700b40dc0d5669276d.png" />
+</div>
+</div>
 </section>
 <section id="ecuacion-parametrica-de-bessel">
 <h3><span class="section-number">5.3.3. </span>Ecuación Paramétrica de Bessel<a class="headerlink" href="#ecuacion-parametrica-de-bessel" title="Link to this heading">#</a></h3>

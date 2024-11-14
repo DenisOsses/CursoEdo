@@ -396,12 +396,32 @@ $$
 y(x)=c_1J_\nu(x)+c_2J_{-\nu}(x)~~,~~\nu\not\in\mathbb{Z}
 $$
 
-```{figure} Bessel1.png
----
-height: 200px
-name: Bessel1
----
-Función de Bessel
+Gráficamente, en Python:
+
+```{code-cell}
+:tags: [Series3]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.special import jv
+
+# Definir valores de x para el gráfico
+x = np.linspace(0, 20, 1000)
+
+# Una lista de funciones de Bessel de 1ra especie
+y = [jv(n, x) for n in range(4)]
+
+# Gráfico
+for i, yi in enumerate(y):
+    plt.plot(x, yi, label='J{}(x)'.format(i))
+plt.xlabel('x')
+plt.ylabel('J(x)')
+plt.title('Funciones de Bessel de Primera Especie')
+plt.legend()
+plt.grid(True)
+plt.show()
 ```
 
 +++ 
@@ -428,12 +448,33 @@ $$
 
 para todo valor de $\nu$.
 
-```{figure} Bessel2.png
----
-height: 200px
-name: Bessel2
----
-Función de Bessel
+Gráficamente, en Python:
+
+```{code-cell}
+:tags: [Series3]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+from scipy.special import yn
+
+# Se puede cambiar yn por yv para órdenes fraccionarios
+# al importar yv  
+
+# Definir valores de x para el gráfico
+x = np.linspace(1, 20, 1000)
+
+# Una lista de funciones de Bessel de 2da especie
+y = [yn(n, x) for n in range(4)]
+
+# Gráfico
+for i, yi in enumerate(y):
+    plt.plot(x, yi, label='Y{}(x)'.format(i))
+plt.xlabel('x')
+plt.ylabel('Y(x)')
+plt.title('Funciones de Bessel de Segunda Especie')
+plt.legend()
+plt.grid(True)
+plt.show()
 ```
 
 ### Ecuación Paramétrica de Bessel 
