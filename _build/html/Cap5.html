@@ -474,6 +474,12 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-indicial">5.2.2. Ecuación Indicial</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-de-bessel">5.3. Ecuación de Bessel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-bessel-de-primera-clase">5.3.1. Funciones de Bessel de Primera Clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-bessel-de-segunda-clase">5.3.2. Funciones de Bessel de Segunda Clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-parametrica-de-bessel">5.3.3. Ecuación Paramétrica de Bessel</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -681,6 +687,52 @@ y=\sum_{n=0}^\infty c_n(x-x_0)^{n+r}
 2xy''-y'+2y=0.
 \]</div>
 </div>
+<p>En python podemos construir un código que calcule automáticamente la derivación y reemplazo de la serie de potencias en la ecuación diferencial y dé el desarrollo de la solución en serie de potencias por el Teorema de Frobenius (conocidas las raíces de la ecuación indicial <a class="reference internal" href="#equation-indicial">(5.5)</a>), pero la relación de recurrencia entre coeficientes debe ser determinada manualmente:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">interactive</span><span class="o">.</span><span class="n">printing</span><span class="o">.</span><span class="n">init_printing</span><span class="p">(</span><span class="n">use_latex</span><span class="o">=</span><span class="s1">&#39;mathjax&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">serie_frobenius</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+
+    <span class="c1"># N = Número de términos de la serie</span>
+    <span class="c1"># a = Coeficiente de y&#39;&#39;</span>
+    <span class="c1"># b = Coeficiente de y&#39;</span>
+    <span class="c1"># c = Coeficiente de y</span>
+    <span class="c1"># r = Raíz indicial (evaluar por la raíz obtenida al resolver</span>
+    <span class="c1">#     la ecuación indicial)</span>
+    <span class="c1"># Observación: En caso de ingresar una fracción numérica realizarlo de la</span>
+    <span class="c1">#              forma:sp.Rational(p,q) donde p=numerador y q=denominador.</span>
+
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Función que calcula N términos de la serie de potencias centrada en 0, </span>
+<span class="sd">    asociada a la expresión ay&#39;&#39;+by&#39;+cy, donde a,b,c son funciones que </span>
+<span class="sd">    dependen de x, de acuerdo a solución &#39;y&#39; dada por el Teorema de Frobenius.&#39;&#39;&#39;</span>
+
+    <span class="n">coef</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;c0:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">coef</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">N</span><span class="p">)])</span>
+    <span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span>
+                                         <span class="n">c</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">x</span><span class="o">**</span><span class="n">r</span><span class="p">))</span>
+    <span class="n">co</span> <span class="o">=</span> <span class="p">[</span><span class="n">expr</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">serie</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="nb">sum</span><span class="p">([(</span><span class="n">co</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)]))</span>
+    <span class="k">return</span> <span class="n">serie</span>
+
+<span class="n">serie_frobenius</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle x^{\frac{3}{2}} \left(c_{0} + x \left(2 c_{0} + 5 c_{1}\right) + x^{2} \cdot \left(2 c_{1} + 14 c_{2}\right) + x^{3} \cdot \left(2 c_{2} + 27 c_{3}\right) + x^{4} \cdot \left(2 c_{3} + 44 c_{4}\right) + x^{5} \cdot \left(2 c_{4} + 65 c_{5}\right) + x^{6} \cdot \left(2 c_{5} + 90 c_{6}\right) + x^{7} \cdot \left(2 c_{6} + 119 c_{7}\right) + x^{8} \cdot \left(2 c_{7} + 152 c_{8}\right) + x^{9} \cdot \left(2 c_{8} + 189 c_{9}\right) + x^{10} \cdot \left(2 c_{9} + 230 c_{10}\right)\right)\]</div>
+</div>
+</div>
 </section>
 <section id="ecuacion-indicial">
 <h3><span class="section-number">5.2.2. </span>Ecuación Indicial<a class="headerlink" href="#ecuacion-indicial" title="Link to this heading">#</a></h3>
@@ -715,8 +767,8 @@ x^2y''+x\left[xP(x)\right]y'+\left[x^2Q(x)\right]y=0
 \]</div>
 <p>(luego de multiplicar la EDO en forma estándar por <span class="math notranslate nohighlight">\(x^2\)</span>)</p>
 <p>obtenemos la <strong>ecuación indicial</strong></p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-indicial">
+<span class="eqno">(5.5)<a class="headerlink" href="#equation-indicial" title="Link to this equation">#</a></span>\[
 r(r-1)+a_0r+b_0=0
 \]</div>
 <p>Esta es una ecuación cuadrática en <span class="math notranslate nohighlight">\(r\)</span>, por lo que tenemos 3 casos en función de sus raíces <span class="math notranslate nohighlight">\(r_1\)</span> y <span class="math notranslate nohighlight">\(r_2\)</span> (solo consideramos el caso en que son reales):</p>
@@ -755,6 +807,114 @@ y_1(x)=\sum_{n=0}^\infty c_nx^{n+r_1}~~,~~y_2(x)=\sum_{n=0}^\infty b_nx^{n+r_2}~
 \[
 xy''+(1-x)y'-y=0
 \]</div>
+</div>
+</section>
+</section>
+<section id="ecuacion-de-bessel">
+<h2><span class="section-number">5.3. </span>Ecuación de Bessel<a class="headerlink" href="#ecuacion-de-bessel" title="Link to this heading">#</a></h2>
+<p>La ecuación diferencial</p>
+<div class="math notranslate nohighlight" id="equation-bessel">
+<span class="eqno">(5.6)<a class="headerlink" href="#equation-bessel" title="Link to this equation">#</a></span>\[
+x^2y''+xy'+(x^2-\nu^2)y=0
+\]</div>
+<p>se denomina <strong>ecuación diferencial de Bessel</strong> de <strong>orden</strong> <span class="math notranslate nohighlight">\(\mathbf{\nu}\)</span>, con <span class="math notranslate nohighlight">\(\nu\geq0.\)</span></p>
+<p>El punto <span class="math notranslate nohighlight">\(x=0\)</span> es un punto singular regular de la ecuación de Bessel, cuya ecuación indicial es</p>
+<div class="math notranslate nohighlight">
+\[
+r(r-1)+r-\nu^2=0~~\Rightarrow~~r=\pm\nu.
+\]</div>
+<p>Si se reemplaza la solución <span class="math notranslate nohighlight">\(\displaystyle y=\sum_{n=0}^\infty c_nx^{n+r}\)</span> y sus derivadas en la ecuación de Bessel <a class="reference internal" href="#equation-bessel">(5.6)</a>, y luego se simplifica, obtenemos que</p>
+<div class="math notranslate nohighlight">
+\[
+c_1=c_3=c_5=\cdots=c_{2n+1}=0~~,~~n\geq0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c_{2n}=\frac{(-1)^n}{2^{2n+\nu}\cdot n!\cdot\Gamma(1+\nu+n)}~~,~~n\geq0
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\Gamma(t)\)</span> es la función <a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_function"><strong>Gamma</strong></a></p>
+<div class="math notranslate nohighlight">
+\[
+\Gamma(t)=\int_0^\infty x^{t-1}e^{-x}~dx.
+\]</div>
+<section id="funciones-de-bessel-de-primera-clase">
+<h3><span class="section-number">5.3.1. </span>Funciones de Bessel de Primera Clase<a class="headerlink" href="#funciones-de-bessel-de-primera-clase" title="Link to this heading">#</a></h3>
+<p>Usamos los <span class="math notranslate nohighlight">\(c_{2n}\)</span> recién obtenidos y <span class="math notranslate nohighlight">\(r=\nu\)</span>. Una solución de la ecuación de Bessel es</p>
+<div class="math notranslate nohighlight">
+\[
+J_\nu(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!\cdot\Gamma(1+\nu+n)}\left(\frac{x}{2}\right)^{2n+\nu}
+\]</div>
+<p>y la otra es</p>
+<div class="math notranslate nohighlight">
+\[
+J_{-\nu}(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!\cdot\Gamma(1-\nu+n)}\left(\frac{x}{2}\right)^{2n-\nu}.
+\]</div>
+<p>Luego, la solución general de la ecuación de Bessel en <span class="math notranslate nohighlight">\(]0,\infty[\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=c_1J_\nu(x)+c_2J_{-\nu}(x)~~,~~\nu\not\in\mathbb{Z}
+\]</div>
+<figure class="align-default" id="bessel1">
+<a class="reference internal image-reference" href="_images/Bessel1.png"><img alt="_images/Bessel1.png" src="_images/Bessel1.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 5.1 </span><span class="caption-text">Función de Bessel</span><a class="headerlink" href="#bessel1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="funciones-de-bessel-de-segunda-clase">
+<h3><span class="section-number">5.3.2. </span>Funciones de Bessel de Segunda Clase<a class="headerlink" href="#funciones-de-bessel-de-segunda-clase" title="Link to this heading">#</a></h3>
+<p>La función definida por</p>
+<div class="math notranslate nohighlight">
+\[
+Y_\nu(x)=\frac{\cos(\nu\pi)J_\nu(x)-J_{-\nu}(x)}{\sin(\nu\pi)}
+\]</div>
+<p>es L.I. con <span class="math notranslate nohighlight">\(J_\nu(x)\)</span> y tiene la propiedad de que</p>
+<div class="math notranslate nohighlight">
+\[
+Y_m(x)=\lim_{\nu\to m} Y_\nu(x)
+\]</div>
+<p>existe cuando <span class="math notranslate nohighlight">\(\nu\to m\)</span> (con <span class="math notranslate nohighlight">\(m\in\mathbb{Z}\)</span>) y es L.I. con <span class="math notranslate nohighlight">\(J_m(x)\)</span>. Luego, la solución general de la ecuación de Bessel en <span class="math notranslate nohighlight">\(]0,\infty[\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=c_1J_\nu(x)+c_2Y_{\nu}(x)
+\]</div>
+<p>para todo valor de <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
+<figure class="align-default" id="bessel2">
+<a class="reference internal image-reference" href="_images/Bessel2.png"><img alt="_images/Bessel2.png" src="_images/Bessel2.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Figura 5.2 </span><span class="caption-text">Función de Bessel</span><a class="headerlink" href="#bessel2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="ecuacion-parametrica-de-bessel">
+<h3><span class="section-number">5.3.3. </span>Ecuación Paramétrica de Bessel<a class="headerlink" href="#ecuacion-parametrica-de-bessel" title="Link to this heading">#</a></h3>
+<p>La ecuación diferencial</p>
+<div class="math notranslate nohighlight">
+\[
+x^2y''+xy'+(\alpha^2x^2-\nu^2)y=0
+\]</div>
+<p>se denomina <strong>ecuación paramétrica de Bessel</strong> y puede ser resuelta mediante el cambio de variable <span class="math notranslate nohighlight">\(t=\alpha x\)</span>. Su solución general es</p>
+<div class="math notranslate nohighlight">
+\[
+y(x)=c_1J_\nu(\alpha x)+c_2Y_\nu(\alpha x).
+\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Sean <span class="math notranslate nohighlight">\(c,n\)</span> constantes positivas y considere la ecuación diferencial</p>
+<div class="math notranslate nohighlight" id="equation-ejer2">
+<span class="eqno">(5.7)<a class="headerlink" href="#equation-ejer2" title="Link to this equation">#</a></span>\[
+y''(x)+cx^ny(x) = 0, \quad \textrm{para $x&gt;0.$}
+\]</div>
+<p>Demuestre que realizando primero la sustitución <span class="math notranslate nohighlight">\(y=x^{1/2}z\)</span> y luego realizando la sustitución <span class="math notranslate nohighlight">\(w=\dfrac{2\sqrt{c}}{n+2}x^{n/2+1}\)</span>, entonces la ecuación <a class="reference internal" href="#equation-ejer2">(5.7)</a> se transforma en la ecuación de Bessel</p>
+<div class="math notranslate nohighlight">
+\[
+w^2\dfrac{d^2z}{dw^2}+w\dfrac{dz}{dw}+\left(w^2-\dfrac{1}{(n+2)^2}\right)z=0.
+\]</div>
+<p>Determine finalmente la solución para <span class="math notranslate nohighlight">\(y(x)\)</span>.</p>
+</div>
+<div class="admonition-ejercicio-aplicado admonition">
+<p class="admonition-title">Ejercicio Aplicado</p>
+<p>Determine la solución de la ecuación diferencial de Airy: <span class="math notranslate nohighlight">\(y''+\alpha^2 x y=0,\quad x&gt;0\)</span>.</p>
 </div>
 </section>
 </section>
@@ -833,6 +993,12 @@ xy''+(1-x)y'-y=0
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-singulares-regulares-teorema-de-frobenius">5.2. Puntos Singulares Regulares. Teorema de Frobenius</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-frobenius">5.2.1. Teorema de Frobenius</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-indicial">5.2.2. Ecuación Indicial</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-de-bessel">5.3. Ecuación de Bessel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-bessel-de-primera-clase">5.3.1. Funciones de Bessel de Primera Clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-bessel-de-segunda-clase">5.3.2. Funciones de Bessel de Segunda Clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecuacion-parametrica-de-bessel">5.3.3. Ecuación Paramétrica de Bessel</a></li>
 </ul>
 </li>
 </ul>

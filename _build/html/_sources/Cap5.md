@@ -220,6 +220,45 @@ $$
 2xy''-y'+2y=0.
 $$
 ```
+
+En python podemos construir un código que calcule automáticamente la derivación y reemplazo de la serie de potencias en la ecuación diferencial y dé el desarrollo de la solución en serie de potencias por el Teorema de Frobenius (conocidas las raíces de la ecuación indicial [](indicial)), pero la relación de recurrencia entre coeficientes debe ser determinada manualmente:
+
+```{code-cell}
+:tags: [Series3]
+:tags: [hide-input]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+import sympy as sp
+sp.interactive.printing.init_printing(use_latex='mathjax', order='old')
+
+x = sp.symbols('x')
+
+def serie_frobenius(N,a,b,c,r):
+
+    # N = Número de términos de la serie
+    # a = Coeficiente de y''
+    # b = Coeficiente de y'
+    # c = Coeficiente de y
+    # r = Raíz indicial (evaluar por la raíz obtenida al resolver
+    #     la ecuación indicial)
+    # Observación: En caso de ingresar una fracción numérica realizarlo de la
+    #              forma:sp.Rational(p,q) donde p=numerador y q=denominador.
+
+    '''Función que calcula N términos de la serie de potencias centrada en 0, 
+    asociada a la expresión ay''+by'+cy, donde a,b,c son funciones que 
+    dependen de x, de acuerdo a solución 'y' dada por el Teorema de Frobenius.'''
+
+    coef = sp.symbols('c0:'+str(2 * N))
+    y = sum([coef[i] * x**(i + r) for i in range(2 * N)])
+    expr = sp.expand(sp.cancel(sp.expand(a * sp.diff(y,x,2) + b * sp.diff(y,x) +
+                                         c * y)/x**r))
+    co = [expr.coeff(x,i-1) for i in range(N+1)]
+    serie = x**r*(coef[0]+sum([(co[i])*x**(i) for i in range(N+1)]))
+    return serie
+
+serie_frobenius(10,2*x,-1,2,sp.Rational(3,2))
+```
 +++
 
 ### Ecuación Indicial
@@ -265,7 +304,7 @@ obtenemos la **ecuación indicial**
 
 $$
 r(r-1)+a_0r+b_0=0
-$$
+$$ (indicial)
 
 Esta es una ecuación cuadrática en $r$, por lo que tenemos 3 casos en función de sus raíces $r_1$ y $r_2$ (solo consideramos el caso en que son reales):
 
@@ -301,4 +340,132 @@ Encuentre la forma de la solución general en $]0,\infty[$ de la ecuación
 $$
 xy''+(1-x)y'-y=0
 $$
+```
+
++++
+
+## Ecuación de Bessel
+
+La ecuación diferencial 
+
+$$
+x^2y''+xy'+(x^2-\nu^2)y=0
+$$ (Bessel)
+
+se denomina **ecuación diferencial de Bessel** de **orden** $\mathbf{\nu}$, con $\nu\geq0.$
+
+El punto $x=0$ es un punto singular regular de la ecuación de Bessel, cuya ecuación indicial es 
+
+$$
+r(r-1)+r-\nu^2=0~~\Rightarrow~~r=\pm\nu.
+$$
+
+Si se reemplaza la solución $\displaystyle y=\sum_{n=0}^\infty c_nx^{n+r}$ y sus derivadas en la ecuación de Bessel [](Bessel), y luego se simplifica, obtenemos que 
+
+$$
+c_1=c_3=c_5=\cdots=c_{2n+1}=0~~,~~n\geq0
+$$ 
+
+$$
+c_{2n}=\frac{(-1)^n}{2^{2n+\nu}\cdot n!\cdot\Gamma(1+\nu+n)}~~,~~n\geq0
+$$ 
+
+donde $\Gamma(t)$ es la función [**Gamma**](https://en.wikipedia.org/wiki/Gamma_function) 
+
+$$
+\Gamma(t)=\int_0^\infty x^{t-1}e^{-x}~dx.
+$$
+
+### Funciones de Bessel de Primera Clase
+
+Usamos los $c_{2n}$ recién obtenidos y $r=\nu$. Una solución de la ecuación de Bessel es 
+
+$$
+J_\nu(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!\cdot\Gamma(1+\nu+n)}\left(\frac{x}{2}\right)^{2n+\nu}
+$$ 
+
+y la otra es 
+
+$$
+J_{-\nu}(x)=\sum_{n=0}^\infty\frac{(-1)^n}{n!\cdot\Gamma(1-\nu+n)}\left(\frac{x}{2}\right)^{2n-\nu}.
+$$ 
+
+Luego, la solución general de la ecuación de Bessel en $]0,\infty[$ es 
+
+$$
+y(x)=c_1J_\nu(x)+c_2J_{-\nu}(x)~~,~~\nu\not\in\mathbb{Z}
+$$
+
+```{figure} Bessel1.png
+---
+height: 200px
+name: Bessel1
+---
+Función de Bessel
+```
+
++++ 
+
+### Funciones de Bessel de Segunda Clase 
+
+La función definida por 
+
+$$
+Y_\nu(x)=\frac{\cos(\nu\pi)J_\nu(x)-J_{-\nu}(x)}{\sin(\nu\pi)}
+$$ 
+
+es L.I. con $J_\nu(x)$ y tiene la propiedad de que 
+
+$$
+Y_m(x)=\lim_{\nu\to m} Y_\nu(x)
+$$ 
+
+existe cuando $\nu\to m$ (con $m\in\mathbb{Z}$) y es L.I. con $J_m(x)$. Luego, la solución general de la ecuación de Bessel en $]0,\infty[$ es 
+
+$$
+y(x)=c_1J_\nu(x)+c_2Y_{\nu}(x)
+$$ 
+
+para todo valor de $\nu$.
+
+```{figure} Bessel2.png
+---
+height: 200px
+name: Bessel2
+---
+Función de Bessel
+```
+
+### Ecuación Paramétrica de Bessel 
+
+La ecuación diferencial 
+
+$$
+x^2y''+xy'+(\alpha^2x^2-\nu^2)y=0
+$$ 
+
+se denomina **ecuación paramétrica de Bessel** y puede ser resuelta mediante el cambio de variable $t=\alpha x$. Su solución general es 
+
+$$
+y(x)=c_1J_\nu(\alpha x)+c_2Y_\nu(\alpha x).
+$$
+
+```{admonition} Ejercicio Teórico
+Sean $c,n$ constantes positivas y considere la ecuación diferencial 
+
+$$
+y''(x)+cx^ny(x) = 0, \quad \textrm{para $x>0.$}
+$$ (ejer2)
+
+Demuestre que realizando primero la sustitución $y=x^{1/2}z$ y luego realizando la sustitución $w=\dfrac{2\sqrt{c}}{n+2}x^{n/2+1}$, entonces la ecuación [](ejer2) se transforma en la ecuación de Bessel 
+
+$$
+w^2\dfrac{d^2z}{dw^2}+w\dfrac{dz}{dw}+\left(w^2-\dfrac{1}{(n+2)^2}\right)z=0.
+$$
+
+Determine finalmente la solución para $y(x)$.
+```
+
+```{admonition} Ejercicio Aplicado
+Determine la solución de la ecuación diferencial de Airy: $y''+\alpha^2 x y=0,\quad x>0$.
 ```
