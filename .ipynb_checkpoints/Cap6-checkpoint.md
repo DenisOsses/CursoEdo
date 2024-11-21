@@ -205,3 +205,101 @@ plot_fourier(f, p, n_terms)
 ```
 
 Note que $a_n=0$ para todo $n=0,1,2,\ldots$ y los únicos coeficientes que aparecen en la serie son los coeficientes $b_n$. ¿Tiene esto alguna razón?
+
+### Serie de Fourier de funciones pares e impares
+
+Si $f$ es una **función par** en el intervalo $]-p, p[$, entonces los coeficientes se pueden evaluar de la siguiente manera:
+
+\begin{eqnarray*}
+a_{0} & = & \dfrac{2}{p}\int_{0}^{p}f(x)dx\\
+a_{n} & = & \dfrac{2}{p}\int_{0}^{p}f(x)\cos\left(\dfrac{n\pi}{p}x\right)dx\\
+b_{n} & = & 0
+\end{eqnarray*}
+
+Es decir
+
+$$
+f(x)=\dfrac{a_{0}}{2}+\sum_{n=1}^{\infty}a_{n}\cos\left(\dfrac{n\pi}{p}x\right)
+$$
+
+De la misma manera, cuando $f$ una **función impar** en el intervalo $]-p,p[$, se tiene que
+
+$$
+a_{n}=0, \quad n=0,1,2,3,\ldots, \qquad b_{n}=\dfrac{2}{p}\int_{0}^{p}f(x)\sin\left(\dfrac{n\pi}{p}x\right)dx.
+$$
+
+Es decir 
+
+$$
+f(x)=\sum_{n=1}^{\infty}b_{n}\sin\left(\dfrac{n\pi}{p}x\right)
+$$
+
+### Desarrollo en Semiintervalos
+
+En muchos casos la función $f$ está definida en un intervalo que contiene el origen en el punto medio de él, es decir, en un intervalo del tipo $]-p, p[$. Sin embargo, es de interés representar una función $f$ que está definida sólo para $0<x<L$ con una serie trigonométrica. Esto se puede hacer de muchas formas distintas, dando una definición arbitraria de $f(x)$ para $-L<x<0$. Consideraremos los tres casos más importantes. Si $y=f(x)$ está definida en el intervalo $]0,L[$, entonces:
+
+1. Reflejar la gráfica de $f$ respecto al eje $Y$ en $]-L,0[$; la función ahora es par en $]-L,L[$.
+
+```{figure} Fourier1.png
+---
+height: 150px
+name: Fourier1
+---
+Desarrollo como Función Par
+```
+
+2. Reflejar la gráfica de $f$ respecto al origen en $]-L,0[$; la función ahora es impar en $]-L,L[$.
+
+```{figure} Fourier2.png
+---
+height: 150px
+name: Fourier2
+---
+Desarrollo como Función Impar
+```
+
+3. Definir $f$ en $]-L,0[$ con $y=f(x+L)$.
+
+```{figure} Fourier3.png
+---
+height: 150px
+name: Fourier3
+---
+Desarrollo mediante una Traslación
+```
+
+```{admonition} Ejercicio Aplicado
+Considere el movimiento no amortiguado de una masa $m$ en un resorte con constante de resorte $k$ bajo la influencia de una fuerza externa periódica $f(t)$. Sabemos que su desplazamiento $x(t)$ desde su posición de equilibrio satisface la conocida ecuación
+
+$$
+mx''(t)+kx(t)=f(t)
+$$ 
+
+y su solucón general es de la forma $x(t)=c_1\cos(\omega_0 t)+c_2\sin(\omega_0 t)+x_p(t)$, donde $\omega_0=\sqrt{\dfrac{k}{m}} $ es la frecuencia natural del sistema, y $x_p(t)$ es una solución particular de la ecuación. Los valores de las constantes  $c_1$ y $c_2$ se determinan por las condiciones iniciales. 
+
+Ahora nos interesa utilizar la serie de Fourier para encontrar una solución periódica particular de la ecuación. Ésta se representa por $x_{sp}(t)$, y se conoce como **solución periódica estacionaria**. 
+
+Para simplificar, se considera que $f(t)$ es una función impar con periodo $2L$, de tal manera que su serie de Fourier tiene la forma 
+
+$$
+f(t)=\sum_{n=1}^\infty B_n\sin\left(\dfrac{n\pi t}{L}\right)
+$$
+
+Si $\dfrac{n\pi}{L}$ no es igual a $\omega_0$ para cualquier entero positivo $n,$ puede determinarse una solución periódica en estado permanente de la forma 
+
+$$
+x_{sp}(t)= \sum_{n=1}^\infty b_n\sin\left(\dfrac{n\pi t}{L}\right)
+$$
+
+Suponga que $m=2 \, kg, \, k=32\, N/m$ y que $f(t)$ es una fuerza periódica impar con periodo de $2\, seg$ dada en un periodo por 
+
+$$
+f(t)=\left\{\begin{array}{ccc}
+    +10\,  N & \textrm{si} & 0<t<1\\
+    -10\, N  & \textrm{si} & 1<t<2\\
+    \end{array}
+\right.
+$$
+
+Determine el movimiento periódico estacionario $x_{sp}(t).$ 
+```
