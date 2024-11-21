@@ -12,4 +12,5 @@ parts:
     - file: Cap3
     - file: Cap4
     - file: Cap5
+    - file: Cap6
     - file: Glosario
