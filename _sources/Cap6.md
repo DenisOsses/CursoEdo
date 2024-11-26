@@ -323,4 +323,6 @@ $$ (Actividad3)
 1. Considere $m=k=1$ y $\beta=0$, y que un martillazo -hacia abajo- en el instante $4\pi$ aplica una fuerza de impulso de magnitud $1$. La masa parte desde el reposo a una unidad sobre la posición de equilibrio. Modele esta situación, resuelva el P.V.I asociado y grafique la solución obtenida.
 2. Suponga ahora que en el instante $8\pi$ se aplica una fuerza de impulso de magnitud $1$ nuevamente, ¿qué ocurre en esta situación? Modele, resuelva y grafique la solución obtenida.
 3. Considere ahora que $m=1$, $\beta=2$, $f(t)=0$ y que la constante del resorte cambia en el tiempo $k(t)=\dfrac{k}{t^2}$, para $k>0$, debido al desgaste. Si $t=0$ es un punto singular regular de la ecuación diferencial, estudie la forma de las soluciones del P.V.I asociado en función de los valores de $k$.
-4. Determine una solución el problema anterior para $k=0.25$ por el método de Frobenius.
+4. Determine una solución el problema anterior para $k=0.25$, por el método de Frobenius.
+
++++
