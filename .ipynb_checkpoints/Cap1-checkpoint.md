@@ -7,7 +7,7 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.11.5
 kernelspec:
-  display_name: ipython3
+  display_name: Python 3
   language: python
   name: python3
 ---
@@ -910,11 +910,11 @@ tenga solución única. Esboce el gráfico de tal región $R$. Resuelva el PVI a
 :  code_prompt_show: "Mostrar el código fuente"
 :  code_prompt_hide: "Ocultar el código"
 %matplotlib inline
-import ipywidgets as widgets
-from IPython.display import display
 from ipywidgets import interactive
 import matplotlib.pyplot as plt
 import numpy as np
+import plotly.io as pio
+pio.renderers.default = 'iframe'
 
 def f(m, b):
     plt.figure(2)
@@ -926,5 +926,5 @@ def f(m, b):
 interactive_plot = interactive(f, m=(-2.0, 2.0), b=(-3, 3, 0.5))
 output = interactive_plot.children[-1]
 output.layout.height = '350px'
-display(interactive_plot)
+interactive_plot
 ```

@@ -7,3 +7,9 @@ seaborn
 sympy
 ipywidgets
 plotly
+myst_nb
+sphinx-exercise
+sphinx-proof
+jupyterquiz
+pydata-sphinx-theme
+docutils==0.18.1
