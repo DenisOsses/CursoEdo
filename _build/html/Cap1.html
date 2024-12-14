@@ -492,6 +492,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-1-resolucion-de-ecuaciones-diferenciales">1.7.1. Problema 1: Resolución de Ecuaciones Diferenciales</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-2-modelamiento-y-analisis-cualitativo">1.7.2. Problema 2: Modelamiento y Análisis Cualitativo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-3-teorema-de-existencia-y-unicidad">1.7.3. Problema 3: Teorema de Existencia y Unicidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba">1.7.4. Prueba</a></li>
 </ul>
 </li>
 </ul>
@@ -1294,7 +1295,7 @@ z=ax+by+c~\Rightarrow ~z'=a+by'.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;C:\Users\denis.osses\AppData\Local\Temp\ipykernel_35888\3181253743.py&quot;</span><span class="gt">, line </span><span class="mi">7</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;C:\Users\denis.osses\AppData\Local\Temp\ipykernel_36220\3181253743.py&quot;</span><span class="gt">, line </span><span class="mi">7</span>
     <span class="n">M</span> <span class="o">=</span> <span class="c1">## ¿?</span>
         <span class="o">^</span>
 <span class="ne">SyntaxError</span>: invalid syntax
@@ -1314,6 +1315,39 @@ z=ax+by+c~\Rightarrow ~z'=a+by'.
 y'=\frac{1}{\sqrt{y+x}}-1~~,~~y(x_0)=y_0
 \]</div>
 <p>tenga solución única. Esboce el gráfico de tal región <span class="math notranslate nohighlight">\(R\)</span>. Resuelva el PVI anterior con <span class="math notranslate nohighlight">\(y(0)=1\)</span>.</p>
+</section>
+<section id="prueba">
+<h3><span class="section-number">1.7.4. </span>Prueba<a class="headerlink" href="#prueba" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Mostrar el código fuente</span>
+<span class="expanded">Ocultar el código</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span>
+<span class="n">pio</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="s1">&#39;iframe&#39;</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">interactive_plot</span> <span class="o">=</span> <span class="n">interactive</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">interactive_plot</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">output</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="s1">&#39;350px&#39;</span>
+<span class="n">interactive_plot</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 </section>
 </section>
@@ -1410,6 +1444,7 @@ y'=\frac{1}{\sqrt{y+x}}-1~~,~~y(x_0)=y_0
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-1-resolucion-de-ecuaciones-diferenciales">1.7.1. Problema 1: Resolución de Ecuaciones Diferenciales</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-2-modelamiento-y-analisis-cualitativo">1.7.2. Problema 2: Modelamiento y Análisis Cualitativo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problema-3-teorema-de-existencia-y-unicidad">1.7.3. Problema 3: Teorema de Existencia y Unicidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba">1.7.4. Prueba</a></li>
 </ul>
 </li>
 </ul>

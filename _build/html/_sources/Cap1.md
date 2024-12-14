@@ -7,7 +7,7 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.11.5
 kernelspec:
-  display_name: Python 3
+  display_name: ipython3
   language: python
   name: python3
 ---
@@ -900,3 +900,31 @@ y'=\frac{1}{\sqrt{y+x}}-1~~,~~y(x_0)=y_0
 $$ 
 
 tenga solución única. Esboce el gráfico de tal región $R$. Resuelva el PVI anterior con $y(0)=1$.
+
+### Prueba 
+
+```{code-cell} ipython3
+:tags: [Prueba]
+:tags: [hide-cell]
+:mystnb:
+:  code_prompt_show: "Mostrar el código fuente"
+:  code_prompt_hide: "Ocultar el código"
+%matplotlib inline
+from ipywidgets import interactive
+import matplotlib.pyplot as plt
+import numpy as np
+import plotly.io as pio
+pio.renderers.default = 'iframe'
+
+def f(m, b):
+    plt.figure(2)
+    x = np.linspace(-10, 10, num=1000)
+    plt.plot(x, m * x + b)
+    plt.ylim(-5, 5)
+    plt.show()
+
+interactive_plot = interactive(f, m=(-2.0, 2.0), b=(-3, 3, 0.5))
+output = interactive_plot.children[-1]
+output.layout.height = '350px'
+interactive_plot
+```

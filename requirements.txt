@@ -5,3 +5,5 @@ scipy
 pandas
 seaborn
 sympy
+ipywidgets
+plotly
