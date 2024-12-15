@@ -928,3 +928,10 @@ output = interactive_plot.children[-1]
 output.layout.height = '350px'
 interactive_plot
 ```
+
+```{code-cell} ipython3
+import plotly.graph_objects as go
+
+fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
+fig.show()
+```
