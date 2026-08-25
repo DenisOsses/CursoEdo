@@ -829,6 +829,115 @@ La demostración del TEU excede los objetivos del curso. Para estudiarla, recome
 <!--######################################################################################################################################################################################################################################################################################################################################################
 -->
 
++++
+
+(MetodosNumericos)=
+## Métodos Numéricos
+
++++
+
+### Método de Euler
+
+Considere el PVI
+
+$$
+\left\{\begin{array}{ccc}\dfrac{dy}{dx}& =& f(x,y)\\&&\\ y(x_0)&=&y_0.\end{array}\right.
+$$
+
+Entonces la ecuación de la recta tangente a la curva solución de este, en el punto inicial $(x_0,y_0)$ es
+
+$$
+L(x)=y_{0}+f(x_{0},y_{0})(x-x_{0}).
+$$
+
+<u>Recuerdo</u>: La recta $L(x)$ se denomina linealización de la función $y(x)$ y satisface que $L(x)\approx y(x)$ en una vecindad de $x=x_{0}$.
+
+Ahora, si nos desplazamos en una cantidad pequeña $h>0$ en el eje $X$ desde el punto de inicio $x_{0}$, nuestra nueva posición será $x_{1}=x_{0}+h$. Por ende
+
+$$
+L(x_{1})=L(x_{0}+h)=y_{0}+hf(x_{0},y_{0}).
+$$
+
+Si definimos $y_{1}=L(x_{1})$ entonces se sigue que $y_{1}\approx y(x_{1})$. Luego, si realizamos el mismo proceso anterior pero tomando como punto inicial ahora $(x_{1},y_{1})$ se sigue que
+
+$$
+y_{2}=L(x_{2})=L(x_{1}+h)=y_{1}+hf(x_{1},y_{1})\approx y(x_{2}).
+$$
+
+Repitiendo el proceso de manera recursiva, se obtiene finalmente que
+
+$$
+y_{n+1}=y_{n}+hf(x_{n},y_{n}),
+$$ (eqMetodoEuler)
+
+donde
+
+$$
+x_{n}=x_{n-1}+h=x_{n-2}+2h=\cdots =x_{0}+nh,\quad \text{y}\quad n=0,1,2,...
+$$
+
+Este procedimiento de usar recursivamente la linealización de $y$ se denomina **método de Euler**.
+
+**Ejemplo:** Considere el problema de valor inicial
+
+$$
+y'=0.1\sqrt{y}+0.4x^2,\qquad y(2)=4.
+$$
+
+Obtenga un valor aproximado de $y(2.5)$.
+
+Usaremos el método de Euler con $h=0.1$. Note que para llegar desde $x_{0}=2$ hasta $x=2.5$ necesitamos dar 5 pasos de largo $h=0.1$. Así, por la ecuación [](eqMetodoEuler), tenemos que
+
+$$
+y_{n+1}=y_{n}+h\left(0.1\sqrt{y_{n}}+0.4x_{n}^2\right) \quad \text{para todo } n\in \mathbb{N}_0.
+$$
+
+En este caso, el punto inicial es $(x_0,y_0)=(2,4)$. Luego
+
+\begin{align*}
+y_{1}&=y_{0}+h\left(0.1\sqrt{y_{0}}+0.4x_{0}^2\right)=4+0.1\left(0.1\sqrt{4}+0.4\cdot 2^2\right)=4.18,\\
+y_{2}&=y_{1}+h\left(0.1\sqrt{y_{1}}+0.4x_{1}^2\right)=4.18+0.1\left(0.1\sqrt{4.18}+0.4\cdot (2.1)^2\right)=4.3768,\\
+y_{3}&=y_{2}+h\left(0.1\sqrt{y_{2}}+0.4x_{2}^2\right)=4.5914,\\
+y_{4}&=y_{3}+h\left(0.1\sqrt{y_{3}}+0.4x_{3}^2\right)=4.8244,\\
+y_{5}&=y_{4}+h\left(0.1\sqrt{y_{4}}+0.4x_{4}^2\right)=5.0768
+\end{align*}
+
+Por lo tanto, dado que $y_{5}\approx y(x_{5})=y(2.5)$, se sigue que $y(2.5)\approx 5.0768$.
+
++++
+
+### Método de Runge-Kutta
+
+Consideremos nuevamente el PVI
+
+$$
+\left\{\begin{array}{ccc}\dfrac{dy}{dx}& =& f(x,y)\\&&\\ y(x_0)&=&y_0.\end{array}\right.
+$$
+
+Así como el método de Euler se basa en aproximar la solución $y(x)$ dentro de un subintervalo mediante una recta (la recta tangente), el método de Runge-Kutta de orden $n$ hace lo mismo, pero por cada subintervalo considera $n$ rectas para aproximar la solución $y(x)$ (teniendo esto en cuenta, el método de Euler es el método de Runge-Kutta de orden 1).
+
+La siguiente formulación corresponde al **método de Runge-Kutta de orden 2** (RK2):
+
+$$
+y_{n+1}=y_{n}+\frac{h}{2}(k_{1}+k_{2}), \quad \text{para todo } n\in \mathbb{N}_0.
+$$ (eqMetodoRK2)
+
+Donde
+
+\begin{align*}
+k_{1}&=f(x_{n},y_{n}),\\
+k_{2}&=f(x_{n}+h,y_{n}+hk_{1})
+\end{align*}
+
+$h>0$ es el largo cada subintervalo generado a partir de $x_0$, que se está partiendo por la mitad. Gráficamente $k_1$ y $k_2$ corresponden a las pendientes de las dos rectas usadas para aproximar la función $y(x)$ en cada mitad de estos subintervalos.
+
+**Observación**: Cabe destacar que en ambos métodos vistos, en general, tomando saltos de largo $h>0$ más pequeños, la aproximación de la solución $y(x)$ será más precisa.
+
+<!--######################################################################################################################################################################################################################################################################################################################################################
+-->
+
++++
+
 ## Actividad de Cierre Unidad 1
 
 ### Problema 1: Resolución de Ecuaciones Diferenciales 
@@ -900,38 +1009,3 @@ y'=\frac{1}{\sqrt{y+x}}-1~~,~~y(x_0)=y_0
 $$ 
 
 tenga solución única. Esboce el gráfico de tal región $R$. Resuelva el PVI anterior con $y(0)=1$.
-
-### Prueba 
-
-```{code-cell} ipython3
-:tags: [Prueba]
-:tags: [hide-cell]
-:mystnb:
-:  code_prompt_show: "Mostrar el código fuente"
-:  code_prompt_hide: "Ocultar el código"
-%matplotlib inline
-from ipywidgets import interactive
-import matplotlib.pyplot as plt
-import numpy as np
-import plotly.io as pio
-pio.renderers.default = 'iframe'
-
-def f(m, b):
-    plt.figure(2)
-    x = np.linspace(-10, 10, num=1000)
-    plt.plot(x, m * x + b)
-    plt.ylim(-5, 5)
-    plt.show()
-
-interactive_plot = interactive(f, m=(-2.0, 2.0), b=(-3, 3, 0.5))
-output = interactive_plot.children[-1]
-output.layout.height = '350px'
-interactive_plot
-```
-
-```{code-cell} ipython3
-import plotly.graph_objects as go
-
-fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
-fig.show()
-```
