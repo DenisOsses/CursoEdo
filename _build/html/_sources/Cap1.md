@@ -864,6 +864,22 @@ $$
 y_{2}=L(x_{2})=L(x_{1}+h)=y_{1}+hf(x_{1},y_{1})\approx y(x_{2}).
 $$
 
+```{figure} Euler1.png
+---
+height: 220px
+name: Euler1
+---
+Primeros pequeños pasos para aproximar una curva solución.
+```
+
+```{figure} Euler2.png
+---
+height: 180px
+name: Euler2
+---
+El paso de $(x_n, y_n)$ a $(x_{n+1}, y_{n+1})$.
+```
+
 Repitiendo el proceso de manera recursiva, se obtiene finalmente que
 
 $$
@@ -877,6 +893,23 @@ x_{n}=x_{n-1}+h=x_{n-2}+2h=\cdots =x_{0}+nh,\quad \text{y}\quad n=0,1,2,...
 $$
 
 Este procedimiento de usar recursivamente la linealización de $y$ se denomina **método de Euler**.
+
+```{admonition} ALGORITMO: El método de Euler
+:class: note
+Dado el problema de valor inicial
+
+$$
+\frac{dy}{dx} = f(x, y), \qquad y(x_0) = y_0
+$$
+
+**El método de Euler** con tamaño de paso $h$ consiste en aplicar la fórmula iterativa
+
+$$
+y_{n+1} = y_n + h \cdot f(x_n, y_n) \qquad (n \ge 0)
+$$
+
+para calcular aproximaciones sucesivas $y_1, y_2, y_3, \ldots$ de los valores (reales) $y(x_1), y(x_2), y(x_3), \ldots$ de la solución (exacta) $y = y(x)$ en los puntos $x_1, x_2, x_3, \ldots$ respectivamente.
+```
 
 **Ejemplo:** Considere el problema de valor inicial
 
