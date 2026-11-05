@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/myfile.css?v=4bd77a66" />
@@ -474,7 +474,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-de-fourier">6.1. Series de Fourier</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">6.1.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion">6.1.2. Definición</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desarrollo-en-semiintervalos">6.1.3. Desarrollo en Semiintervalos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-de-una-serie-de-fourier">6.1.3. Convergencia de una serie de Fourier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-periodica">6.1.4. Extensión periódica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-fourier-de-funciones-pares-e-impares">6.1.5. Serie de Fourier de funciones pares e impares</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desarrollo-en-semiintervalos">6.1.6. Desarrollo en Semiintervalos</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidades-4-5-y-6">6.2. Actividad de Cierre Unidades 4, 5 y 6</a><ul class="nav section-nav flex-column">
@@ -528,153 +531,176 @@ f(x)=\dfrac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n}\cos\left(\dfrac{n\pi}{p}x\r
 a_{0} &amp; = &amp; \dfrac{1}{p}\int_{-p}^{p}f(x)dx\\
 a_{n} &amp; = &amp; \dfrac{1}{p}\int_{-p}^{p}f(x)\cos\left(\dfrac{n\pi}{p}x\right)dx\\
 b_{n} &amp; = &amp; \dfrac{1}{p}\int_{-p}^{p}f(x)\sin \left(\dfrac{n\pi}{p}x\right)dx
-\end{eqnarray*} (Fourier1)
+\end{eqnarray*}\]</div>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine la serie de Fourier de <span class="math notranslate nohighlight">\(f(x)=x\)</span> en <span class="math notranslate nohighlight">\(]-\pi,\pi[\)</span>.</p>
+</div>
+<p>En Python,</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar el código fuente</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
 
-```{admonition} Ejercicio Teórico
-Determine la serie de Fourier de $f(x)=x$ en $]-\pi,\pi[$.
-```
+<span class="k">def</span><span class="w"> </span><span class="nf">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n_terms</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula el desarrollo en serie de Fourier de una función `f(x)` definida en el intervalo ]-p, p[.</span>
 
-En Python, 
+<span class="sd">    Args:</span>
+<span class="sd">        f (sympy expression): La función a desarrollar.</span>
+<span class="sd">        p (float): El intervalo del desarrollo ]-p, p[.</span>
+<span class="sd">        n_terms (int): Número de términos de la serie de Fourier.</span>
 
-```{code-cell}
-:tags: [Fourier1]
-:tags: [hide-input]
-:mystnb:
-:  code_prompt_show: &quot;Mostrar el código fuente&quot;
-import sympy as sp
-
-def fourier_series(f, p, n_terms=10):
-    &quot;&quot;&quot;
-    Calcula el desarrollo en serie de Fourier de una función `f(x)` definida en el intervalo ]-p, p[.
-
-    Args:
-        f (sympy expression): La función a desarrollar.
-        p (float): El intervalo del desarrollo ]-p, p[.
-        n_terms (int): Número de términos de la serie de Fourier.
-
-    Returns:
-        sympy expression: La serie de Fourier como una expresión simbólica.
-    &quot;&quot;&quot;
-    # Definir la variable simbólica
-    x = sp.Symbol('x', real=True)
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy expression: La serie de Fourier como una expresión simbólica.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Definir la variable simbólica</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    # Coeficiente a_0
-    a0 = (1 / (2 * p)) * sp.integrate(f, (x, -p, p))
+    <span class="c1"># Coeficiente a_0</span>
+    <span class="n">a0</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p</span><span class="p">))</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 
-    # Coeficientes a_n y b_n
-    a_n = lambda n: (1 / p) * sp.integrate(f * sp.cos(n * sp.pi * x / p), (x, -p, p))
-    b_n = lambda n: (1 / p) * sp.integrate(f * sp.sin(n * sp.pi * x / p), (x, -p, p))
+    <span class="c1"># Coeficientes a_n y b_n</span>
+    <span class="n">a_n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">p</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+    <span class="n">b_n</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">p</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
 
-    # Construir la serie de Fourier
-    series = a0 / 2
-    for n in range(1, n_terms + 1):
-        series += a_n(n) * sp.cos(n * sp.pi * x / p) + b_n(n) * sp.sin(n * sp.pi * x / p)
+    <span class="c1"># Construir la serie de Fourier</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_terms</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">series</span> <span class="o">+=</span> <span class="n">a_n</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">b_n</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span>
 
-    # Simplificar la serie
-    series = sp.simplify(series)
-    return series
+    <span class="c1"># Simplificar la serie</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">series</span>
 
-# Definir la función f(x) y el intervalo
-x = sp.Symbol('x', real=True)
-f = x # Función f(x) a desarrollar
-p = sp.pi  # Intervalo ]-p, p[
+<span class="c1"># Definir la función f(x) y el intervalo</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span> <span class="c1"># Función f(x) a desarrollar</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># Intervalo ]-p, p[</span>
 
-# Llamar a la función para calcular la serie de Fourier
-n_terms = 3  # Número de términos de la serie
-series = fourier_series(f, p, n_terms)
+<span class="c1"># Llamar a la función para calcular la serie de Fourier</span>
+<span class="n">n_terms</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Número de términos de la serie</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n_terms</span><span class="p">)</span>
 
-# Mostrar la serie
-display(series)
-```
+<span class="c1"># Mostrar la serie</span>
+<span class="n">display</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span><span class="w"> </span><span class="nf">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n_terms</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd">     Calcula el desarrollo en serie de Fourier de una función `f(x)` definida en el intervalo ]-p, p[.</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="sd"> </span>
+<span class="sd">   (...)     13         sympy expression: La serie de Fourier como una expresión simbólica.</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="sd">     &quot;&quot;&quot;</span>
 
-### Convergencia de una serie de Fourier
-
-**Teorema: Condiciones para la convergencia**: Sean $f$ y $f'$ continuas por tramos en $]-p, p[$ excepto en un número finito de puntos en el intervalo y con discontinuidades finitas sólo en esos puntos. Entonces, la serie de Fourier de $f$ en el intervalo converge a $f(x)$ en un punto de continuidad. En un punto de discontinuidad, la serie de Fourier converge hacia el promedio 
-
-$$
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;sympy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convergencia-de-una-serie-de-fourier">
+<h3><span class="section-number">6.1.3. </span>Convergencia de una serie de Fourier<a class="headerlink" href="#convergencia-de-una-serie-de-fourier" title="Link to this heading">#</a></h3>
+<p><strong>Teorema: Condiciones para la convergencia</strong>: Sean <span class="math notranslate nohighlight">\(f\)</span> y <span class="math notranslate nohighlight">\(f'\)</span> continuas por tramos en <span class="math notranslate nohighlight">\(]-p, p[\)</span> excepto en un número finito de puntos en el intervalo y con discontinuidades finitas sólo en esos puntos. Entonces, la serie de Fourier de <span class="math notranslate nohighlight">\(f\)</span> en el intervalo converge a <span class="math notranslate nohighlight">\(f(x)\)</span> en un punto de continuidad. En un punto de discontinuidad, la serie de Fourier converge hacia el promedio</p>
+<div class="math notranslate nohighlight">
+\[
 \dfrac{f(x^{+})+f(x^{-})}{2}
-$$
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(f(x^{+})\)</span> y <span class="math notranslate nohighlight">\(f(x^{-})\)</span> denotan el límite de <span class="math notranslate nohighlight">\(f\)</span> en <span class="math notranslate nohighlight">\(x\)</span>, por la derecha y por la izquierda.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Analice la convergencia de la serie de Fourier del ejemplo anterior en <span class="math notranslate nohighlight">\(]-\pi,\pi[\)</span>.</p>
+</div>
+</section>
+<section id="extension-periodica">
+<h3><span class="section-number">6.1.4. </span>Extensión periódica<a class="headerlink" href="#extension-periodica" title="Link to this heading">#</a></h3>
+<p>Una serie de Fourier no solo representa la función <span class="math notranslate nohighlight">\(f\)</span> en el intervalo <span class="math notranslate nohighlight">\(]-p, p[\)</span>, sino que también a la extensión periódica de <span class="math notranslate nohighlight">\(f\)</span> fuera de este intervalo, debido a la periodicidad (con periodo <span class="math notranslate nohighlight">\(2p\)</span>) de las funciones seno y coseno involucradas en su desarrollo en serie de Fourier.</p>
+<div class="admonition-ejercicio-teorico admonition">
+<p class="admonition-title">Ejercicio Teórico</p>
+<p>Determine la serie de Fourier de <span class="math notranslate nohighlight">\(f(x)=x\)</span> en <span class="math notranslate nohighlight">\(]-\pi,\pi[\)</span>. Extienda esta serie periódicamente a todo <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> y analice la convergencia de la serie para <span class="math notranslate nohighlight">\(f\)</span> en todos sus puntos.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Mostrar el código fuente</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
 
-donde $f(x^{+})$ y $f(x^{-})$ denotan el límite de $f$ en $x$, por la derecha y por la izquierda.
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_fourier</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n_terms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Grafica la función original `f(x)` y su desarrollo en serie de Fourier en el intervalo ]-p, p[.</span>
 
-```{admonition} Ejercicio Teórico
-Analice la convergencia de la serie de Fourier del ejemplo anterior en $]-\pi,\pi[$.
-```
-
-### Extensión periódica
-
-Una serie de Fourier no solo representa la función $f$ en el intervalo $]-p, p[$, sino que también a la extensión periódica de $f$ fuera de este intervalo, debido a la periodicidad (con periodo $2p$) de las funciones seno y coseno involucradas en su desarrollo en serie de Fourier.
-
-```{admonition} Ejercicio Teórico
-Determine la serie de Fourier de $f(x)=x$ en $]-\pi,\pi[$. Extienda esta serie periódicamente a todo $\mathbb{R}$ y analice la convergencia de la serie para $f$ en todos sus puntos.
-```
-
-```{code-cell}
-:tags: [Fourier2]
-:tags: [hide-input]
-:mystnb:
-:  code_prompt_show: &quot;Mostrar el código fuente&quot;
-import numpy as np
-import matplotlib.pyplot as plt
-import sympy as sp
-
-def plot_fourier(f, p, n_terms=10, num_points=1000):
-    &quot;&quot;&quot;
-    Grafica la función original `f(x)` y su desarrollo en serie de Fourier en el intervalo ]-p, p[.
-
-    Args:
-        f (sympy expression): La función a desarrollar.
-        p (float or sympy expression): El intervalo del desarrollo ]-p, p[.
-        n_terms (int): Número de términos de la serie de Fourier.
-        num_points (int): Número de puntos para la gráfica.
-    &quot;&quot;&quot;
-    # Variables simbólicas
-    x = sp.Symbol('x', real=True)
+<span class="sd">    Args:</span>
+<span class="sd">        f (sympy expression): La función a desarrollar.</span>
+<span class="sd">        p (float or sympy expression): El intervalo del desarrollo ]-p, p[.</span>
+<span class="sd">        n_terms (int): Número de términos de la serie de Fourier.</span>
+<span class="sd">        num_points (int): Número de puntos para la gráfica.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Variables simbólicas</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    # Calcular la serie de Fourier
-    series = fourier_series(f, p, n_terms)
+    <span class="c1"># Calcular la serie de Fourier</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n_terms</span><span class="p">)</span>
     
-    # Convertir las expresiones simbólicas a funciones numéricas
-    f_numeric = sp.lambdify(x, f, modules=[&quot;numpy&quot;])
-    series_numeric = sp.lambdify(x, series, modules=[&quot;numpy&quot;])
+    <span class="c1"># Convertir las expresiones simbólicas a funciones numéricas</span>
+    <span class="n">f_numeric</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;numpy&quot;</span><span class="p">])</span>
+    <span class="n">series_numeric</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;numpy&quot;</span><span class="p">])</span>
     
-    # Convertir p a un número si es simbólico
-    p_numeric = float(p) if isinstance(p, sp.Basic) else p
+    <span class="c1"># Convertir p a un número si es simbólico</span>
+    <span class="n">p_numeric</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Basic</span><span class="p">)</span> <span class="k">else</span> <span class="n">p</span>
     
-    # Crear puntos para graficar
-    x_vals = np.linspace(-p_numeric, p_numeric, num_points)
-    f_vals = f_numeric(x_vals)
-    series_vals = series_numeric(x_vals)
+    <span class="c1"># Crear puntos para graficar</span>
+    <span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">p_numeric</span><span class="p">,</span> <span class="n">p_numeric</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
+    <span class="n">f_vals</span> <span class="o">=</span> <span class="n">f_numeric</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
+    <span class="n">series_vals</span> <span class="o">=</span> <span class="n">series_numeric</span><span class="p">(</span><span class="n">x_vals</span><span class="p">)</span>
     
-    # Graficar
-    plt.figure(figsize=(10, 6))
-    plt.plot(x_vals, f_vals, label='f(x) (Original)', color='blue')
-    plt.plot(x_vals, series_vals, label=f'Serie de Fourier (n={n_terms})', color='red', linestyle='--')
-    plt.title(f'Serie de Fourier de f(x)={f} en ]-{p_numeric}, {p_numeric}[')
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
-    plt.axvline(0, color='black', linewidth=0.8, linestyle='--')
-    plt.legend()
-    plt.grid()
-    plt.show()
+    <span class="c1"># Graficar</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">f_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) (Original)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">series_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Serie de Fourier (n=</span><span class="si">{</span><span class="n">n_terms</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Serie de Fourier de f(x)=</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1"> en ]-</span><span class="si">{</span><span class="n">p_numeric</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">p_numeric</span><span class="si">}</span><span class="s1">[&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-# Ejemplo de uso
-x = sp.Symbol('x', real=True)
-f = x  # Función original
-p = np.pi  # Intervalo ]-p, p[
-n_terms = 3  # Número de términos en la serie de Fourier
+<span class="c1"># Ejemplo de uso</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">x</span>  <span class="c1"># Función original</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># Intervalo ]-p, p[</span>
+<span class="n">n_terms</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Número de términos en la serie de Fourier</span>
 
-plot_fourier(f, p, n_terms)
-```
-
-Note que $a_n=0$ para todo $n=0,1,2,\ldots$ y los únicos coeficientes que aparecen en la serie son los coeficientes $b_n$. ¿Tiene esto alguna razón?
-
-### Serie de Fourier de funciones pares e impares
-
-Si $f$ es una **función par** en el intervalo $]-p, p[$, entonces los coeficientes se pueden evaluar de la siguiente manera:
-
-\begin{eqnarray*}
+<span class="n">plot_fourier</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n_terms</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Note que <span class="math notranslate nohighlight">\(a_n=0\)</span> para todo <span class="math notranslate nohighlight">\(n=0,1,2,\ldots\)</span> y los únicos coeficientes que aparecen en la serie son los coeficientes <span class="math notranslate nohighlight">\(b_n\)</span>. ¿Tiene esto alguna razón?</p>
+</section>
+<section id="serie-de-fourier-de-funciones-pares-e-impares">
+<h3><span class="section-number">6.1.5. </span>Serie de Fourier de funciones pares e impares<a class="headerlink" href="#serie-de-fourier-de-funciones-pares-e-impares" title="Link to this heading">#</a></h3>
+<p>Si <span class="math notranslate nohighlight">\(f\)</span> es una <strong>función par</strong> en el intervalo <span class="math notranslate nohighlight">\(]-p, p[\)</span>, entonces los coeficientes se pueden evaluar de la siguiente manera:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{eqnarray*}
 a_{0} &amp; = &amp; \dfrac{2}{p}\int_{0}^{p}f(x)dx\\
 a_{n} &amp; = &amp; \dfrac{2}{p}\int_{0}^{p}f(x)\cos\left(\dfrac{n\pi}{p}x\right)dx\\
 b_{n} &amp; = &amp; 0
@@ -696,7 +722,7 @@ f(x)=\sum_{n=1}^{\infty}b_{n}\sin\left(\dfrac{n\pi}{p}x\right)
 \]</div>
 </section>
 <section id="desarrollo-en-semiintervalos">
-<h3><span class="section-number">6.1.3. </span>Desarrollo en Semiintervalos<a class="headerlink" href="#desarrollo-en-semiintervalos" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.6. </span>Desarrollo en Semiintervalos<a class="headerlink" href="#desarrollo-en-semiintervalos" title="Link to this heading">#</a></h3>
 <p>En muchos casos la función <span class="math notranslate nohighlight">\(f\)</span> está definida en un intervalo que contiene el origen en el punto medio de él, es decir, en un intervalo del tipo <span class="math notranslate nohighlight">\(]-p, p[\)</span>. Sin embargo, es de interés representar una función <span class="math notranslate nohighlight">\(f\)</span> que está definida sólo para <span class="math notranslate nohighlight">\(0&lt;x&lt;L\)</span> con una serie trigonométrica. Esto se puede hacer de muchas formas distintas, dando una definición arbitraria de <span class="math notranslate nohighlight">\(f(x)\)</span> para <span class="math notranslate nohighlight">\(-L&lt;x&lt;0\)</span>. Consideraremos los tres casos más importantes. Si <span class="math notranslate nohighlight">\(y=f(x)\)</span> está definida en el intervalo <span class="math notranslate nohighlight">\(]0,L[\)</span>, entonces:</p>
 <ol class="arabic simple">
 <li><p>Reflejar la gráfica de <span class="math notranslate nohighlight">\(f\)</span> respecto al eje <span class="math notranslate nohighlight">\(Y\)</span> en <span class="math notranslate nohighlight">\(]-L,0[\)</span>; la función ahora es par en <span class="math notranslate nohighlight">\(]-L,L[\)</span>.</p></li>
@@ -846,7 +872,10 @@ m\frac{d^2x}{dt^2}+\beta\frac{dx}{dt}+kx=f(t).
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-de-fourier">6.1. Series de Fourier</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">6.1.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion">6.1.2. Definición</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desarrollo-en-semiintervalos">6.1.3. Desarrollo en Semiintervalos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-de-una-serie-de-fourier">6.1.3. Convergencia de una serie de Fourier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-periodica">6.1.4. Extensión periódica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-fourier-de-funciones-pares-e-impares">6.1.5. Serie de Fourier de funciones pares e impares</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desarrollo-en-semiintervalos">6.1.6. Desarrollo en Semiintervalos</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-de-cierre-unidades-4-5-y-6">6.2. Actividad de Cierre Unidades 4, 5 y 6</a><ul class="nav section-nav flex-column">

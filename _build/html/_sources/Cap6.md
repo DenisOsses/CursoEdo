@@ -64,7 +64,7 @@ donde
 a_{0} & = & \dfrac{1}{p}\int_{-p}^{p}f(x)dx\\
 a_{n} & = & \dfrac{1}{p}\int_{-p}^{p}f(x)\cos\left(\dfrac{n\pi}{p}x\right)dx\\
 b_{n} & = & \dfrac{1}{p}\int_{-p}^{p}f(x)\sin \left(\dfrac{n\pi}{p}x\right)dx
-\end{eqnarray*} (Fourier1)
+\end{eqnarray*}
 
 ```{admonition} Ejercicio Teórico
 Determine la serie de Fourier de $f(x)=x$ en $]-\pi,\pi[$.
